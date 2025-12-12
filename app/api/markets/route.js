@@ -50,6 +50,7 @@ export async function GET() {
     'another-cloudflare-outage-by-december-31',
     'when-will-samsung-release-a-trifold-phone',
     '1-free-app-in-the-us-apple-app-store-on-december-12',
+    '1-paid-app-in-the-us-apple-app-store-on-december-12',
     'will-apple-release-a-new-product-line-in-2025',
     'how-many-spacex-launches-in-2025',
     'how-many-spacex-starship-launches-reach-space-in-2025',

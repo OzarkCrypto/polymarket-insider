@@ -116,7 +116,7 @@ function MarketsTab({ markets }) {
                             <div key={h.wallet} className="holder-item">
                               <span className="holder-rank">#{i + 1}</span>
                               <a href={`https://polymarket.com/profile/${h.wallet}`} target="_blank" rel="noopener noreferrer">
-                                {h.name || `${h.wallet.slice(0, 6)}...${h.wallet.slice(-4)}`}
+                                {h.name || h.wallet}
                               </a>
                               <span className="holder-amount">{formatAmount(h.amount)}</span>
                             </div>
@@ -128,7 +128,7 @@ function MarketsTab({ markets }) {
                             <div key={h.wallet} className="holder-item">
                               <span className="holder-rank">#{i + 1}</span>
                               <a href={`https://polymarket.com/profile/${h.wallet}`} target="_blank" rel="noopener noreferrer">
-                                {h.name || `${h.wallet.slice(0, 6)}...${h.wallet.slice(-4)}`}
+                                {h.name || h.wallet}
                               </a>
                               <span className="holder-amount">{formatAmount(h.amount)}</span>
                             </div>
@@ -156,6 +156,11 @@ function MarketsTab({ markets }) {
     </table>
   );
 }
+
+// Blacklisted addresses
+const BLACKLIST = [
+  '0xa5ef39c3d3e10d0b270233af41cac69796b12966'
+];
 
 // Holders Tab Component
 function HoldersTab({ markets }) {
@@ -232,7 +237,9 @@ function HoldersTab({ markets }) {
         })
       );
 
-      const holdersList = Object.values(holdersMap);
+      const holdersList = Object.values(holdersMap).filter(
+        h => !BLACKLIST.includes(h.wallet.toLowerCase())
+      );
       setAllHolders(holdersList);
       setLoading(false);
     }
@@ -298,9 +305,9 @@ function HoldersTab({ markets }) {
               <td>
                 <div className="holder-cell">
                   <a href={profileUrl} target="_blank" rel="noopener noreferrer" className="holder-link">
-                    {holder.name || `${holder.wallet.slice(0, 6)}...${holder.wallet.slice(-4)}`}
+                    {holder.name || holder.wallet}
                   </a>
-                  <span className="wallet-address">{holder.wallet.slice(0, 10)}...{holder.wallet.slice(-6)}</span>
+                  <span className="wallet-address">{holder.wallet}</span>
                 </div>
                 {isExpanded && (
                   <div className="positions-detail">

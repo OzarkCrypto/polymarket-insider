@@ -230,9 +230,14 @@ function InsiderTab({ markets, searchQuery }) {
     async function analyzeInsiders() {
       setLoading(true);
       
-      // 기업별 마켓 매핑
+      // 기업별 마켓 매핑 및 conditionId 목록
       const companyMarkets = {};
+      const marketConditionIds = new Set();
+      const marketInfoMap = {}; // conditionId -> market info
+      
       markets.forEach(market => {
+        marketConditionIds.add(market.conditionId);
+        marketInfoMap[market.conditionId] = market;
         const company = extractCompany(market.question);
         if (company) {
           if (!companyMarkets[company]) companyMarkets[company] = [];
@@ -240,74 +245,106 @@ function InsiderTab({ markets, searchQuery }) {
         }
       });
 
-      // 홀더 데이터 수집
-      const holdersMap = {};
+      // 1단계: 각 마켓의 Top 50 홀더에서 고유 지갑 주소 수집
+      const uniqueWallets = new Set();
+      const walletNames = {};
       
       await Promise.all(
         markets.map(async (market) => {
-          const company = extractCompany(market.question);
-          
           try {
             const res = await fetch(`/api/holders?market=${market.conditionId}`);
             const data = await res.json();
-
+            
             [...(data.yes || []), ...(data.no || [])].forEach(h => {
               if (BLACKLIST.includes(h.wallet.toLowerCase())) return;
-              
-              if (!holdersMap[h.wallet]) {
-                holdersMap[h.wallet] = {
-                  wallet: h.wallet,
-                  name: h.name,
-                  totalShares: 0,
-                  positions: [],
-                  companyPositions: {},
-                };
-              }
-              
-              if (h.name && !holdersMap[h.wallet].name) {
-                holdersMap[h.wallet].name = h.name;
-              }
-              
-              const side = data.yes?.includes(h) ? 'YES' : 'NO';
-              
-              holdersMap[h.wallet].totalShares += h.amount;
-              
-              holdersMap[h.wallet].positions.push({
-                market: market.question,
-                marketSlug: market.slug,
-                eventSlug: market.eventSlug,
-                company,
-                side,
-                amount: h.amount,
-              });
-              
-              if (company) {
-                if (!holdersMap[h.wallet].companyPositions[company]) {
-                  holdersMap[h.wallet].companyPositions[company] = {
-                    markets: [],
-                    totalAmount: 0,
-                    yesCount: 0,
-                    noCount: 0,
-                  };
-                }
-                holdersMap[h.wallet].companyPositions[company].markets.push({
-                  question: market.question,
-                  side,
-                  amount: h.amount,
-                });
-                holdersMap[h.wallet].companyPositions[company].totalAmount += h.amount;
-                if (side === 'YES') {
-                  holdersMap[h.wallet].companyPositions[company].yesCount++;
-                } else {
-                  holdersMap[h.wallet].companyPositions[company].noCount++;
-                }
+              uniqueWallets.add(h.wallet);
+              if (h.name && !walletNames[h.wallet]) {
+                walletNames[h.wallet] = h.name;
               }
             });
           } catch (err) {
-            console.error('Error:', err);
+            console.error('Error fetching holders:', err);
           }
         })
       );
+
+      // 2단계: 각 지갑의 전체 포지션 가져오기
+      const holdersMap = {};
+      const walletArray = Array.from(uniqueWallets);
+      
+      // 병렬 처리 (10개씩 배치)
+      const batchSize = 10;
+      for (let i = 0; i < walletArray.length; i += batchSize) {
+        const batch = walletArray.slice(i, i + batchSize);
+        await Promise.all(
+          batch.map(async (wallet) => {
+            try {
+              const res = await fetch(`/api/holders?wallet=${wallet}`);
+              const data = await res.json();
+              
+              if (!data.positions) return;
+              
+              // 우리 마켓 목록과 매칭되는 포지션만 필터링
+              const relevantPositions = data.positions.filter(pos => 
+                marketConditionIds.has(pos.conditionId)
+              );
+              
+              if (relevantPositions.length === 0) return;
+              
+              holdersMap[wallet] = {
+                wallet,
+                name: walletNames[wallet],
+                totalShares: 0,
+                positions: [],
+                companyPositions: {},
+              };
+              
+              relevantPositions.forEach(pos => {
+                const market = marketInfoMap[pos.conditionId];
+                if (!market) return;
+                
+                const company = extractCompany(market.question);
+                const side = pos.outcome === 'Yes' ? 'YES' : 'NO';
+                const amount = pos.size || 0;
+                
+                holdersMap[wallet].totalShares += amount;
+                holdersMap[wallet].positions.push({
+                  market: market.question,
+                  marketSlug: market.slug,
+                  eventSlug: market.eventSlug,
+                  company,
+                  side,
+                  amount,
+                });
+                
+                if (company) {
+                  if (!holdersMap[wallet].companyPositions[company]) {
+                    holdersMap[wallet].companyPositions[company] = {
+                      markets: [],
+                      totalAmount: 0,
+                      yesCount: 0,
+                      noCount: 0,
+                    };
+                  }
+                  holdersMap[wallet].companyPositions[company].markets.push({
+                    question: market.question,
+                    side,
+                    amount,
+                  });
+                  holdersMap[wallet].companyPositions[company].totalAmount += amount;
+                  if (side === 'YES') {
+                    holdersMap[wallet].companyPositions[company].yesCount++;
+                  } else {
+                    holdersMap[wallet].companyPositions[company].noCount++;
+                  }
+                }
+              });
+            } catch (err) {
+              console.error('Error fetching positions for', wallet, err);
+            }
+          })
+        );
+      }
 
       // Insider Score 계산
       const insiders = Object.values(holdersMap).map(holder => {

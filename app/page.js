@@ -403,20 +403,33 @@ function InsiderTab({ markets, searchQuery }) {
           : 0;
         const evScore = Math.min(1, avgExpectedReturn / 2); // 200% 이상이면 1점
 
+        // 6. Position Value 점수 (베팅 규모)
+        // $10K 이하: 0점, $100K 이상: 만점 (로그 스케일)
+        const companyPositionValue = focusCompanyData?.totalAmount || 0;
+        let positionValueScore = 0;
+        if (companyPositionValue >= 100000) {
+          positionValueScore = 1;
+        } else if (companyPositionValue >= 10000) {
+          // 로그 스케일: log(value/10000) / log(10) = 0~1
+          positionValueScore = Math.log10(companyPositionValue / 10000);
+        }
+
         // 최종 점수 계산 (100점 만점)
-        // - 기업 집중도: 30점 (특정 기업 마켓 참여율)
-        // - 포트폴리오 집중도: 15점 (적은 마켓에만 참여)
-        // - 방향 일관성: 15점 (한 방향으로만 베팅)
+        // - 기업 집중도: 25점 (특정 기업 마켓 참여율)
+        // - 포트폴리오 집중도: 10점 (적은 마켓에만 참여)
+        // - 방향 일관성: 10점 (한 방향으로만 베팅)
         // - 규모 집중도: 10점 (특정 기업에 자금 집중)
         // - 역방향 베팅: 15점 (소수 의견에 베팅)
-        // - 예상 수익률: 15점 (높은 수익률 포지션)
+        // - 예상 수익률: 10점 (높은 수익률 포지션)
+        // - Position Value: 20점 (베팅 규모)
         const score = Math.round(
-          (maxConcentration * 30) +
-          (portfolioConcentration * 15) +
-          (directionConsistency * 15) +
+          (maxConcentration * 25) +
+          (portfolioConcentration * 10) +
+          (directionConsistency * 10) +
           (sizeConcentration * 10) +
           (companyContrarianRate * 15) +
-          (evScore * 15)
+          (evScore * 10) +
+          (positionValueScore * 20)
         );
 
         // 예상 총 수익
@@ -439,6 +452,7 @@ function InsiderTab({ markets, searchQuery }) {
           expectedProfit,
           contrarianRate: (companyContrarianRate * 100).toFixed(0),
           avgExpectedReturn: (avgExpectedReturn * 100).toFixed(0),
+          positionValue: companyPositionValue,
           positions: holder.positions,
           companyPositions: holder.companyPositions,
         };
@@ -480,7 +494,7 @@ function InsiderTab({ markets, searchQuery }) {
     switch (sortKey) {
       case 'score': aVal = a.score; bVal = b.score; break;
       case 'concentration': aVal = a.focusCompanyMarkets / (a.totalCompanyMarkets || 1); bVal = b.focusCompanyMarkets / (b.totalCompanyMarkets || 1); break;
-      case 'shares': aVal = a.companyShares; bVal = b.companyShares; break;
+      case 'positionValue': aVal = a.positionValue; bVal = b.positionValue; break;
       case 'expectedProfit': aVal = a.expectedProfit; bVal = b.expectedProfit; break;
       case 'contrarian': aVal = parseFloat(a.contrarianRate); bVal = parseFloat(b.contrarianRate); break;
       default: return 0;
@@ -507,7 +521,7 @@ function InsiderTab({ markets, searchQuery }) {
     <table className="markets-table">
       <thead>
         <tr>
-          <th style={{ cursor: 'default' }}>Rank</th>
+          <th style={{ cursor: 'default' }}>#</th>
           <th style={{ cursor: 'default' }}>Account</th>
           <th onClick={() => handleSort('score')} className={sortKey === 'score' ? 'sorted' : ''}>
             Score
@@ -518,7 +532,10 @@ function InsiderTab({ markets, searchQuery }) {
             Conc.
             <span className="sort-icon">{sortKey === 'concentration' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
           </th>
-          <th style={{ cursor: 'default' }}>Dir</th>
+          <th onClick={() => handleSort('positionValue')} className={sortKey === 'positionValue' ? 'sorted' : ''}>
+            Position $
+            <span className="sort-icon">{sortKey === 'positionValue' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
           <th onClick={() => handleSort('contrarian')} className={sortKey === 'contrarian' ? 'sorted' : ''}>
             Contrarian
             <span className="sort-icon">{sortKey === 'contrarian' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
@@ -574,10 +591,8 @@ function InsiderTab({ markets, searchQuery }) {
                   {insider.focusCompanyMarkets}/{insider.totalCompanyMarkets}
                 </span>
               </td>
-              <td>
-                <span className={`direction ${insider.direction.toLowerCase()}`}>
-                  {insider.direction}
-                </span>
+              <td className={`position-value ${insider.positionValue >= 50000 ? 'high-value' : ''}`}>
+                {formatNumber(insider.positionValue)}
               </td>
               <td>
                 <span className={`contrarian-rate ${parseInt(insider.contrarianRate) > 50 ? 'high' : ''}`}>

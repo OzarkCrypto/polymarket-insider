@@ -91,6 +91,24 @@ export async function GET() {
       console.log('Using fallback slug list');
     }
 
+    // 필수 slug - 항상 추가 (restricted 마켓 포함)
+    const ESSENTIAL_SLUGS = [
+      'will-netflix-close-warner-brothers-acquisition-by-end-of-2026',
+      'will-perplexity-acquire-chrome-in-2025',
+      'openai-acquired-in-2025',
+      'anthropic-acquired-in-2025',
+      'tiktok-sale-announced-in-2025',
+      'will-meta-be-forced-to-sell-instagram-or-whatsapp-in-2025',
+      'will-apple-acquire-perplexity-in-2025',
+      'ipos-in-2025',
+    ];
+    
+    for (const slug of ESSENTIAL_SLUGS) {
+      if (!techSlugs.includes(slug)) {
+        techSlugs.push(slug);
+      }
+    }
+
     // 2. 각 slug로 이벤트 가져오기
     const slugPromises = techSlugs.map(slug =>
       fetch(`https://gamma-api.polymarket.com/events/slug/${slug}`, {

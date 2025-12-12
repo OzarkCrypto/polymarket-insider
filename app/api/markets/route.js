@@ -110,6 +110,15 @@ export async function GET() {
       fetch('https://gamma-api.polymarket.com/events?tag=science&closed=false&active=true&limit=200', {
         next: { revalidate: 3600 }
       }).then(r => r.json()).catch(() => []),
+      fetch('https://gamma-api.polymarket.com/events?tag=acquisitions&closed=false&active=true&limit=200', {
+        next: { revalidate: 3600 }
+      }).then(r => r.json()).catch(() => []),
+      fetch('https://gamma-api.polymarket.com/events?tag=big-tech&closed=false&active=true&limit=200', {
+        next: { revalidate: 3600 }
+      }).then(r => r.json()).catch(() => []),
+      fetch('https://gamma-api.polymarket.com/events?tag=companies&closed=false&active=true&limit=200', {
+        next: { revalidate: 3600 }
+      }).then(r => r.json()).catch(() => []),
     ];
 
     const results = await Promise.all(fetchPromises);

@@ -1,11 +1,30 @@
 export async function GET() {
-  // 무조건 제외할 키워드 (암호화폐, 귀금속)
+  // 무조건 제외할 키워드 (암호화폐, 귀금속, 국제정치)
   const ALWAYS_EXCLUDE = [
+    // 암호화폐
     'btc', 'bitcoin', 'eth', 'ethereum', 'crypto', 'solana', 'sol ',
     'xrp', 'doge', 'dogecoin', 'memecoin', 'meme coin', 'shiba',
     'cardano', 'ada ', 'bnb', 'binance', 'token', 'stablecoin',
+    // 귀금속/원자재
     'gold price', 'silver price', 'oil price', 'commodity',
-    'gold hit', 'silver hit', 'gold reach', 'silver reach'
+    'gold hit', 'silver hit', 'gold reach', 'silver reach',
+    // 정치/선거
+    'trump', 'biden', 'president', 'election', 'vote', 'congress',
+    'senate', 'house of rep', 'democrat', 'republican', 'gop',
+    'governor', 'mayor', 'politician', 'political', 'ballot',
+    'impeach', 'pardon', 'cabinet', 'secretary of',
+    // 국제관계/전쟁
+    'war', 'ukraine', 'russia', 'putin', 'zelensky', 'nato',
+    'china', 'xi jinping', 'taiwan', 'iran', 'israel', 'gaza',
+    'palestine', 'hamas', 'hezbollah', 'military', 'troops',
+    'missile', 'nuclear', 'sanction', 'tariff', 'ceasefire',
+    'invasion', 'occupation', 'border', 'immigration',
+    // 정부/외교
+    'government shutdown', 'prime minister', 'minister',
+    'embassy', 'diplomat', 'treaty', 'united nations', 'g7', 'g20',
+    // 기타 비기업
+    'fed ', 'federal reserve', 'interest rate', 'inflation rate',
+    'gdp', 'unemployment', 'recession'
   ];
 
   // 가격/시총 예측 키워드

@@ -55,7 +55,7 @@ export async function GET() {
   ];
 
   try {
-    const res = await fetch('https://gamma-api.polymarket.com/events?tag=tech&closed=false&limit=50', {
+    const res = await fetch('https://gamma-api.polymarket.com/events?tag=tech&closed=false&limit=500', {
       next: { revalidate: 60 }
     });
     const events = await res.json();

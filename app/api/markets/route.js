@@ -36,7 +36,11 @@ export async function GET() {
     'premier league', 'la liga', 'bundesliga', 'serie a', 'ligue 1',
     'champions league', 'europa league', 'euro 2024', 'copa america',
     'team', 'player', 'game', 'match', 'season', 'draft', 'trade',
-    'lebron', 'messi', 'ronaldo', 'mahomes', 'brady', 'curry'
+    'lebron', 'messi', 'ronaldo', 'mahomes', 'brady', 'curry',
+    // 시총/가격 순위 예측 (상장기업)
+    'largest company', 'biggest company', 'most valuable company',
+    'by market cap', 'market cap on', 'overtake', 'surpass',
+    'trillion', 'reach $', 'hit $', 'above $', 'below $', 'trading at'
   ];
 
   // 가격/시총 예측 키워드

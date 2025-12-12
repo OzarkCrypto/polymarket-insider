@@ -128,7 +128,12 @@ export async function GET() {
           if (market.closed === true || market.active === false) continue;
           
           // 종료일이 지난 마켓 제외
-          if (market.endDate && new Date(market.endDate) < now) continue;
+          // 종료일이 오늘 이전인 마켓만 제외 (오늘 종료는 포함)
+          const endDate = market.endDate ? new Date(market.endDate) : null;
+          if (endDate) {
+            endDate.setHours(23, 59, 59, 999); // 종료일 끝까지 포함
+            if (endDate < now) continue;
+          }
           
           // 볼륨 체크
           const volume = market.volumeNum || parseFloat(market.volume) || 0;

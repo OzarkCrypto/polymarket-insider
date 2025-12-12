@@ -5,6 +5,8 @@ export async function GET() {
     'btc', 'bitcoin', 'eth', 'ethereum', 'crypto', 'solana', 'sol ',
     'xrp', 'doge', 'dogecoin', 'memecoin', 'meme coin', 'shiba',
     'cardano', 'ada ', 'bnb', 'binance', 'token', 'stablecoin',
+    'hyperliquid', 'hype ', 'airdrop', 'defi', 'nft', 'web3',
+    'blockchain', 'altcoin', 'coin ', 'coinbase',
     // 귀금속/원자재 - 강화
     'gold', 'silver', 'oil price', 'commodity', 'platinum', 'copper',
     'crude oil', 'natural gas', 'wheat', 'corn',
@@ -19,6 +21,8 @@ export async function GET() {
     'stock price', 'share price', 'close at', 'close above', 'close below',
     'fdv', 'fully diluted', 'market cap >', 'market cap <', 'mcap',
     '>$', '<$', 'after launch', 'at launch', 'ath', 'all-time high',
+    'dip to', 'drop to', 'fall to', 'rise to', 'pump to', 'dump to',
+    'price of', 'priced at', 'worth more', 'worth less',
     // 정치/선거
     'trump', 'biden', 'president', 'election', 'vote', 'congress',
     'senate', 'house of rep', 'democrat', 'republican', 'gop',

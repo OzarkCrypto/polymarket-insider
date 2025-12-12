@@ -11,7 +11,9 @@ export async function GET() {
   // 가격/시총 예측 키워드
   const PRICE_KEYWORDS = [
     'price', 'market cap', 'marketcap', 'reach $', 'hit $', 'above $',
-    'below $', 'trading at', 'worth $', 'valuation', 'trillion', 'billion market'
+    'below $', 'trading at', 'worth $', 'valuation', 'trillion', 'billion market',
+    'largest company', 'biggest company', 'most valuable', 'by market cap',
+    'market cap on', 'overtake', 'surpass'
   ];
 
   // 상장 주식 티커/회사명 (가격 예측시 제외)

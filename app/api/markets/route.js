@@ -185,11 +185,17 @@ export async function GET() {
 
     markets.sort((a, b) => b.volume - a.volume);
 
+    // Netflix 마켓이 있는지 확인
+    const netflixMarket = markets.find(m => m.question.toLowerCase().includes('netflix'));
+    
     return Response.json({ 
       markets,
       meta: {
         scrapedSlugs: techSlugs.length,
-        totalMarkets: markets.length
+        totalMarkets: markets.length,
+        essentialSlugsAdded: ESSENTIAL_SLUGS.filter(s => !techSlugs.slice(0, -ESSENTIAL_SLUGS.length).includes(s)).length,
+        hasNetflixInSlugs: techSlugs.includes('will-netflix-close-warner-brothers-acquisition-by-end-of-2026'),
+        netflixMarketFound: !!netflixMarket,
       }
     });
   } catch (error) {

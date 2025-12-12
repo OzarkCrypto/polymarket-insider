@@ -1,4 +1,11 @@
 export async function GET() {
+  // 제외할 키워드 (암호화폐 관련)
+  const EXCLUDE_KEYWORDS = [
+    'btc', 'bitcoin', 'eth', 'ethereum', 'crypto', 'solana', 'sol ', 
+    'xrp', 'doge', 'dogecoin', 'memecoin', 'meme coin', 'shiba',
+    'cardano', 'ada ', 'bnb', 'binance', 'coinbase', 'token'
+  ];
+
   try {
     const res = await fetch('https://gamma-api.polymarket.com/events?tag=tech&closed=false&limit=50', {
       next: { revalidate: 60 }
@@ -10,6 +17,16 @@ export async function GET() {
     for (const event of events) {
       if (event.markets) {
         for (const market of event.markets) {
+          const questionLower = (market.question || '').toLowerCase();
+          const eventTitleLower = (event.title || '').toLowerCase();
+          
+          // 암호화폐 관련 키워드가 포함된 마켓 제외
+          const isExcluded = EXCLUDE_KEYWORDS.some(keyword => 
+            questionLower.includes(keyword) || eventTitleLower.includes(keyword)
+          );
+          
+          if (isExcluded) continue;
+          
           markets.push({
             id: market.id,
             conditionId: market.conditionId,

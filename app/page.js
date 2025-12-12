@@ -14,143 +14,86 @@ function formatAmount(num) {
   return num.toFixed(2);
 }
 
-function MarketCard({ market }) {
-  const [expanded, setExpanded] = useState(false);
+function HoldersRow({ market, isOpen, onToggle }) {
   const [holders, setHolders] = useState(null);
-  const [loadingHolders, setLoadingHolders] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const loadHolders = async () => {
     if (holders) return;
-    setLoadingHolders(true);
+    setLoading(true);
     try {
       const res = await fetch(`/api/holders?market=${market.conditionId}`);
       const data = await res.json();
       setHolders(data);
     } catch (err) {
-      console.error('Error loading holders:', err);
       setHolders({ yes: [], no: [] });
     }
-    setLoadingHolders(false);
+    setLoading(false);
   };
 
-  const handleToggle = () => {
-    if (!expanded) {
+  useEffect(() => {
+    if (isOpen && !holders) {
       loadHolders();
     }
-    setExpanded(!expanded);
-  };
+  }, [isOpen]);
 
-  const yesPrice = parseFloat(market.outcomePrices[0]) * 100;
-  const noPrice = parseFloat(market.outcomePrices[1]) * 100;
-  const marketUrl = `https://polymarket.com/event/${market.eventSlug}/${market.slug}`;
+  if (!isOpen) return null;
 
   return (
-    <div className="market-card">
-      <div className="market-header">
-        {market.image && (
-          <img src={market.image} alt="" className="market-image" />
-        )}
-        <div className="market-info">
-          <h3 className="market-question">
-            <a href={marketUrl} target="_blank" rel="noopener noreferrer">
-              {market.question}
-            </a>
-          </h3>
-          <div className="market-meta">
-            <span className="market-tag volume">Vol: {formatNumber(market.volume)}</span>
-            <span className="market-tag">Liq: {formatNumber(market.liquidity)}</span>
-            {market.endDate && (
-              <span className="market-tag">
-                Ends: {new Date(market.endDate).toLocaleDateString()}
-              </span>
-            )}
-          </div>
-        </div>
-        <div className="market-prices">
-          <div className="price-box yes">
-            <div className="price-label">Yes</div>
-            <div className="price-value">{yesPrice.toFixed(1)}¢</div>
-          </div>
-          <div className="price-box no">
-            <div className="price-label">No</div>
-            <div className="price-value">{noPrice.toFixed(1)}¢</div>
-          </div>
-        </div>
-      </div>
-      
-      <div className="holders-section">
-        <div className="holders-toggle" onClick={handleToggle}>
-          <div className={`holders-toggle-icon ${expanded ? 'open' : ''}`}>
-            ▶
-          </div>
-          <span className="holders-toggle-text">
-            TOP 10 Holders (Click to {expanded ? 'hide' : 'show'})
-          </span>
-        </div>
-        
-        <div className={`holders-content ${expanded ? 'open' : ''}`}>
-          {loadingHolders ? (
+    <tr className="holders-row">
+      <td colSpan="7">
+        <div className="holders-content">
+          {loading ? (
             <div className="holders-loading">Loading holders...</div>
           ) : holders ? (
             <div className="holders-grid">
               <div className="holders-column yes">
-                <div className="holders-column-title">
-                  <span>🟢</span> YES HOLDERS
-                </div>
+                <h4>YES HOLDERS (Top 10)</h4>
                 {holders.yes.length > 0 ? (
-                  holders.yes.map((holder, idx) => (
-                    <HolderItem key={holder.wallet} holder={holder} rank={idx + 1} />
+                  holders.yes.map((h, i) => (
+                    <div key={h.wallet} className="holder-item">
+                      <span className="holder-rank">#{i + 1}</span>
+                      <div>
+                        <div className="holder-name">
+                          <a href={`https://polymarket.com/profile/${h.wallet}`} target="_blank" rel="noopener noreferrer">
+                            {h.name || 'Anonymous'}
+                          </a>
+                        </div>
+                        <div className="holder-wallet">{h.wallet.slice(0, 6)}...{h.wallet.slice(-4)}</div>
+                      </div>
+                      <span className="holder-amount">{formatAmount(h.amount)}</span>
+                    </div>
                   ))
                 ) : (
-                  <div className="no-holders">No YES holders found</div>
+                  <div className="no-holders">No holders</div>
                 )}
               </div>
               <div className="holders-column no">
-                <div className="holders-column-title">
-                  <span>🔴</span> NO HOLDERS
-                </div>
+                <h4>NO HOLDERS (Top 10)</h4>
                 {holders.no.length > 0 ? (
-                  holders.no.map((holder, idx) => (
-                    <HolderItem key={holder.wallet} holder={holder} rank={idx + 1} />
+                  holders.no.map((h, i) => (
+                    <div key={h.wallet} className="holder-item">
+                      <span className="holder-rank">#{i + 1}</span>
+                      <div>
+                        <div className="holder-name">
+                          <a href={`https://polymarket.com/profile/${h.wallet}`} target="_blank" rel="noopener noreferrer">
+                            {h.name || 'Anonymous'}
+                          </a>
+                        </div>
+                        <div className="holder-wallet">{h.wallet.slice(0, 6)}...{h.wallet.slice(-4)}</div>
+                      </div>
+                      <span className="holder-amount">{formatAmount(h.amount)}</span>
+                    </div>
                   ))
                 ) : (
-                  <div className="no-holders">No NO holders found</div>
+                  <div className="no-holders">No holders</div>
                 )}
               </div>
             </div>
           ) : null}
         </div>
-      </div>
-    </div>
-  );
-}
-
-function HolderItem({ holder, rank }) {
-  const profileUrl = `https://polymarket.com/profile/${holder.wallet}`;
-  const initials = holder.name ? holder.name.slice(0, 2).toUpperCase() : '??';
-  
-  return (
-    <div className="holder-item">
-      <div className="holder-rank">#{rank}</div>
-      <div className="holder-avatar">
-        {holder.profileImage ? (
-          <img src={holder.profileImage} alt="" style={{ width: '100%', height: '100%', borderRadius: '8px', objectFit: 'cover' }} />
-        ) : (
-          initials
-        )}
-      </div>
-      <div className="holder-info">
-        <div className="holder-name">
-          <a href={profileUrl} target="_blank" rel="noopener noreferrer">
-            {holder.name || 'Anonymous'}
-          </a>
-        </div>
-        <div className="holder-wallet">
-          {holder.wallet.slice(0, 6)}...{holder.wallet.slice(-4)}
-        </div>
-      </div>
-      <div className="holder-amount">{formatAmount(holder.amount)}</div>
-    </div>
+      </td>
+    </tr>
   );
 }
 
@@ -158,6 +101,9 @@ export default function Home() {
   const [markets, setMarkets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [sortKey, setSortKey] = useState('volume');
+  const [sortDir, setSortDir] = useState('desc');
+  const [expandedId, setExpandedId] = useState(null);
 
   useEffect(() => {
     async function fetchMarkets() {
@@ -173,14 +119,69 @@ export default function Home() {
     fetchMarkets();
   }, []);
 
+  const handleSort = (key) => {
+    if (sortKey === key) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortDir('desc');
+    }
+  };
+
+  const sortedMarkets = [...markets].sort((a, b) => {
+    let aVal, bVal;
+    
+    switch (sortKey) {
+      case 'yes':
+        aVal = parseFloat(a.outcomePrices[0]);
+        bVal = parseFloat(b.outcomePrices[0]);
+        break;
+      case 'no':
+        aVal = parseFloat(a.outcomePrices[1]);
+        bVal = parseFloat(b.outcomePrices[1]);
+        break;
+      case 'volume':
+        aVal = a.volume;
+        bVal = b.volume;
+        break;
+      case 'liquidity':
+        aVal = a.liquidity;
+        bVal = b.liquidity;
+        break;
+      case 'endDate':
+        aVal = a.endDate ? new Date(a.endDate).getTime() : 0;
+        bVal = b.endDate ? new Date(b.endDate).getTime() : 0;
+        break;
+      default:
+        return 0;
+    }
+    
+    if (sortDir === 'asc') {
+      return aVal - bVal;
+    }
+    return bVal - aVal;
+  });
+
   const totalVolume = markets.reduce((sum, m) => sum + m.volume, 0);
+
+  const SortHeader = ({ label, keyName }) => (
+    <th 
+      onClick={() => handleSort(keyName)}
+      className={sortKey === keyName ? 'sorted' : ''}
+    >
+      {label}
+      <span className="sort-icon">
+        {sortKey === keyName ? (sortDir === 'desc' ? '▼' : '▲') : ''}
+      </span>
+    </th>
+  );
 
   if (loading) {
     return (
       <div className="dashboard">
         <div className="loading">
           <div className="spinner"></div>
-          <div className="loading-text">Loading Tech Markets...</div>
+          Loading Tech Markets...
         </div>
       </div>
     );
@@ -189,10 +190,8 @@ export default function Home() {
   if (error) {
     return (
       <div className="dashboard">
-        <div className="loading">
-          <div className="loading-text" style={{ color: '#ff3b5c' }}>
-            Error: {error}
-          </div>
+        <div className="loading" style={{ color: '#cf222e' }}>
+          Error: {error}
         </div>
       </div>
     );
@@ -202,29 +201,81 @@ export default function Home() {
     <div className="dashboard">
       <header className="header">
         <div className="logo">
-          <div className="logo-icon">PM</div>
-          <div>
-            <h1>POLYMARKET INSIDER</h1>
-            <p>Tech Markets • Whale Tracker</p>
-          </div>
+          <h1>Polymarket Insider</h1>
+          <p>Tech Markets Whale Tracker</p>
         </div>
         <div className="stats-bar">
           <div className="stat-box">
-            <div className="stat-label">Total Volume</div>
-            <div className="stat-value">{formatNumber(totalVolume)}</div>
+            <span className="stat-label">Volume:</span>
+            <span className="stat-value">{formatNumber(totalVolume)}</span>
           </div>
           <div className="stat-box">
-            <div className="stat-label">Active Markets</div>
-            <div className="stat-value blue">{markets.length}</div>
+            <span className="stat-label">Markets:</span>
+            <span className="stat-value blue">{markets.length}</span>
           </div>
         </div>
       </header>
 
-      <div className="markets-list">
-        {markets.map(market => (
-          <MarketCard key={market.conditionId} market={market} />
-        ))}
-      </div>
+      <table className="markets-table">
+        <thead>
+          <tr>
+            <th style={{ cursor: 'default' }}>Market</th>
+            <SortHeader label="Yes" keyName="yes" />
+            <SortHeader label="No" keyName="no" />
+            <SortHeader label="Volume" keyName="volume" />
+            <SortHeader label="Liquidity" keyName="liquidity" />
+            <SortHeader label="Ends" keyName="endDate" />
+            <th style={{ cursor: 'default' }}>Holders</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedMarkets.map(market => {
+            const yesPrice = (parseFloat(market.outcomePrices[0]) * 100).toFixed(1);
+            const noPrice = (parseFloat(market.outcomePrices[1]) * 100).toFixed(1);
+            const marketUrl = `https://polymarket.com/event/${market.eventSlug}/${market.slug}`;
+            const isExpanded = expandedId === market.conditionId;
+
+            return (
+              <>
+                <tr key={market.conditionId}>
+                  <td>
+                    <div className="market-cell">
+                      {market.image && (
+                        <img src={market.image} alt="" className="market-image" />
+                      )}
+                      <span className="market-question">
+                        <a href={marketUrl} target="_blank" rel="noopener noreferrer">
+                          {market.question}
+                        </a>
+                      </span>
+                    </div>
+                  </td>
+                  <td className="price-yes">{yesPrice}¢</td>
+                  <td className="price-no">{noPrice}¢</td>
+                  <td className="volume-cell">{formatNumber(market.volume)}</td>
+                  <td className="text-dim">{formatNumber(market.liquidity)}</td>
+                  <td className="text-dim">
+                    {market.endDate ? new Date(market.endDate).toLocaleDateString() : '-'}
+                  </td>
+                  <td>
+                    <button 
+                      className="expand-btn"
+                      onClick={() => setExpandedId(isExpanded ? null : market.conditionId)}
+                    >
+                      {isExpanded ? 'Hide' : 'Show'}
+                    </button>
+                  </td>
+                </tr>
+                <HoldersRow 
+                  key={`holders-${market.conditionId}`}
+                  market={market} 
+                  isOpen={isExpanded}
+                />
+              </>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }

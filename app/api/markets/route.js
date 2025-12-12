@@ -55,15 +55,20 @@ export async function GET() {
   ];
 
   try {
-    const res = await fetch('https://gamma-api.polymarket.com/events?tag=tech&closed=false&limit=500', {
-      next: { revalidate: 60 }
+    // active=true: 활성 마켓만, closed=false: 종료되지 않은 마켓만
+    const res = await fetch('https://gamma-api.polymarket.com/events?tag=tech&closed=false&active=true&limit=500', {
+      next: { revalidate: 28800 } // 8시간 캐싱 (1일 3회 업데이트)
     });
     const events = await res.json();
     
+    const now = new Date();
     const markets = [];
     for (const event of events) {
       if (event.markets) {
         for (const market of event.markets) {
+          // 종료일이 지난 마켓 제외
+          if (market.endDate && new Date(market.endDate) < now) continue;
+          
           const questionLower = (market.question || '').toLowerCase();
           const eventTitleLower = (event.title || '').toLowerCase();
           const combined = questionLower + ' ' + eventTitleLower;

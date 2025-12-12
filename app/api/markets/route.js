@@ -88,38 +88,27 @@ export async function GET() {
   const MIN_VOLUME = 5000;
 
   try {
-    // 전체 이벤트 가져오기 (여러 소스에서)
-    const fetchPromises = [
-      // 전체 활성 이벤트 (최대한 많이)
-      fetch('https://gamma-api.polymarket.com/events?closed=false&active=true&limit=500', {
-        next: { revalidate: 3600 }
-      }).then(r => r.json()).catch(() => []),
-      // 추가 태그들
-      fetch('https://gamma-api.polymarket.com/events?tag=tech&closed=false&active=true&limit=200', {
-        next: { revalidate: 3600 }
-      }).then(r => r.json()).catch(() => []),
-      fetch('https://gamma-api.polymarket.com/events?tag=business&closed=false&active=true&limit=200', {
-        next: { revalidate: 3600 }
-      }).then(r => r.json()).catch(() => []),
-      fetch('https://gamma-api.polymarket.com/events?tag=ai&closed=false&active=true&limit=200', {
-        next: { revalidate: 3600 }
-      }).then(r => r.json()).catch(() => []),
-      fetch('https://gamma-api.polymarket.com/events?tag=finance&closed=false&active=true&limit=200', {
-        next: { revalidate: 3600 }
-      }).then(r => r.json()).catch(() => []),
-      fetch('https://gamma-api.polymarket.com/events?tag=science&closed=false&active=true&limit=200', {
-        next: { revalidate: 3600 }
-      }).then(r => r.json()).catch(() => []),
-      fetch('https://gamma-api.polymarket.com/events?tag=acquisitions&closed=false&active=true&limit=200', {
-        next: { revalidate: 3600 }
-      }).then(r => r.json()).catch(() => []),
-      fetch('https://gamma-api.polymarket.com/events?tag=big-tech&closed=false&active=true&limit=200', {
-        next: { revalidate: 3600 }
-      }).then(r => r.json()).catch(() => []),
-      fetch('https://gamma-api.polymarket.com/events?tag=companies&closed=false&active=true&limit=200', {
-        next: { revalidate: 3600 }
-      }).then(r => r.json()).catch(() => []),
-    ];
+    // 전체 이벤트 가져오기 (offset으로 페이지네이션)
+    const fetchPromises = [];
+    
+    // offset 0부터 600까지 (600개 이상 이벤트 커버)
+    for (let offset = 0; offset <= 600; offset += 100) {
+      fetchPromises.push(
+        fetch(`https://gamma-api.polymarket.com/events?closed=false&active=true&limit=100&offset=${offset}`, {
+          next: { revalidate: 3600 }
+        }).then(r => r.json()).catch(() => [])
+      );
+    }
+    
+    // 추가 태그별 조회 (restricted 마켓 포함 가능성)
+    const tags = ['tech', 'business', 'ai', 'finance', 'science', 'big-tech'];
+    for (const tag of tags) {
+      fetchPromises.push(
+        fetch(`https://gamma-api.polymarket.com/events?tag=${tag}&closed=false&active=true&limit=200`, {
+          next: { revalidate: 3600 }
+        }).then(r => r.json()).catch(() => [])
+      );
+    }
 
     const results = await Promise.all(fetchPromises);
     

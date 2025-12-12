@@ -1,5 +1,5 @@
 export async function GET() {
-  // 무조건 제외할 키워드 (암호화폐, 귀금속, 국제정치, 스포츠)
+  // 무조건 제외할 키워드
   const ALWAYS_EXCLUDE = [
     // 암호화폐
     'btc', 'bitcoin', 'eth', 'ethereum', 'crypto', 'solana', 'sol ',
@@ -8,6 +8,10 @@ export async function GET() {
     // 귀금속/원자재
     'gold price', 'silver price', 'oil price', 'commodity',
     'gold hit', 'silver hit', 'gold reach', 'silver reach',
+    // 금융/채권/금리
+    'treasury', 'yield', 'bond', 'interest rate', 'fed ', 'federal reserve',
+    'inflation rate', 'gdp', 'unemployment', 'recession', 'cpi',
+    'rate cut', 'rate hike', 'basis point', 'fomc',
     // 정치/선거
     'trump', 'biden', 'president', 'election', 'vote', 'congress',
     'senate', 'house of rep', 'democrat', 'republican', 'gop',
@@ -22,46 +26,43 @@ export async function GET() {
     // 정부/외교
     'government shutdown', 'prime minister', 'minister',
     'embassy', 'diplomat', 'treaty', 'united nations', 'g7', 'g20',
-    // 기타 비기업
-    'fed ', 'federal reserve', 'interest rate', 'inflation rate',
-    'gdp', 'unemployment', 'recession',
-    // 스포츠
+    // 스포츠 - 리그/대회
     'nfl', 'nba', 'mlb', 'nhl', 'mls', 'ufc', 'wwe', 'pga', 'atp', 'wta',
     'super bowl', 'world series', 'stanley cup', 'world cup',
     'championship', 'playoffs', 'finals', 'semifinal',
-    'football', 'basketball', 'baseball', 'hockey', 'soccer', 'tennis',
-    'golf', 'boxing', 'mma', 'wrestling', 'f1', 'formula 1', 'nascar',
-    'olympics', 'olympic', 'athlete', 'coach', 'quarterback', 'mvp',
-    'touchdown', 'home run', 'slam dunk', 'goal', 'assist',
     'premier league', 'la liga', 'bundesliga', 'serie a', 'ligue 1',
     'champions league', 'europa league', 'euro 2024', 'copa america',
-    'team', 'player', 'game', 'match', 'season', 'draft', 'trade',
+    // 스포츠 - 종목
+    'football', 'basketball', 'baseball', 'hockey', 'soccer', 'tennis',
+    'golf', 'boxing', 'mma', 'wrestling', 'f1', 'formula 1', 'nascar',
+    'olympics', 'olympic',
+    // 스포츠 - 컨퍼런스/디비전
+    'afc ', 'nfc ', 'afc west', 'afc east', 'afc north', 'afc south',
+    'nfc west', 'nfc east', 'nfc north', 'nfc south',
+    'al east', 'al west', 'al central', 'nl east', 'nl west', 'nl central',
+    'eastern conference', 'western conference',
+    // 스포츠 - 팀명
+    'chiefs', 'eagles', 'cowboys', 'patriots', 'packers', 'bears', '49ers',
+    'ravens', 'bills', 'dolphins', 'jets', 'steelers', 'bengals', 'browns',
+    'texans', 'colts', 'jaguars', 'titans', 'broncos', 'raiders', 'chargers',
+    'commanders', 'giants', 'lions', 'vikings', 'falcons', 'panthers',
+    'saints', 'buccaneers', 'cardinals', 'rams', 'seahawks',
+    'lakers', 'celtics', 'warriors', 'bulls', 'heat', 'knicks', 'nets',
+    'yankees', 'dodgers', 'red sox', 'cubs', 'mets', 'braves',
+    // 스포츠 - 기타
+    'athlete', 'coach', 'quarterback', 'mvp', 'touchdown', 'home run',
+    'slam dunk', 'goal', 'assist', 'win the', 'beat the',
+    'player', 'game', 'match', 'season', 'draft', 'trade',
     'lebron', 'messi', 'ronaldo', 'mahomes', 'brady', 'curry',
-    // 시총/가격 순위 예측 (상장기업)
+    // 시총/가격 예측
     'largest company', 'biggest company', 'most valuable company',
     'by market cap', 'market cap on', 'overtake', 'surpass',
-    'trillion', 'reach $', 'hit $', 'above $', 'below $', 'trading at'
+    'trillion', 'reach $', 'hit $', 'above $', 'below $', 'trading at',
+    'stock price', 'share price'
   ];
 
-  // 가격/시총 예측 키워드
-  const PRICE_KEYWORDS = [
-    'price', 'market cap', 'marketcap', 'reach $', 'hit $', 'above $',
-    'below $', 'trading at', 'worth $', 'valuation', 'trillion', 'billion market',
-    'largest company', 'biggest company', 'most valuable', 'by market cap',
-    'market cap on', 'overtake', 'surpass'
-  ];
-
-  // 상장 주식 티커/회사명 (가격 예측시 제외)
-  const PUBLIC_STOCKS = [
-    'aapl', 'apple stock', 'tsla', 'tesla stock', 'nvda', 'nvidia stock',
-    'googl', 'goog', 'google stock', 'alphabet stock',
-    'msft', 'microsoft stock', 'meta stock', 'facebook stock',
-    'amzn', 'amazon stock', 'nflx', 'netflix stock',
-    'amd', 'intel', 'intc', 'ibm', 'orcl', 'oracle stock',
-    'crm', 'salesforce', 'adobe', 'adbe', 'snap', 'uber', 'lyft',
-    'coin', 'coinbase stock', 'hood', 'robinhood', 'pltr', 'palantir',
-    'sp500', 's&p 500', 's&p500', 'nasdaq', 'dow jones'
-  ];
+  // 최소 볼륨 (USD)
+  const MIN_VOLUME = 10000;
 
   // 비상장 기업 (시총 예측 허용)
   const PRIVATE_COMPANIES = [
@@ -71,9 +72,8 @@ export async function GET() {
   ];
 
   try {
-    // active=true: 활성 마켓만, closed=false: 종료되지 않은 마켓만
     const res = await fetch('https://gamma-api.polymarket.com/events?tag=tech&closed=false&active=true&limit=500', {
-      next: { revalidate: 28800 } // 8시간 캐싱 (1일 3회 업데이트)
+      next: { revalidate: 28800 }
     });
     const events = await res.json();
     
@@ -85,41 +85,24 @@ export async function GET() {
           // 종료일이 지난 마켓 제외
           if (market.endDate && new Date(market.endDate) < now) continue;
           
+          // 볼륨 $10k 미만 제외
+          const volume = market.volumeNum || parseFloat(market.volume) || 0;
+          if (volume < MIN_VOLUME) continue;
+          
           const questionLower = (market.question || '').toLowerCase();
           const eventTitleLower = (event.title || '').toLowerCase();
           const combined = questionLower + ' ' + eventTitleLower;
           
-          // 1. 무조건 제외 키워드 체크
+          // 무조건 제외 키워드 체크
           const alwaysExcluded = ALWAYS_EXCLUDE.some(keyword => 
             combined.includes(keyword)
           );
-          if (alwaysExcluded) continue;
-          
-          // 2. 가격/시총 예측 마켓인지 체크
-          const isPricePrediction = PRICE_KEYWORDS.some(keyword => 
-            combined.includes(keyword)
-          );
-          
-          if (isPricePrediction) {
-            // 비상장 기업이면 허용
+          if (alwaysExcluded) {
+            // 비상장 기업이면 예외적으로 허용
             const isPrivateCompany = PRIVATE_COMPANIES.some(company => 
               combined.includes(company)
             );
-            if (isPrivateCompany) {
-              // 허용 - 아래로 진행
-            } else {
-              // 상장 주식이면 제외
-              const isPublicStock = PUBLIC_STOCKS.some(stock => 
-                combined.includes(stock)
-              );
-              if (isPublicStock) continue;
-              
-              // 상장/비상장 불명확하면 제외 (안전하게)
-              // 단, 기업 이름이 명확히 있으면 허용
-              const hasCompanyContext = combined.includes('company') || 
-                combined.includes('startup') || combined.includes('ipo');
-              if (!hasCompanyContext) continue;
-            }
+            if (!isPrivateCompany) continue;
           }
           
           markets.push({
@@ -130,7 +113,7 @@ export async function GET() {
             image: market.image || event.image,
             outcomes: JSON.parse(market.outcomes || '["Yes", "No"]'),
             outcomePrices: JSON.parse(market.outcomePrices || '[0.5, 0.5]'),
-            volume: market.volumeNum || parseFloat(market.volume) || 0,
+            volume: volume,
             liquidity: market.liquidityNum || parseFloat(market.liquidity) || 0,
             endDate: market.endDate,
             eventTitle: event.title,

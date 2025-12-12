@@ -443,6 +443,76 @@ body {
   text-align: right;
 }
 
+/* Insider Score styles */
+.insider-score {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.score-high {
+  background: rgba(207, 34, 46, 0.15);
+  color: var(--red);
+}
+
+.score-medium {
+  background: rgba(227, 171, 46, 0.15);
+  color: #9a6700;
+}
+
+.score-low {
+  background: rgba(26, 127, 55, 0.15);
+  color: var(--green);
+}
+
+.company-cell {
+  font-weight: 500;
+}
+
+.concentration {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+.direction {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.direction.yes {
+  background: rgba(26, 127, 55, 0.15);
+  color: var(--green);
+}
+
+.direction.no {
+  background: rgba(207, 34, 46, 0.15);
+  color: var(--red);
+}
+
+.insider-breakdown {
+  padding: 12px 0;
+}
+
+.insider-breakdown h4 {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.position-question {
+  flex: 1;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (max-width: 900px) {
   .markets-table {
     font-size: 12px;

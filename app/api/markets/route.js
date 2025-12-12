@@ -5,13 +5,20 @@ export async function GET() {
     'btc', 'bitcoin', 'eth', 'ethereum', 'crypto', 'solana', 'sol ',
     'xrp', 'doge', 'dogecoin', 'memecoin', 'meme coin', 'shiba',
     'cardano', 'ada ', 'bnb', 'binance', 'token', 'stablecoin',
-    // 귀금속/원자재
-    'gold price', 'silver price', 'oil price', 'commodity',
-    'gold hit', 'silver hit', 'gold reach', 'silver reach',
+    // 귀금속/원자재 - 강화
+    'gold', 'silver', 'oil price', 'commodity', 'platinum', 'copper',
+    'crude oil', 'natural gas', 'wheat', 'corn',
     // 금융/채권/금리
     'treasury', 'yield', 'bond', 'interest rate', 'fed ', 'federal reserve',
     'inflation rate', 'gdp', 'unemployment', 'recession', 'cpi',
     'rate cut', 'rate hike', 'basis point', 'fomc',
+    // 가격/시총 예측 - 강화
+    'largest company', 'biggest company', 'most valuable company',
+    'by market cap', 'market cap on', 'overtake', 'surpass',
+    'trillion', 'reach $', 'hit $', 'above $', 'below $', 'trading at',
+    'stock price', 'share price', 'close at', 'close above', 'close below',
+    'fdv', 'fully diluted', 'market cap >', 'market cap <', 'mcap',
+    '>$', '<$', 'after launch', 'at launch', 'ath', 'all-time high',
     // 정치/선거
     'trump', 'biden', 'president', 'election', 'vote', 'congress',
     'senate', 'house of rep', 'democrat', 'republican', 'gop',
@@ -53,12 +60,7 @@ export async function GET() {
     'athlete', 'coach', 'quarterback', 'mvp', 'touchdown', 'home run',
     'slam dunk', 'goal', 'assist', 'win the', 'beat the',
     'player', 'game', 'match', 'season', 'draft', 'trade',
-    'lebron', 'messi', 'ronaldo', 'mahomes', 'brady', 'curry',
-    // 시총/가격 예측
-    'largest company', 'biggest company', 'most valuable company',
-    'by market cap', 'market cap on', 'overtake', 'surpass',
-    'trillion', 'reach $', 'hit $', 'above $', 'below $', 'trading at',
-    'stock price', 'share price'
+    'lebron', 'messi', 'ronaldo', 'mahomes', 'brady', 'curry'
   ];
 
   // 최소 볼륨 (USD)

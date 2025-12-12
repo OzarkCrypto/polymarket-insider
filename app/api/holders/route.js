@@ -9,7 +9,7 @@ export async function GET(request) {
   try {
     const res = await fetch(
       `https://data-api.polymarket.com/holders?market=${conditionId}&limit=10`,
-      { next: { revalidate: 300 } }
+      { next: { revalidate: 28800 } } // 8시간 캐싱 (1일 3회 업데이트)
     );
     const data = await res.json();
     

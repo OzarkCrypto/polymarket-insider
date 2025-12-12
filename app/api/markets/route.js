@@ -1,9 +1,36 @@
 export async function GET() {
-  // 제외할 키워드 (암호화폐 관련)
-  const EXCLUDE_KEYWORDS = [
-    'btc', 'bitcoin', 'eth', 'ethereum', 'crypto', 'solana', 'sol ', 
+  // 무조건 제외할 키워드 (암호화폐, 귀금속)
+  const ALWAYS_EXCLUDE = [
+    'btc', 'bitcoin', 'eth', 'ethereum', 'crypto', 'solana', 'sol ',
     'xrp', 'doge', 'dogecoin', 'memecoin', 'meme coin', 'shiba',
-    'cardano', 'ada ', 'bnb', 'binance', 'coinbase', 'token'
+    'cardano', 'ada ', 'bnb', 'binance', 'token', 'stablecoin',
+    'gold price', 'silver price', 'oil price', 'commodity',
+    'gold hit', 'silver hit', 'gold reach', 'silver reach'
+  ];
+
+  // 가격/시총 예측 키워드
+  const PRICE_KEYWORDS = [
+    'price', 'market cap', 'marketcap', 'reach $', 'hit $', 'above $',
+    'below $', 'trading at', 'worth $', 'valuation', 'trillion', 'billion market'
+  ];
+
+  // 상장 주식 티커/회사명 (가격 예측시 제외)
+  const PUBLIC_STOCKS = [
+    'aapl', 'apple stock', 'tsla', 'tesla stock', 'nvda', 'nvidia stock',
+    'googl', 'goog', 'google stock', 'alphabet stock',
+    'msft', 'microsoft stock', 'meta stock', 'facebook stock',
+    'amzn', 'amazon stock', 'nflx', 'netflix stock',
+    'amd', 'intel', 'intc', 'ibm', 'orcl', 'oracle stock',
+    'crm', 'salesforce', 'adobe', 'adbe', 'snap', 'uber', 'lyft',
+    'coin', 'coinbase stock', 'hood', 'robinhood', 'pltr', 'palantir',
+    'sp500', 's&p 500', 's&p500', 'nasdaq', 'dow jones'
+  ];
+
+  // 비상장 기업 (시총 예측 허용)
+  const PRIVATE_COMPANIES = [
+    'openai', 'anthropic', 'spacex', 'stripe', 'databricks',
+    'discord', 'reddit ipo', 'canva', 'instacart', 'klarna',
+    'revolut', 'figma', 'notion', 'airtable', 'scale ai'
   ];
 
   try {
@@ -12,20 +39,46 @@ export async function GET() {
     });
     const events = await res.json();
     
-    // 각 이벤트의 마켓들을 평탄화하여 반환
     const markets = [];
     for (const event of events) {
       if (event.markets) {
         for (const market of event.markets) {
           const questionLower = (market.question || '').toLowerCase();
           const eventTitleLower = (event.title || '').toLowerCase();
+          const combined = questionLower + ' ' + eventTitleLower;
           
-          // 암호화폐 관련 키워드가 포함된 마켓 제외
-          const isExcluded = EXCLUDE_KEYWORDS.some(keyword => 
-            questionLower.includes(keyword) || eventTitleLower.includes(keyword)
+          // 1. 무조건 제외 키워드 체크
+          const alwaysExcluded = ALWAYS_EXCLUDE.some(keyword => 
+            combined.includes(keyword)
+          );
+          if (alwaysExcluded) continue;
+          
+          // 2. 가격/시총 예측 마켓인지 체크
+          const isPricePrediction = PRICE_KEYWORDS.some(keyword => 
+            combined.includes(keyword)
           );
           
-          if (isExcluded) continue;
+          if (isPricePrediction) {
+            // 비상장 기업이면 허용
+            const isPrivateCompany = PRIVATE_COMPANIES.some(company => 
+              combined.includes(company)
+            );
+            if (isPrivateCompany) {
+              // 허용 - 아래로 진행
+            } else {
+              // 상장 주식이면 제외
+              const isPublicStock = PUBLIC_STOCKS.some(stock => 
+                combined.includes(stock)
+              );
+              if (isPublicStock) continue;
+              
+              // 상장/비상장 불명확하면 제외 (안전하게)
+              // 단, 기업 이름이 명확히 있으면 허용
+              const hasCompanyContext = combined.includes('company') || 
+                combined.includes('startup') || combined.includes('ipo');
+              if (!hasCompanyContext) continue;
+            }
+          }
           
           markets.push({
             id: market.id,

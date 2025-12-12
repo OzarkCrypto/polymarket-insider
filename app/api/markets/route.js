@@ -62,16 +62,20 @@ export async function GET() {
     'football', 'basketball', 'baseball', 'hockey', 'soccer', 'tennis',
     'golf', 'boxing', 'mma', 'f1 ', 'formula 1', 'nascar', 'olympics',
     'quarterback', 'mvp', 'touchdown', 'home run', 'slam dunk',
-    // 스포츠 팀
+    // 스포츠 선수/팀
+    'lebron', 'messi', 'ronaldo', 'curry', 'mahomes', 'brady',
     'chiefs', 'eagles', 'cowboys', 'patriots', 'packers', 'bears', '49ers',
     'ravens', 'bills', 'dolphins', 'jets', 'steelers', 'bengals', 'browns',
     'lakers', 'celtics', 'warriors', 'bulls', 'heat', 'knicks', 'nets',
     'yankees', 'dodgers', 'red sox', 'cubs', 'mets', 'braves',
-    // 암호화폐 가격
+    // 암호화폐 가격/토큰
     'bitcoin', 'btc ', 'ethereum', 'eth ', 'solana', 'sol ',
     'xrp', 'doge', 'dogecoin', 'memecoin', 'shiba', 'cardano',
-    'bnb', 'binance coin', 'stablecoin', 'altcoin',
+    'bnb', 'binance coin', 'stablecoin', 'altcoin', 'airdrop',
     'reach $', 'hit $', 'price of btc', 'price of eth',
+    'fdv', 'fully diluted', 'market cap >', 'market cap <', 'mcap',
+    'token launch', 'token price', 'lighter ', 'hyperliquid',
+    'base launch', 'base token',
     // 원자재/금융 예측
     'gold price', 'silver price', 'oil price', 'commodity',
     'close at $', 'close above', 'close below',
@@ -80,9 +84,13 @@ export async function GET() {
     // 시총 예측
     'largest company', 'biggest company', 'by market cap',
     'market cap on', 'trillion',
-    // 연예/가십
+    // 연예/가십/종교
     'divorce', 'pregnant', 'wedding', 'engaged', 'dating',
     'taylor swift', 'beyonce', 'kardashian', 'bieber',
+    'jesus christ', 'pope', 'second coming', 'rapture',
+    'person of the year', 'time magazine',
+    // 영화 (tech과 무관)
+    'grossing movie', 'box office', 'avatar',
   ];
 
   const MIN_VOLUME = 5000;

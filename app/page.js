@@ -230,6 +230,14 @@ function InsiderTab({ markets, searchQuery }) {
     async function analyzeInsiders() {
       setLoading(true);
       
+      // 마켓별 가격 정보 매핑
+      const marketPrices = {};
+      markets.forEach(market => {
+        const yesPrice = parseFloat(market.outcomePrices[0]) || 0.5;
+        const noPrice = parseFloat(market.outcomePrices[1]) || 0.5;
+        marketPrices[market.conditionId] = { yesPrice, noPrice };
+      });
+      
       // 기업별 마켓 매핑
       const companyMarkets = {};
       markets.forEach(market => {
@@ -246,6 +254,8 @@ function InsiderTab({ markets, searchQuery }) {
       await Promise.all(
         markets.map(async (market) => {
           const company = extractCompany(market.question);
+          const prices = marketPrices[market.conditionId] || { yesPrice: 0.5, noPrice: 0.5 };
+          
           try {
             const res = await fetch(`/api/holders?market=${market.conditionId}`);
             const data = await res.json();
@@ -259,7 +269,11 @@ function InsiderTab({ markets, searchQuery }) {
                   name: h.name,
                   totalShares: 0,
                   positions: [],
-                  companyPositions: {}, // 기업별 포지션
+                  companyPositions: {},
+                  // PnL 관련
+                  totalExpectedValue: 0,
+                  totalContrarianScore: 0,
+                  positionCount: 0,
                 };
               }
               
@@ -268,7 +282,23 @@ function InsiderTab({ markets, searchQuery }) {
               }
               
               const side = data.yes?.includes(h) ? 'YES' : 'NO';
+              const currentPrice = side === 'YES' ? prices.yesPrice : prices.noPrice;
+              
+              // 예상 수익률 계산 (마켓이 내 방향으로 결정될 경우)
+              // EV = (1 / currentPrice - 1) = 잠재 수익률
+              const expectedReturn = currentPrice > 0 ? (1 / currentPrice - 1) : 0;
+              const expectedValue = h.amount * expectedReturn;
+              
+              // 역방향 베팅 점수 (소수 의견에 베팅 = 높은 점수)
+              // 현재 가격이 낮은 쪽에 베팅했으면 역방향
+              const isContrarian = currentPrice < 0.5;
+              const contrarianScore = isContrarian ? (0.5 - currentPrice) * 2 : 0; // 0~1 범위
+              
               holdersMap[h.wallet].totalShares += h.amount;
+              holdersMap[h.wallet].totalExpectedValue += expectedValue;
+              holdersMap[h.wallet].totalContrarianScore += contrarianScore;
+              holdersMap[h.wallet].positionCount += 1;
+              
               holdersMap[h.wallet].positions.push({
                 market: market.question,
                 marketSlug: market.slug,
@@ -276,6 +306,9 @@ function InsiderTab({ markets, searchQuery }) {
                 company,
                 side,
                 amount: h.amount,
+                currentPrice,
+                expectedReturn: (expectedReturn * 100).toFixed(1),
+                isContrarian,
               });
               
               if (company) {
@@ -285,14 +318,23 @@ function InsiderTab({ markets, searchQuery }) {
                     totalAmount: 0,
                     yesCount: 0,
                     noCount: 0,
+                    expectedValue: 0,
+                    contrarianCount: 0,
                   };
                 }
                 holdersMap[h.wallet].companyPositions[company].markets.push({
                   question: market.question,
                   side,
                   amount: h.amount,
+                  currentPrice,
+                  expectedReturn: (expectedReturn * 100).toFixed(1),
+                  isContrarian,
                 });
                 holdersMap[h.wallet].companyPositions[company].totalAmount += h.amount;
+                holdersMap[h.wallet].companyPositions[company].expectedValue += expectedValue;
+                if (isContrarian) {
+                  holdersMap[h.wallet].companyPositions[company].contrarianCount++;
+                }
                 if (side === 'YES') {
                   holdersMap[h.wallet].companyPositions[company].yesCount++;
                 } else {
@@ -343,17 +385,42 @@ function InsiderTab({ markets, searchQuery }) {
           sizeConcentration = focusCompanyData.totalAmount / holder.totalShares;
         }
 
+        // 5. PnL 관련 점수
+        // 5a. 역방향 베팅 점수 (소수 의견에 베팅 = 정보 우위 가능성)
+        const avgContrarianScore = holder.positionCount > 0 
+          ? holder.totalContrarianScore / holder.positionCount 
+          : 0;
+        
+        // 5b. 집중 기업에서의 역방향 베팅 비율
+        let companyContrarianRate = 0;
+        if (focusCompanyData && focusCompanyData.markets.length > 0) {
+          companyContrarianRate = focusCompanyData.contrarianCount / focusCompanyData.markets.length;
+        }
+
+        // 5c. 예상 수익률 점수 (높은 예상 수익 = 확신 있는 베팅)
+        const avgExpectedReturn = holder.totalShares > 0 
+          ? holder.totalExpectedValue / holder.totalShares 
+          : 0;
+        const evScore = Math.min(1, avgExpectedReturn / 2); // 200% 이상이면 1점
+
         // 최종 점수 계산 (100점 만점)
-        // - 기업 집중도: 40점 (특정 기업 마켓 참여율)
-        // - 포트폴리오 집중도: 25점 (적은 마켓에만 참여)
-        // - 방향 일관성: 20점 (한 방향으로만 베팅)
-        // - 규모 집중도: 15점 (특정 기업에 자금 집중)
+        // - 기업 집중도: 30점 (특정 기업 마켓 참여율)
+        // - 포트폴리오 집중도: 15점 (적은 마켓에만 참여)
+        // - 방향 일관성: 15점 (한 방향으로만 베팅)
+        // - 규모 집중도: 10점 (특정 기업에 자금 집중)
+        // - 역방향 베팅: 15점 (소수 의견에 베팅)
+        // - 예상 수익률: 15점 (높은 수익률 포지션)
         const score = Math.round(
-          (maxConcentration * 40) +
-          (portfolioConcentration * 25) +
-          (directionConsistency * 20) +
-          (sizeConcentration * 15)
+          (maxConcentration * 30) +
+          (portfolioConcentration * 15) +
+          (directionConsistency * 15) +
+          (sizeConcentration * 10) +
+          (companyContrarianRate * 15) +
+          (evScore * 15)
         );
+
+        // 예상 총 수익
+        const expectedProfit = focusCompanyData?.expectedValue || 0;
 
         return {
           wallet: holder.wallet,
@@ -368,6 +435,10 @@ function InsiderTab({ markets, searchQuery }) {
           direction: focusCompanyData 
             ? (focusCompanyData.yesCount > focusCompanyData.noCount ? 'YES' : 'NO')
             : '-',
+          // PnL 관련
+          expectedProfit,
+          contrarianRate: (companyContrarianRate * 100).toFixed(0),
+          avgExpectedReturn: (avgExpectedReturn * 100).toFixed(0),
           positions: holder.positions,
           companyPositions: holder.companyPositions,
         };
@@ -410,6 +481,8 @@ function InsiderTab({ markets, searchQuery }) {
       case 'score': aVal = a.score; bVal = b.score; break;
       case 'concentration': aVal = a.focusCompanyMarkets / (a.totalCompanyMarkets || 1); bVal = b.focusCompanyMarkets / (b.totalCompanyMarkets || 1); break;
       case 'shares': aVal = a.companyShares; bVal = b.companyShares; break;
+      case 'expectedProfit': aVal = a.expectedProfit; bVal = b.expectedProfit; break;
+      case 'contrarian': aVal = parseFloat(a.contrarianRate); bVal = parseFloat(b.contrarianRate); break;
       default: return 0;
     }
     return sortDir === 'asc' ? aVal - bVal : bVal - aVal;
@@ -437,20 +510,24 @@ function InsiderTab({ markets, searchQuery }) {
           <th style={{ cursor: 'default' }}>Rank</th>
           <th style={{ cursor: 'default' }}>Account</th>
           <th onClick={() => handleSort('score')} className={sortKey === 'score' ? 'sorted' : ''}>
-            Insider Score
+            Score
             <span className="sort-icon">{sortKey === 'score' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
           </th>
-          <th style={{ cursor: 'default' }}>Focus Company</th>
+          <th style={{ cursor: 'default' }}>Focus</th>
           <th onClick={() => handleSort('concentration')} className={sortKey === 'concentration' ? 'sorted' : ''}>
-            Concentration
+            Conc.
             <span className="sort-icon">{sortKey === 'concentration' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
           </th>
-          <th style={{ cursor: 'default' }}>Direction</th>
-          <th onClick={() => handleSort('shares')} className={sortKey === 'shares' ? 'sorted' : ''}>
-            Company Shares
-            <span className="sort-icon">{sortKey === 'shares' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          <th style={{ cursor: 'default' }}>Dir</th>
+          <th onClick={() => handleSort('contrarian')} className={sortKey === 'contrarian' ? 'sorted' : ''}>
+            Contrarian
+            <span className="sort-icon">{sortKey === 'contrarian' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
           </th>
-          <th style={{ cursor: 'default' }}>Details</th>
+          <th onClick={() => handleSort('expectedProfit')} className={sortKey === 'expectedProfit' ? 'sorted' : ''}>
+            Exp. Profit
+            <span className="sort-icon">{sortKey === 'expectedProfit' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
+          <th style={{ cursor: 'default' }}></th>
         </tr>
       </thead>
       <tbody>
@@ -477,6 +554,9 @@ function InsiderTab({ markets, searchQuery }) {
                           <span className={`position-side ${pos.side.toLowerCase()}`}>{pos.side}</span>
                           <span className="position-question">{pos.question}</span>
                           <span className="position-amount">{formatAmount(pos.amount)}</span>
+                          <span className={`position-return ${pos.isContrarian ? 'contrarian' : ''}`}>
+                            {pos.expectedReturn}%
+                          </span>
                         </div>
                       ))}
                     </div>
@@ -491,7 +571,7 @@ function InsiderTab({ markets, searchQuery }) {
               <td className="company-cell">{insider.focusCompany || '-'}</td>
               <td>
                 <span className="concentration">
-                  {insider.focusCompanyMarkets}/{insider.totalCompanyMarkets} markets
+                  {insider.focusCompanyMarkets}/{insider.totalCompanyMarkets}
                 </span>
               </td>
               <td>
@@ -499,7 +579,14 @@ function InsiderTab({ markets, searchQuery }) {
                   {insider.direction}
                 </span>
               </td>
-              <td className="shares-cell">{formatAmount(insider.companyShares)}</td>
+              <td>
+                <span className={`contrarian-rate ${parseInt(insider.contrarianRate) > 50 ? 'high' : ''}`}>
+                  {insider.contrarianRate}%
+                </span>
+              </td>
+              <td className={`profit-cell ${insider.expectedProfit > 0 ? 'positive' : ''}`}>
+                {formatAmount(insider.expectedProfit)}
+              </td>
               <td>
                 <button className="expand-btn" onClick={() => setExpandedWallet(isExpanded ? null : insider.wallet)}>
                   {isExpanded ? 'Hide' : 'Show'}

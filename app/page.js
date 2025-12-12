@@ -312,27 +312,40 @@ function InsiderTab({ markets, searchQuery }) {
       // Insider Score 계산
       const insiders = Object.values(holdersMap).map(holder => {
         const companies = Object.keys(holder.companyPositions);
-        let maxConcentration = 0;
+        const totalPositions = holder.positions.length;
+        
+        // 가장 집중한 기업 찾기 (전체 포지션 대비 해당 기업 포지션 비율 기준)
         let focusCompany = null;
         let focusCompanyData = null;
-
-        // 1. 기업 집중도 계산 (가장 집중한 기업 찾기)
+        let maxPortfolioRatio = 0;
+        
         companies.forEach(company => {
           const companyData = holder.companyPositions[company];
-          const totalMarketsForCompany = companyMarkets[company]?.length || 1;
-          const participationRate = companyData.markets.length / totalMarketsForCompany;
+          const portfolioRatio = companyData.markets.length / totalPositions;
           
-          if (participationRate > maxConcentration) {
-            maxConcentration = participationRate;
+          if (portfolioRatio > maxPortfolioRatio) {
+            maxPortfolioRatio = portfolioRatio;
             focusCompany = company;
             focusCompanyData = companyData;
           }
         });
 
-        // 2. 포트폴리오 집중도 (참여 마켓 수가 적을수록 높음)
-        const portfolioConcentration = Math.max(0, 1 - (holder.positions.length / 20));
+        // 1. 포트폴리오 집중도 (45점)
+        // 전체 포지션 대비 특정 기업 포지션 비율
+        // 예: 8개 포지션 중 6개가 OpenAI = 75% = 0.75 * 45 = 33.75점
+        const portfolioConcentration = maxPortfolioRatio;
 
-        // 3. 방향 일관성 (같은 기업에서 YES/NO 방향 일관성)
+        // 2. 기업 마켓 커버리지 (15점)
+        // 해당 기업의 전체 마켓 중 몇 개에 참여했는지
+        // 예: OpenAI 마켓 10개 중 6개 참여 = 60%
+        let marketCoverage = 0;
+        if (focusCompany && focusCompanyData) {
+          const totalMarketsForCompany = companyMarkets[focusCompany]?.length || 1;
+          marketCoverage = Math.min(1, focusCompanyData.markets.length / totalMarketsForCompany);
+        }
+
+        // 3. 방향 일관성 (10점)
+        // 같은 기업에서 YES/NO 중 한 방향으로만 베팅
         let directionConsistency = 0;
         if (focusCompanyData) {
           const total = focusCompanyData.yesCount + focusCompanyData.noCount;
@@ -340,35 +353,27 @@ function InsiderTab({ markets, searchQuery }) {
           directionConsistency = total > 0 ? dominant / total : 0;
         }
 
-        // 4. 규모 집중도 (상위 기업에 얼마나 집중했는지)
-        let sizeConcentration = 0;
-        if (focusCompanyData && holder.totalShares > 0) {
-          sizeConcentration = focusCompanyData.totalAmount / holder.totalShares;
-        }
-
-        // 6. Position Value 점수 (베팅 규모)
-        // $10K 이하: 0점, $100K 이상: 만점 (로그 스케일)
+        // 4. Position Value 점수 (30점)
+        // $1K 이하: 0점, $50K 이상: 만점 (로그 스케일)
         const companyPositionValue = focusCompanyData?.totalAmount || 0;
         let positionValueScore = 0;
-        if (companyPositionValue >= 100000) {
+        if (companyPositionValue >= 50000) {
           positionValueScore = 1;
-        } else if (companyPositionValue >= 10000) {
-          // 로그 스케일: log(value/10000) / log(10) = 0~1
-          positionValueScore = Math.log10(companyPositionValue / 10000);
+        } else if (companyPositionValue >= 1000) {
+          // 로그 스케일: log(value/1000) / log(50) ≈ 0~1
+          positionValueScore = Math.log10(companyPositionValue / 1000) / Math.log10(50);
         }
 
         // 최종 점수 계산 (100점 만점)
-        // - 기업 집중도: 35점 (특정 기업 마켓 참여율)
+        // - 포트폴리오 집중도: 45점 (전체 포지션 대비 특정 기업 비율) ★핵심★
         // - Position Value: 30점 (베팅 규모)
-        // - 포트폴리오 집중도: 15점 (적은 마켓에만 참여)
+        // - 기업 마켓 커버리지: 15점 (해당 기업 마켓 참여율)
         // - 방향 일관성: 10점 (한 방향으로만 베팅)
-        // - 규모 집중도: 10점 (특정 기업에 자금 집중)
         const score = Math.round(
-          (maxConcentration * 35) +
+          (portfolioConcentration * 45) +
           (positionValueScore * 30) +
-          (portfolioConcentration * 15) +
-          (directionConsistency * 10) +
-          (sizeConcentration * 10)
+          (marketCoverage * 15) +
+          (directionConsistency * 10)
         );
 
         return {
@@ -378,13 +383,14 @@ function InsiderTab({ markets, searchQuery }) {
           focusCompany,
           focusCompanyMarkets: focusCompanyData?.markets.length || 0,
           totalCompanyMarkets: focusCompany ? (companyMarkets[focusCompany]?.length || 0) : 0,
-          totalMarkets: holder.positions.length,
+          totalMarkets: totalPositions,
           totalShares: holder.totalShares,
           companyShares: focusCompanyData?.totalAmount || 0,
           direction: focusCompanyData 
             ? (focusCompanyData.yesCount > focusCompanyData.noCount ? 'YES' : 'NO')
             : '-',
           positionValue: companyPositionValue,
+          portfolioRatio: (maxPortfolioRatio * 100).toFixed(0),
           positions: holder.positions,
           companyPositions: holder.companyPositions,
         };
@@ -425,7 +431,7 @@ function InsiderTab({ markets, searchQuery }) {
     let aVal, bVal;
     switch (sortKey) {
       case 'score': aVal = a.score; bVal = b.score; break;
-      case 'concentration': aVal = a.focusCompanyMarkets / (a.totalCompanyMarkets || 1); bVal = b.focusCompanyMarkets / (b.totalCompanyMarkets || 1); break;
+      case 'portfolioRatio': aVal = parseFloat(a.portfolioRatio); bVal = parseFloat(b.portfolioRatio); break;
       case 'positionValue': aVal = a.positionValue; bVal = b.positionValue; break;
       default: return 0;
     }
@@ -458,9 +464,9 @@ function InsiderTab({ markets, searchQuery }) {
             <span className="sort-icon">{sortKey === 'score' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
           </th>
           <th style={{ cursor: 'default' }}>Focus</th>
-          <th onClick={() => handleSort('concentration')} className={sortKey === 'concentration' ? 'sorted' : ''}>
-            Conc.
-            <span className="sort-icon">{sortKey === 'concentration' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          <th onClick={() => handleSort('portfolioRatio')} className={sortKey === 'portfolioRatio' ? 'sorted' : ''}>
+            Focus %
+            <span className="sort-icon">{sortKey === 'portfolioRatio' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
           </th>
           <th onClick={() => handleSort('positionValue')} className={sortKey === 'positionValue' ? 'sorted' : ''}>
             Position $
@@ -488,7 +494,7 @@ function InsiderTab({ markets, searchQuery }) {
                 {isExpanded && (
                   <div className="positions-detail">
                     <div className="insider-breakdown">
-                      <h4>Positions in {insider.focusCompany} Markets:</h4>
+                      <h4>Positions in {insider.focusCompany} ({insider.focusCompanyMarkets}/{insider.totalMarkets} positions):</h4>
                       {insider.companyPositions[insider.focusCompany]?.markets.map((pos, i) => (
                         <div key={i} className={`position-item ${pos.side.toLowerCase()}`}>
                           <span className={`position-side ${pos.side.toLowerCase()}`}>{pos.side}</span>
@@ -507,9 +513,10 @@ function InsiderTab({ markets, searchQuery }) {
               </td>
               <td className="company-cell">{insider.focusCompany || '-'}</td>
               <td>
-                <span className="concentration">
-                  {insider.focusCompanyMarkets}/{insider.totalCompanyMarkets}
+                <span className={`portfolio-ratio ${parseInt(insider.portfolioRatio) >= 50 ? 'high' : ''}`}>
+                  {insider.portfolioRatio}%
                 </span>
+                <span className="position-count">({insider.focusCompanyMarkets}/{insider.totalMarkets})</span>
               </td>
               <td className={`position-value ${insider.positionValue >= 50000 ? 'high-value' : ''}`}>
                 {formatNumber(insider.positionValue)}

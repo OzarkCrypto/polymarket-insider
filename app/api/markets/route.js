@@ -1,5 +1,5 @@
 export async function GET() {
-  // 무조건 제외할 키워드 (암호화폐, 귀금속, 국제정치)
+  // 무조건 제외할 키워드 (암호화폐, 귀금속, 국제정치, 스포츠)
   const ALWAYS_EXCLUDE = [
     // 암호화폐
     'btc', 'bitcoin', 'eth', 'ethereum', 'crypto', 'solana', 'sol ',
@@ -24,7 +24,19 @@ export async function GET() {
     'embassy', 'diplomat', 'treaty', 'united nations', 'g7', 'g20',
     // 기타 비기업
     'fed ', 'federal reserve', 'interest rate', 'inflation rate',
-    'gdp', 'unemployment', 'recession'
+    'gdp', 'unemployment', 'recession',
+    // 스포츠
+    'nfl', 'nba', 'mlb', 'nhl', 'mls', 'ufc', 'wwe', 'pga', 'atp', 'wta',
+    'super bowl', 'world series', 'stanley cup', 'world cup',
+    'championship', 'playoffs', 'finals', 'semifinal',
+    'football', 'basketball', 'baseball', 'hockey', 'soccer', 'tennis',
+    'golf', 'boxing', 'mma', 'wrestling', 'f1', 'formula 1', 'nascar',
+    'olympics', 'olympic', 'athlete', 'coach', 'quarterback', 'mvp',
+    'touchdown', 'home run', 'slam dunk', 'goal', 'assist',
+    'premier league', 'la liga', 'bundesliga', 'serie a', 'ligue 1',
+    'champions league', 'europa league', 'euro 2024', 'copa america',
+    'team', 'player', 'game', 'match', 'season', 'draft', 'trade',
+    'lebron', 'messi', 'ronaldo', 'mahomes', 'brady', 'curry'
   ];
 
   // 가격/시총 예측 키워드

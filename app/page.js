@@ -172,6 +172,347 @@ const BLACKLIST = [
   '0xa5ef39c3d3e10d0b270233af41cac69796b12966'
 ];
 
+// 주요 기업 목록 (마켓에서 추출할 기업명)
+const COMPANIES = [
+  { name: 'OpenAI', keywords: ['openai', 'chatgpt', 'gpt-5', 'gpt5', 'sam altman'] },
+  { name: 'Anthropic', keywords: ['anthropic', 'claude'] },
+  { name: 'Google', keywords: ['google', 'alphabet', 'deepmind', 'gemini'] },
+  { name: 'Apple', keywords: ['apple', 'iphone', 'ipad', 'tim cook'] },
+  { name: 'Microsoft', keywords: ['microsoft', 'msft', 'satya nadella', 'bing', 'copilot'] },
+  { name: 'Meta', keywords: ['meta', 'facebook', 'instagram', 'zuckerberg', 'threads'] },
+  { name: 'Amazon', keywords: ['amazon', 'aws', 'bezos', 'alexa'] },
+  { name: 'Tesla', keywords: ['tesla', 'elon musk', 'cybertruck', 'model 3', 'model y'] },
+  { name: 'Nvidia', keywords: ['nvidia', 'nvda', 'jensen huang'] },
+  { name: 'SpaceX', keywords: ['spacex', 'starship', 'starlink', 'falcon'] },
+  { name: 'xAI', keywords: ['xai', 'grok'] },
+  { name: 'Netflix', keywords: ['netflix'] },
+  { name: 'Twitter/X', keywords: ['twitter', ' x.com', 'x corp'] },
+  { name: 'TikTok', keywords: ['tiktok', 'bytedance'] },
+  { name: 'Uber', keywords: ['uber'] },
+  { name: 'Stripe', keywords: ['stripe'] },
+  { name: 'Discord', keywords: ['discord'] },
+  { name: 'Snap', keywords: ['snap', 'snapchat'] },
+  { name: 'Adobe', keywords: ['adobe'] },
+  { name: 'Salesforce', keywords: ['salesforce'] },
+  { name: 'Oracle', keywords: ['oracle', 'larry ellison'] },
+  { name: 'IBM', keywords: ['ibm'] },
+  { name: 'Intel', keywords: ['intel'] },
+  { name: 'AMD', keywords: [' amd ', 'advanced micro'] },
+  { name: 'Palantir', keywords: ['palantir'] },
+  { name: 'Databricks', keywords: ['databricks'] },
+  { name: 'Figma', keywords: ['figma'] },
+  { name: 'Notion', keywords: ['notion'] },
+  { name: 'Perplexity', keywords: ['perplexity'] },
+];
+
+// 마켓에서 기업명 추출
+function extractCompany(marketQuestion) {
+  const questionLower = marketQuestion.toLowerCase();
+  for (const company of COMPANIES) {
+    for (const keyword of company.keywords) {
+      if (questionLower.includes(keyword)) {
+        return company.name;
+      }
+    }
+  }
+  return null;
+}
+
+// Insider Score 탭 컴포넌트
+function InsiderTab({ markets, searchQuery }) {
+  const [insiderData, setInsiderData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [expandedWallet, setExpandedWallet] = useState(null);
+  const [sortKey, setSortKey] = useState('score');
+  const [sortDir, setSortDir] = useState('desc');
+
+  useEffect(() => {
+    async function analyzeInsiders() {
+      setLoading(true);
+      
+      // 기업별 마켓 매핑
+      const companyMarkets = {};
+      markets.forEach(market => {
+        const company = extractCompany(market.question);
+        if (company) {
+          if (!companyMarkets[company]) companyMarkets[company] = [];
+          companyMarkets[company].push(market);
+        }
+      });
+
+      // 홀더 데이터 수집
+      const holdersMap = {};
+      
+      await Promise.all(
+        markets.map(async (market) => {
+          const company = extractCompany(market.question);
+          try {
+            const res = await fetch(`/api/holders?market=${market.conditionId}`);
+            const data = await res.json();
+
+            [...(data.yes || []), ...(data.no || [])].forEach(h => {
+              if (BLACKLIST.includes(h.wallet.toLowerCase())) return;
+              
+              if (!holdersMap[h.wallet]) {
+                holdersMap[h.wallet] = {
+                  wallet: h.wallet,
+                  name: h.name,
+                  totalShares: 0,
+                  positions: [],
+                  companyPositions: {}, // 기업별 포지션
+                };
+              }
+              
+              if (h.name && !holdersMap[h.wallet].name) {
+                holdersMap[h.wallet].name = h.name;
+              }
+              
+              const side = data.yes?.includes(h) ? 'YES' : 'NO';
+              holdersMap[h.wallet].totalShares += h.amount;
+              holdersMap[h.wallet].positions.push({
+                market: market.question,
+                marketSlug: market.slug,
+                eventSlug: market.eventSlug,
+                company,
+                side,
+                amount: h.amount,
+              });
+              
+              if (company) {
+                if (!holdersMap[h.wallet].companyPositions[company]) {
+                  holdersMap[h.wallet].companyPositions[company] = {
+                    markets: [],
+                    totalAmount: 0,
+                    yesCount: 0,
+                    noCount: 0,
+                  };
+                }
+                holdersMap[h.wallet].companyPositions[company].markets.push({
+                  question: market.question,
+                  side,
+                  amount: h.amount,
+                });
+                holdersMap[h.wallet].companyPositions[company].totalAmount += h.amount;
+                if (side === 'YES') {
+                  holdersMap[h.wallet].companyPositions[company].yesCount++;
+                } else {
+                  holdersMap[h.wallet].companyPositions[company].noCount++;
+                }
+              }
+            });
+          } catch (err) {
+            console.error('Error:', err);
+          }
+        })
+      );
+
+      // Insider Score 계산
+      const insiders = Object.values(holdersMap).map(holder => {
+        const companies = Object.keys(holder.companyPositions);
+        let maxConcentration = 0;
+        let focusCompany = null;
+        let focusCompanyData = null;
+
+        // 1. 기업 집중도 계산 (가장 집중한 기업 찾기)
+        companies.forEach(company => {
+          const companyData = holder.companyPositions[company];
+          const totalMarketsForCompany = companyMarkets[company]?.length || 1;
+          const participationRate = companyData.markets.length / totalMarketsForCompany;
+          
+          if (participationRate > maxConcentration) {
+            maxConcentration = participationRate;
+            focusCompany = company;
+            focusCompanyData = companyData;
+          }
+        });
+
+        // 2. 포트폴리오 집중도 (참여 마켓 수가 적을수록 높음)
+        const portfolioConcentration = Math.max(0, 1 - (holder.positions.length / 20));
+
+        // 3. 방향 일관성 (같은 기업에서 YES/NO 방향 일관성)
+        let directionConsistency = 0;
+        if (focusCompanyData) {
+          const total = focusCompanyData.yesCount + focusCompanyData.noCount;
+          const dominant = Math.max(focusCompanyData.yesCount, focusCompanyData.noCount);
+          directionConsistency = total > 0 ? dominant / total : 0;
+        }
+
+        // 4. 규모 집중도 (상위 기업에 얼마나 집중했는지)
+        let sizeConcentration = 0;
+        if (focusCompanyData && holder.totalShares > 0) {
+          sizeConcentration = focusCompanyData.totalAmount / holder.totalShares;
+        }
+
+        // 최종 점수 계산 (100점 만점)
+        // - 기업 집중도: 40점 (특정 기업 마켓 참여율)
+        // - 포트폴리오 집중도: 25점 (적은 마켓에만 참여)
+        // - 방향 일관성: 20점 (한 방향으로만 베팅)
+        // - 규모 집중도: 15점 (특정 기업에 자금 집중)
+        const score = Math.round(
+          (maxConcentration * 40) +
+          (portfolioConcentration * 25) +
+          (directionConsistency * 20) +
+          (sizeConcentration * 15)
+        );
+
+        return {
+          wallet: holder.wallet,
+          name: holder.name,
+          score,
+          focusCompany,
+          focusCompanyMarkets: focusCompanyData?.markets.length || 0,
+          totalCompanyMarkets: focusCompany ? (companyMarkets[focusCompany]?.length || 0) : 0,
+          totalMarkets: holder.positions.length,
+          totalShares: holder.totalShares,
+          companyShares: focusCompanyData?.totalAmount || 0,
+          direction: focusCompanyData 
+            ? (focusCompanyData.yesCount > focusCompanyData.noCount ? 'YES' : 'NO')
+            : '-',
+          positions: holder.positions,
+          companyPositions: holder.companyPositions,
+        };
+      });
+
+      // 점수가 20점 이상인 계정만 필터링 (너무 낮은 점수 제외)
+      const filteredInsiders = insiders.filter(i => i.score >= 20 && i.focusCompany);
+      setInsiderData(filteredInsiders);
+      setLoading(false);
+    }
+
+    if (markets.length > 0) {
+      analyzeInsiders();
+    }
+  }, [markets]);
+
+  const handleSort = (key) => {
+    if (sortKey === key) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortDir('desc');
+    }
+  };
+
+  // 검색 필터링
+  const filteredInsiders = insiderData.filter(insider => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      insider.wallet.toLowerCase().includes(query) ||
+      (insider.name && insider.name.toLowerCase().includes(query)) ||
+      (insider.focusCompany && insider.focusCompany.toLowerCase().includes(query))
+    );
+  });
+
+  const sortedInsiders = [...filteredInsiders].sort((a, b) => {
+    let aVal, bVal;
+    switch (sortKey) {
+      case 'score': aVal = a.score; bVal = b.score; break;
+      case 'concentration': aVal = a.focusCompanyMarkets / (a.totalCompanyMarkets || 1); bVal = b.focusCompanyMarkets / (b.totalCompanyMarkets || 1); break;
+      case 'shares': aVal = a.companyShares; bVal = b.companyShares; break;
+      default: return 0;
+    }
+    return sortDir === 'asc' ? aVal - bVal : bVal - aVal;
+  });
+
+  const getScoreColor = (score) => {
+    if (score >= 70) return 'score-high';
+    if (score >= 50) return 'score-medium';
+    return 'score-low';
+  };
+
+  if (loading) {
+    return (
+      <div className="loading">
+        <div className="spinner"></div>
+        Analyzing insider patterns...
+      </div>
+    );
+  }
+
+  return (
+    <table className="markets-table">
+      <thead>
+        <tr>
+          <th style={{ cursor: 'default' }}>Rank</th>
+          <th style={{ cursor: 'default' }}>Account</th>
+          <th onClick={() => handleSort('score')} className={sortKey === 'score' ? 'sorted' : ''}>
+            Insider Score
+            <span className="sort-icon">{sortKey === 'score' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
+          <th style={{ cursor: 'default' }}>Focus Company</th>
+          <th onClick={() => handleSort('concentration')} className={sortKey === 'concentration' ? 'sorted' : ''}>
+            Concentration
+            <span className="sort-icon">{sortKey === 'concentration' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
+          <th style={{ cursor: 'default' }}>Direction</th>
+          <th onClick={() => handleSort('shares')} className={sortKey === 'shares' ? 'sorted' : ''}>
+            Company Shares
+            <span className="sort-icon">{sortKey === 'shares' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
+          <th style={{ cursor: 'default' }}>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sortedInsiders.map((insider, idx) => {
+          const isExpanded = expandedWallet === insider.wallet;
+          const profileUrl = `https://polymarket.com/profile/${insider.wallet}`;
+
+          return (
+            <tr key={insider.wallet} className={isExpanded ? 'expanded-row' : ''}>
+              <td className="rank-cell">#{idx + 1}</td>
+              <td>
+                <div className="holder-cell">
+                  <a href={profileUrl} target="_blank" rel="noopener noreferrer" className="holder-link">
+                    {insider.name || insider.wallet}
+                  </a>
+                  <span className="wallet-address">{insider.wallet}</span>
+                </div>
+                {isExpanded && (
+                  <div className="positions-detail">
+                    <div className="insider-breakdown">
+                      <h4>Positions in {insider.focusCompany} Markets:</h4>
+                      {insider.companyPositions[insider.focusCompany]?.markets.map((pos, i) => (
+                        <div key={i} className={`position-item ${pos.side.toLowerCase()}`}>
+                          <span className={`position-side ${pos.side.toLowerCase()}`}>{pos.side}</span>
+                          <span className="position-question">{pos.question}</span>
+                          <span className="position-amount">{formatAmount(pos.amount)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </td>
+              <td>
+                <span className={`insider-score ${getScoreColor(insider.score)}`}>
+                  {insider.score}
+                </span>
+              </td>
+              <td className="company-cell">{insider.focusCompany || '-'}</td>
+              <td>
+                <span className="concentration">
+                  {insider.focusCompanyMarkets}/{insider.totalCompanyMarkets} markets
+                </span>
+              </td>
+              <td>
+                <span className={`direction ${insider.direction.toLowerCase()}`}>
+                  {insider.direction}
+                </span>
+              </td>
+              <td className="shares-cell">{formatAmount(insider.companyShares)}</td>
+              <td>
+                <button className="expand-btn" onClick={() => setExpandedWallet(isExpanded ? null : insider.wallet)}>
+                  {isExpanded ? 'Hide' : 'Show'}
+                </button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
 // Holders Tab Component
 function HoldersTab({ markets, searchQuery }) {
   const [allHolders, setAllHolders] = useState([]);
@@ -433,12 +774,22 @@ export default function Home() {
         >
           Top Holders
         </button>
+        <button 
+          className={`tab ${activeTab === 'insider' ? 'active' : ''}`}
+          onClick={() => setActiveTab('insider')}
+        >
+          🔍 Insider Score
+        </button>
       </div>
 
       <div className="search-bar">
         <input
           type="text"
-          placeholder={activeTab === 'markets' ? 'Search markets...' : 'Search by wallet address or name...'}
+          placeholder={
+            activeTab === 'markets' ? 'Search markets...' : 
+            activeTab === 'insider' ? 'Search by wallet, name, or company...' :
+            'Search by wallet address or name...'
+          }
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="search-input"
@@ -448,10 +799,14 @@ export default function Home() {
         )}
       </div>
 
-      {activeTab === 'markets' ? (
+      {activeTab === 'markets' && (
         <MarketsTab markets={markets} searchQuery={searchQuery} />
-      ) : (
+      )}
+      {activeTab === 'holders' && (
         <HoldersTab markets={markets} searchQuery={searchQuery} />
+      )}
+      {activeTab === 'insider' && (
+        <InsiderTab markets={markets} searchQuery={searchQuery} />
       )}
     </div>
   );

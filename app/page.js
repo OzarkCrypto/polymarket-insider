@@ -15,7 +15,7 @@ function formatAmount(num) {
 }
 
 // Markets Tab Component
-function MarketsTab({ markets }) {
+function MarketsTab({ markets, searchQuery }) {
   const [sortKey, setSortKey] = useState('volume');
   const [sortDir, setSortDir] = useState('desc');
   const [expandedId, setExpandedId] = useState(null);
@@ -53,7 +53,17 @@ function MarketsTab({ markets }) {
     }
   };
 
-  const sortedMarkets = [...markets].sort((a, b) => {
+  // 검색 필터링
+  const filteredMarkets = markets.filter(market => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      market.question.toLowerCase().includes(query) ||
+      (market.eventTitle && market.eventTitle.toLowerCase().includes(query))
+    );
+  });
+
+  const sortedMarkets = [...filteredMarkets].sort((a, b) => {
     let aVal, bVal;
     switch (sortKey) {
       case 'yes': aVal = parseFloat(a.outcomePrices[0]); bVal = parseFloat(b.outcomePrices[0]); break;
@@ -163,7 +173,7 @@ const BLACKLIST = [
 ];
 
 // Holders Tab Component
-function HoldersTab({ markets }) {
+function HoldersTab({ markets, searchQuery }) {
   const [allHolders, setAllHolders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedWallet, setExpandedWallet] = useState(null);
@@ -258,7 +268,17 @@ function HoldersTab({ markets }) {
     }
   };
 
-  const sortedHolders = [...allHolders].sort((a, b) => {
+  // 검색 필터링
+  const filteredHolders = allHolders.filter(holder => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      holder.wallet.toLowerCase().includes(query) ||
+      (holder.name && holder.name.toLowerCase().includes(query))
+    );
+  });
+
+  const sortedHolders = [...filteredHolders].sort((a, b) => {
     let aVal, bVal;
     switch (sortKey) {
       case 'totalShares': aVal = a.totalShares; bVal = b.totalShares; break;
@@ -344,6 +364,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('markets');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     async function fetchMarkets() {
@@ -414,10 +435,23 @@ export default function Home() {
         </button>
       </div>
 
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder={activeTab === 'markets' ? 'Search markets...' : 'Search by wallet address or name...'}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="search-input"
+        />
+        {searchQuery && (
+          <button className="search-clear" onClick={() => setSearchQuery('')}>×</button>
+        )}
+      </div>
+
       {activeTab === 'markets' ? (
-        <MarketsTab markets={markets} />
+        <MarketsTab markets={markets} searchQuery={searchQuery} />
       ) : (
-        <HoldersTab markets={markets} />
+        <HoldersTab markets={markets} searchQuery={searchQuery} />
       )}
     </div>
   );

@@ -476,6 +476,23 @@ body {
   color: var(--text-dim);
 }
 
+.portfolio-ratio {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.portfolio-ratio.high {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.position-count {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-left: 4px;
+}
+
 .direction {
   display: inline-block;
   padding: 2px 8px;

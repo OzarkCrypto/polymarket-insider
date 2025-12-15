@@ -27,6 +27,17 @@ export async function GET() {
     // 서비스 변경
     'shutdown', 'discontinue', 'end ', 'close', 'terminate',
     'restructur', 'layoff', 'lay off',
+    // 크립토 에어드랍 (프로젝트 팀, VC)
+    'airdrop',
+    // 법적 판결/체포 (검찰, 법원, 수사기관)
+    'sentenced', 'arrested', 'jail', 'prison', 'indicted', 'convicted',
+    'guilty', 'verdict', 'trial',
+    // 정부 인사 지명 (인사 담당자)
+    'confirmed as', 'appointed', 'nominated', 'ambassador',
+    // 서비스 장애 (SRE/운영팀)
+    'outage', 'incident', 'downtime',
+    // 소송/합의 (법무팀)
+    'settlement', 'lawsuit', 'sue', 'legal action',
   ];
 
   // ========== 제외 키워드 (Insider 가치 낮거나 관심 없는 분야) ==========
@@ -62,19 +73,20 @@ export async function GET() {
     'chiefs', 'eagles', 'cowboys', 'patriots', 'packers',
     'lakers', 'celtics', 'warriors', 'yankees', 'dodgers',
     '49ers', 'niners', 'nfc', 'afc', 'win the',
+    'winner', 'champion', 'league winner', 'division winner',
     // 정치/정책
     'rfk', 'vaccine', 'vaccination', 'covid',
-    // 암호화폐 가격
+    // 암호화폐 가격 (에어드랍은 제외 - 내부정보 가치 있음)
     'bitcoin', 'btc ', 'ethereum', 'eth ', 'solana', 'sol ',
     'xrp', 'doge', 'dogecoin', 'memecoin', 'shiba', 'cardano',
-    'bnb', 'stablecoin', 'altcoin', 'airdrop', 'tether', 'usdt',
+    'bnb', 'stablecoin', 'altcoin', 'tether', 'usdt',
     'reach $', 'hit $', 'price of',
     'fdv', 'fully diluted', 'market cap >', 'mcap',
-    'token launch', 'token price', 'lighter ', 'hyperliquid',
+    'token launch', 'token price',
     'base launch', 'base token',
     // 금융 예측 (예측 불가능한 것만)
     'gold price', 'silver price', 'oil price', 'commodity',
-    'gold close', 'silver close', 'oil close',
+    'gold close', 'silver close', 'oil close', 'close at',
     'treasury', 'yield', 'bond',
     'inflation rate', 'gdp', 'unemployment', 'recession',
     'largest company', 'biggest company', 'by market cap', 'trillion',
@@ -167,6 +179,11 @@ export async function GET() {
     // 앱스토어
     '1-free-app-in-the-us-apple-app-store-on-december-12',
     '1-paid-app-in-the-us-apple-app-store-on-december-12',
+    // 에어드랍
+    'lighter-airdop-by',
+    'pumpfun-airdop-by',
+    // 법적 판결
+    'will-yoon-be-sentenced-to-prison-in-2025',
   ];
 
   const MIN_VOLUME = 5000;

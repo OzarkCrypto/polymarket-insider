@@ -834,17 +834,23 @@ body {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
+  border: 1px solid var(--border);
+}
+
+.sus-table thead {
+  background: #f0f3f6;
 }
 
 .sus-table th {
   text-align: left;
-  padding: 8px 10px;
-  background: var(--bg-hover);
-  border-bottom: 1px solid var(--border);
-  font-weight: 600;
+  padding: 10px 12px;
+  background: #e8ecf0;
+  border-bottom: 2px solid var(--border);
+  font-weight: 700;
   font-size: 11px;
-  color: var(--text-dim);
+  color: #24292f;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .sus-table td {

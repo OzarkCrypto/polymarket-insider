@@ -108,11 +108,13 @@ export async function GET(request) {
     // 점수 순 정렬
     results.sort((a, b) => b.score - a.score);
     
-    // 의심 등급 추가
-    const analyzed = results.map(h => ({
-      ...h,
-      flag: h.score >= 70 ? 'HIGH' : h.score >= 50 ? 'MEDIUM' : h.score >= 30 ? 'LOW' : null,
-    }));
+    // 의심 등급 추가 + $1K 이상만 필터링
+    const analyzed = results
+      .filter(h => h.amount >= 1000)  // Position value $1K 이상
+      .map(h => ({
+        ...h,
+        flag: h.score >= 70 ? 'HIGH' : h.score >= 50 ? 'MEDIUM' : h.score >= 30 ? 'LOW' : null,
+      }));
     
     return Response.json({
       market: conditionId,

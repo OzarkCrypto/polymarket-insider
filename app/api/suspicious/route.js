@@ -108,9 +108,9 @@ export async function GET(request) {
     // 점수 순 정렬
     results.sort((a, b) => b.score - a.score);
     
-    // 의심 등급 추가 + $1K 이상만 필터링
+    // 의심 등급 추가 + $5K 이상만 필터링
     const analyzed = results
-      .filter(h => h.amount >= 1000)  // Position value $1K 이상
+      .filter(h => h.amount >= 5000)  // Position value $5K 이상
       .map(h => ({
         ...h,
         flag: h.score >= 70 ? 'HIGH' : h.score >= 50 ? 'MEDIUM' : h.score >= 30 ? 'LOW' : null,

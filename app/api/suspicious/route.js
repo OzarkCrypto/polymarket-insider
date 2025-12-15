@@ -41,14 +41,13 @@ export async function GET(request) {
     // 2. 각 홀더 분석 (positions + activity 병렬 호출)
     const analyzeHolder = async (holder) => {
       try {
-        // 병렬로 positions와 activity 조회
         const [posRes, actRes] = await Promise.all([
           fetch(
             `https://data-api.polymarket.com/positions?user=${holder.wallet}&sizeThreshold=100`,
             { next: { revalidate: 300 } }
           ),
           fetch(
-            `https://data-api.polymarket.com/activity?user=${holder.wallet}&limit=100`,
+            `https://data-api.polymarket.com/activity?user=${holder.wallet}&limit=200`,
             { next: { revalidate: 300 } }
           )
         ]);
@@ -62,40 +61,62 @@ export async function GET(request) {
         const marketRatio = totalValue > 0 ? holder.shares / totalValue : 1;
         
         // 계정 나이 계산 (첫 거래 ~ 현재)
-        let accountAgeDays = 999; // 기본값: 오래된 계정
+        let accountAgeDays = 999;
         let firstTradeDate = null;
         
+        // 이 마켓 첫 베팅 시점 계산 ★ 핵심 ★
+        let marketEntryDays = 999;
+        let marketFirstBetDate = null;
+        
         if (activities && activities.length > 0) {
-          const timestamps = activities.map(a => a.timestamp).filter(t => t);
-          if (timestamps.length > 0) {
-            const firstTimestamp = Math.min(...timestamps);
+          const allTimestamps = activities.map(a => a.timestamp).filter(t => t);
+          if (allTimestamps.length > 0) {
+            const firstTimestamp = Math.min(...allTimestamps);
             firstTradeDate = new Date(firstTimestamp * 1000);
             const now = new Date();
             accountAgeDays = Math.floor((now - firstTradeDate) / (1000 * 60 * 60 * 24));
           }
+          
+          // 이 마켓의 거래만 필터링
+          const marketTrades = activities.filter(a => a.conditionId === conditionId);
+          if (marketTrades.length > 0) {
+            const marketTimestamps = marketTrades.map(a => a.timestamp).filter(t => t);
+            if (marketTimestamps.length > 0) {
+              const firstMarketTs = Math.min(...marketTimestamps);
+              marketFirstBetDate = new Date(firstMarketTs * 1000);
+              const now = new Date();
+              marketEntryDays = Math.floor((now - marketFirstBetDate) / (1000 * 60 * 60 * 24));
+            }
+          }
         }
         
-        // ========== 새로운 점수 체계 (100점) ==========
+        // ========== 개선된 점수 체계 (100점) ==========
         let score = 0;
         
-        // 1. 계정 활동 기간 (최대 40점) ★ 핵심 지표 ★
-        if (accountAgeDays <= 7) score += 40;        // 🚨 신규 계정 (1주 이내)
-        else if (accountAgeDays <= 30) score += 25;  // ⚠️ 최근 생성 (1달 이내)
-        else if (accountAgeDays <= 90) score += 10;  // 👀 관찰 대상
-        // 90일+ = 0점 (일반 트레이더)
+        // 1. 이 마켓 첫 베팅 시점 (최대 35점) ★ 핵심 지표 ★
+        if (marketEntryDays <= 3) score += 35;       // 🚨 마켓 초기 진입
+        else if (marketEntryDays <= 7) score += 25;  // ⚠️ 최근 진입
+        else if (marketEntryDays <= 14) score += 15; // 👀 관찰
+        // 15일+ = 0점
         
-        // 2. 현재 마켓 집중도 (최대 35점)
-        if (totalMarkets <= 1) score += 35;      // 🚨 단일 마켓 올인
-        else if (totalMarkets <= 2) score += 30;
-        else if (totalMarkets <= 3) score += 20;
-        else if (totalMarkets <= 5) score += 10;
+        // 2. 계정 활동 기간 (최대 25점)
+        if (accountAgeDays <= 7) score += 25;
+        else if (accountAgeDays <= 30) score += 15;
+        else if (accountAgeDays <= 90) score += 5;
+        // 90일+ = 0점
+        
+        // 3. 현재 마켓 집중도 (최대 25점)
+        if (totalMarkets <= 1) score += 25;
+        else if (totalMarkets <= 2) score += 20;
+        else if (totalMarkets <= 3) score += 15;
+        else if (totalMarkets <= 5) score += 5;
         // 6+ = 0점
         
-        // 3. 포지션 가치 (최대 25점)
-        if (holder.amount >= 50000) score += 25;
-        else if (holder.amount >= 20000) score += 20;
-        else if (holder.amount >= 10000) score += 15;
-        else if (holder.amount >= 5000) score += 10;
+        // 4. 포지션 가치 (최대 15점)
+        if (holder.amount >= 50000) score += 15;
+        else if (holder.amount >= 20000) score += 12;
+        else if (holder.amount >= 10000) score += 10;
+        else if (holder.amount >= 5000) score += 5;
         
         return {
           ...holder,
@@ -104,6 +125,8 @@ export async function GET(request) {
           marketRatio: Math.round(marketRatio * 100),
           accountAgeDays,
           firstTradeDate: firstTradeDate ? firstTradeDate.toISOString().split('T')[0] : null,
+          marketEntryDays,
+          marketFirstBetDate: marketFirstBetDate ? marketFirstBetDate.toISOString().split('T')[0] : null,
           score,
         };
       } catch (err) {
@@ -113,7 +136,7 @@ export async function GET(request) {
           totalValue: 0,
           marketRatio: 0,
           accountAgeDays: 999,
-          firstTradeDate: null,
+          marketEntryDays: 999,
           score: 0,
           error: true,
         };

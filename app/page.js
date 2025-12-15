@@ -20,7 +20,6 @@ function SuspiciousTab() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [expandedWallet, setExpandedWallet] = useState(null);
-  const [filter, setFilter] = useState('all');
 
   useEffect(() => {
     fetch('/data/suspicious.json')
@@ -43,22 +42,6 @@ function SuspiciousTab() {
     );
   }
 
-  const timeAgo = (dateStr) => {
-    if (!dateStr) return 'Never';
-    const diff = Date.now() - new Date(dateStr).getTime();
-    const mins = Math.floor(diff / 60000);
-    const hours = Math.floor(mins / 60);
-    if (mins < 60) return `${mins}m ago`;
-    if (hours < 24) return `${hours}h ago`;
-    return `${Math.floor(hours / 24)}d ago`;
-  };
-
-  const filteredAccounts = data.accounts.filter(acc => {
-    if (filter === 'high') return acc.maxScore >= 70;
-    if (filter === 'camouflage') return acc.isCamouflage;
-    return true;
-  });
-
   const getFlag = (score) => score >= 70 ? '🚨' : score >= 50 ? '⚠️' : '👀';
   
   const formatPnl = (pnl) => {
@@ -70,19 +53,6 @@ function SuspiciousTab() {
 
   return (
     <div className="suspicious-tab">
-      <div className="sus-header">
-        <div className="sus-stats">
-          <span>📊 {data.totalMarketsScanned} mkts</span>
-          <span>🔍 {data.totalSuspiciousAccounts} suspicious</span>
-          <span>🕐 {timeAgo(data.updatedAt)}</span>
-        </div>
-        <div className="sus-filters">
-          <button className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>All</button>
-          <button className={filter === 'high' ? 'active' : ''} onClick={() => setFilter('high')}>🚨 High</button>
-          <button className={filter === 'camouflage' ? 'active' : ''} onClick={() => setFilter('camouflage')}>🎭 Camo</button>
-        </div>
-      </div>
-
       <table className="markets-table">
         <thead>
           <tr>
@@ -98,7 +68,7 @@ function SuspiciousTab() {
           </tr>
         </thead>
         <tbody>
-          {filteredAccounts.map((acc, idx) => {
+          {data.accounts.map((acc, idx) => {
             const isExpanded = expandedWallet === acc.wallet;
             return (
               <tr key={acc.wallet} className={isExpanded ? 'expanded-row' : ''}>
@@ -127,7 +97,7 @@ function SuspiciousTab() {
       </table>
       
       {expandedWallet && (() => {
-        const acc = filteredAccounts.find(a => a.wallet === expandedWallet);
+        const acc = data.accounts.find(a => a.wallet === expandedWallet);
         if (!acc || !acc.markets) return null;
         return (
           <div className="expanded-markets">

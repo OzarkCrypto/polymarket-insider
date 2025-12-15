@@ -173,6 +173,33 @@ function MarketsTab({ markets, searchQuery }) {
   const [expandedId, setExpandedId] = useState(null);
   const [suspiciousCache, setSuspiciousCache] = useState({});
   const [loadingAnalysis, setLoadingAnalysis] = useState({});
+  const [suspiciousData, setSuspiciousData] = useState(null);
+  const [marketSusCount, setMarketSusCount] = useState({});
+
+  // Load suspicious.json and calculate per-market counts
+  useEffect(() => {
+    fetch('/data/suspicious.json')
+      .then(res => res.json())
+      .then(data => {
+        setSuspiciousData(data);
+        // Calculate suspicious count per market
+        const counts = {};
+        if (data?.accounts) {
+          for (const acc of data.accounts) {
+            if (acc.markets) {
+              for (const mkt of acc.markets) {
+                const key = mkt.conditionId || mkt.slug;
+                if (key) {
+                  counts[key] = (counts[key] || 0) + 1;
+                }
+              }
+            }
+          }
+        }
+        setMarketSusCount(counts);
+      })
+      .catch(() => {});
+  }, []);
 
   const handleSort = (key) => {
     if (sortKey === key) {
@@ -226,6 +253,10 @@ function MarketsTab({ markets, searchQuery }) {
       case 'volume': aVal = a.volume; bVal = b.volume; break;
       case 'liquidity': aVal = a.liquidity; bVal = b.liquidity; break;
       case 'endDate': aVal = a.endDate ? new Date(a.endDate).getTime() : 0; bVal = b.endDate ? new Date(b.endDate).getTime() : 0; break;
+      case 'suspicious': 
+        aVal = marketSusCount[a.conditionId] || marketSusCount[a.slug] || 0; 
+        bVal = marketSusCount[b.conditionId] || marketSusCount[b.slug] || 0; 
+        break;
       default: return 0;
     }
     return sortDir === 'asc' ? aVal - bVal : bVal - aVal;
@@ -250,6 +281,7 @@ function MarketsTab({ markets, searchQuery }) {
       <thead>
         <tr>
           <th style={{ cursor: 'default' }}>Market</th>
+          <SortHeader label="🔍 Sus" keyName="suspicious" />
           <SortHeader label="Yes" keyName="yes" />
           <SortHeader label="No" keyName="no" />
           <SortHeader label="Volume" keyName="volume" />
@@ -266,7 +298,7 @@ function MarketsTab({ markets, searchQuery }) {
           const isExpanded = expandedId === market.conditionId;
           const analysis = suspiciousCache[market.conditionId];
           const isLoading = loadingAnalysis[market.conditionId];
-          const suspiciousCount = analysis?.suspicious?.length || 0;
+          const susCount = marketSusCount[market.conditionId] || marketSusCount[market.slug] || 0;
 
           return (
             <tr key={market.conditionId} className={isExpanded ? 'expanded-row' : ''}>
@@ -339,6 +371,9 @@ function MarketsTab({ markets, searchQuery }) {
                   </div>
                 )}
               </td>
+              <td className={`sus-count-cell ${susCount > 0 ? 'has-sus' : ''}`}>
+                {susCount > 0 ? `🚨 ${susCount}` : '-'}
+              </td>
               <td className="price-yes">{yesPrice}¢</td>
               <td className="price-no">{noPrice}¢</td>
               <td className="volume-cell">{formatNumber(market.volume)}</td>
@@ -346,7 +381,7 @@ function MarketsTab({ markets, searchQuery }) {
               <td className="text-dim">{market.endDate ? new Date(market.endDate).toLocaleDateString() : '-'}</td>
               <td>
                 <button className="expand-btn" onClick={() => toggleExpand(market.conditionId, market.outcomePrices)}>
-                  {isExpanded ? 'Hide' : suspiciousCount > 0 ? `🚨 ${suspiciousCount}` : 'Scan'}
+                  {isExpanded ? 'Hide' : 'Scan'}
                 </button>
               </td>
             </tr>

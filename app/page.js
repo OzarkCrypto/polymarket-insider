@@ -14,6 +14,167 @@ function formatAmount(num) {
   return Math.round(num).toString();
 }
 
+// Top Suspicious Accounts Tab Component
+function SuspiciousTab() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [expandedWallet, setExpandedWallet] = useState(null);
+  const [filter, setFilter] = useState('all');
+
+  useEffect(() => {
+    fetch('/data/suspicious.json')
+      .then(res => res.json())
+      .then(d => setData(d))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <div className="loading"><div className="spinner"></div>Loading suspicious accounts...</div>;
+  }
+
+  if (!data || !data.accounts || data.accounts.length === 0) {
+    return (
+      <div className="empty-message">
+        <p>🔄 데이터 준비 중...</p>
+        <p style={{fontSize: '0.9rem', color: '#8b949e'}}>GitHub Actions에서 스캔이 완료되면 여기에 의심 계정이 표시됩니다.</p>
+      </div>
+    );
+  }
+
+  const timeAgo = (dateStr) => {
+    if (!dateStr) return 'Never';
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diff / 60000);
+    const hours = Math.floor(mins / 60);
+    if (mins < 60) return `${mins}m ago`;
+    if (hours < 24) return `${hours}h ago`;
+    return `${Math.floor(hours / 24)}d ago`;
+  };
+
+  const filteredAccounts = data.accounts.filter(acc => {
+    if (filter === 'high') return acc.maxScore >= 70;
+    if (filter === 'camouflage') return acc.isCamouflage;
+    return true;
+  });
+
+  return (
+    <div className="suspicious-tab">
+      <div className="suspicious-header">
+        <div className="suspicious-info">
+          <span>📊 {data.totalMarketsScanned} markets scanned</span>
+          <span>🔍 {data.totalSuspiciousAccounts} suspicious</span>
+          <span>🕐 Updated: {timeAgo(data.updatedAt)}</span>
+        </div>
+        <div className="filter-btns">
+          <button className={filter === 'all' ? 'active' : ''} onClick={() => setFilter('all')}>
+            All ({data.accounts.length})
+          </button>
+          <button className={filter === 'high' ? 'active' : ''} onClick={() => setFilter('high')}>
+            🚨 High ({data.accounts.filter(a => a.maxScore >= 70).length})
+          </button>
+          <button className={filter === 'camouflage' ? 'active' : ''} onClick={() => setFilter('camouflage')}>
+            🎭 Camouflage ({data.accounts.filter(a => a.isCamouflage).length})
+          </button>
+        </div>
+      </div>
+
+      <table className="suspicious-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Account</th>
+            <th>Score</th>
+            <th>Value</th>
+            <th>Markets</th>
+            <th>Age</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredAccounts.map((acc, idx) => {
+            const isExpanded = expandedWallet === acc.wallet;
+            const flag = acc.maxScore >= 70 ? '🚨' : acc.maxScore >= 50 ? '⚠️' : '👀';
+            
+            return (
+              <tr key={acc.wallet} className={isExpanded ? 'expanded-row' : ''}>
+                <td className="rank-cell">{flag} #{idx + 1}</td>
+                <td>
+                  <div className="holder-cell">
+                    <a href={`https://polymarket.com/profile/${acc.wallet}`} target="_blank" rel="noopener noreferrer" className="holder-link">
+                      {acc.name || `${acc.wallet.slice(0, 10)}...`}
+                    </a>
+                    {acc.isCamouflage && <span className="camo-badge">🎭</span>}
+                  </div>
+                  {isExpanded && acc.markets && (
+                    <div className="positions-detail">
+                      {acc.markets.sort((a, b) => b.score - a.score).map((mkt, i) => (
+                        <div key={i} className={`position-item ${mkt.side?.toLowerCase()}`}>
+                          <span className="mkt-score">{mkt.score}pt</span>
+                          <a href={`https://polymarket.com/event/${mkt.slug}`} target="_blank" rel="noopener noreferrer">
+                            {mkt.question?.slice(0, 50) || mkt.slug}...
+                          </a>
+                          <span className={`position-side ${mkt.side?.toLowerCase()}`}>{mkt.side}</span>
+                          <span className="position-amount">${Math.round(mkt.amount).toLocaleString()}</span>
+                          <span className="mkt-ratio">{mkt.marketRatio}%</span>
+                          <span className="mkt-entry">{mkt.marketEntryDays}d</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </td>
+                <td className="score-cell">{acc.maxScore}</td>
+                <td className="value-cell">${Math.round(acc.totalValue).toLocaleString()}</td>
+                <td>{acc.markets?.length || 0}</td>
+                <td className="text-dim">{acc.accountAgeDays < 999 ? `${acc.accountAgeDays}d` : '?'}</td>
+                <td>
+                  <button className="expand-btn" onClick={() => setExpandedWallet(isExpanded ? null : acc.wallet)}>
+                    {isExpanded ? '▼' : '▶'}
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+
+      <style jsx>{`
+        .suspicious-tab { padding: 10px 0; }
+        .suspicious-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .suspicious-info { display: flex; gap: 20px; color: #8b949e; font-size: 0.9rem; }
+        .filter-btns { display: flex; gap: 8px; }
+        .filter-btns button { padding: 6px 12px; background: #21262d; border: 1px solid #30363d; color: #8b949e; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+        .filter-btns button:hover { border-color: #58a6ff; }
+        .filter-btns button.active { background: #238636; color: white; border-color: #238636; }
+        .suspicious-table { width: 100%; border-collapse: collapse; }
+        .suspicious-table th { text-align: left; padding: 10px; border-bottom: 1px solid #30363d; color: #8b949e; font-weight: 500; }
+        .suspicious-table td { padding: 12px 10px; border-bottom: 1px solid #21262d; }
+        .suspicious-table tr:hover { background: #161b22; }
+        .rank-cell { width: 70px; }
+        .score-cell { color: #f0883e; font-weight: bold; }
+        .value-cell { color: #3fb950; }
+        .camo-badge { margin-left: 8px; }
+        .holder-cell { display: flex; align-items: center; gap: 5px; }
+        .holder-link { color: #58a6ff; text-decoration: none; }
+        .holder-link:hover { text-decoration: underline; }
+        .positions-detail { margin-top: 10px; padding: 10px; background: #0d1117; border-radius: 6px; }
+        .position-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 0.85rem; }
+        .position-item a { flex: 1; color: #8b949e; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .position-item a:hover { color: #58a6ff; }
+        .mkt-score { color: #f0883e; min-width: 40px; }
+        .position-side { padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; }
+        .position-side.yes { background: #238636; color: white; }
+        .position-side.no { background: #da3633; color: white; }
+        .position-amount { color: #3fb950; min-width: 80px; }
+        .mkt-ratio, .mkt-entry { color: #8b949e; min-width: 40px; }
+        .expand-btn { background: none; border: none; color: #8b949e; cursor: pointer; font-size: 0.9rem; }
+        .expanded-row { background: #161b22; }
+        .empty-message { text-align: center; padding: 60px 20px; color: #8b949e; }
+      `}</style>
+    </div>
+  );
+}
+
 // Markets Tab Component
 function MarketsTab({ markets, searchQuery }) {
   const [sortKey, setSortKey] = useState('volume');
@@ -447,7 +608,7 @@ export default function Home() {
   const [markets, setMarkets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('markets');
+  const [activeTab, setActiveTab] = useState('suspicious');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -506,6 +667,12 @@ export default function Home() {
 
       <div className="tabs">
         <button 
+          className={`tab ${activeTab === 'suspicious' ? 'active' : ''}`}
+          onClick={() => setActiveTab('suspicious')}
+        >
+          🔍 Top Suspicious
+        </button>
+        <button 
           className={`tab ${activeTab === 'markets' ? 'active' : ''}`}
           onClick={() => setActiveTab('markets')}
         >
@@ -532,6 +699,9 @@ export default function Home() {
         )}
       </div>
 
+      {activeTab === 'suspicious' && (
+        <SuspiciousTab />
+      )}
       {activeTab === 'markets' && (
         <MarketsTab markets={markets} searchQuery={searchQuery} />
       )}

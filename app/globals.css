@@ -840,6 +840,19 @@ body {
   overflow: hidden;
 }
 
+.sus-labels {
+  background: var(--bg-hover);
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 500;
+  cursor: default !important;
+  padding: 6px 12px !important;
+}
+
+.sus-labels:hover {
+  background: var(--bg-hover) !important;
+}
+
 .sus-item {
   background: var(--bg);
 }
@@ -903,6 +916,33 @@ body {
   min-width: 35px;
   color: var(--text-dim);
   font-size: 12px;
+}
+
+.sus-pnl {
+  min-width: 60px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.sus-pnl.positive {
+  color: var(--green);
+}
+
+.sus-pnl.negative {
+  color: var(--red);
+}
+
+.sus-pnl-month {
+  min-width: 55px;
+  font-size: 11px;
+}
+
+.sus-pnl-month.positive {
+  color: var(--green);
+}
+
+.sus-pnl-month.negative {
+  color: var(--red);
 }
 
 .sus-expand {

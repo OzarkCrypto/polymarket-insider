@@ -54,6 +54,9 @@ export async function GET() {
     'lebron', 'messi', 'ronaldo', 'curry', 'mahomes', 'brady',
     'chiefs', 'eagles', 'cowboys', 'patriots', 'packers',
     'lakers', 'celtics', 'warriors', 'yankees', 'dodgers',
+    '49ers', 'niners', 'nfc', 'afc', 'win the',
+    // 정치/정책
+    'rfk', 'vaccine', 'vaccination', 'covid',
     // 암호화폐 가격
     'bitcoin', 'btc ', 'ethereum', 'eth ', 'solana', 'sol ',
     'xrp', 'doge', 'dogecoin', 'memecoin', 'shiba', 'cardano',

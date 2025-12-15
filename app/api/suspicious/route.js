@@ -12,7 +12,7 @@ export async function GET(request) {
     // 1. 마켓의 홀더 목록 가져오기 (Top 50)
     const holdersRes = await fetch(
       `https://data-api.polymarket.com/holders?market=${conditionId}&limit=50`,
-      { next: { revalidate: 300 } } // 5분 캐시
+      { next: { revalidate: 300 } }
     );
     const holdersData = await holdersRes.json();
     
@@ -23,7 +23,6 @@ export async function GET(request) {
         for (const holder of tokenData.holders) {
           const side = holder.outcomeIndex === 0 ? 'YES' : 'NO';
           const shares = holder.amount;
-          // 실제 포지션 가치 계산: shares × price
           const price = side === 'YES' ? yesPrice : noPrice;
           const positionValue = shares * price;
           
@@ -31,7 +30,7 @@ export async function GET(request) {
             wallet: holder.proxyWallet,
             name: holder.displayUsernamePublic ? (holder.name || holder.pseudonym) : holder.pseudonym,
             shares: shares,
-            amount: positionValue,  // 이제 실제 달러 가치
+            amount: positionValue,
             side: side,
             price: price,
           });
@@ -39,48 +38,72 @@ export async function GET(request) {
       }
     }
     
-    // 2. 각 홀더의 전체 포지션 수 조회 (병렬, 10개씩 배치)
+    // 2. 각 홀더 분석 (positions + activity 병렬 호출)
     const analyzeHolder = async (holder) => {
       try {
-        const posRes = await fetch(
-          `https://data-api.polymarket.com/positions?user=${holder.wallet}&sizeThreshold=100`,
-          { next: { revalidate: 300 } }
-        );
-        const positions = await posRes.json();
+        // 병렬로 positions와 activity 조회
+        const [posRes, actRes] = await Promise.all([
+          fetch(
+            `https://data-api.polymarket.com/positions?user=${holder.wallet}&sizeThreshold=100`,
+            { next: { revalidate: 300 } }
+          ),
+          fetch(
+            `https://data-api.polymarket.com/activity?user=${holder.wallet}&limit=100`,
+            { next: { revalidate: 300 } }
+          )
+        ]);
         
+        const positions = await posRes.json();
+        const activities = await actRes.json();
+        
+        // 포지션 분석
         const totalMarkets = positions.length;
         const totalValue = positions.reduce((sum, p) => sum + (p.size || 0), 0);
-        
-        // 해당 마켓 비중 계산 (shares 기준)
         const marketRatio = totalValue > 0 ? holder.shares / totalValue : 1;
         
-        // 내부자 점수 계산
+        // 계정 나이 계산 (첫 거래 ~ 현재)
+        let accountAgeDays = 999; // 기본값: 오래된 계정
+        let firstTradeDate = null;
+        
+        if (activities && activities.length > 0) {
+          const timestamps = activities.map(a => a.timestamp).filter(t => t);
+          if (timestamps.length > 0) {
+            const firstTimestamp = Math.min(...timestamps);
+            firstTradeDate = new Date(firstTimestamp * 1000);
+            const now = new Date();
+            accountAgeDays = Math.floor((now - firstTradeDate) / (1000 * 60 * 60 * 24));
+          }
+        }
+        
+        // ========== 새로운 점수 체계 (100점) ==========
         let score = 0;
         
-        // 1. 마켓 수 적으면 의심 (핵심 지표)
-        if (totalMarkets <= 1) score += 50;
-        else if (totalMarkets <= 2) score += 45;
-        else if (totalMarkets <= 3) score += 35;
-        else if (totalMarkets <= 5) score += 25;
-        else if (totalMarkets <= 10) score += 10;
+        // 1. 계정 활동 기간 (최대 40점) ★ 핵심 지표 ★
+        if (accountAgeDays <= 7) score += 40;        // 🚨 신규 계정 (1주 이내)
+        else if (accountAgeDays <= 30) score += 25;  // ⚠️ 최근 생성 (1달 이내)
+        else if (accountAgeDays <= 90) score += 10;  // 👀 관찰 대상
+        // 90일+ = 0점 (일반 트레이더)
         
-        // 2. 포지션 가치 크면 의심 (실제 달러 가치 기준)
-        if (holder.amount >= 50000) score += 30;
-        else if (holder.amount >= 20000) score += 25;
-        else if (holder.amount >= 10000) score += 20;
-        else if (holder.amount >= 5000) score += 15;
-        else if (holder.amount >= 1000) score += 10;
+        // 2. 현재 마켓 집중도 (최대 35점)
+        if (totalMarkets <= 1) score += 35;      // 🚨 단일 마켓 올인
+        else if (totalMarkets <= 2) score += 30;
+        else if (totalMarkets <= 3) score += 20;
+        else if (totalMarkets <= 5) score += 10;
+        // 6+ = 0점
         
-        // 3. 해당 마켓 비중 높으면 의심
-        if (marketRatio >= 0.9) score += 20;
-        else if (marketRatio >= 0.7) score += 15;
-        else if (marketRatio >= 0.5) score += 10;
+        // 3. 포지션 가치 (최대 25점)
+        if (holder.amount >= 50000) score += 25;
+        else if (holder.amount >= 20000) score += 20;
+        else if (holder.amount >= 10000) score += 15;
+        else if (holder.amount >= 5000) score += 10;
         
         return {
           ...holder,
           totalMarkets,
           totalValue,
           marketRatio: Math.round(marketRatio * 100),
+          accountAgeDays,
+          firstTradeDate: firstTradeDate ? firstTradeDate.toISOString().split('T')[0] : null,
           score,
         };
       } catch (err) {
@@ -89,13 +112,15 @@ export async function GET(request) {
           totalMarkets: -1,
           totalValue: 0,
           marketRatio: 0,
+          accountAgeDays: 999,
+          firstTradeDate: null,
           score: 0,
           error: true,
         };
       }
     };
     
-    // 병렬 처리 (10개씩)
+    // 병렬 처리 (10개씩 배치)
     const results = [];
     const batchSize = 10;
     
@@ -110,7 +135,7 @@ export async function GET(request) {
     
     // 의심 등급 추가 + $5K 이상만 필터링
     const analyzed = results
-      .filter(h => h.amount >= 5000)  // Position value $5K 이상
+      .filter(h => h.amount >= 5000)
       .map(h => ({
         ...h,
         flag: h.score >= 70 ? 'HIGH' : h.score >= 50 ? 'MEDIUM' : h.score >= 30 ? 'LOW' : null,

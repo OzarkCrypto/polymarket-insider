@@ -15,128 +15,6 @@ function formatAmount(num) {
   return Math.round(num).toString();
 }
 
-// Top Suspicious Accounts Tab Component
-function SuspiciousTab() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [expandedWallet, setExpandedWallet] = useState(null);
-
-  useEffect(() => {
-    fetch('/data/suspicious.json')
-      .then(res => res.json())
-      .then(d => setData(d))
-      .catch(err => console.error(err))
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
-    return <div className="loading"><div className="spinner"></div>Loading suspicious accounts...</div>;
-  }
-
-  if (!data || !data.accounts || data.accounts.length === 0) {
-    return (
-      <div className="empty-message">
-        <p>🔄 데이터 준비 중...</p>
-        <p style={{fontSize: '0.9rem', color: '#8b949e'}}>GitHub Actions에서 스캔이 완료되면 여기에 의심 계정이 표시됩니다.</p>
-      </div>
-    );
-  }
-
-  const getFlag = (score) => score >= 70 ? '🚨' : score >= 50 ? '⚠️' : '👀';
-  
-  const formatPnl = (pnl) => {
-    if (pnl === undefined || pnl === null) return '?';
-    const absVal = Math.abs(pnl);
-    const formatted = absVal >= 1000 ? `${(absVal / 1000).toFixed(1)}K` : absVal.toString();
-    return pnl >= 0 ? `+$${formatted}` : `-$${formatted}`;
-  };
-
-  return (
-    <div className="suspicious-tab">
-      <table className="markets-table">
-        <thead>
-          <tr>
-            <th style={{ cursor: 'default' }}>#</th>
-            <th style={{ cursor: 'default' }}>Account</th>
-            <th style={{ cursor: 'default' }}>Score</th>
-            <th style={{ cursor: 'default' }}>Position</th>
-            <th style={{ cursor: 'default' }}>All PnL</th>
-            <th style={{ cursor: 'default' }}>30d PnL</th>
-            <th style={{ cursor: 'default' }}>Mkts</th>
-            <th style={{ cursor: 'default' }}>Age</th>
-            <th style={{ cursor: 'default' }}></th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.accounts.map((acc, idx) => {
-            const isExpanded = expandedWallet === acc.wallet;
-            return (
-              <tr key={acc.wallet} className={isExpanded ? 'expanded-row' : ''}>
-                <td className="rank-col">{getFlag(acc.maxScore)} #{idx + 1}</td>
-                <td className="name-col">
-                  <a href={`https://polymarket.com/profile/${acc.wallet}`} target="_blank" rel="noopener noreferrer">
-                    {acc.name || `${acc.wallet.slice(0, 10)}...`}
-                  </a>
-                  {acc.isCamouflage && <span className="camo-badge">🎭</span>}
-                </td>
-                <td className="score-col">{acc.maxScore}pt</td>
-                <td className="value-col">${Math.round(acc.totalValue).toLocaleString()}</td>
-                <td className={`pnl-col ${(acc.allTimePnl || 0) >= 0 ? 'positive' : 'negative'}`}>{formatPnl(acc.allTimePnl)}</td>
-                <td className={`pnl-col ${(acc.monthPnl || 0) >= 0 ? 'positive' : 'negative'}`}>{formatPnl(acc.monthPnl)}</td>
-                <td>{acc.markets?.length || 0}</td>
-                <td className="age-col">{acc.accountAgeDays < 999 ? `${acc.accountAgeDays}d` : '?'}</td>
-                <td>
-                  <button className="expand-btn" onClick={() => setExpandedWallet(isExpanded ? null : acc.wallet)}>
-                    {isExpanded ? '▼' : '▶'}
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      
-      {expandedWallet && (() => {
-        const acc = data.accounts.find(a => a.wallet === expandedWallet);
-        if (!acc || !acc.markets) return null;
-        return (
-          <div className="expanded-markets">
-            <h4>📊 {acc.name || acc.wallet.slice(0, 10)}의 포지션</h4>
-            <table className="markets-detail-table">
-              <thead>
-                <tr>
-                  <th>Score</th>
-                  <th>Market</th>
-                  <th>Side</th>
-                  <th>Value</th>
-                  <th>Ratio</th>
-                  <th>Entry</th>
-                </tr>
-              </thead>
-              <tbody>
-                {acc.markets.sort((a, b) => b.score - a.score).map((mkt, i) => (
-                  <tr key={i}>
-                    <td className="score-col">{mkt.score}pt</td>
-                    <td>
-                      <a href={`https://polymarket.com/event/${mkt.slug}`} target="_blank" rel="noopener noreferrer">
-                        {mkt.question?.slice(0, 50) || mkt.slug}...
-                      </a>
-                    </td>
-                    <td><span className={`side-badge ${mkt.side?.toLowerCase()}`}>{mkt.side}</span></td>
-                    <td className="value-col">${Math.round(mkt.amount).toLocaleString()}</td>
-                    <td>{mkt.marketRatio}%</td>
-                    <td>{mkt.marketEntryDays}d ago</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        );
-      })()}
-    </div>
-  );
-}
-
 // Markets Tab Component
 function MarketsTab({ markets, searchQuery }) {
   const [sortKey, setSortKey] = useState('volume');
@@ -670,12 +548,6 @@ export default function Home() {
           Markets
         </button>
         <button 
-          className={`tab ${activeTab === 'suspicious' ? 'active' : ''}`}
-          onClick={() => setActiveTab('suspicious')}
-        >
-          🔍 Top Suspicious
-        </button>
-        <button 
           className={`tab ${activeTab === 'holders' ? 'active' : ''}`}
           onClick={() => setActiveTab('holders')}
         >
@@ -696,9 +568,6 @@ export default function Home() {
         )}
       </div>
 
-      {activeTab === 'suspicious' && (
-        <SuspiciousTab />
-      )}
       {activeTab === 'markets' && (
         <MarketsTab markets={markets} searchQuery={searchQuery} />
       )}

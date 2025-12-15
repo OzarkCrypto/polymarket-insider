@@ -153,7 +153,7 @@ function MarketsTab({ markets, searchQuery }) {
                                   <div className="suspicious-details">
                                     <span>💰 ${Math.round(h.amount || 0).toLocaleString()}</span>
                                     <span>📊 {h.totalMarkets} market{h.totalMarkets !== 1 ? 's' : ''}</span>
-                                    <span>🎯 {h.marketRatio}% here</span>
+                                    <span>📅 {h.accountAgeDays !== undefined ? (h.accountAgeDays <= 7 ? `${h.accountAgeDays}d 🚨` : h.accountAgeDays <= 30 ? `${h.accountAgeDays}d ⚠️` : `${h.accountAgeDays}d`) : '?'}</span>
                                   </div>
                                 </div>
                               ))}

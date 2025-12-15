@@ -1,6 +1,8 @@
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const conditionId = searchParams.get('market');
+  const yesPrice = parseFloat(searchParams.get('yesPrice')) || 0.5;
+  const noPrice = parseFloat(searchParams.get('noPrice')) || 0.5;
   
   if (!conditionId) {
     return Response.json({ error: 'market parameter required' }, { status: 400 });
@@ -19,11 +21,19 @@ export async function GET(request) {
     for (const tokenData of holdersData) {
       if (tokenData.holders) {
         for (const holder of tokenData.holders) {
+          const side = holder.outcomeIndex === 0 ? 'YES' : 'NO';
+          const shares = holder.amount;
+          // 실제 포지션 가치 계산: shares × price
+          const price = side === 'YES' ? yesPrice : noPrice;
+          const positionValue = shares * price;
+          
           allHolders.push({
             wallet: holder.proxyWallet,
             name: holder.displayUsernamePublic ? (holder.name || holder.pseudonym) : holder.pseudonym,
-            amount: holder.amount,
-            side: holder.outcomeIndex === 0 ? 'YES' : 'NO',
+            shares: shares,
+            amount: positionValue,  // 이제 실제 달러 가치
+            side: side,
+            price: price,
           });
         }
       }
@@ -41,8 +51,8 @@ export async function GET(request) {
         const totalMarkets = positions.length;
         const totalValue = positions.reduce((sum, p) => sum + (p.size || 0), 0);
         
-        // 해당 마켓 비중 계산
-        const marketRatio = totalValue > 0 ? holder.amount / totalValue : 1;
+        // 해당 마켓 비중 계산 (shares 기준)
+        const marketRatio = totalValue > 0 ? holder.shares / totalValue : 1;
         
         // 내부자 점수 계산
         let score = 0;
@@ -54,12 +64,12 @@ export async function GET(request) {
         else if (totalMarkets <= 5) score += 25;
         else if (totalMarkets <= 10) score += 10;
         
-        // 2. 금액 크면 의심
-        if (holder.amount >= 100000) score += 30;
-        else if (holder.amount >= 50000) score += 25;
-        else if (holder.amount >= 20000) score += 20;
-        else if (holder.amount >= 10000) score += 15;
-        else if (holder.amount >= 5000) score += 10;
+        // 2. 포지션 가치 크면 의심 (실제 달러 가치 기준)
+        if (holder.amount >= 50000) score += 30;
+        else if (holder.amount >= 20000) score += 25;
+        else if (holder.amount >= 10000) score += 20;
+        else if (holder.amount >= 5000) score += 15;
+        else if (holder.amount >= 1000) score += 10;
         
         // 3. 해당 마켓 비중 높으면 의심
         if (marketRatio >= 0.9) score += 20;
@@ -106,6 +116,8 @@ export async function GET(request) {
     
     return Response.json({
       market: conditionId,
+      yesPrice,
+      noPrice,
       totalHolders: analyzed.length,
       suspicious: analyzed.filter(h => h.score >= 50),
       all: analyzed,

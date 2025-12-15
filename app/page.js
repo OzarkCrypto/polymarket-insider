@@ -31,11 +31,14 @@ function MarketsTab({ markets, searchQuery }) {
     }
   };
 
-  const analyzeMarket = async (conditionId) => {
+  const analyzeMarket = async (conditionId, outcomePrices) => {
     if (suspiciousCache[conditionId]) return;
     setLoadingAnalysis(prev => ({ ...prev, [conditionId]: true }));
     try {
-      const res = await fetch(`/api/suspicious?market=${conditionId}`);
+      // 가격 정보를 쿼리 파라미터로 전달
+      const yesPrice = parseFloat(outcomePrices[0]) || 0.5;
+      const noPrice = parseFloat(outcomePrices[1]) || 0.5;
+      const res = await fetch(`/api/suspicious?market=${conditionId}&yesPrice=${yesPrice}&noPrice=${noPrice}`);
       const data = await res.json();
       setSuspiciousCache(prev => ({ ...prev, [conditionId]: data }));
     } catch (err) {
@@ -44,12 +47,12 @@ function MarketsTab({ markets, searchQuery }) {
     setLoadingAnalysis(prev => ({ ...prev, [conditionId]: false }));
   };
 
-  const toggleExpand = (conditionId) => {
+  const toggleExpand = (conditionId, outcomePrices) => {
     if (expandedId === conditionId) {
       setExpandedId(null);
     } else {
       setExpandedId(conditionId);
-      analyzeMarket(conditionId);
+      analyzeMarket(conditionId, outcomePrices);
     }
   };
 
@@ -189,7 +192,7 @@ function MarketsTab({ markets, searchQuery }) {
               <td className="text-dim">{formatNumber(market.liquidity)}</td>
               <td className="text-dim">{market.endDate ? new Date(market.endDate).toLocaleDateString() : '-'}</td>
               <td>
-                <button className="expand-btn" onClick={() => toggleExpand(market.conditionId)}>
+                <button className="expand-btn" onClick={() => toggleExpand(market.conditionId, market.outcomePrices)}>
                   {isExpanded ? 'Hide' : suspiciousCount > 0 ? `🚨 ${suspiciousCount}` : 'Scan'}
                 </button>
               </td>

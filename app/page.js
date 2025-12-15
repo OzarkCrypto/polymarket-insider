@@ -59,6 +59,13 @@ function SuspiciousTab() {
   });
 
   const getFlag = (score) => score >= 70 ? '🚨' : score >= 50 ? '⚠️' : '👀';
+  
+  const formatPnl = (pnl) => {
+    if (pnl === undefined || pnl === null) return '?';
+    const absVal = Math.abs(pnl);
+    const formatted = absVal >= 1000 ? `${(absVal / 1000).toFixed(1)}K` : absVal.toString();
+    return pnl >= 0 ? `+$${formatted}` : `-$${formatted}`;
+  };
 
   return (
     <div className="suspicious-tab">
@@ -88,6 +95,8 @@ function SuspiciousTab() {
                 {acc.isCamouflage && <span className="sus-camo">🎭</span>}
                 <span className="sus-score">{acc.maxScore}pt</span>
                 <span className="sus-value">${Math.round(acc.totalValue).toLocaleString()}</span>
+                <span className={`sus-pnl ${(acc.allTimePnl || 0) >= 0 ? 'positive' : 'negative'}`}>{formatPnl(acc.allTimePnl)}</span>
+                <span className={`sus-pnl-month ${(acc.monthPnl || 0) >= 0 ? 'positive' : 'negative'}`}>{formatPnl(acc.monthPnl)}</span>
                 <span className="sus-mkts">{acc.markets?.length || 0} mkts</span>
                 <span className="sus-age">{acc.accountAgeDays < 999 ? `${acc.accountAgeDays}d` : '?'}</span>
                 <span className="sus-expand">{isExpanded ? '▼' : '▶'}</span>

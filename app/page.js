@@ -255,177 +255,6 @@ function extractCompany(marketQuestion) {
   return null;
 }
 
-// Insider Score 탭 컴포넌트 (서버 캐시 사용)
-function InsiderTab({ markets, searchQuery }) {
-  const [insiderData, setInsiderData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [expandedWallet, setExpandedWallet] = useState(null);
-  const [sortKey, setSortKey] = useState('score');
-  const [sortDir, setSortDir] = useState('desc');
-  const [cacheInfo, setCacheInfo] = useState(null);
-
-  useEffect(() => {
-    async function fetchInsiderScores() {
-      setLoading(true);
-      try {
-        const res = await fetch('/api/insider-score');
-        const data = await res.json();
-        setInsiderData(data.insiders || []);
-        setCacheInfo({
-          cached: data.cached,
-          cacheAge: data.cacheAge,
-        });
-      } catch (err) {
-        console.error('Error fetching insider scores:', err);
-        setInsiderData([]);
-      }
-      setLoading(false);
-    }
-
-    fetchInsiderScores();
-  }, []);
-
-  const handleSort = (key) => {
-    if (sortKey === key) {
-      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortKey(key);
-      setSortDir('desc');
-    }
-  };
-
-  // 검색 필터링
-  const filteredInsiders = insiderData.filter(insider => {
-    if (!searchQuery) return true;
-    const query = searchQuery.toLowerCase();
-    return (
-      insider.wallet.toLowerCase().includes(query) ||
-      (insider.name && insider.name.toLowerCase().includes(query)) ||
-      (insider.focusCompany && insider.focusCompany.toLowerCase().includes(query))
-    );
-  });
-
-  const sortedInsiders = [...filteredInsiders].sort((a, b) => {
-    let aVal, bVal;
-    switch (sortKey) {
-      case 'score': aVal = a.score; bVal = b.score; break;
-      case 'portfolioRatio': aVal = parseFloat(a.portfolioRatio); bVal = parseFloat(b.portfolioRatio); break;
-      case 'positionValue': aVal = a.positionValue; bVal = b.positionValue; break;
-      default: return 0;
-    }
-    return sortDir === 'asc' ? aVal - bVal : bVal - aVal;
-  });
-
-  const getScoreColor = (score) => {
-    if (score >= 70) return 'score-high';
-    if (score >= 50) return 'score-medium';
-    return 'score-low';
-  };
-
-  if (loading) {
-    return (
-      <div className="loading">
-        <div className="spinner"></div>
-        Loading insider scores...
-      </div>
-    );
-  }
-
-  return (
-    <>
-      {cacheInfo && (
-        <div className="cache-info">
-          {cacheInfo.cached 
-            ? `⚡ Cached (${cacheInfo.cacheAge}s ago)` 
-            : '🔄 Fresh data'}
-        </div>
-      )}
-      <table className="markets-table">
-      <thead>
-        <tr>
-          <th style={{ cursor: 'default' }}>#</th>
-          <th style={{ cursor: 'default' }}>Account</th>
-          <th onClick={() => handleSort('score')} className={sortKey === 'score' ? 'sorted' : ''}>
-            Score
-            <span className="sort-icon">{sortKey === 'score' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
-          </th>
-          <th style={{ cursor: 'default' }}>Focus</th>
-          <th onClick={() => handleSort('portfolioRatio')} className={sortKey === 'portfolioRatio' ? 'sorted' : ''}>
-            Focus %
-            <span className="sort-icon">{sortKey === 'portfolioRatio' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
-          </th>
-          <th onClick={() => handleSort('positionValue')} className={sortKey === 'positionValue' ? 'sorted' : ''}>
-            Position $
-            <span className="sort-icon">{sortKey === 'positionValue' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
-          </th>
-          <th style={{ cursor: 'default' }}>Dir</th>
-          <th style={{ cursor: 'default' }}></th>
-        </tr>
-      </thead>
-      <tbody>
-        {sortedInsiders.map((insider, idx) => {
-          const isExpanded = expandedWallet === insider.wallet;
-          const profileUrl = `https://polymarket.com/profile/${insider.wallet}`;
-
-          return (
-            <tr key={insider.wallet} className={isExpanded ? 'expanded-row' : ''}>
-              <td className="rank-cell">#{idx + 1}</td>
-              <td>
-                <div className="holder-cell">
-                  <a href={profileUrl} target="_blank" rel="noopener noreferrer" className="holder-link">
-                    {insider.name || insider.wallet}
-                  </a>
-                  <span className="wallet-address">{insider.wallet}</span>
-                </div>
-                {isExpanded && (
-                  <div className="positions-detail">
-                    <div className="insider-breakdown">
-                      <h4>Positions in {insider.focusCompany} ({insider.focusCompanyMarkets}/{insider.totalMarkets} positions):</h4>
-                      {insider.companyPositions[insider.focusCompany]?.markets.map((pos, i) => (
-                        <div key={i} className={`position-item ${pos.side.toLowerCase()}`}>
-                          <span className={`position-side ${pos.side.toLowerCase()}`}>{pos.side}</span>
-                          <span className="position-question">{pos.question}</span>
-                          <span className="position-amount">{formatAmount(pos.amount)}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </td>
-              <td>
-                <span className={`insider-score ${getScoreColor(insider.score)}`}>
-                  {insider.score}
-                </span>
-              </td>
-              <td className="company-cell">{insider.focusCompany || '-'}</td>
-              <td>
-                <span className={`portfolio-ratio ${parseInt(insider.portfolioRatio) >= 50 ? 'high' : ''}`}>
-                  {insider.portfolioRatio}%
-                </span>
-                <span className="position-count">({insider.focusCompanyMarkets}/{insider.totalMarkets})</span>
-              </td>
-              <td className={`position-value ${insider.positionValue >= 50000 ? 'high-value' : ''}`}>
-                {formatNumber(insider.positionValue)}
-              </td>
-              <td>
-                <span className={`direction ${insider.direction.toLowerCase()}`}>
-                  {insider.direction}
-                </span>
-              </td>
-              <td>
-                <button className="expand-btn" onClick={() => setExpandedWallet(isExpanded ? null : insider.wallet)}>
-                  {isExpanded ? 'Hide' : 'Show'}
-                </button>
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-    </>
-  );
-}
-
 // Holders Tab Component
 function HoldersTab({ markets, searchQuery }) {
   const [allHolders, setAllHolders] = useState([]);
@@ -687,22 +516,12 @@ export default function Home() {
         >
           Top Holders
         </button>
-        <button 
-          className={`tab ${activeTab === 'insider' ? 'active' : ''}`}
-          onClick={() => setActiveTab('insider')}
-        >
-          🔍 Insider Score
-        </button>
       </div>
 
       <div className="search-bar">
         <input
           type="text"
-          placeholder={
-            activeTab === 'markets' ? 'Search markets...' : 
-            activeTab === 'insider' ? 'Search by wallet, name, or company...' :
-            'Search by wallet address or name...'
-          }
+          placeholder={activeTab === 'markets' ? 'Search markets...' : 'Search by wallet address or name...'}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="search-input"
@@ -717,9 +536,6 @@ export default function Home() {
       )}
       {activeTab === 'holders' && (
         <HoldersTab markets={markets} searchQuery={searchQuery} />
-      )}
-      {activeTab === 'insider' && (
-        <InsiderTab markets={markets} searchQuery={searchQuery} />
       )}
     </div>
   );

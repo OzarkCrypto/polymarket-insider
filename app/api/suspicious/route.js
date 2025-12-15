@@ -118,15 +118,25 @@ export async function GET(request) {
         else if (holder.amount >= 10000) score += 10;
         else if (holder.amount >= 5000) score += 5;
         
-        // 5. 위장 분산 탐지 (보너스 점수) ★ 새로 추가 ★
+        // 5. 위장 분산 탐지 (보너스 점수) ★ 핵심 ★
         // 마켓 수 많은데 이 마켓 비중 높으면 = 소액 분산으로 위장 의심
+        // 정상: 10개 마켓 → 각 10% 비중
+        // 위장: 10개 마켓 → 이 마켓 60% 비중 (나머지 9개는 소액)
         let isCamouflage = false;
-        if (totalMarkets >= 6 && marketRatio >= 60) {
-          score += 15;  // 위장 분산 의심
+        
+        // marketRatio는 0~1 값, 퍼센트로 변환
+        const marketRatioPercent = marketRatio * 100;
+        // 기대 비중 = 100 / 마켓수 (예: 10개면 10%)
+        const expectedRatio = totalMarkets > 0 ? 100 / totalMarkets : 100;
+        // 실제 비중이 기대 비중의 몇 배인지 (예: 60% / 10% = 6배)
+        const ratioMultiple = marketRatioPercent / expectedRatio;
+        
+        if (totalMarkets >= 6 && ratioMultiple >= 3) {
+          score += 20;  // 위장 분산 의심
           isCamouflage = true;
         }
-        if (totalMarkets >= 10 && marketRatio >= 80) {
-          score += 10;  // 강한 위장 분산 의심
+        if (totalMarkets >= 10 && ratioMultiple >= 5) {
+          score += 10;  // 강한 위장 분산
         }
         
         return {

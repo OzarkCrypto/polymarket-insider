@@ -19,8 +19,8 @@ function MarketsTab({ markets, searchQuery }) {
   const [sortKey, setSortKey] = useState('volume');
   const [sortDir, setSortDir] = useState('desc');
   const [expandedId, setExpandedId] = useState(null);
-  const [holdersCache, setHoldersCache] = useState({});
-  const [loadingHolders, setLoadingHolders] = useState({});
+  const [suspiciousCache, setSuspiciousCache] = useState({});
+  const [loadingAnalysis, setLoadingAnalysis] = useState({});
 
   const handleSort = (key) => {
     if (sortKey === key) {
@@ -31,17 +31,17 @@ function MarketsTab({ markets, searchQuery }) {
     }
   };
 
-  const loadHolders = async (conditionId) => {
-    if (holdersCache[conditionId]) return;
-    setLoadingHolders(prev => ({ ...prev, [conditionId]: true }));
+  const analyzeMarket = async (conditionId) => {
+    if (suspiciousCache[conditionId]) return;
+    setLoadingAnalysis(prev => ({ ...prev, [conditionId]: true }));
     try {
-      const res = await fetch(`/api/holders?market=${conditionId}`);
+      const res = await fetch(`/api/suspicious?market=${conditionId}`);
       const data = await res.json();
-      setHoldersCache(prev => ({ ...prev, [conditionId]: data }));
+      setSuspiciousCache(prev => ({ ...prev, [conditionId]: data }));
     } catch (err) {
-      setHoldersCache(prev => ({ ...prev, [conditionId]: { yes: [], no: [] } }));
+      setSuspiciousCache(prev => ({ ...prev, [conditionId]: { suspicious: [], all: [] } }));
     }
-    setLoadingHolders(prev => ({ ...prev, [conditionId]: false }));
+    setLoadingAnalysis(prev => ({ ...prev, [conditionId]: false }));
   };
 
   const toggleExpand = (conditionId) => {
@@ -49,7 +49,7 @@ function MarketsTab({ markets, searchQuery }) {
       setExpandedId(null);
     } else {
       setExpandedId(conditionId);
-      loadHolders(conditionId);
+      analyzeMarket(conditionId);
     }
   };
 
@@ -83,6 +83,13 @@ function MarketsTab({ markets, searchQuery }) {
     </th>
   );
 
+  const getFlagEmoji = (flag) => {
+    if (flag === 'HIGH') return '🚨';
+    if (flag === 'MEDIUM') return '⚠️';
+    if (flag === 'LOW') return '👀';
+    return '';
+  };
+
   return (
     <table className="markets-table">
       <thead>
@@ -93,7 +100,7 @@ function MarketsTab({ markets, searchQuery }) {
           <SortHeader label="Volume" keyName="volume" />
           <SortHeader label="Liquidity" keyName="liquidity" />
           <SortHeader label="Ends" keyName="endDate" />
-          <th style={{ cursor: 'default' }}>Holders</th>
+          <th style={{ cursor: 'default' }}>Analyze</th>
         </tr>
       </thead>
       <tbody>
@@ -102,8 +109,9 @@ function MarketsTab({ markets, searchQuery }) {
           const noPrice = (parseFloat(market.outcomePrices[1]) * 100).toFixed(1);
           const marketUrl = `https://polymarket.com/event/${market.eventSlug}/${market.slug}`;
           const isExpanded = expandedId === market.conditionId;
-          const holders = holdersCache[market.conditionId];
-          const isLoading = loadingHolders[market.conditionId];
+          const analysis = suspiciousCache[market.conditionId];
+          const isLoading = loadingAnalysis[market.conditionId];
+          const suspiciousCount = analysis?.suspicious?.length || 0;
 
           return (
             <tr key={market.conditionId} className={isExpanded ? 'expanded-row' : ''}>
@@ -117,33 +125,59 @@ function MarketsTab({ markets, searchQuery }) {
                 {isExpanded && (
                   <div className="holders-inline">
                     {isLoading ? (
-                      <div className="holders-loading">Loading...</div>
-                    ) : holders ? (
-                      <div className="holders-grid">
-                        <div className="holders-column yes">
-                          <h4>YES HOLDERS</h4>
-                          {holders.yes.length > 0 ? holders.yes.map((h, i) => (
-                            <div key={h.wallet} className="holder-item">
-                              <span className="holder-rank">#{i + 1}</span>
-                              <a href={`https://polymarket.com/profile/${h.wallet}`} target="_blank" rel="noopener noreferrer">
-                                {h.name || h.wallet}
-                              </a>
-                              <span className="holder-amount">{formatAmount(h.amount)}</span>
+                      <div className="holders-loading">
+                        <div className="spinner-small"></div>
+                        Analyzing holders...
+                      </div>
+                    ) : analysis ? (
+                      <div className="suspicious-analysis">
+                        {analysis.suspicious && analysis.suspicious.length > 0 ? (
+                          <>
+                            <h4 className="suspicious-title">
+                              🔍 Suspicious Accounts ({analysis.suspicious.length})
+                            </h4>
+                            <div className="suspicious-list">
+                              {analysis.suspicious.map((h, i) => (
+                                <div key={h.wallet} className={`suspicious-item flag-${h.flag?.toLowerCase()}`}>
+                                  <div className="suspicious-header">
+                                    <span className="suspicious-flag">{getFlagEmoji(h.flag)}</span>
+                                    <a href={`https://polymarket.com/profile/${h.wallet}`} target="_blank" rel="noopener noreferrer" className="suspicious-name">
+                                      {h.name || `${h.wallet.slice(0, 10)}...`}
+                                    </a>
+                                    <span className={`suspicious-side ${h.side?.toLowerCase()}`}>{h.side}</span>
+                                    <span className="suspicious-score">Score: {h.score}</span>
+                                  </div>
+                                  <div className="suspicious-details">
+                                    <span>💰 ${h.amount?.toLocaleString()}</span>
+                                    <span>📊 {h.totalMarkets} market{h.totalMarkets !== 1 ? 's' : ''}</span>
+                                    <span>🎯 {h.marketRatio}% here</span>
+                                  </div>
+                                </div>
+                              ))}
                             </div>
-                          )) : <div className="no-holders">No holders</div>}
-                        </div>
-                        <div className="holders-column no">
-                          <h4>NO HOLDERS</h4>
-                          {holders.no.length > 0 ? holders.no.map((h, i) => (
-                            <div key={h.wallet} className="holder-item">
-                              <span className="holder-rank">#{i + 1}</span>
-                              <a href={`https://polymarket.com/profile/${h.wallet}`} target="_blank" rel="noopener noreferrer">
-                                {h.name || h.wallet}
-                              </a>
-                              <span className="holder-amount">{formatAmount(h.amount)}</span>
+                          </>
+                        ) : (
+                          <div className="no-suspicious">
+                            ✅ No suspicious accounts detected
+                          </div>
+                        )}
+                        {analysis.all && analysis.all.length > analysis.suspicious?.length && (
+                          <details className="other-holders">
+                            <summary>View all {analysis.all.length} holders</summary>
+                            <div className="all-holders-list">
+                              {analysis.all.filter(h => !h.flag || h.flag === 'LOW').slice(0, 20).map((h, i) => (
+                                <div key={h.wallet} className="holder-item-simple">
+                                  <a href={`https://polymarket.com/profile/${h.wallet}`} target="_blank" rel="noopener noreferrer">
+                                    {h.name || `${h.wallet.slice(0, 10)}...`}
+                                  </a>
+                                  <span className={`side-badge ${h.side?.toLowerCase()}`}>{h.side}</span>
+                                  <span>${h.amount?.toLocaleString()}</span>
+                                  <span className="text-dim">{h.totalMarkets} mkts</span>
+                                </div>
+                              ))}
                             </div>
-                          )) : <div className="no-holders">No holders</div>}
-                        </div>
+                          </details>
+                        )}
                       </div>
                     ) : null}
                   </div>
@@ -156,7 +190,7 @@ function MarketsTab({ markets, searchQuery }) {
               <td className="text-dim">{market.endDate ? new Date(market.endDate).toLocaleDateString() : '-'}</td>
               <td>
                 <button className="expand-btn" onClick={() => toggleExpand(market.conditionId)}>
-                  {isExpanded ? 'Hide' : 'Show'}
+                  {isExpanded ? 'Hide' : suspiciousCount > 0 ? `🚨 ${suspiciousCount}` : 'Scan'}
                 </button>
               </td>
             </tr>

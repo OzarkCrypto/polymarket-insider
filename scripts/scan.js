@@ -82,12 +82,17 @@ async function analyzeHolder(holder, conditionId) {
     
     const totalMarkets = positions.length;
     
-    // 전체 포지션 가치 (currentValue 사용)
-    const totalValue = positions.reduce((sum, p) => sum + (p.currentValue || p.size || 0), 0);
+    // 전체 포지션 가치 - currentValue 사용 (USD)
+    const totalValue = positions.reduce((sum, p) => sum + (p.currentValue || 0), 0);
     
-    // 이 마켓에서의 포지션 가치
+    // 이 마켓에서의 포지션 가치 - currentValue만 사용
     const thisMarketPos = positions.find(p => p.conditionId === conditionId);
-    const thisMarketValue = thisMarketPos ? (thisMarketPos.currentValue || thisMarketPos.size || 0) : holder.amount;
+    const thisMarketValue = thisMarketPos?.currentValue || 0;
+    
+    // thisMarketValue가 0이면 스킵 (포지션 없음)
+    if (thisMarketValue < 100) {
+      return null;
+    }
     
     const marketRatio = totalValue > 0 ? thisMarketValue / totalValue : 1;
     
@@ -132,7 +137,7 @@ async function analyzeHolder(holder, conditionId) {
     
     return {
       ...holder,
-      amount: thisMarketValue,
+      amount: thisMarketValue,  // currentValue (USD)
       totalMarkets,
       marketRatio: Math.round(marketRatio * 100),
       accountAgeDays,

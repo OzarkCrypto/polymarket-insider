@@ -148,7 +148,7 @@ function MarketsTab({ markets, searchQuery }) {
                                     <span className="suspicious-score">Score: {h.score}</span>
                                   </div>
                                   <div className="suspicious-details">
-                                    <span>💰 ${h.amount?.toLocaleString()}</span>
+                                    <span>💰 ${Math.round(h.amount || 0).toLocaleString()}</span>
                                     <span>📊 {h.totalMarkets} market{h.totalMarkets !== 1 ? 's' : ''}</span>
                                     <span>🎯 {h.marketRatio}% here</span>
                                   </div>
@@ -171,7 +171,7 @@ function MarketsTab({ markets, searchQuery }) {
                                     {h.name || `${h.wallet.slice(0, 10)}...`}
                                   </a>
                                   <span className={`side-badge ${h.side?.toLowerCase()}`}>{h.side}</span>
-                                  <span>${h.amount?.toLocaleString()}</span>
+                                  <span>${Math.round(h.amount || 0).toLocaleString()}</span>
                                   <span className="text-dim">{h.totalMarkets} mkts</span>
                                 </div>
                               ))}

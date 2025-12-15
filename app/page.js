@@ -608,7 +608,7 @@ export default function Home() {
   const [markets, setMarkets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('suspicious');
+  const [activeTab, setActiveTab] = useState('markets');
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
@@ -667,16 +667,16 @@ export default function Home() {
 
       <div className="tabs">
         <button 
-          className={`tab ${activeTab === 'suspicious' ? 'active' : ''}`}
-          onClick={() => setActiveTab('suspicious')}
-        >
-          🔍 Top Suspicious
-        </button>
-        <button 
           className={`tab ${activeTab === 'markets' ? 'active' : ''}`}
           onClick={() => setActiveTab('markets')}
         >
           Markets
+        </button>
+        <button 
+          className={`tab ${activeTab === 'suspicious' ? 'active' : ''}`}
+          onClick={() => setActiveTab('suspicious')}
+        >
+          🔍 Top Suspicious
         </button>
         <button 
           className={`tab ${activeTab === 'holders' ? 'active' : ''}`}

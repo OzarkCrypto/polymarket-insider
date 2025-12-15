@@ -83,6 +83,18 @@ function SuspiciousTab() {
       </div>
 
       <div className="sus-list">
+        <div className="sus-row sus-labels">
+          <span className="sus-rank">#</span>
+          <span className="sus-name">Account</span>
+          <span className="sus-camo"></span>
+          <span className="sus-score">Score</span>
+          <span className="sus-value">Value</span>
+          <span className="sus-pnl">All PnL</span>
+          <span className="sus-pnl-month">30d PnL</span>
+          <span className="sus-mkts">Mkts</span>
+          <span className="sus-age">Age</span>
+          <span className="sus-expand"></span>
+        </div>
         {filteredAccounts.map((acc, idx) => {
           const isExpanded = expandedWallet === acc.wallet;
           return (

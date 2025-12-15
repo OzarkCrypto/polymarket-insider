@@ -90,7 +90,7 @@ export async function GET(request) {
           }
         }
         
-        // ========== 개선된 점수 체계 (100점) ==========
+        // ========== 개선된 점수 체계 (100점 기본 + 위장 분산 보너스) ==========
         let score = 0;
         
         // 1. 이 마켓 첫 베팅 시점 (최대 35점) ★ 핵심 지표 ★
@@ -118,6 +118,17 @@ export async function GET(request) {
         else if (holder.amount >= 10000) score += 10;
         else if (holder.amount >= 5000) score += 5;
         
+        // 5. 위장 분산 탐지 (보너스 점수) ★ 새로 추가 ★
+        // 마켓 수 많은데 이 마켓 비중 높으면 = 소액 분산으로 위장 의심
+        let isCamouflage = false;
+        if (totalMarkets >= 6 && marketRatio >= 60) {
+          score += 15;  // 위장 분산 의심
+          isCamouflage = true;
+        }
+        if (totalMarkets >= 10 && marketRatio >= 80) {
+          score += 10;  // 강한 위장 분산 의심
+        }
+        
         return {
           ...holder,
           totalMarkets,
@@ -127,6 +138,7 @@ export async function GET(request) {
           firstTradeDate: firstTradeDate ? firstTradeDate.toISOString().split('T')[0] : null,
           marketEntryDays,
           marketFirstBetDate: marketFirstBetDate ? marketFirstBetDate.toISOString().split('T')[0] : null,
+          isCamouflage,
           score,
         };
       } catch (err) {

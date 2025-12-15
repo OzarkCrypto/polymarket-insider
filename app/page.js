@@ -83,18 +83,18 @@ function SuspiciousTab() {
         </div>
       </div>
 
-      <table className="sus-table">
+      <table className="markets-table">
         <thead>
           <tr>
-            <th>RANK</th>
-            <th>ACCOUNT</th>
-            <th>SCORE</th>
-            <th>POSITION</th>
-            <th>ALL PNL</th>
-            <th>30D PNL</th>
-            <th>MKTS</th>
-            <th>AGE</th>
-            <th></th>
+            <th style={{ cursor: 'default' }}>#</th>
+            <th style={{ cursor: 'default' }}>Account</th>
+            <th style={{ cursor: 'default' }}>Score</th>
+            <th style={{ cursor: 'default' }}>Position</th>
+            <th style={{ cursor: 'default' }}>All PnL</th>
+            <th style={{ cursor: 'default' }}>30d PnL</th>
+            <th style={{ cursor: 'default' }}>Mkts</th>
+            <th style={{ cursor: 'default' }}>Age</th>
+            <th style={{ cursor: 'default' }}></th>
           </tr>
         </thead>
         <tbody>

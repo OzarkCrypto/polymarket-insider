@@ -3,7 +3,7 @@
 /**
  * Polymarket Insider Scanner
  * 모든 insider-possible 마켓을 스캔하고 의심 계정을 수집
- * GitHub Actions에서 2시간마다 실행
+ * GitHub Actions에서 3시간마다 실행
  */
 
 const fs = require('fs');
@@ -80,8 +80,35 @@ async function analyzeHolder(holder, conditionId) {
     ]);
     
     const totalMarkets = positions.length;
-    const totalValue = positions.reduce((sum, p) => sum + (p.size || 0), 0);
-    const marketRatio = totalValue > 0 ? holder.shares / totalValue : 1;
+    
+    // 전체 포지션 가치 (currentValue 사용)
+    const totalValue = positions.reduce((sum, p) => sum + (p.currentValue || p.size || 0), 0);
+    
+    // 이 마켓에서의 포지션 가치
+    const thisMarketPos = positions.find(p => p.conditionId === conditionId);
+    const thisMarketValue = thisMarketPos ? (thisMarketPos.currentValue || thisMarketPos.size || 0) : holder.amount;
+    
+    const marketRatio = totalValue > 0 ? thisMarketValue / totalValue : 1;
+    
+    // PnL 계산 (전체)
+    const allTimePnl = positions.reduce((sum, p) => sum + (p.cashPnl || 0), 0);
+    
+    // 30일 PnL (activity에서 계산)
+    const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+    let monthPnl = 0;
+    if (activities && activities.length > 0) {
+      for (const a of activities) {
+        if (a.timestamp && a.timestamp * 1000 >= thirtyDaysAgo) {
+          // 매수는 -, 매도는 +
+          if (a.type === 'TRADE') {
+            const pnl = (a.usdcSize || 0) * (a.side === 'SELL' ? 1 : -1);
+            monthPnl += pnl;
+          }
+        }
+      }
+    }
+    // 현재 포지션 가치 더하기 (미실현)
+    monthPnl += totalValue;
     
     // 계정 나이
     let accountAgeDays = 999;
@@ -107,17 +134,20 @@ async function analyzeHolder(holder, conditionId) {
     }
     
     const { score, isCamouflage } = calculateScore(
-      holder, marketRatio, totalMarkets, accountAgeDays, marketEntryDays
+      { ...holder, amount: thisMarketValue }, marketRatio, totalMarkets, accountAgeDays, marketEntryDays
     );
     
     return {
       ...holder,
+      amount: thisMarketValue,
       totalMarkets,
       marketRatio: Math.round(marketRatio * 100),
       accountAgeDays,
       marketEntryDays,
       isCamouflage,
-      score
+      score,
+      allTimePnl: Math.round(allTimePnl),
+      monthPnl: Math.round(monthPnl)
     };
   } catch (err) {
     return null;
@@ -131,13 +161,17 @@ async function analyzeMarket(market) {
       `${POLYMARKET_API}/holders?market=${market.conditionId}&limit=${TOP_HOLDERS_LIMIT}`
     );
     
+    // outcomePrices에서 가격 추출
+    const yesPrice = market.outcomePrices ? parseFloat(market.outcomePrices[0]) : 0.5;
+    const noPrice = market.outcomePrices ? parseFloat(market.outcomePrices[1]) : 0.5;
+    
     const allHolders = [];
     for (const tokenData of holdersData) {
       if (tokenData.holders) {
         for (const holder of tokenData.holders) {
           const side = holder.outcomeIndex === 0 ? 'YES' : 'NO';
           const shares = holder.amount;
-          const price = side === 'YES' ? (market.yesPrice || 0.5) : (market.noPrice || 0.5);
+          const price = side === 'YES' ? yesPrice : noPrice;
           const positionValue = shares * price;
           
           if (positionValue >= MIN_POSITION_VALUE) {
@@ -214,6 +248,9 @@ async function main() {
           existing.maxScore = holder.score;
         }
         existing.totalValue += holder.amount;
+        // PnL은 가장 최신 데이터 사용
+        existing.allTimePnl = holder.allTimePnl;
+        existing.monthPnl = holder.monthPnl;
       } else {
         allSuspicious.set(holder.wallet, {
           wallet: holder.wallet,
@@ -223,6 +260,8 @@ async function main() {
           isCamouflage: holder.isCamouflage,
           maxScore: holder.score,
           totalValue: holder.amount,
+          allTimePnl: holder.allTimePnl,
+          monthPnl: holder.monthPnl,
           markets: [marketInfo]
         });
       }
@@ -257,7 +296,8 @@ async function main() {
   console.log('\n🏆 Top 10 의심 계정:');
   for (const account of results.slice(0, 10)) {
     const camo = account.isCamouflage ? '🎭' : '';
-    console.log(`   ${account.maxScore}점 | ${account.name || account.wallet.slice(0, 10)} | $${Math.round(account.totalValue).toLocaleString()} | ${account.markets.length} markets ${camo}`);
+    const pnl = account.allTimePnl >= 0 ? `+$${account.allTimePnl}` : `-$${Math.abs(account.allTimePnl)}`;
+    console.log(`   ${account.maxScore}점 | ${account.name || account.wallet.slice(0, 10)} | $${Math.round(account.totalValue).toLocaleString()} | PnL: ${pnl} ${camo}`);
   }
 }
 

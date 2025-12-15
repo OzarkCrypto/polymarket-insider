@@ -19,6 +19,11 @@ export async function GET() {
     // 규제/법적 (정부 관계자)
     'ban', 'approve', 'block', 'fine', 'antitrust', 'regulate',
     'forced to', 'required to', 'must ',
+    // 중앙은행/금리 (FOMC 위원, 연준 직원)
+    'rate cut', 'rate hike', 'fomc', 'fed ', 'interest rate',
+    'bank of england', 'ecb', 'central bank',
+    // 앱스토어 순위 (앱 개발사, 애플 피처드 팀)
+    'app store', '#1 app', '1 app', 'top app', 'free app', 'paid app',
     // 서비스 변경
     'shutdown', 'discontinue', 'end ', 'close', 'terminate',
     'restructur', 'layoff', 'lay off',
@@ -67,10 +72,10 @@ export async function GET() {
     'fdv', 'fully diluted', 'market cap >', 'mcap',
     'token launch', 'token price', 'lighter ', 'hyperliquid',
     'base launch', 'base token',
-    // 금융 예측
+    // 금융 예측 (예측 불가능한 것만)
     'gold price', 'silver price', 'oil price', 'commodity',
     'gold close', 'silver close', 'oil close',
-    'treasury', 'yield', 'bond', 'interest rate', 'fed ',
+    'treasury', 'yield', 'bond',
     'inflation rate', 'gdp', 'unemployment', 'recession',
     'largest company', 'biggest company', 'by market cap', 'trillion',
     // 연예/가십/종교
@@ -81,8 +86,6 @@ export async function GET() {
     // 영화/엔터 (내부정보 가치 낮음)
     'grossing movie', 'box office', 'avatar', 'oscar', 'grammy', 'emmy',
     'minecraft movie', 'opening weekend', 'domestic opening',
-    // 앱스토어 랭킹 (공개 경쟁)
-    'app store', 'play store', '#1 app', '1 app', 'top app',
     // 장기/추상적 예측
     'agi', 'artificial general intelligence', 'singularity',
     'alien', 'ufo', 'extraterrestrial',
@@ -158,6 +161,12 @@ export async function GET() {
     'another-cloudflare-outage-by-december-31',
     'x-money-launch-in-2025',
     'will-draftkings-launch-a-prediction-market-in-2025',
+    // 연준/금리
+    'bank-of-england-rate-cut-in-2025',
+    'federal-reserve-interest-rate-decision',
+    // 앱스토어
+    '1-free-app-in-the-us-apple-app-store-on-december-12',
+    '1-paid-app-in-the-us-apple-app-store-on-december-12',
   ];
 
   const MIN_VOLUME = 5000;

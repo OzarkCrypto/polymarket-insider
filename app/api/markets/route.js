@@ -37,7 +37,9 @@ export async function GET() {
     'prime minister', ' pm ', 'starmer', 'poilievre', 'sanchez', 'sánchez',
     'maduro', 'trudeau', 'macron', 'scholz', 'modi', 'netanyahu',
     'kim jong', 'supreme leader', 'parliament', 'citizenship',
-    'conservatives', 'labour', 'liberal',
+    'conservatives', 'labour', 'liberal', 'referendum', 'afd', 'ban ',
+    // 스포츠 추가
+    'verstappen', 'red bull', 'formula', 'f1 ',
     // 국제관계/전쟁
     'war ', 'ukraine', 'russia', 'putin', 'zelensky', 'nato',
     'xi jinping', 'iran ', 'israel', 'gaza', 'palestine',

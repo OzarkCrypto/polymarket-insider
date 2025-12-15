@@ -29,11 +29,15 @@ export async function GET() {
     // 자연현상 (예측 불가)
     'hottest year', 'temperature', 'weather', 'climate', 'earthquake',
     'hurricane', 'tornado', 'flood',
-    // 정치/선거
+    // 정치/선거/정치인
     'trump', 'biden', 'harris', 'desantis', 'president', 'election', 'vote',
     'congress', 'senate', 'democrat', 'republican', 'gop', 'ballot',
     'governor', 'mayor', 'politician', 'political', 'impeach', 'pardon',
     'presidential', 'nominee', '2028', '2032',
+    'prime minister', ' pm ', 'starmer', 'poilievre', 'sanchez', 'sánchez',
+    'maduro', 'trudeau', 'macron', 'scholz', 'modi', 'netanyahu',
+    'kim jong', 'supreme leader', 'parliament', 'citizenship',
+    'conservatives', 'labour', 'liberal',
     // 국제관계/전쟁
     'war ', 'ukraine', 'russia', 'putin', 'zelensky', 'nato',
     'xi jinping', 'iran ', 'israel', 'gaza', 'palestine',
@@ -60,6 +64,7 @@ export async function GET() {
     'base launch', 'base token',
     // 금융 예측
     'gold price', 'silver price', 'oil price', 'commodity',
+    'gold close', 'silver close', 'oil close',
     'treasury', 'yield', 'bond', 'interest rate', 'fed ',
     'inflation rate', 'gdp', 'unemployment', 'recession',
     'largest company', 'biggest company', 'by market cap', 'trillion',
@@ -70,6 +75,7 @@ export async function GET() {
     'person of the year', 'time magazine',
     // 영화/엔터 (내부정보 가치 낮음)
     'grossing movie', 'box office', 'avatar', 'oscar', 'grammy', 'emmy',
+    'minecraft movie', 'opening weekend', 'domestic opening',
     // 앱스토어 랭킹 (공개 경쟁)
     'app store', 'play store', '#1 app', '1 app', 'top app',
     // 장기/추상적 예측
@@ -77,6 +83,10 @@ export async function GET() {
     'alien', 'ufo', 'extraterrestrial',
     // 트윗/소셜미디어 (노이즈)
     'tweet', 'tweets', 'follower', 'subscribers',
+    // 전쟁/침공/영토
+    'invade', 'invasion', 'annex', 'territory', 'greenland', 'taiwan',
+    // 암호화폐 토큰 출시
+    'launch a token', 'token in 2025', 'token by',
     // 기타
     'weed', 'cannabis', 'marijuana', 'reschedule',
   ];

@@ -218,231 +218,35 @@ function extractCompany(marketQuestion) {
   return null;
 }
 
-// Insider Score 탭 컴포넌트
+// Insider Score 탭 컴포넌트 (서버 캐시 사용)
 function InsiderTab({ markets, searchQuery }) {
   const [insiderData, setInsiderData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedWallet, setExpandedWallet] = useState(null);
   const [sortKey, setSortKey] = useState('score');
   const [sortDir, setSortDir] = useState('desc');
+  const [cacheInfo, setCacheInfo] = useState(null);
 
   useEffect(() => {
-    async function analyzeInsiders() {
+    async function fetchInsiderScores() {
       setLoading(true);
-      
-      // 기업별 마켓 매핑 및 conditionId 목록
-      const companyMarkets = {};
-      const marketConditionIds = new Set();
-      const marketInfoMap = {}; // conditionId -> market info
-      
-      markets.forEach(market => {
-        marketConditionIds.add(market.conditionId);
-        marketInfoMap[market.conditionId] = market;
-        const company = extractCompany(market.question);
-        if (company) {
-          if (!companyMarkets[company]) companyMarkets[company] = [];
-          companyMarkets[company].push(market);
-        }
-      });
-
-      // 1단계: 각 마켓의 Top 50 홀더에서 고유 지갑 주소 수집
-      const uniqueWallets = new Set();
-      const walletNames = {};
-      
-      await Promise.all(
-        markets.map(async (market) => {
-          try {
-            const res = await fetch(`/api/holders?market=${market.conditionId}`);
-            const data = await res.json();
-            
-            [...(data.yes || []), ...(data.no || [])].forEach(h => {
-              if (BLACKLIST.includes(h.wallet.toLowerCase())) return;
-              uniqueWallets.add(h.wallet);
-              if (h.name && !walletNames[h.wallet]) {
-                walletNames[h.wallet] = h.name;
-              }
-            });
-          } catch (err) {
-            console.error('Error fetching holders:', err);
-          }
-        })
-      );
-
-      // 2단계: 각 지갑의 전체 포지션 가져오기
-      const holdersMap = {};
-      const walletArray = Array.from(uniqueWallets);
-      
-      // 병렬 처리 (10개씩 배치)
-      const batchSize = 10;
-      for (let i = 0; i < walletArray.length; i += batchSize) {
-        const batch = walletArray.slice(i, i + batchSize);
-        await Promise.all(
-          batch.map(async (wallet) => {
-            try {
-              const res = await fetch(`/api/holders?wallet=${wallet}`);
-              const data = await res.json();
-              
-              if (!data.positions) return;
-              
-              // 우리 마켓 목록과 매칭되는 포지션만 필터링
-              const relevantPositions = data.positions.filter(pos => 
-                marketConditionIds.has(pos.conditionId)
-              );
-              
-              if (relevantPositions.length === 0) return;
-              
-              holdersMap[wallet] = {
-                wallet,
-                name: walletNames[wallet],
-                totalShares: 0,
-                positions: [],
-                companyPositions: {},
-              };
-              
-              relevantPositions.forEach(pos => {
-                const market = marketInfoMap[pos.conditionId];
-                if (!market) return;
-                
-                const company = extractCompany(market.question);
-                const side = pos.outcome === 'Yes' ? 'YES' : 'NO';
-                const amount = pos.size || 0;
-                
-                holdersMap[wallet].totalShares += amount;
-                holdersMap[wallet].positions.push({
-                  market: market.question,
-                  marketSlug: market.slug,
-                  eventSlug: market.eventSlug,
-                  company,
-                  side,
-                  amount,
-                });
-                
-                if (company) {
-                  if (!holdersMap[wallet].companyPositions[company]) {
-                    holdersMap[wallet].companyPositions[company] = {
-                      markets: [],
-                      totalAmount: 0,
-                      yesCount: 0,
-                      noCount: 0,
-                    };
-                  }
-                  holdersMap[wallet].companyPositions[company].markets.push({
-                    question: market.question,
-                    side,
-                    amount,
-                  });
-                  holdersMap[wallet].companyPositions[company].totalAmount += amount;
-                  if (side === 'YES') {
-                    holdersMap[wallet].companyPositions[company].yesCount++;
-                  } else {
-                    holdersMap[wallet].companyPositions[company].noCount++;
-                  }
-                }
-              });
-            } catch (err) {
-              console.error('Error fetching positions for', wallet, err);
-            }
-          })
-        );
-      }
-
-      // Insider Score 계산
-      const insiders = Object.values(holdersMap).map(holder => {
-        const companies = Object.keys(holder.companyPositions);
-        const totalPositions = holder.positions.length;
-        
-        // 가장 집중한 기업 찾기 (전체 포지션 대비 해당 기업 포지션 비율 기준)
-        let focusCompany = null;
-        let focusCompanyData = null;
-        let maxPortfolioRatio = 0;
-        
-        companies.forEach(company => {
-          const companyData = holder.companyPositions[company];
-          const portfolioRatio = companyData.markets.length / totalPositions;
-          
-          if (portfolioRatio > maxPortfolioRatio) {
-            maxPortfolioRatio = portfolioRatio;
-            focusCompany = company;
-            focusCompanyData = companyData;
-          }
+      try {
+        const res = await fetch('/api/insider-score');
+        const data = await res.json();
+        setInsiderData(data.insiders || []);
+        setCacheInfo({
+          cached: data.cached,
+          cacheAge: data.cacheAge,
         });
-
-        // 1. 포트폴리오 집중도 (45점)
-        // 전체 포지션 대비 특정 기업 포지션 비율
-        // 예: 8개 포지션 중 6개가 OpenAI = 75% = 0.75 * 45 = 33.75점
-        const portfolioConcentration = maxPortfolioRatio;
-
-        // 2. 기업 마켓 커버리지 (15점)
-        // 해당 기업의 전체 마켓 중 몇 개에 참여했는지
-        // 예: OpenAI 마켓 10개 중 6개 참여 = 60%
-        let marketCoverage = 0;
-        if (focusCompany && focusCompanyData) {
-          const totalMarketsForCompany = companyMarkets[focusCompany]?.length || 1;
-          marketCoverage = Math.min(1, focusCompanyData.markets.length / totalMarketsForCompany);
-        }
-
-        // 3. 방향 일관성 (10점)
-        // 같은 기업에서 YES/NO 중 한 방향으로만 베팅
-        let directionConsistency = 0;
-        if (focusCompanyData) {
-          const total = focusCompanyData.yesCount + focusCompanyData.noCount;
-          const dominant = Math.max(focusCompanyData.yesCount, focusCompanyData.noCount);
-          directionConsistency = total > 0 ? dominant / total : 0;
-        }
-
-        // 4. Position Value 점수 (30점)
-        // $1K 이하: 0점, $50K 이상: 만점 (로그 스케일)
-        const companyPositionValue = focusCompanyData?.totalAmount || 0;
-        let positionValueScore = 0;
-        if (companyPositionValue >= 50000) {
-          positionValueScore = 1;
-        } else if (companyPositionValue >= 1000) {
-          // 로그 스케일: log(value/1000) / log(50) ≈ 0~1
-          positionValueScore = Math.log10(companyPositionValue / 1000) / Math.log10(50);
-        }
-
-        // 최종 점수 계산 (100점 만점)
-        // - 포트폴리오 집중도: 45점 (전체 포지션 대비 특정 기업 비율) ★핵심★
-        // - Position Value: 30점 (베팅 규모)
-        // - 기업 마켓 커버리지: 15점 (해당 기업 마켓 참여율)
-        // - 방향 일관성: 10점 (한 방향으로만 베팅)
-        const score = Math.round(
-          (portfolioConcentration * 45) +
-          (positionValueScore * 30) +
-          (marketCoverage * 15) +
-          (directionConsistency * 10)
-        );
-
-        return {
-          wallet: holder.wallet,
-          name: holder.name,
-          score,
-          focusCompany,
-          focusCompanyMarkets: focusCompanyData?.markets.length || 0,
-          totalCompanyMarkets: focusCompany ? (companyMarkets[focusCompany]?.length || 0) : 0,
-          totalMarkets: totalPositions,
-          totalShares: holder.totalShares,
-          companyShares: focusCompanyData?.totalAmount || 0,
-          direction: focusCompanyData 
-            ? (focusCompanyData.yesCount > focusCompanyData.noCount ? 'YES' : 'NO')
-            : '-',
-          positionValue: companyPositionValue,
-          portfolioRatio: (maxPortfolioRatio * 100).toFixed(0),
-          positions: holder.positions,
-          companyPositions: holder.companyPositions,
-        };
-      });
-
-      // 점수가 20점 이상인 계정만 필터링 (너무 낮은 점수 제외)
-      const filteredInsiders = insiders.filter(i => i.score >= 20 && i.focusCompany);
-      setInsiderData(filteredInsiders);
+      } catch (err) {
+        console.error('Error fetching insider scores:', err);
+        setInsiderData([]);
+      }
       setLoading(false);
     }
 
-    if (markets.length > 0) {
-      analyzeInsiders();
-    }
-  }, [markets]);
+    fetchInsiderScores();
+  }, []);
 
   const handleSort = (key) => {
     if (sortKey === key) {
@@ -485,13 +289,21 @@ function InsiderTab({ markets, searchQuery }) {
     return (
       <div className="loading">
         <div className="spinner"></div>
-        Analyzing insider patterns...
+        Loading insider scores...
       </div>
     );
   }
 
   return (
-    <table className="markets-table">
+    <>
+      {cacheInfo && (
+        <div className="cache-info">
+          {cacheInfo.cached 
+            ? `⚡ Cached (${cacheInfo.cacheAge}s ago)` 
+            : '🔄 Fresh data'}
+        </div>
+      )}
+      <table className="markets-table">
       <thead>
         <tr>
           <th style={{ cursor: 'default' }}>#</th>
@@ -573,6 +385,7 @@ function InsiderTab({ markets, searchQuery }) {
         })}
       </tbody>
     </table>
+    </>
   );
 }
 

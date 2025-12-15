@@ -105,8 +105,8 @@ function MarketsTab({ markets, searchQuery }) {
       </thead>
       <tbody>
         {sortedMarkets.map(market => {
-          const yesPrice = Math.round(parseFloat(market.outcomePrices[0]) * 100);
-          const noPrice = Math.round(parseFloat(market.outcomePrices[1]) * 100);
+          const yesPrice = (parseFloat(market.outcomePrices[0]) * 100).toFixed(1);
+          const noPrice = (parseFloat(market.outcomePrices[1]) * 100).toFixed(1);
           const marketUrl = `https://polymarket.com/event/${market.eventSlug}/${market.slug}`;
           const isExpanded = expandedId === market.conditionId;
           const analysis = suspiciousCache[market.conditionId];

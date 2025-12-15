@@ -74,9 +74,10 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
 // 단일 홀더 분석
 async function analyzeHolder(holder, conditionId) {
   try {
-    const [positions, activities] = await Promise.all([
+    const [positions, activities, profile] = await Promise.all([
       fetchJSON(`${POLYMARKET_API}/positions?user=${holder.wallet}&sizeThreshold=100`),
-      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=200`)
+      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=200`),
+      fetchJSON(`${POLYMARKET_API}/profile/${holder.wallet}`).catch(() => null)
     ]);
     
     const totalMarkets = positions.length;
@@ -90,25 +91,17 @@ async function analyzeHolder(holder, conditionId) {
     
     const marketRatio = totalValue > 0 ? thisMarketValue / totalValue : 1;
     
-    // PnL 계산 (전체)
-    const allTimePnl = positions.reduce((sum, p) => sum + (p.cashPnl || 0), 0);
-    
-    // 30일 PnL (activity에서 계산)
-    const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+    // PnL - profile API에서 가져오기 (더 정확)
+    let allTimePnl = 0;
     let monthPnl = 0;
-    if (activities && activities.length > 0) {
-      for (const a of activities) {
-        if (a.timestamp && a.timestamp * 1000 >= thirtyDaysAgo) {
-          // 매수는 -, 매도는 +
-          if (a.type === 'TRADE') {
-            const pnl = (a.usdcSize || 0) * (a.side === 'SELL' ? 1 : -1);
-            monthPnl += pnl;
-          }
-        }
-      }
+    
+    if (profile) {
+      allTimePnl = profile.pnl || profile.allTimePnl || 0;
+      monthPnl = profile.pnl30d || profile.monthPnl || 0;
+    } else {
+      // fallback: positions에서 계산
+      allTimePnl = positions.reduce((sum, p) => sum + (p.pnl || p.cashPnl || 0), 0);
     }
-    // 현재 포지션 가치 더하기 (미실현)
-    monthPnl += totalValue;
     
     // 계정 나이
     let accountAgeDays = 999;

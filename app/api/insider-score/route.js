@@ -64,10 +64,63 @@ async function fetchWithRetry(url, retries = 2) {
 }
 
 async function computeInsiderScores() {
-  // 1. 마켓 목록 가져오기
-  const marketsRes = await fetch(`${process.env.VERCEL_URL ? 'https://' + process.env.VERCEL_URL : 'http://localhost:3000'}/api/markets`);
-  const marketsData = await marketsRes.json();
-  const markets = marketsData.markets || [];
+  // 1. 마켓 목록 직접 가져오기 (route.js 로직과 동일하게)
+  const MIN_VOLUME = 5000;
+  
+  const INSIDER_KEYWORDS = [
+    'acquisition', 'acquire', 'merger', 'buyout', 'ipo', 'go public',
+    'ceo', 'step down', 'resign', 'fired', 'release', 'launch', 'announce',
+    'model', 'gpt', 'claude', 'gemini', 'llama', 'grok',
+    'partner', 'deal', 'ban', 'approve', 'rate cut', 'rate hike', 'fed ',
+    'airdrop', 'sentenced', 'arrested', 'jail', 'prison',
+    'outage', 'settlement', 'lawsuit',
+  ];
+
+  const MAJOR_COMPANIES = [
+    'apple', 'google', 'microsoft', 'amazon', 'meta', 'netflix',
+    'nvidia', 'tesla', 'spacex', 'openai', 'anthropic', 'xai',
+  ];
+
+  const EXCLUDE_KEYWORDS = [
+    'trump', 'biden', 'election', 'war', 'ukraine', 'russia',
+    'nfl', 'nba', 'super bowl', 'bitcoin', 'ethereum',
+  ];
+
+  // Polymarket API 직접 호출
+  const [offset0, offset100, offset200] = await Promise.all([
+    fetchWithRetry('https://gamma-api.polymarket.com/events?closed=false&active=true&limit=100&offset=0'),
+    fetchWithRetry('https://gamma-api.polymarket.com/events?closed=false&active=true&limit=100&offset=100'),
+    fetchWithRetry('https://gamma-api.polymarket.com/events?closed=false&active=true&limit=100&offset=200'),
+  ]);
+
+  const allEvents = [...(offset0 || []), ...(offset100 || []), ...(offset200 || [])];
+  const markets = [];
+
+  for (const event of allEvents) {
+    if (!event.markets) continue;
+    for (const market of event.markets) {
+      if (market.closed || !market.active) continue;
+      const volume = market.volumeNum || parseFloat(market.volume) || 0;
+      if (volume < MIN_VOLUME) continue;
+
+      const combined = ((market.question || '') + ' ' + (event.title || '')).toLowerCase();
+      
+      if (EXCLUDE_KEYWORDS.some(kw => combined.includes(kw))) continue;
+      
+      const hasKeyword = INSIDER_KEYWORDS.some(kw => combined.includes(kw));
+      const hasCompany = MAJOR_COMPANIES.some(c => combined.includes(c));
+      if (!hasKeyword && !hasCompany) continue;
+
+      markets.push({
+        conditionId: market.conditionId,
+        question: market.question,
+        slug: market.slug,
+        eventSlug: event.slug,
+        image: market.image || event.image,
+        volume,
+      });
+    }
+  }
 
   if (markets.length === 0) return [];
 

@@ -13,15 +13,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+          
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: node scripts/scan.js
+          
+      - name: Run scanner
+        run: node scripts/scan.js
         timeout-minutes: 30
+        
       - name: Commit and push
         run: |
-          git config user.email "action@github.com"
-          git config user.name "GitHub Action"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
           git add public/data/suspicious.json
-          git diff --staged --quiet || git commit -m "🔄 Update data [skip ci]"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔄 Update suspicious accounts data"
+            git push
+          fi

@@ -38,6 +38,31 @@ export async function GET() {
     'outage', 'incident', 'downtime',
     // 소송/합의 (법무팀)
     'settlement', 'lawsuit', 'sue', 'legal action',
+    
+    // ========== 🆕 NEW: 추가 내부자 카테고리 ==========
+    
+    // ETF/금융상품 승인 (SEC 직원, 신청 회사)
+    ' etf', 'etf ', 'spot etf', 'etf approv', 'etf filing',
+    
+    // 스테이블코인 이슈 (발행사 내부, 감사팀)
+    'depeg', 'insolvent', 'usdt ', 'usdc ', 'tether ',
+    'stablecoin launch', 'stablecoin issue',
+    
+    // 신용등급 (Moody's, S&P, Fitch 애널리스트)
+    'downgrade', 'upgrade rating', 'credit rating', 'debt rating',
+    
+    // FDA/규제 승인 (FDA 직원, 제약사)
+    'fda approv', 'fda clear', 'drug approv', 'clinical trial',
+    'phase 3', 'clinical result',
+    
+    // 해킹/보안 (보안팀, 화이트햇)
+    'hack', 'hacked', 'exploit', 'breach', 'vulnerability',
+    
+    // 게임 출시 (게임 개발사, 퍼블리셔)
+    'gta 6', 'gta vi', 'grand theft auto', 'game release', 'game delay',
+    
+    // 콘텐츠/미디어 (스튜디오, 스트리밍)
+    'cancel', 'renewed', 'season ', 'streaming exclusive',
   ];
 
   // ========== 제외 키워드 (Insider 가치 낮거나 관심 없는 분야) ==========
@@ -79,7 +104,7 @@ export async function GET() {
     // 암호화폐 가격 (에어드랍은 제외 - 내부정보 가치 있음)
     'bitcoin', 'btc ', 'ethereum', 'eth ', 'solana', 'sol ',
     'xrp', 'doge', 'dogecoin', 'memecoin', 'shiba', 'cardano',
-    'bnb', 'stablecoin', 'altcoin', 'tether', 'usdt',
+    'bnb', 'altcoin',
     'reach $', 'hit $', 'price of',
     'fdv', 'fully diluted', 'market cap >', 'mcap',
     'token launch', 'token price',
@@ -184,6 +209,15 @@ export async function GET() {
     'pumpfun-airdop-by',
     // 법적 판결
     'will-yoon-be-sentenced-to-prison-in-2025',
+    
+    // 🆕 ETF 승인
+    'cardano-etf-in-2025',
+    'pepe-etf-in-2025',
+    
+    // 🆕 스테이블코인
+    'usdt-depeg-in-2025',
+    'tether-insolvent-in-2025',
+    'boa-launches-a-usd-stablecoin-in-2025',
   ];
 
   const MIN_VOLUME = 5000;

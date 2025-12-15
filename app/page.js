@@ -86,14 +86,14 @@ function SuspiciousTab() {
       <table className="sus-table">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Account</th>
-            <th>Score</th>
-            <th>Position</th>
-            <th>All-time PnL</th>
-            <th>30d PnL</th>
-            <th>Markets</th>
-            <th>Age</th>
+            <th>RANK</th>
+            <th>ACCOUNT</th>
+            <th>SCORE</th>
+            <th>POSITION</th>
+            <th>ALL PNL</th>
+            <th>30D PNL</th>
+            <th>MKTS</th>
+            <th>AGE</th>
             <th></th>
           </tr>
         </thead>

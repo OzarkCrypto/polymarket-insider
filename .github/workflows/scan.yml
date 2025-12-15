@@ -1,0 +1,23 @@
+name: Scan Polymarket Insiders
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: node scripts/scan.js
+        timeout-minutes: 30
+      - run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add public/data/suspicious.json
+          git diff --staged --quiet || git commit -m "🔄 Update data [skip ci]"
+          git push

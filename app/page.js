@@ -82,56 +82,86 @@ function SuspiciousTab() {
         </div>
       </div>
 
-      <div className="sus-list">
-        <div className="sus-row sus-labels">
-          <span className="sus-rank">#</span>
-          <span className="sus-name">Account</span>
-          <span className="sus-camo"></span>
-          <span className="sus-score">Score</span>
-          <span className="sus-value">Value</span>
-          <span className="sus-pnl">All PnL</span>
-          <span className="sus-pnl-month">30d PnL</span>
-          <span className="sus-mkts">Mkts</span>
-          <span className="sus-age">Age</span>
-          <span className="sus-expand"></span>
-        </div>
-        {filteredAccounts.map((acc, idx) => {
-          const isExpanded = expandedWallet === acc.wallet;
-          return (
-            <div key={acc.wallet} className={`sus-item ${isExpanded ? 'expanded' : ''}`}>
-              <div className="sus-row" onClick={() => setExpandedWallet(isExpanded ? null : acc.wallet)}>
-                <span className="sus-rank">{getFlag(acc.maxScore)} #{idx + 1}</span>
-                <a href={`https://polymarket.com/profile/${acc.wallet}`} target="_blank" rel="noopener noreferrer" className="sus-name" onClick={e => e.stopPropagation()}>
-                  {acc.name || `${acc.wallet.slice(0, 10)}...`}
-                </a>
-                {acc.isCamouflage && <span className="sus-camo">🎭</span>}
-                <span className="sus-score">{acc.maxScore}pt</span>
-                <span className="sus-value">${Math.round(acc.totalValue).toLocaleString()}</span>
-                <span className={`sus-pnl ${(acc.allTimePnl || 0) >= 0 ? 'positive' : 'negative'}`}>{formatPnl(acc.allTimePnl)}</span>
-                <span className={`sus-pnl-month ${(acc.monthPnl || 0) >= 0 ? 'positive' : 'negative'}`}>{formatPnl(acc.monthPnl)}</span>
-                <span className="sus-mkts">{acc.markets?.length || 0} mkts</span>
-                <span className="sus-age">{acc.accountAgeDays < 999 ? `${acc.accountAgeDays}d` : '?'}</span>
-                <span className="sus-expand">{isExpanded ? '▼' : '▶'}</span>
-              </div>
-              {isExpanded && acc.markets && (
-                <div className="sus-markets">
-                  {acc.markets.sort((a, b) => b.score - a.score).map((mkt, i) => (
-                    <div key={i} className="sus-mkt-row">
-                      <span className="sus-mkt-score">{mkt.score}pt</span>
+      <table className="sus-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Account</th>
+            <th>Score</th>
+            <th>Position</th>
+            <th>All-time PnL</th>
+            <th>30d PnL</th>
+            <th>Markets</th>
+            <th>Age</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredAccounts.map((acc, idx) => {
+            const isExpanded = expandedWallet === acc.wallet;
+            return (
+              <tr key={acc.wallet} className={isExpanded ? 'expanded-row' : ''}>
+                <td className="rank-col">{getFlag(acc.maxScore)} #{idx + 1}</td>
+                <td className="name-col">
+                  <a href={`https://polymarket.com/profile/${acc.wallet}`} target="_blank" rel="noopener noreferrer">
+                    {acc.name || `${acc.wallet.slice(0, 10)}...`}
+                  </a>
+                  {acc.isCamouflage && <span className="camo-badge">🎭</span>}
+                </td>
+                <td className="score-col">{acc.maxScore}pt</td>
+                <td className="value-col">${Math.round(acc.totalValue).toLocaleString()}</td>
+                <td className={`pnl-col ${(acc.allTimePnl || 0) >= 0 ? 'positive' : 'negative'}`}>{formatPnl(acc.allTimePnl)}</td>
+                <td className={`pnl-col ${(acc.monthPnl || 0) >= 0 ? 'positive' : 'negative'}`}>{formatPnl(acc.monthPnl)}</td>
+                <td>{acc.markets?.length || 0}</td>
+                <td className="age-col">{acc.accountAgeDays < 999 ? `${acc.accountAgeDays}d` : '?'}</td>
+                <td>
+                  <button className="expand-btn" onClick={() => setExpandedWallet(isExpanded ? null : acc.wallet)}>
+                    {isExpanded ? '▼' : '▶'}
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      
+      {expandedWallet && (() => {
+        const acc = filteredAccounts.find(a => a.wallet === expandedWallet);
+        if (!acc || !acc.markets) return null;
+        return (
+          <div className="expanded-markets">
+            <h4>📊 {acc.name || acc.wallet.slice(0, 10)}의 포지션</h4>
+            <table className="markets-detail-table">
+              <thead>
+                <tr>
+                  <th>Score</th>
+                  <th>Market</th>
+                  <th>Side</th>
+                  <th>Value</th>
+                  <th>Ratio</th>
+                  <th>Entry</th>
+                </tr>
+              </thead>
+              <tbody>
+                {acc.markets.sort((a, b) => b.score - a.score).map((mkt, i) => (
+                  <tr key={i}>
+                    <td className="score-col">{mkt.score}pt</td>
+                    <td>
                       <a href={`https://polymarket.com/event/${mkt.slug}`} target="_blank" rel="noopener noreferrer">
-                        {mkt.question?.slice(0, 45) || mkt.slug}...
+                        {mkt.question?.slice(0, 50) || mkt.slug}...
                       </a>
-                      <span className={`sus-mkt-side ${mkt.side?.toLowerCase()}`}>{mkt.side}</span>
-                      <span className="sus-mkt-val">${Math.round(mkt.amount).toLocaleString()}</span>
-                      <span className="sus-mkt-info">{mkt.marketRatio}% · {mkt.marketEntryDays}d</span>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+                    </td>
+                    <td><span className={`side-badge ${mkt.side?.toLowerCase()}`}>{mkt.side}</span></td>
+                    <td className="value-col">${Math.round(mkt.amount).toLocaleString()}</td>
+                    <td>{mkt.marketRatio}%</td>
+                    <td>{mkt.marketEntryDays}d ago</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      })()}
     </div>
   );
 }

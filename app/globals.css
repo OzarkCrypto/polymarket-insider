@@ -975,3 +975,32 @@ body {
   padding: 40px 20px;
   color: var(--text-dim);
 }
+
+/* PnL styles */
+.sus-pnl {
+  min-width: 60px;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.sus-pnl.positive {
+  color: var(--green);
+}
+
+.sus-pnl.negative {
+  color: var(--red);
+}
+
+.sus-pnl-month {
+  min-width: 60px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.sus-pnl-month.positive {
+  color: #3fb950;
+}
+
+.sus-pnl-month.negative {
+  color: #f85149;
+}

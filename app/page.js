@@ -3,15 +3,15 @@
 import { useState, useEffect } from 'react';
 
 function formatNumber(num) {
-  if (num >= 1000000) return `$${(num / 1000000).toFixed(2)}M`;
-  if (num >= 1000) return `$${(num / 1000).toFixed(1)}K`;
-  return `$${num.toFixed(0)}`;
+  if (num >= 1000000) return `$${Math.round(num / 1000000)}M`;
+  if (num >= 1000) return `$${Math.round(num / 1000)}K`;
+  return `$${Math.round(num)}`;
 }
 
 function formatAmount(num) {
-  if (num >= 1000000) return `${(num / 1000000).toFixed(2)}M`;
-  if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
-  return num.toFixed(2);
+  if (num >= 1000000) return `${Math.round(num / 1000000)}M`;
+  if (num >= 1000) return `${Math.round(num / 1000)}K`;
+  return Math.round(num).toString();
 }
 
 // Markets Tab Component
@@ -105,8 +105,8 @@ function MarketsTab({ markets, searchQuery }) {
       </thead>
       <tbody>
         {sortedMarkets.map(market => {
-          const yesPrice = (parseFloat(market.outcomePrices[0]) * 100).toFixed(1);
-          const noPrice = (parseFloat(market.outcomePrices[1]) * 100).toFixed(1);
+          const yesPrice = Math.round(parseFloat(market.outcomePrices[0]) * 100);
+          const noPrice = Math.round(parseFloat(market.outcomePrices[1]) * 100);
           const marketUrl = `https://polymarket.com/event/${market.eventSlug}/${market.slug}`;
           const isExpanded = expandedId === market.conditionId;
           const analysis = suspiciousCache[market.conditionId];

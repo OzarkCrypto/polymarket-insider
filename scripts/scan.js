@@ -72,12 +72,23 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
   
   // 6. 역베팅 점수 (최대 30점) - 낮은 확률에 큰 금액 베팅
   const avgPrice = extraData.avgPrice || 0;
-  if (avgPrice > 0 && avgPrice < 0.15 && holder.amount >= 5000) {
-    score += 30;  // 15% 미만 확률에 $5K+ 베팅
-  } else if (avgPrice > 0 && avgPrice < 0.25 && holder.amount >= 3000) {
-    score += 20;  // 25% 미만 확률에 $3K+ 베팅
+  const shares = extraData.shares || 0;
+  
+  // 현재 가치 기준 또는 shares 기준 (롱샷 베팅)
+  if (avgPrice > 0 && avgPrice < 0.15) {
+    if (holder.amount >= 5000 || shares >= 20000) {
+      score += 30;  // 15% 미만 확률에 큰 베팅
+    } else if (holder.amount >= 3000 || shares >= 10000) {
+      score += 20;
+    }
+  } else if (avgPrice > 0 && avgPrice < 0.25) {
+    if (holder.amount >= 3000 || shares >= 15000) {
+      score += 20;
+    } else if (holder.amount >= 1000 || shares >= 5000) {
+      score += 10;
+    }
   } else if (avgPrice > 0 && avgPrice < 0.35 && holder.amount >= 1000) {
-    score += 10;  // 35% 미만 확률에 $1K+ 베팅
+    score += 10;
   }
   
   // 7. 승리 횟수 대비 계정 나이 (최대 25점) - 짧은 기간에 많은 승리
@@ -250,7 +261,7 @@ async function analyzeHolder(holder, conditionId) {
       categoryRatio = positions.length > 0 ? maxCount / positions.length : 0;
     }
     
-    const extraData = { avgPrice, winCount, categoryRatio, totalPnl: allTimePnl, totalValue, redeemTotal };
+    const extraData = { avgPrice, winCount, categoryRatio, totalPnl: allTimePnl, totalValue, redeemTotal, shares: holder.shares };
     
     const { score, isCamouflage } = calculateScore(
       { ...holder, amount: thisMarketValue }, marketRatio, totalMarkets, accountAgeDays, marketEntryDays, extraData
@@ -305,6 +316,18 @@ async function analyzeMarket(market) {
               amount: positionValue,
               side,
               price
+            });
+          }
+          // 낮은 확률 베팅도 포함 (shares가 크면 잠재 수익이 큼)
+          else if (shares >= 10000 && price < 0.30) {
+            allHolders.push({
+              wallet: holder.proxyWallet,
+              name: holder.displayUsernamePublic ? (holder.name || holder.pseudonym) : holder.pseudonym,
+              shares,
+              amount: positionValue,
+              side,
+              price,
+              isLongshot: true  // 롱샷 베팅 표시
             });
           }
         }

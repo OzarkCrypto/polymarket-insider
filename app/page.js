@@ -15,6 +15,162 @@ function formatAmount(num) {
   return Math.round(num).toString();
 }
 
+// Top Suspicious Accounts Tab Component (same structure as HoldersTab)
+function SuspiciousTab({ searchQuery }) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [expandedWallet, setExpandedWallet] = useState(null);
+  const [sortKey, setSortKey] = useState('score');
+  const [sortDir, setSortDir] = useState('desc');
+
+  useEffect(() => {
+    fetch('/data/suspicious.json')
+      .then(res => res.json())
+      .then(d => setData(d))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handleSort = (key) => {
+    if (sortKey === key) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortKey(key);
+      setSortDir('desc');
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="loading">
+        <div className="spinner"></div>
+        Loading suspicious accounts...
+      </div>
+    );
+  }
+
+  if (!data || !data.accounts || data.accounts.length === 0) {
+    return (
+      <div className="loading">
+        <p>🔄 데이터 준비 중...</p>
+        <p style={{fontSize: '0.9rem', color: '#8b949e'}}>GitHub Actions에서 스캔이 완료되면 여기에 의심 계정이 표시됩니다.</p>
+      </div>
+    );
+  }
+
+  // 검색 필터링
+  const filteredAccounts = data.accounts.filter(acc => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      acc.wallet.toLowerCase().includes(query) ||
+      (acc.name && acc.name.toLowerCase().includes(query))
+    );
+  });
+
+  const sortedAccounts = [...filteredAccounts].sort((a, b) => {
+    let aVal, bVal;
+    switch (sortKey) {
+      case 'score': aVal = a.maxScore; bVal = b.maxScore; break;
+      case 'position': aVal = a.totalValue; bVal = b.totalValue; break;
+      case 'pnl': aVal = a.allTimePnl || 0; bVal = b.allTimePnl || 0; break;
+      case 'markets': aVal = a.markets?.length || 0; bVal = b.markets?.length || 0; break;
+      case 'age': aVal = a.accountAgeDays || 999; bVal = b.accountAgeDays || 999; break;
+      default: return 0;
+    }
+    return sortDir === 'asc' ? aVal - bVal : bVal - aVal;
+  });
+
+  const getFlag = (score) => score >= 70 ? '🚨' : score >= 50 ? '⚠️' : '👀';
+  
+  const formatPnl = (pnl) => {
+    if (pnl === undefined || pnl === null) return '?';
+    const absVal = Math.abs(pnl);
+    const formatted = absVal >= 1000 ? `${(absVal / 1000).toFixed(1)}K` : absVal.toString();
+    return pnl >= 0 ? `+$${formatted}` : `-$${formatted}`;
+  };
+
+  return (
+    <table className="markets-table">
+      <thead>
+        <tr>
+          <th style={{ cursor: 'default' }}>Rank</th>
+          <th style={{ cursor: 'default' }}>Account</th>
+          <th onClick={() => handleSort('score')} className={sortKey === 'score' ? 'sorted' : ''}>
+            Score
+            <span className="sort-icon">{sortKey === 'score' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
+          <th onClick={() => handleSort('position')} className={sortKey === 'position' ? 'sorted' : ''}>
+            Position
+            <span className="sort-icon">{sortKey === 'position' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
+          <th onClick={() => handleSort('pnl')} className={sortKey === 'pnl' ? 'sorted' : ''}>
+            All PnL
+            <span className="sort-icon">{sortKey === 'pnl' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
+          <th onClick={() => handleSort('markets')} className={sortKey === 'markets' ? 'sorted' : ''}>
+            Markets
+            <span className="sort-icon">{sortKey === 'markets' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
+          <th onClick={() => handleSort('age')} className={sortKey === 'age' ? 'sorted' : ''}>
+            Age
+            <span className="sort-icon">{sortKey === 'age' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
+          <th style={{ cursor: 'default' }}>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sortedAccounts.map((acc, idx) => {
+          const isExpanded = expandedWallet === acc.wallet;
+          const profileUrl = `https://polymarket.com/profile/${acc.wallet}`;
+
+          return (
+            <tr key={acc.wallet} className={isExpanded ? 'expanded-row' : ''}>
+              <td className="rank-cell">{getFlag(acc.maxScore)} #{idx + 1}</td>
+              <td>
+                <div className="holder-cell">
+                  <a href={profileUrl} target="_blank" rel="noopener noreferrer" className="holder-link">
+                    {acc.name || acc.wallet.slice(0, 12) + '...'}
+                  </a>
+                  {acc.isCamouflage && <span style={{marginLeft: '6px'}}>🎭</span>}
+                </div>
+                {isExpanded && acc.markets && (
+                  <div className="positions-detail">
+                    {acc.markets.sort((a, b) => b.score - a.score).map((mkt, i) => (
+                      <div key={i} className={`position-item ${mkt.side?.toLowerCase()}`}>
+                        <span className="position-score">{mkt.score}pt</span>
+                        <a href={`https://polymarket.com/event/${mkt.slug}`} target="_blank" rel="noopener noreferrer">
+                          {mkt.question?.slice(0, 45) || mkt.slug}...
+                        </a>
+                        <span className={`position-side ${mkt.side?.toLowerCase()}`}>{mkt.side}</span>
+                        <span className="position-amount">${Math.round(mkt.amount).toLocaleString()}</span>
+                        <span className="text-dim">{mkt.marketRatio}%</span>
+                        <span className="text-dim">{mkt.marketEntryDays}d</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </td>
+              <td className="score-cell">{acc.maxScore}pt</td>
+              <td className="value-cell">${Math.round(acc.totalValue).toLocaleString()}</td>
+              <td className={`pnl-cell ${(acc.allTimePnl || 0) >= 0 ? 'positive' : 'negative'}`}>
+                {formatPnl(acc.allTimePnl)}
+              </td>
+              <td className="text-dim">{acc.markets?.length || 0}</td>
+              <td className="text-dim">{acc.accountAgeDays < 999 ? `${acc.accountAgeDays}d` : '?'}</td>
+              <td>
+                <button className="expand-btn" onClick={() => setExpandedWallet(isExpanded ? null : acc.wallet)}>
+                  {isExpanded ? 'Hide' : 'Show'}
+                </button>
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
+
 // Markets Tab Component
 function MarketsTab({ markets, searchQuery }) {
   const [sortKey, setSortKey] = useState('volume');
@@ -548,6 +704,12 @@ export default function Home() {
           Markets
         </button>
         <button 
+          className={`tab ${activeTab === 'suspicious' ? 'active' : ''}`}
+          onClick={() => setActiveTab('suspicious')}
+        >
+          🔍 Top Suspicious
+        </button>
+        <button 
           className={`tab ${activeTab === 'holders' ? 'active' : ''}`}
           onClick={() => setActiveTab('holders')}
         >
@@ -570,6 +732,9 @@ export default function Home() {
 
       {activeTab === 'markets' && (
         <MarketsTab markets={markets} searchQuery={searchQuery} />
+      )}
+      {activeTab === 'suspicious' && (
+        <SuspiciousTab searchQuery={searchQuery} />
       )}
       {activeTab === 'holders' && (
         <HoldersTab markets={markets} searchQuery={searchQuery} />

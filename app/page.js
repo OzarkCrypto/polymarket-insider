@@ -73,8 +73,6 @@ function SuspiciousTab({ searchQuery }) {
     switch (sortKey) {
       case 'score': aVal = a.maxScore; bVal = b.maxScore; break;
       case 'position': aVal = a.totalValue; bVal = b.totalValue; break;
-      case 'pnl': aVal = a.allTimePnl || 0; bVal = b.allTimePnl || 0; break;
-      case 'pnl30': aVal = a.monthPnl || 0; bVal = b.monthPnl || 0; break;
       case 'markets': aVal = a.markets?.length || 0; bVal = b.markets?.length || 0; break;
       case 'age': aVal = a.accountAgeDays || 999; bVal = b.accountAgeDays || 999; break;
       default: return 0;
@@ -84,13 +82,6 @@ function SuspiciousTab({ searchQuery }) {
 
   const getFlag = (score) => score >= 70 ? '🚨' : score >= 50 ? '⚠️' : '👀';
   
-  const formatPnl = (pnl) => {
-    if (pnl === undefined || pnl === null) return '?';
-    const absVal = Math.abs(pnl);
-    const formatted = absVal >= 1000 ? `${(absVal / 1000).toFixed(1)}K` : absVal.toString();
-    return pnl >= 0 ? `+$${formatted}` : `-$${formatted}`;
-  };
-
   return (
     <table className="markets-table">
       <thead>
@@ -105,14 +96,7 @@ function SuspiciousTab({ searchQuery }) {
             Position
             <span className="sort-icon">{sortKey === 'position' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
           </th>
-          <th onClick={() => handleSort('pnl')} className={sortKey === 'pnl' ? 'sorted' : ''}>
-            All PnL
-            <span className="sort-icon">{sortKey === 'pnl' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
-          </th>
-          <th onClick={() => handleSort('pnl30')} className={sortKey === 'pnl30' ? 'sorted' : ''}>
-            30d PnL
-            <span className="sort-icon">{sortKey === 'pnl30' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
-          </th>
+
           <th onClick={() => handleSort('markets')} className={sortKey === 'markets' ? 'sorted' : ''}>
             Markets
             <span className="sort-icon">{sortKey === 'markets' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
@@ -157,12 +141,6 @@ function SuspiciousTab({ searchQuery }) {
               </td>
               <td className="score-cell">{acc.maxScore}pt</td>
               <td className="value-cell">${Math.round(acc.totalValue).toLocaleString()}</td>
-              <td className={`pnl-cell ${(acc.allTimePnl || 0) >= 0 ? 'positive' : 'negative'}`}>
-                {formatPnl(acc.allTimePnl)}
-              </td>
-              <td className={`pnl-cell ${(acc.monthPnl || 0) >= 0 ? 'positive' : 'negative'}`}>
-                {formatPnl(acc.monthPnl)}
-              </td>
               <td className="text-dim">{acc.markets?.length || 0}</td>
               <td className="text-dim">{acc.accountAgeDays < 999 ? `${acc.accountAgeDays}d` : '?'}</td>
               <td>

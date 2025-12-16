@@ -30,7 +30,7 @@ async function fetchJSON(url) {
 }
 
 // 의심 계정 점수 계산
-function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marketEntryDays) {
+function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marketEntryDays, extraData = {}) {
   let score = 0;
   
   // 1. 마켓 진입 시점 (최대 35점)
@@ -68,17 +68,50 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     score += 10;
   }
   
+  // === 새로운 내부자 탐지 요소 ===
+  
+  // 6. 역베팅 점수 (최대 30점) - 낮은 확률에 큰 금액 베팅
+  const avgPrice = extraData.avgPrice || 0;
+  if (avgPrice > 0 && avgPrice < 0.15 && holder.amount >= 5000) {
+    score += 30;  // 15% 미만 확률에 $5K+ 베팅
+  } else if (avgPrice > 0 && avgPrice < 0.25 && holder.amount >= 3000) {
+    score += 20;  // 25% 미만 확률에 $3K+ 베팅
+  } else if (avgPrice > 0 && avgPrice < 0.35 && holder.amount >= 1000) {
+    score += 10;  // 35% 미만 확률에 $1K+ 베팅
+  }
+  
+  // 7. 승리 횟수 대비 계정 나이 (최대 25점) - 짧은 기간에 많은 승리
+  const winCount = extraData.winCount || 0;
+  const winsPerMonth = accountAgeDays > 0 ? (winCount / accountAgeDays) * 30 : 0;
+  if (winCount >= 10 && winsPerMonth >= 15) {
+    score += 25;  // 월 15승 이상
+  } else if (winCount >= 5 && winsPerMonth >= 8) {
+    score += 15;  // 월 8승 이상
+  } else if (winCount >= 3 && winsPerMonth >= 4) {
+    score += 8;   // 월 4승 이상
+  }
+  
+  // 8. 카테고리 집중도 (최대 20점) - 특정 분야만 베팅
+  const categoryRatio = extraData.categoryRatio || 0;
+  if (categoryRatio >= 0.8 && totalMarkets >= 3) {
+    score += 20;  // 80% 이상 같은 카테고리
+  } else if (categoryRatio >= 0.6 && totalMarkets >= 3) {
+    score += 10;  // 60% 이상 같은 카테고리
+  }
+  
   return { score, isCamouflage };
 }
 
 // 단일 홀더 분석
 async function analyzeHolder(holder, conditionId) {
   try {
-    const [positions, activities, oldestActivity] = await Promise.all([
+    const [positions, activities, oldestActivity, redeemActivity] = await Promise.all([
       fetchJSON(`${POLYMARKET_API}/positions?user=${holder.wallet}&sizeThreshold=100`),
       fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=200`),
       // 계정 나이용 - 가장 오래된 거래 1개만 가져오기
-      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=1&sortBy=TIMESTAMP&sortDirection=ASC`)
+      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=1&sortBy=TIMESTAMP&sortDirection=ASC`),
+      // 승리 횟수용 - REDEEM 기록
+      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=200&type=REDEEM`)
     ]);
     
     const totalMarkets = positions.length;
@@ -128,8 +161,28 @@ async function analyzeHolder(holder, conditionId) {
       }
     }
     
+    // === 새로운 내부자 탐지 데이터 ===
+    
+    // 역베팅 탐지: 이 마켓의 평균 매수 가격
+    const avgPrice = thisMarketPos?.avgPrice || 0;
+    
+    // 승리 횟수: REDEEM 기록 수
+    const winCount = redeemActivity?.length || 0;
+    
+    // 카테고리 집중도: 같은 eventSlug를 가진 마켓 비율
+    let categoryRatio = 0;
+    if (positions.length >= 2) {
+      const eventSlugs = positions.map(p => p.eventSlug).filter(s => s);
+      const slugCounts = {};
+      eventSlugs.forEach(s => slugCounts[s] = (slugCounts[s] || 0) + 1);
+      const maxCount = Math.max(...Object.values(slugCounts), 0);
+      categoryRatio = positions.length > 0 ? maxCount / positions.length : 0;
+    }
+    
+    const extraData = { avgPrice, winCount, categoryRatio };
+    
     const { score, isCamouflage } = calculateScore(
-      { ...holder, amount: thisMarketValue }, marketRatio, totalMarkets, accountAgeDays, marketEntryDays
+      { ...holder, amount: thisMarketValue }, marketRatio, totalMarkets, accountAgeDays, marketEntryDays, extraData
     );
     
     return {
@@ -142,7 +195,11 @@ async function analyzeHolder(holder, conditionId) {
       isCamouflage,
       score,
       allTimePnl: Math.round(allTimePnl),
-      monthPnl: Math.round(monthPnl)
+      monthPnl: Math.round(monthPnl),
+      // 새로운 필드
+      avgPrice: Math.round(avgPrice * 100),  // 퍼센트로 저장
+      winCount,
+      categoryRatio: Math.round(categoryRatio * 100)
     };
   } catch (err) {
     return null;

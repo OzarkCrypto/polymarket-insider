@@ -1004,3 +1004,32 @@ body {
   color: var(--red);
   font-weight: 600;
 }
+
+/* Suspicious Tab specific styles */
+.score-cell {
+  color: #cf6600;
+  font-weight: 600;
+}
+
+.value-cell {
+  color: var(--green);
+  font-weight: 500;
+}
+
+.pnl-cell {
+  font-weight: 500;
+}
+
+.pnl-cell.positive {
+  color: var(--green);
+}
+
+.pnl-cell.negative {
+  color: var(--red);
+}
+
+.position-score {
+  color: #cf6600;
+  font-weight: 500;
+  min-width: 40px;
+}

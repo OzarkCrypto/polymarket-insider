@@ -99,6 +99,35 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     score += 10;  // 60% 이상 같은 카테고리
   }
   
+  // === 내부자 아닌 특성 감점 ===
+  
+  // 9. Open PnL 마이너스 감점 - 진짜 내부자는 수익을 냄
+  const totalPnl = extraData.totalPnl || 0;
+  const totalValue = extraData.totalValue || 1;
+  const pnlRatio = totalValue > 0 ? totalPnl / totalValue : 0;
+  
+  if (pnlRatio < -1.0) {
+    score -= 40;  // -100% 이하 (원금보다 더 큰 손실)
+  } else if (pnlRatio < -0.5) {
+    score -= 30;  // -50% 이하
+  } else if (pnlRatio < -0.2) {
+    score -= 15;  // -20% 이하
+  }
+  
+  // 10. 분산 투자 감점 - 진짜 내부자는 확신 있는 마켓에만 집중
+  if (totalMarkets >= 50) {
+    score -= 30;  // 50개 이상 마켓 = 일반 트레이더
+  } else if (totalMarkets >= 20) {
+    score -= 20;  // 20개 이상
+  } else if (totalMarkets >= 10) {
+    score -= 10;  // 10개 이상
+  }
+  
+  // 11. 손실 + 분산 콤보 = 확실히 내부자 아님
+  if (pnlRatio < -0.3 && totalMarkets >= 10) {
+    score -= 15;  // 추가 감점
+  }
+  
   return { score, isCamouflage };
 }
 
@@ -179,7 +208,7 @@ async function analyzeHolder(holder, conditionId) {
       categoryRatio = positions.length > 0 ? maxCount / positions.length : 0;
     }
     
-    const extraData = { avgPrice, winCount, categoryRatio };
+    const extraData = { avgPrice, winCount, categoryRatio, totalPnl: allTimePnl, totalValue };
     
     const { score, isCamouflage } = calculateScore(
       { ...holder, amount: thisMarketValue }, marketRatio, totalMarkets, accountAgeDays, marketEntryDays, extraData

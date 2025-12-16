@@ -125,16 +125,21 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     score += 5;
   }
   
-  // 10. REDEEM 총액 (최대 40점) - 실제 수익 실현
+  // 10. REDEEM 총액 (최대 50점) - 실제 수익 실현
   const redeemTotal = extraData.redeemTotal || 0;
   if (redeemTotal >= 100000) {
-    score += 40;  // $100K+ 청산
+    score += 50;  // $100K+ 청산
   } else if (redeemTotal >= 50000) {
-    score += 30;  // $50K+ 청산
+    score += 35;  // $50K+ 청산
   } else if (redeemTotal >= 20000) {
-    score += 20;  // $20K+ 청산
+    score += 25;  // $20K+ 청산
   } else if (redeemTotal >= 5000) {
     score += 10;  // $5K+ 청산
+  }
+  
+  // 콤보 가점: 카테고리 집중 + 높은 REDEEM = 전문 내부자
+  if (categoryRatio >= 0.5 && redeemTotal >= 50000) {
+    score += 20;  // 집중 + 고수익 콤보
   }
   
   // 11. 높은 수익률 (최대 30점)
@@ -251,14 +256,29 @@ async function analyzeHolder(holder, conditionId) {
     // REDEEM 총액: 실제 청산 금액
     const redeemTotal = redeemActivity?.reduce((sum, r) => sum + (r.size || 0), 0) || 0;
     
-    // 카테고리 집중도: 같은 eventSlug를 가진 마켓 비율
+    // 카테고리 집중도: 같은 eventSlug 또는 같은 키워드를 가진 마켓 비율
     let categoryRatio = 0;
     if (positions.length >= 2) {
+      // 방법 1: eventSlug 기반
       const eventSlugs = positions.map(p => p.eventSlug).filter(s => s);
       const slugCounts = {};
       eventSlugs.forEach(s => slugCounts[s] = (slugCounts[s] || 0) + 1);
-      const maxCount = Math.max(...Object.values(slugCounts), 0);
-      categoryRatio = positions.length > 0 ? maxCount / positions.length : 0;
+      const maxSlugCount = Math.max(...Object.values(slugCounts), 0);
+      const slugRatio = positions.length > 0 ? maxSlugCount / positions.length : 0;
+      
+      // 방법 2: 키워드 기반 (OpenAI, Gemini 등)
+      const keywords = ['openai', 'gpt', 'chatgpt', 'gemini', 'google', 'anthropic', 'claude', 'meta', 'llama'];
+      let keywordMatches = 0;
+      for (const p of positions) {
+        const title = (p.title || '').toLowerCase();
+        if (keywords.some(kw => title.includes(kw))) {
+          keywordMatches++;
+        }
+      }
+      const keywordRatio = positions.length > 0 ? keywordMatches / positions.length : 0;
+      
+      // 더 높은 값 사용
+      categoryRatio = Math.max(slugRatio, keywordRatio);
     }
     
     const extraData = { avgPrice, winCount, categoryRatio, totalPnl: allTimePnl, totalValue, redeemTotal, shares: holder.shares };
@@ -421,7 +441,7 @@ async function main() {
   // 3. 결과 정리
   const results = Array.from(allSuspicious.values())
     .sort((a, b) => b.maxScore - a.maxScore)
-    .slice(0, 100); // Top 100만 저장
+    .slice(0, 150); // Top 150만 저장
   
   const output = {
     updatedAt: new Date().toISOString(),

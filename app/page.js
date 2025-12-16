@@ -137,7 +137,6 @@ function SuspiciousTab({ searchQuery }) {
                   <a href={profileUrl} target="_blank" rel="noopener noreferrer" className="holder-link">
                     {acc.name || acc.wallet.slice(0, 12) + '...'}
                   </a>
-                  {acc.isCamouflage && <span style={{marginLeft: '6px'}}>🎭</span>}
                 </div>
                 {isExpanded && acc.markets && (
                   <div className="positions-detail">
@@ -349,7 +348,7 @@ function MarketsTab({ markets, searchQuery }) {
                                   </div>
                                   <div className="suspicious-details">
                                     <span>💰 ${Math.round(h.amount || 0).toLocaleString()}</span>
-                                    <span>📊 {h.totalMarkets} mkt{h.totalMarkets !== 1 ? 's' : ''}{h.isCamouflage ? ' 🎭' : ''}</span>
+                                    <span>📊 {h.totalMarkets} mkt{h.totalMarkets !== 1 ? 's' : ''}</span>
                                     <span>🎯 {h.marketEntryDays !== undefined && h.marketEntryDays < 999 ? `${h.marketEntryDays}d ago` : '?'}{h.marketEntryDays <= 3 ? ' 🚨' : h.marketEntryDays <= 7 ? ' ⚠️' : ''}</span>
                                     {h.marketRatio >= 60 && <span className="text-dim">{h.marketRatio}% here</span>}
                                   </div>

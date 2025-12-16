@@ -74,6 +74,7 @@ function SuspiciousTab({ searchQuery }) {
       case 'score': aVal = a.maxScore; bVal = b.maxScore; break;
       case 'position': aVal = a.totalValue; bVal = b.totalValue; break;
       case 'pnl': aVal = a.allTimePnl || 0; bVal = b.allTimePnl || 0; break;
+      case 'pnl30': aVal = a.monthPnl || 0; bVal = b.monthPnl || 0; break;
       case 'markets': aVal = a.markets?.length || 0; bVal = b.markets?.length || 0; break;
       case 'age': aVal = a.accountAgeDays || 999; bVal = b.accountAgeDays || 999; break;
       default: return 0;
@@ -94,7 +95,7 @@ function SuspiciousTab({ searchQuery }) {
     <table className="markets-table">
       <thead>
         <tr>
-          <th style={{ cursor: 'default' }}>Rank</th>
+          <th style={{ cursor: 'default' }}>#</th>
           <th style={{ cursor: 'default' }}>Account</th>
           <th onClick={() => handleSort('score')} className={sortKey === 'score' ? 'sorted' : ''}>
             Score
@@ -108,6 +109,10 @@ function SuspiciousTab({ searchQuery }) {
             All PnL
             <span className="sort-icon">{sortKey === 'pnl' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
           </th>
+          <th onClick={() => handleSort('pnl30')} className={sortKey === 'pnl30' ? 'sorted' : ''}>
+            30d PnL
+            <span className="sort-icon">{sortKey === 'pnl30' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
+          </th>
           <th onClick={() => handleSort('markets')} className={sortKey === 'markets' ? 'sorted' : ''}>
             Markets
             <span className="sort-icon">{sortKey === 'markets' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
@@ -116,7 +121,7 @@ function SuspiciousTab({ searchQuery }) {
             Age
             <span className="sort-icon">{sortKey === 'age' ? (sortDir === 'desc' ? '▼' : '▲') : ''}</span>
           </th>
-          <th style={{ cursor: 'default' }}>Details</th>
+          <th style={{ cursor: 'default' }}></th>
         </tr>
       </thead>
       <tbody>
@@ -126,7 +131,7 @@ function SuspiciousTab({ searchQuery }) {
 
           return (
             <tr key={acc.wallet} className={isExpanded ? 'expanded-row' : ''}>
-              <td className="rank-cell">{getFlag(acc.maxScore)} #{idx + 1}</td>
+              <td>#{idx + 1}</td>
               <td>
                 <div className="holder-cell">
                   <a href={profileUrl} target="_blank" rel="noopener noreferrer" className="holder-link">
@@ -155,6 +160,9 @@ function SuspiciousTab({ searchQuery }) {
               <td className="value-cell">${Math.round(acc.totalValue).toLocaleString()}</td>
               <td className={`pnl-cell ${(acc.allTimePnl || 0) >= 0 ? 'positive' : 'negative'}`}>
                 {formatPnl(acc.allTimePnl)}
+              </td>
+              <td className={`pnl-cell ${(acc.monthPnl || 0) >= 0 ? 'positive' : 'negative'}`}>
+                {formatPnl(acc.monthPnl)}
               </td>
               <td className="text-dim">{acc.markets?.length || 0}</td>
               <td className="text-dim">{acc.accountAgeDays < 999 ? `${acc.accountAgeDays}d` : '?'}</td>

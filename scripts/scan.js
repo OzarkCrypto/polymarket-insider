@@ -74,10 +74,9 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
 // 단일 홀더 분석
 async function analyzeHolder(holder, conditionId) {
   try {
-    const [positions, activities, profile] = await Promise.all([
+    const [positions, activities] = await Promise.all([
       fetchJSON(`${POLYMARKET_API}/positions?user=${holder.wallet}&sizeThreshold=100`),
-      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=200`),
-      fetchJSON(`${POLYMARKET_API}/profile/${holder.wallet}`).catch(() => null)
+      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=200`)
     ]);
     
     const totalMarkets = positions.length;
@@ -96,17 +95,16 @@ async function analyzeHolder(holder, conditionId) {
     
     const marketRatio = totalValue > 0 ? thisMarketValue / totalValue : 1;
     
-    // PnL - profile API에서 가져오기 (더 정확)
+    // PnL - positions에서 계산 (realizedPnl + cashPnl)
     let allTimePnl = 0;
     let monthPnl = 0;
     
-    if (profile) {
-      allTimePnl = profile.pnl || profile.allTimePnl || 0;
-      monthPnl = profile.pnl30d || profile.monthPnl || 0;
-    } else {
-      // fallback: positions에서 계산
-      allTimePnl = positions.reduce((sum, p) => sum + (p.pnl || p.cashPnl || 0), 0);
-    }
+    // positions에서 PnL 계산: realizedPnl (실현) + cashPnl (미실현)
+    allTimePnl = positions.reduce((sum, p) => {
+      const realized = p.realizedPnl || 0;
+      const unrealized = p.cashPnl || 0;
+      return sum + realized + unrealized;
+    }, 0);
     
     // 계정 나이
     let accountAgeDays = 999;

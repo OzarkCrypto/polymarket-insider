@@ -74,9 +74,11 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
 // 단일 홀더 분석
 async function analyzeHolder(holder, conditionId) {
   try {
-    const [positions, activities] = await Promise.all([
+    const [positions, activities, oldestActivity] = await Promise.all([
       fetchJSON(`${POLYMARKET_API}/positions?user=${holder.wallet}&sizeThreshold=100`),
-      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=200`)
+      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=200`),
+      // 계정 나이용 - 가장 오래된 거래 1개만 가져오기
+      fetchJSON(`${POLYMARKET_API}/activity?user=${holder.wallet}&limit=1&sortBy=TIMESTAMP&sortDirection=ASC`)
     ]);
     
     const totalMarkets = positions.length;
@@ -106,14 +108,11 @@ async function analyzeHolder(holder, conditionId) {
       return sum + realized + unrealized;
     }, 0);
     
-    // 계정 나이
+    // 계정 나이 - 가장 오래된 거래 기준
     let accountAgeDays = 999;
-    if (activities && activities.length > 0) {
-      const timestamps = activities.map(a => a.timestamp).filter(t => t);
-      if (timestamps.length > 0) {
-        const firstTs = Math.min(...timestamps);
-        accountAgeDays = Math.floor((Date.now() - firstTs * 1000) / (1000 * 60 * 60 * 24));
-      }
+    if (oldestActivity && oldestActivity.length > 0 && oldestActivity[0].timestamp) {
+      const firstTs = oldestActivity[0].timestamp;
+      accountAgeDays = Math.floor((Date.now() - firstTs * 1000) / (1000 * 60 * 60 * 24));
     }
     
     // 이 마켓 첫 베팅 시점

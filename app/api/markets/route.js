@@ -34,6 +34,10 @@ export async function GET() {
     'guilty', 'verdict', 'trial',
     // 정부 인사 지명 (인사 담당자)
     'confirmed as', 'appointed', 'nominated', 'ambassador',
+    // 🆕 인사 지명 확장 (백악관, 정부 관계자)
+    'nominate', 'nomination', 'appointee', 'appointment',
+    'cabinet', 'secretary', ' chair', 'chairman', 'director',
+    'fed chair', 'treasury secretary', 'attorney general',
     // 서비스 장애 (SRE/운영팀)
     'outage', 'incident', 'downtime',
     // 소송/합의 (법무팀)
@@ -66,19 +70,23 @@ export async function GET() {
   ];
 
   // ========== 제외 키워드 (Insider 가치 낮거나 관심 없는 분야) ==========
+  // 정치인 이름 - 인사 지명 마켓은 제외하지 않음 (SOFT_EXCLUDE)
+  const SOFT_EXCLUDE_KEYWORDS = [
+    'trump', 'biden', 'harris', 'desantis', 'president', 'election', 'vote',
+    'congress', 'senate', 'democrat', 'republican', 'gop', 'ballot',
+    'governor', 'mayor', 'politician', 'political', 'impeach', 'pardon',
+    'presidential', '2028', '2032',
+    'prime minister', ' pm ', 'starmer', 'poilievre', 'sanchez', 'sánchez',
+    'maduro', 'trudeau', 'macron', 'scholz', 'modi', 'netanyahu',
+    'kim jong', 'supreme leader', 'parliament', 'citizenship',
+    'conservatives', 'labour', 'liberal', 'referendum', 'afd',
+  ];
+  
+  // 절대 제외 - INSIDER 키워드가 있어도 제외
   const EXCLUDE_KEYWORDS = [
     // 자연현상 (예측 불가)
     'hottest year', 'temperature', 'weather', 'climate', 'earthquake',
     'hurricane', 'tornado', 'flood',
-    // 정치/선거/정치인
-    'trump', 'biden', 'harris', 'desantis', 'president', 'election', 'vote',
-    'congress', 'senate', 'democrat', 'republican', 'gop', 'ballot',
-    'governor', 'mayor', 'politician', 'political', 'impeach', 'pardon',
-    'presidential', 'nominee', '2028', '2032',
-    'prime minister', ' pm ', 'starmer', 'poilievre', 'sanchez', 'sánchez',
-    'maduro', 'trudeau', 'macron', 'scholz', 'modi', 'netanyahu',
-    'kim jong', 'supreme leader', 'parliament', 'citizenship',
-    'conservatives', 'labour', 'liberal', 'referendum', 'afd', 'ban ',
     // 스포츠 추가
     'verstappen', 'red bull', 'formula', 'f1 ',
     // 국제관계/전쟁
@@ -201,6 +209,9 @@ export async function GET() {
     // 연준/금리
     'bank-of-england-rate-cut-in-2025',
     'federal-reserve-interest-rate-decision',
+    // 🆕 연준 인사
+    'who-will-trump-nominate-as-fed-chair',
+    'jerome-powell-out-as-fed-chair-in-2025',
     // 앱스토어
     '1-free-app-in-the-us-apple-app-store-on-december-12',
     '1-paid-app-in-the-us-apple-app-store-on-december-12',
@@ -300,13 +311,19 @@ export async function GET() {
         const eventTitleLower = (event.title || '').toLowerCase();
         const combined = questionLower + ' ' + eventTitleLower;
 
-        // 1. 블랙리스트 체크 (먼저 제외)
-        const isExcluded = EXCLUDE_KEYWORDS.some(kw => combined.includes(kw.toLowerCase()));
-        if (isExcluded) continue;
+        // 1. 절대 블랙리스트 체크 (먼저 제외)
+        const isHardExcluded = EXCLUDE_KEYWORDS.some(kw => combined.includes(kw.toLowerCase()));
+        if (isHardExcluded) continue;
 
         // 2. Insider 가치 판단
         const hasInsiderKeyword = INSIDER_KEYWORDS.some(kw => combined.includes(kw.toLowerCase()));
         const hasMajorCompany = MAJOR_COMPANIES.some(c => combined.includes(c.toLowerCase()));
+        
+        // 3. 소프트 제외 체크 (정치인 이름 등) - INSIDER 키워드가 있으면 우회
+        if (!hasInsiderKeyword) {
+          const isSoftExcluded = SOFT_EXCLUDE_KEYWORDS.some(kw => combined.includes(kw.toLowerCase()));
+          if (isSoftExcluded) continue;
+        }
         
         // Insider 키워드가 있거나, 주요 기업 관련이면 포함
         if (!hasInsiderKeyword && !hasMajorCompany) continue;

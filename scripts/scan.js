@@ -91,17 +91,19 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     score += 8;   // 월 4승 이상
   }
   
-  // 8. 카테고리 집중도 (최대 20점) - 특정 분야만 베팅
+  // 8. 카테고리 집중도 (최대 25점) - 특정 분야만 베팅
   const categoryRatio = extraData.categoryRatio || 0;
   if (categoryRatio >= 0.8 && totalMarkets >= 3) {
-    score += 20;  // 80% 이상 같은 카테고리
+    score += 25;  // 80% 이상 같은 카테고리
   } else if (categoryRatio >= 0.6 && totalMarkets >= 3) {
-    score += 10;  // 60% 이상 같은 카테고리
+    score += 15;  // 60% 이상 같은 카테고리
+  } else if (categoryRatio >= 0.4 && totalMarkets >= 3) {
+    score += 8;   // 40% 이상 같은 카테고리
   }
   
   // === 내부자 특성 가점 ===
   
-  // 9. 높은 승리 횟수 (최대 35점) - 많이 이기는 계정
+  // 9. 높은 승리 횟수 (최대 35점)
   if (winCount >= 50) {
     score += 35;
   } else if (winCount >= 30) {
@@ -112,7 +114,19 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     score += 5;
   }
   
-  // 10. 높은 수익률 (최대 30점) - 수익 내는 계정
+  // 10. REDEEM 총액 (최대 40점) - 실제 수익 실현
+  const redeemTotal = extraData.redeemTotal || 0;
+  if (redeemTotal >= 100000) {
+    score += 40;  // $100K+ 청산
+  } else if (redeemTotal >= 50000) {
+    score += 30;  // $50K+ 청산
+  } else if (redeemTotal >= 20000) {
+    score += 20;  // $20K+ 청산
+  } else if (redeemTotal >= 5000) {
+    score += 10;  // $5K+ 청산
+  }
+  
+  // 11. 높은 수익률 (최대 30점)
   const totalPnl = extraData.totalPnl || 0;
   const totalValue = extraData.totalValue || 1;
   const pnlRatio = totalValue > 0 ? totalPnl / totalValue : 0;
@@ -127,28 +141,30 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
   
   // === 내부자 아닌 특성 감점 ===
   
-  // 11. Open PnL 마이너스 감점 - 손실 계정
+  // 12. Open PnL 마이너스 감점
   if (pnlRatio < -1.0) {
-    score -= 40;  // -100% 이하 (원금보다 더 큰 손실)
+    score -= 40;
   } else if (pnlRatio < -0.5) {
-    score -= 30;  // -50% 이하
+    score -= 30;
   } else if (pnlRatio < -0.2) {
-    score -= 15;  // -20% 이하
+    score -= 15;
   }
   
-  // 12. 분산 투자 감점 - 단, 승리 많으면 감점 줄임
-  const diversityPenalty = winCount >= 30 ? 0.5 : 1;  // 승리 많으면 감점 50% 감소
-  if (totalMarkets >= 50) {
-    score -= Math.round(30 * diversityPenalty);
-  } else if (totalMarkets >= 20) {
-    score -= Math.round(20 * diversityPenalty);
-  } else if (totalMarkets >= 10) {
-    score -= Math.round(10 * diversityPenalty);
+  // 13. 분산 투자 감점 - 단, 카테고리 집중도 높거나 승리 많으면 감점 감소/무효
+  const focusedInvestor = categoryRatio >= 0.4 || winCount >= 15 || redeemTotal >= 20000;
+  if (!focusedInvestor) {
+    if (totalMarkets >= 50) {
+      score -= 30;
+    } else if (totalMarkets >= 20) {
+      score -= 20;
+    } else if (totalMarkets >= 10) {
+      score -= 10;
+    }
   }
   
-  // 13. 손실 + 분산 콤보 = 확실히 내부자 아님
-  if (pnlRatio < -0.3 && totalMarkets >= 10) {
-    score -= 15;  // 추가 감점
+  // 14. 손실 + 분산 콤보 = 확실히 내부자 아님
+  if (pnlRatio < -0.3 && totalMarkets >= 10 && !focusedInvestor) {
+    score -= 15;
   }
   
   return { score, isCamouflage };
@@ -221,6 +237,9 @@ async function analyzeHolder(holder, conditionId) {
     // 승리 횟수: REDEEM 기록 수
     const winCount = redeemActivity?.length || 0;
     
+    // REDEEM 총액: 실제 청산 금액
+    const redeemTotal = redeemActivity?.reduce((sum, r) => sum + (r.size || 0), 0) || 0;
+    
     // 카테고리 집중도: 같은 eventSlug를 가진 마켓 비율
     let categoryRatio = 0;
     if (positions.length >= 2) {
@@ -231,7 +250,7 @@ async function analyzeHolder(holder, conditionId) {
       categoryRatio = positions.length > 0 ? maxCount / positions.length : 0;
     }
     
-    const extraData = { avgPrice, winCount, categoryRatio, totalPnl: allTimePnl, totalValue };
+    const extraData = { avgPrice, winCount, categoryRatio, totalPnl: allTimePnl, totalValue, redeemTotal };
     
     const { score, isCamouflage } = calculateScore(
       { ...holder, amount: thisMarketValue }, marketRatio, totalMarkets, accountAgeDays, marketEntryDays, extraData

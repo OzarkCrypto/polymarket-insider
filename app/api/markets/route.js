@@ -1,80 +1,141 @@
 export async function GET() {
-  // ========== INSIDER VALUE 키워드 (내부정보 활용 가치 높음) ==========
+  // ========================================
+  // 내부정보 활용 가능 마켓 필터링
+  // 관점: "누가 미리 알 수 있는가?"
+  // ========================================
+  
   const INSIDER_KEYWORDS = [
-    // M&A / 인수합병 (딜 관계자)
+    // ===== 1. 기업 내부자 (임원, 이사회, 직원, IB) =====
+    
+    // M&A/인수합병 - 딜팀, 법무팀, IB, 양사 임원
     'acquisition', 'acquire', 'acquires', 'acquired', 'merger', 'merge',
     'buyout', 'takeover', 'buy ', 'sell ', 'sale', 'divest',
-    // IPO (회사 내부자, IB)
-    'ipo', 'go public', 'goes public', 'public offering',
-    // CEO/임원 변경 (이사회, 경영진)
+    
+    // IPO/상장 - CFO, IB, SEC, 거래소
+    'ipo', 'go public', 'goes public', 'public offering', 'direct listing',
+    
+    // 임원 변경 - 이사회, HR, 헤드헌터
     'ceo', 'chief executive', 'step down', 'resign', 'fired', 'replaced',
-    'new ceo', 'out as', 'leave', 'depart',
-    // 제품 출시 (개발팀, PM)
+    'new ceo', 'out as', 'leave', 'depart', 'retire',
+    
+    // 제품 출시 - PM, 개발팀, 마케팅
     'release', 'released', 'launch', 'launched', 'announce', 'announced',
-    'ship', 'debut', 'unveil', 'reveal', 'available',
-    // 기술/모델 발표 (연구팀)
-    'model', 'gpt', 'claude', 'gemini', 'llama', 'frontier',
-    // 파트너십 (양측 관계자)
-    'partner', 'deal', 'contract', 'agreement', 'collaboration',
-    // 규제/법적 (정부 관계자)
-    'ban', 'approve', 'block', 'fine', 'antitrust', 'regulate',
-    'forced to', 'required to', 'must ',
-    // 중앙은행/금리 (FOMC 위원, 연준 직원)
+    'ship', 'debut', 'unveil', 'reveal', 'available', 'coming soon',
+    
+    // 파트너십/계약 - BD팀, 법무팀
+    'partner', 'partnership', 'deal', 'contract', 'agreement', 'collaboration',
+    'exclusive', 'integrate',
+    
+    // 구조조정 - 경영진, HR
+    'shutdown', 'discontinue', 'close', 'terminate', 'wind down',
+    'restructur', 'layoff', 'lay off', 'workforce reduction',
+    'bankruptcy', 'chapter 11', 'insolvent',
+    
+    // 실적/재무 - CFO, 감사팀, IR
+    'earnings', 'revenue', 'profit', 'guidance', 'forecast',
+    
+    // ===== 2. 정부/규제기관 (공무원, 위원, 정책 담당자) =====
+    
+    // 중앙은행 - FOMC 위원, 연준 직원, ECB
     'rate cut', 'rate hike', 'fomc', 'fed ', 'interest rate',
-    'bank of england', 'ecb', 'central bank',
-    // 앱스토어 순위 (앱 개발사, 애플 피처드 팀)
-    'app store', '#1 app', '1 app', 'top app', 'free app', 'paid app',
-    // 서비스 변경
-    'shutdown', 'discontinue', 'end ', 'close', 'terminate',
-    'restructur', 'layoff', 'lay off',
-    // 크립토 에어드랍 (프로젝트 팀, VC)
-    'airdrop',
-    // 법적 판결/체포 (검찰, 법원, 수사기관)
-    'sentenced', 'arrested', 'jail', 'prison', 'indicted', 'convicted',
-    'verdict', 'trial', 'guilty', 'acquitted', 'charged',
-    // 문서/파일 공개 (정부 관계자, 법원)
-    'files', 'documents', 'declassif', 'unseal', 'release',
-    'named in', 'implicated', 'accused', 'linked to',
-    // 특정 고프로필 수사/스캔들
-    'epstein', 'diddy', 'weinstein', 'scandal',
-    // 수사/조사
-    'investigation', 'probe', 'inquiry', 'subpoena', 'testimony',
-    'guilty', 'verdict', 'trial',
-    // 정부 인사 지명 (인사 담당자)
-    'confirmed as', 'appointed', 'nominated', 'ambassador',
-    // 🆕 인사 지명 확장 (백악관, 정부 관계자)
+    'bank of england', 'ecb', 'central bank', 'monetary policy',
+    'quantitative', 'tightening', 'easing',
+    
+    // 규제 승인/거부 - FDA, SEC, FTC, FCC 직원
+    'approve', 'approved', 'approval', 'reject', 'block', 'ban',
+    'fine', 'antitrust', 'regulate', 'regulation',
+    'fda approv', 'fda clear', 'drug approv', 'clinical trial',
+    'phase 3', 'phase 2', 'clinical result',
+    'forced to', 'required to', 'must ', 'mandate',
+    
+    // 인사 지명 - 백악관, 인사청, 상원
     'nominate', 'nomination', 'appointee', 'appointment',
+    'confirmed as', 'appointed', 'nominated',
     'cabinet', 'secretary', ' chair', 'chairman', 'director',
     'fed chair', 'treasury secretary', 'attorney general',
-    // 서비스 장애 (SRE/운영팀)
-    'outage', 'incident', 'downtime',
-    // 소송/합의 (법무팀)
+    'ambassador', 'commissioner',
+    
+    // 정책/법안 - 의회 스태프, 위원회
+    'bill', 'legislation', 'law passed', 'signed into law',
+    'executive order', 'tariff', 'sanction',
+    
+    // ===== 3. 사법/수사 (검찰, 법원, FBI, DOJ) =====
+    
+    // 기소/체포 - 검찰, FBI, DOJ
+    'indicted', 'arrested', 'charged', 'prosecute',
+    'investigation', 'probe', 'inquiry', 'subpoena',
+    
+    // 재판/판결 - 법원, 판사 보좌관
+    'verdict', 'trial', 'guilty', 'acquitted', 'convicted',
+    'sentenced', 'jail', 'prison', 'plea deal',
+    
+    // 문서 공개 - 법원 서기, FOIA 담당
+    'files', 'documents', 'declassif', 'unseal', 'sealed',
+    'named in', 'implicated', 'accused', 'linked to',
+    'testimony', 'deposition',
+    
+    // 합의/소송 - 법무팀
     'settlement', 'lawsuit', 'sue', 'legal action',
     
-    // ========== 🆕 NEW: 추가 내부자 카테고리 ==========
+    // 고프로필 수사 - 수사팀, 피해자측
+    'epstein', 'diddy', 'weinstein', 'scandal',
     
-    // ETF/금융상품 승인 (SEC 직원, 신청 회사)
+    // ===== 4. 기술/AI (연구팀, PM, 엔지니어) =====
+    
+    // AI 모델 - OpenAI, Google, Anthropic, Meta 내부
+    'gpt', 'gpt-4', 'gpt-5', 'gpt-6', 'chatgpt',
+    'claude', 'gemini', 'llama', 'mistral',
+    'frontier model', 'foundation model', 'agi',
+    'model release', 'model launch',
+    
+    // 제품 기능 - PM, 개발팀
+    'feature', 'update', 'version', 'upgrade',
+    'beta', 'alpha', 'early access',
+    
+    // 앱스토어 - 앱 개발사, 애플 피처드팀
+    'app store', '#1 app', '1 app', 'top app', 'free app', 'paid app',
+    
+    // 해킹/보안 - 보안팀, 화이트햇
+    'hack', 'hacked', 'exploit', 'breach', 'vulnerability',
+    'outage', 'incident', 'downtime',
+    
+    // ===== 5. 금융/크립토 (거래소, 발행사, VC) =====
+    
+    // ETF 승인 - SEC, 신청 회사
     ' etf', 'etf ', 'spot etf', 'etf approv', 'etf filing',
     
-    // 스테이블코인 이슈 (발행사 내부, 감사팀)
-    'depeg', 'insolvent', 'usdt ', 'usdc ', 'tether ',
-    'stablecoin launch', 'stablecoin issue',
+    // 스테이블코인 - 발행사, 감사팀
+    'depeg', 'usdt ', 'usdc ', 'tether ',
     
-    // 신용등급 (Moody's, S&P, Fitch 애널리스트)
-    'downgrade', 'upgrade rating', 'credit rating', 'debt rating',
+    // 에어드랍/토큰 - 프로젝트팀, VC
+    'airdrop', 'token launch', 'listing',
     
-    // FDA/규제 승인 (FDA 직원, 제약사)
-    'fda approv', 'fda clear', 'drug approv', 'clinical trial',
-    'phase 3', 'clinical result',
+    // 신용등급 - Moody's, S&P, Fitch
+    'downgrade', 'upgrade rating', 'credit rating',
     
-    // 해킹/보안 (보안팀, 화이트햇)
-    'hack', 'hacked', 'exploit', 'breach', 'vulnerability',
+    // ===== 6. 엔터테인먼트/미디어 (스튜디오, 레이블) =====
     
-    // 게임 출시 (게임 개발사, 퍼블리셔)
-    'gta 6', 'gta vi', 'grand theft auto', 'game release', 'game delay',
+    // 영화/TV - 스튜디오, 네트워크
+    'cancel', 'cancelled', 'renewed', 'season ',
+    'box office', 'streaming', 'premiere',
+    'rotten tomatoes', 'imdb',
     
-    // 콘텐츠/미디어 (스튜디오, 스트리밍)
-    'cancel', 'renewed', 'season ', 'streaming exclusive',
+    // 게임 - 개발사, 퍼블리셔
+    'gta 6', 'gta vi', 'game release', 'game delay', 'game launch',
+    
+    // 음악 - 레이블, 매니저
+    'album', 'tour', 'concert',
+    
+    // 시상식 - 투표위원, 아카데미
+    'oscar', 'grammy', 'emmy', 'golden globe', 'award',
+    
+    // ===== 7. 스포츠 (에이전트, 팀 프런트) =====
+    
+    // 계약/이적 (에이전트, GM)
+    'trade', 'sign', 'contract extension', 'free agent',
+    
+    // 은퇴/복귀
+    'retire', 'retirement', 'comeback',
   ];
 
   // ========== 제외 키워드 (Insider 가치 낮거나 관심 없는 분야) ==========

@@ -252,6 +252,208 @@ function KenGriffinTab() {
   );
 }
 
+// Ed Thorp Tab Component - Kelly Criterion Master
+function EdThorpTab() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/data/suspicious.json')
+      .then(res => res.json())
+      .then(d => setData(d))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <div className="loading"><div className="spinner"></div>Loading...</div>;
+  }
+
+  const accounts = data?.accounts || [];
+  const positions = [];
+  let totalAllocated = 0;
+
+  // Thorp: 엣지가 명확할 때만 베팅, 켈리 공식 적용
+  const sorted = accounts
+    .filter(acc => acc.maxScore >= 120) // 높은 확신만
+    .sort((a, b) => b.maxScore - a.maxScore);
+
+  for (const acc of sorted) {
+    if (positions.length >= 10) break; // 집중: 최대 10개
+    
+    const score = acc.maxScore || 0;
+    const market = acc.markets?.[0];
+    const category = categorizeMarket(market?.question);
+    
+    // 엣지 추정: score 기반 (200+ = 15% edge, 150+ = 10%, 120+ = 5%)
+    let estimatedEdge;
+    if (score >= 200) estimatedEdge = 0.15;
+    else if (score >= 150) estimatedEdge = 0.10;
+    else estimatedEdge = 0.05;
+    
+    // 켈리 공식: f = edge / odds (단순화)
+    // 반켈리 적용 (보수적)
+    const kellyFraction = estimatedEdge * 0.5;
+    const size = Math.round(BANKROLL * Math.min(kellyFraction, 0.05)); // max 5%
+    
+    if (size < 50) continue;
+    
+    totalAllocated += size;
+    positions.push({ 
+      ...acc, 
+      size, 
+      category, 
+      edge: estimatedEdge,
+      kelly: kellyFraction
+    });
+  }
+
+  const cashReserve = BANKROLL - totalAllocated;
+  const avgEdge = positions.length > 0 
+    ? (positions.reduce((s, p) => s + p.edge, 0) / positions.length * 100).toFixed(1) 
+    : 0;
+
+  return (
+    <div>
+      <div style={{display:'flex',gap:'16px',marginBottom:'12px',fontSize:'12px',flexWrap:'wrap',alignItems:'center'}}>
+        <span style={{fontWeight:600}}>🎰 Ed Thorp</span>
+        <span>Allocated: <b style={{color:'var(--green)'}}>${totalAllocated.toLocaleString()}</b></span>
+        <span>Cash: <b style={{color:'var(--blue)'}}>${cashReserve.toLocaleString()}</b></span>
+        <span>Positions: <b>{positions.length}</b></span>
+        <span style={{color:'var(--text-dim)'}}>| Avg Edge: <b>{avgEdge}%</b> | Half-Kelly</span>
+      </div>
+
+      <table className="sus-table">
+        <thead><tr>
+          <th style={{width:'30px'}}>#</th>
+          <th>Account</th>
+          <th>Market</th>
+          <th style={{width:'50px'}}>Score</th>
+          <th style={{width:'50px'}}>Edge</th>
+          <th style={{width:'50px'}}>Kelly</th>
+          <th style={{width:'60px'}}>Size</th>
+        </tr></thead>
+        <tbody>
+          {positions.map((pos, i) => (
+            <tr key={i}>
+              <td style={{color:'var(--text-dim)',fontSize:'11px'}}>{i+1}</td>
+              <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
+              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
+              <td style={{fontFamily:'monospace',fontSize:'12px',color:'var(--green)'}}>{(pos.edge*100).toFixed(0)}%</td>
+              <td style={{fontFamily:'monospace',fontSize:'11px',color:'var(--text-dim)'}}>{(pos.kelly*100).toFixed(1)}%</td>
+              <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// Nate Silver Tab Component - Bayesian Probabilist
+function NateSilverTab() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/data/suspicious.json')
+      .then(res => res.json())
+      .then(d => setData(d))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <div className="loading"><div className="spinner"></div>Loading...</div>;
+  }
+
+  const accounts = data?.accounts || [];
+  const positions = [];
+  let totalAllocated = 0;
+  const maxTotal = BANKROLL * 0.4; // 보수적: 40%만 배치
+
+  // Silver: 확률 차이가 클 때 베팅, 불확실성 고려
+  const sorted = accounts
+    .filter(acc => acc.maxScore >= 100)
+    .sort((a, b) => b.maxScore - a.maxScore);
+
+  for (const acc of sorted) {
+    if (totalAllocated >= maxTotal) break;
+    if (positions.length >= 15) break;
+    
+    const score = acc.maxScore || 0;
+    const market = acc.markets?.[0];
+    const category = categorizeMarket(market?.question);
+    
+    // 시장 확률 vs 내 확률 (score 기반 추정)
+    // 내부자 시그널 = 실제 확률이 시장보다 높다는 의미
+    const marketProb = 0.5; // 기본 가정
+    let myProb;
+    if (score >= 200) myProb = 0.75;
+    else if (score >= 150) myProb = 0.65;
+    else myProb = 0.55;
+    
+    const probDiff = myProb - marketProb;
+    const confidence = Math.min(score / 300, 0.9); // 최대 90% 신뢰도
+    
+    // 확률 차이 * 신뢰도로 사이징
+    const betPct = probDiff * confidence * 0.2;
+    const size = Math.round(BANKROLL * Math.min(betPct, 0.03)); // max 3%
+    
+    if (size < 50) continue;
+    
+    totalAllocated += size;
+    positions.push({ 
+      ...acc, 
+      size, 
+      category, 
+      marketProb,
+      myProb,
+      confidence
+    });
+  }
+
+  const cashReserve = BANKROLL - totalAllocated;
+
+  return (
+    <div>
+      <div style={{display:'flex',gap:'16px',marginBottom:'12px',fontSize:'12px',flexWrap:'wrap',alignItems:'center'}}>
+        <span style={{fontWeight:600}}>📈 Nate Silver</span>
+        <span>Allocated: <b style={{color:'var(--green)'}}>${totalAllocated.toLocaleString()}</b></span>
+        <span>Cash: <b style={{color:'var(--blue)'}}>${cashReserve.toLocaleString()}</b></span>
+        <span>Positions: <b>{positions.length}</b></span>
+        <span style={{color:'var(--text-dim)'}}>| Max 40% deployed | Bayesian</span>
+      </div>
+
+      <table className="sus-table">
+        <thead><tr>
+          <th style={{width:'30px'}}>#</th>
+          <th>Account</th>
+          <th>Market</th>
+          <th style={{width:'50px'}}>Score</th>
+          <th style={{width:'60px'}}>Mkt→My</th>
+          <th style={{width:'50px'}}>Conf</th>
+          <th style={{width:'60px'}}>Size</th>
+        </tr></thead>
+        <tbody>
+          {positions.map((pos, i) => (
+            <tr key={i}>
+              <td style={{color:'var(--text-dim)',fontSize:'11px'}}>{i+1}</td>
+              <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
+              <td style={{maxWidth:'180px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
+              <td style={{fontFamily:'monospace',fontSize:'11px'}}>{(pos.marketProb*100).toFixed(0)}→<b style={{color:'var(--green)'}}>{(pos.myProb*100).toFixed(0)}%</b></td>
+              <td style={{fontFamily:'monospace',fontSize:'11px',color:'var(--text-dim)'}}>{(pos.confidence*100).toFixed(0)}%</td>
+              <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 // Top Suspicious Accounts Tab Component (same structure as HoldersTab)
 function SuspiciousTab({ searchQuery }) {
   const [data, setData] = useState(null);
@@ -963,6 +1165,18 @@ export default function Home() {
         >
           📊 Griffin
         </button>
+        <button 
+          className={`tab ${activeTab === 'thorp' ? 'active' : ''}`}
+          onClick={() => setActiveTab('thorp')}
+        >
+          🎰 Thorp
+        </button>
+        <button 
+          className={`tab ${activeTab === 'silver' ? 'active' : ''}`}
+          onClick={() => setActiveTab('silver')}
+        >
+          📈 Silver
+        </button>
       </div>
 
       <div className="search-bar">
@@ -992,6 +1206,12 @@ export default function Home() {
       )}
       {activeTab === 'kg' && (
         <KenGriffinTab />
+      )}
+      {activeTab === 'thorp' && (
+        <EdThorpTab />
+      )}
+      {activeTab === 'silver' && (
+        <NateSilverTab />
       )}
     </div>
   );

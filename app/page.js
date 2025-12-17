@@ -49,7 +49,59 @@ function getCluster(question) {
   return null;
 }
 
-// PTJ Tab Component
+// 마켓 단위로 데이터 재구성
+function aggregateByMarket(accounts) {
+  const marketMap = {};
+  
+  for (const acc of accounts) {
+    for (const m of (acc.markets || [])) {
+      const key = m.slug || m.question;
+      if (!marketMap[key]) {
+        marketMap[key] = {
+          slug: m.slug,
+          question: m.question,
+          category: categorizeMarket(m.question),
+          cluster: getCluster(m.question),
+          bets: [],
+          totalAmount: 0,
+          yesAmount: 0,
+          noAmount: 0,
+          maxScore: 0,
+        };
+      }
+      
+      const bet = {
+        wallet: acc.wallet,
+        name: acc.name,
+        side: m.side,
+        amount: m.amount || 0,
+        score: m.score || acc.maxScore || 0,
+      };
+      
+      marketMap[key].bets.push(bet);
+      marketMap[key].totalAmount += bet.amount;
+      if (m.side === 'YES') marketMap[key].yesAmount += bet.amount;
+      else marketMap[key].noAmount += bet.amount;
+      marketMap[key].maxScore = Math.max(marketMap[key].maxScore, bet.score);
+    }
+  }
+  
+  // 방향 결정 (금액 기준)
+  for (const market of Object.values(marketMap)) {
+    market.direction = market.yesAmount >= market.noAmount ? 'YES' : 'NO';
+    market.directionAmount = market.direction === 'YES' ? market.yesAmount : market.noAmount;
+    market.consensus = market.totalAmount > 0 
+      ? Math.round(market.directionAmount / market.totalAmount * 100) 
+      : 0;
+    market.avgScore = market.bets.length > 0 
+      ? Math.round(market.bets.reduce((s, b) => s + b.score, 0) / market.bets.length)
+      : 0;
+  }
+  
+  return Object.values(marketMap);
+}
+
+// PTJ Tab Component - Market-based
 function PTJTab() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -67,32 +119,30 @@ function PTJTab() {
   }
 
   const accounts = data?.accounts || [];
+  const allMarkets = aggregateByMarket(accounts);
+  
   const positions = [];
   let totalAllocated = 0;
   const maxTotal = BANKROLL * 0.5;
 
-  const filtered = accounts
-    .filter(acc => acc.maxScore >= 100)
-    .sort((a, b) => b.maxScore - a.maxScore)
-    .slice(0, 15);
+  const filtered = allMarkets
+    .filter(m => m.maxScore >= 100 && m.category !== 'Crypto')
+    .sort((a, b) => b.maxScore - a.maxScore);
 
-  for (const acc of filtered) {
-    if (totalAllocated >= maxTotal) break;
-    const score = acc.maxScore || 0;
+  for (const market of filtered) {
+    if (totalAllocated >= maxTotal || positions.length >= 10) break;
+    
+    const score = market.maxScore;
     let tier, maxPct;
     if (score >= 200) { tier = 'S'; maxPct = 0.05; }
     else if (score >= 150) { tier = 'A'; maxPct = 0.03; }
     else { tier = 'B'; maxPct = 0.015; }
     
-    const market = acc.markets?.[0];
-    const category = categorizeMarket(market?.question);
-    if (category === 'Crypto') continue;
-    
-    const size = Math.min(maxPct * BANKROLL * 0.25, maxTotal - totalAllocated);
+    const size = Math.round(Math.min(maxPct * BANKROLL * 0.25, maxTotal - totalAllocated));
     if (size < 50) continue;
     
     totalAllocated += size;
-    positions.push({ ...acc, tier, size: Math.round(size), category });
+    positions.push({ ...market, tier, size });
   }
 
   const cashReserve = BANKROLL - totalAllocated;
@@ -104,47 +154,45 @@ function PTJTab() {
         <span>Allocated: <b style={{color:'var(--green)'}}>${totalAllocated.toLocaleString()}</b></span>
         <span>Cash: <b style={{color:'var(--blue)'}}>${cashReserve.toLocaleString()}</b></span>
         <span>Positions: <b>{positions.length}</b></span>
-        <span style={{color:'var(--text-dim)'}}>| Stop: <span style={{color:'var(--red)'}}>-30%</span> | TP: <span style={{color:'var(--green)'}}>+50/100/200%</span></span>
+        <span style={{color:'var(--text-dim)'}}>| Stop: -30% | TP: +50/100/200%</span>
       </div>
       <table className="sus-table">
         <thead><tr>
           <th style={{width:'40px'}}>Tier</th>
-          <th>Account</th>
+          <th style={{width:'45px'}}>Side</th>
           <th>Market</th>
-          <th style={{width:'40px'}}>Side</th>
+          <th style={{width:'40px'}}>Bets</th>
           <th style={{width:'50px'}}>Score</th>
           <th style={{width:'60px'}}>Size</th>
           <th style={{width:'50px'}}>Stop</th>
         </tr></thead>
         <tbody>
-          {positions.map((pos, i) => {
-            const side = pos.markets?.[0]?.side || '-';
-            return (
+          {positions.map((pos, i) => (
             <tr key={i}>
               <td><span style={{
                 padding:'1px 6px',borderRadius:'3px',fontSize:'11px',fontWeight:600,
                 background: pos.tier === 'S' ? '#fef3c7' : pos.tier === 'A' ? '#ede9fe' : '#dbeafe',
                 color: pos.tier === 'S' ? '#92400e' : pos.tier === 'A' ? '#6b21a8' : '#1e40af'
               }}>{pos.tier}</span></td>
-              <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
-              <td style={{maxWidth:'180px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
               <td><span style={{
                 padding:'1px 6px',borderRadius:'3px',fontSize:'10px',fontWeight:600,
-                background: side === 'YES' ? '#dcfce7' : side === 'NO' ? '#fee2e2' : '#f3f4f6',
-                color: side === 'YES' ? '#166534' : side === 'NO' ? '#991b1b' : '#6b7280'
-              }}>{side}</span></td>
+                background: pos.direction === 'YES' ? '#dcfce7' : '#fee2e2',
+                color: pos.direction === 'YES' ? '#166534' : '#991b1b'
+              }}>{pos.direction}</span></td>
+              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.question || '-'}</td>
+              <td style={{fontSize:'11px',color:'var(--text-dim)'}}>{pos.bets.length}</td>
               <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
               <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
               <td style={{fontFamily:'monospace',color:'var(--red)',fontSize:'11px'}}>-${Math.round(pos.size*0.3)}</td>
             </tr>
-          );})}
+          ))}
         </tbody>
       </table>
     </div>
   );
 }
 
-// Ken Griffin Tab Component
+// Ken Griffin Tab Component - Market-based
 function KenGriffinTab() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -162,29 +210,25 @@ function KenGriffinTab() {
   }
 
   const accounts = data?.accounts || [];
+  const allMarkets = aggregateByMarket(accounts);
   
-  // KG Portfolio Construction
   const positions = [];
   let totalAllocated = 0;
   const maxTotal = BANKROLL * 0.6;
   const clusterExposure = {};
   const categoryExposure = {};
 
-  const sorted = accounts
-    .filter(acc => acc.maxScore >= 80)
+  const sorted = allMarkets
+    .filter(m => m.maxScore >= 80)
     .sort((a, b) => b.maxScore - a.maxScore);
 
-  for (const acc of sorted) {
+  for (const market of sorted) {
     if (totalAllocated >= maxTotal || positions.length >= 20) break;
     
-    const market = acc.markets?.[0];
-    const category = categorizeMarket(market?.question);
-    const cluster = getCluster(market?.question);
-    
     const categoryLimit = BANKROLL * 0.25;
-    if ((categoryExposure[category] || 0) >= categoryLimit) continue;
+    if ((categoryExposure[market.category] || 0) >= categoryLimit) continue;
     
-    const score = acc.maxScore || 0;
+    const score = market.maxScore;
     let basePct;
     if (score >= 200) basePct = 0.04;
     else if (score >= 150) basePct = 0.025;
@@ -192,9 +236,9 @@ function KenGriffinTab() {
     else basePct = 0.008;
     
     let clusterAdj = 1.0;
-    if (cluster && clusterExposure[cluster]) {
+    if (market.cluster && clusterExposure[market.cluster]) {
       const maxCluster = BANKROLL * 0.15;
-      const remaining = Math.max(0, maxCluster - clusterExposure[cluster]);
+      const remaining = Math.max(0, maxCluster - clusterExposure[market.cluster]);
       clusterAdj = Math.min(1, remaining / (basePct * BANKROLL));
     }
     
@@ -203,10 +247,10 @@ function KenGriffinTab() {
     
     const actualSize = Math.min(size, maxTotal - totalAllocated);
     totalAllocated += actualSize;
-    if (cluster) clusterExposure[cluster] = (clusterExposure[cluster] || 0) + actualSize;
-    categoryExposure[category] = (categoryExposure[category] || 0) + actualSize;
+    if (market.cluster) clusterExposure[market.cluster] = (clusterExposure[market.cluster] || 0) + actualSize;
+    categoryExposure[market.category] = (categoryExposure[market.category] || 0) + actualSize;
     
-    positions.push({ ...acc, size: actualSize, category, cluster, clusterAdj });
+    positions.push({ ...market, size: actualSize, clusterAdj });
   }
 
   const cashReserve = BANKROLL - totalAllocated;
@@ -235,38 +279,36 @@ function KenGriffinTab() {
       <table className="sus-table">
         <thead><tr>
           <th style={{width:'30px'}}>#</th>
-          <th>Account</th>
+          <th style={{width:'45px'}}>Side</th>
           <th>Market</th>
-          <th style={{width:'40px'}}>Side</th>
           <th style={{width:'60px'}}>Cluster</th>
+          <th style={{width:'40px'}}>Bets</th>
           <th style={{width:'50px'}}>Score</th>
           <th style={{width:'60px'}}>Size</th>
         </tr></thead>
         <tbody>
-          {positions.map((pos, i) => {
-            const side = pos.markets?.[0]?.side || '-';
-            return (
+          {positions.map((pos, i) => (
             <tr key={i}>
               <td style={{color:'var(--text-dim)',fontSize:'11px'}}>{i+1}</td>
-              <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
-              <td style={{maxWidth:'160px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
               <td><span style={{
                 padding:'1px 6px',borderRadius:'3px',fontSize:'10px',fontWeight:600,
-                background: side === 'YES' ? '#dcfce7' : side === 'NO' ? '#fee2e2' : '#f3f4f6',
-                color: side === 'YES' ? '#166534' : side === 'NO' ? '#991b1b' : '#6b7280'
-              }}>{side}</span></td>
+                background: pos.direction === 'YES' ? '#dcfce7' : '#fee2e2',
+                color: pos.direction === 'YES' ? '#166534' : '#991b1b'
+              }}>{pos.direction}</span></td>
+              <td style={{maxWidth:'180px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.question || '-'}</td>
               <td style={{fontSize:'10px',color:'var(--text-dim)'}}>{pos.cluster || '-'}</td>
+              <td style={{fontSize:'11px',color:'var(--text-dim)'}}>{pos.bets.length}</td>
               <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
               <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
             </tr>
-          );})}
+          ))}
         </tbody>
       </table>
     </div>
   );
 }
 
-// Ed Thorp Tab Component - Kelly Criterion Master
+// Ed Thorp Tab Component - Kelly Criterion Master (Market-based)
 function EdThorpTab() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -284,39 +326,38 @@ function EdThorpTab() {
   }
 
   const accounts = data?.accounts || [];
+  const allMarkets = aggregateByMarket(accounts);
+  
   const positions = [];
   let totalAllocated = 0;
 
-  // Thorp: 엣지가 명확할 때만 베팅, 켈리 공식 적용
-  const sorted = accounts
-    .filter(acc => acc.maxScore >= 120) // 높은 확신만
+  // Thorp: 높은 엣지 + 높은 컨센서스만
+  const sorted = allMarkets
+    .filter(m => m.maxScore >= 120 && m.consensus >= 70)
     .sort((a, b) => b.maxScore - a.maxScore);
 
-  for (const acc of sorted) {
-    if (positions.length >= 10) break; // 집중: 최대 10개
+  for (const market of sorted) {
+    if (positions.length >= 10) break;
     
-    const score = acc.maxScore || 0;
-    const market = acc.markets?.[0];
-    const category = categorizeMarket(market?.question);
-    
-    // 엣지 추정: score 기반 (200+ = 15% edge, 150+ = 10%, 120+ = 5%)
+    const score = market.maxScore;
     let estimatedEdge;
     if (score >= 200) estimatedEdge = 0.15;
     else if (score >= 150) estimatedEdge = 0.10;
     else estimatedEdge = 0.05;
     
-    // 켈리 공식: f = edge / odds (단순화)
-    // 반켈리 적용 (보수적)
+    // 컨센서스 보너스
+    const consensusBonus = (market.consensus - 70) / 100 * 0.05;
+    estimatedEdge += consensusBonus;
+    
     const kellyFraction = estimatedEdge * 0.5;
-    const size = Math.round(BANKROLL * Math.min(kellyFraction, 0.05)); // max 5%
+    const size = Math.round(BANKROLL * Math.min(kellyFraction, 0.05));
     
     if (size < 50) continue;
     
     totalAllocated += size;
     positions.push({ 
-      ...acc, 
+      ...market, 
       size, 
-      category, 
       edge: estimatedEdge,
       kelly: kellyFraction
     });
@@ -340,34 +381,28 @@ function EdThorpTab() {
       <table className="sus-table">
         <thead><tr>
           <th style={{width:'30px'}}>#</th>
-          <th>Account</th>
+          <th style={{width:'45px'}}>Side</th>
           <th>Market</th>
-          <th style={{width:'40px'}}>Side</th>
+          <th style={{width:'40px'}}>Bets</th>
           <th style={{width:'50px'}}>Score</th>
           <th style={{width:'50px'}}>Edge</th>
-          <th style={{width:'50px'}}>Kelly</th>
           <th style={{width:'60px'}}>Size</th>
         </tr></thead>
         <tbody>
-          {positions.map((pos, i) => {
-            const side = pos.markets?.[0]?.side || '-';
-            return (
+          {positions.map((pos, i) => (
             <tr key={i}>
               <td style={{color:'var(--text-dim)',fontSize:'11px'}}>{i+1}</td>
-              <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
-              <td style={{maxWidth:'160px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
               <td><span style={{
                 padding:'1px 6px',borderRadius:'3px',fontSize:'10px',fontWeight:600,
-                background: side === 'YES' ? '#dcfce7' : side === 'NO' ? '#fee2e2' : '#f3f4f6',
-                color: side === 'YES' ? '#166534' : side === 'NO' ? '#991b1b' : '#6b7280'
-              }}>{side}</span></td>
+                background: pos.direction === 'YES' ? '#dcfce7' : '#fee2e2',
+                color: pos.direction === 'YES' ? '#166534' : '#991b1b'
+              }}>{pos.direction}</span></td>
+              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.question || '-'}</td>
+              <td style={{fontSize:'11px',color:'var(--text-dim)'}}>{pos.bets.length}</td>
               <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
               <td style={{fontFamily:'monospace',fontSize:'12px',color:'var(--green)'}}>{(pos.edge*100).toFixed(0)}%</td>
-              <td style={{fontFamily:'monospace',fontSize:'11px',color:'var(--text-dim)'}}>{(pos.kelly*100).toFixed(1)}%</td>
               <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
             </tr>
-          );})}
-        </tbody>
           ))}
         </tbody>
       </table>
@@ -375,7 +410,7 @@ function EdThorpTab() {
   );
 }
 
-// Nate Silver Tab Component - Bayesian Probabilist
+// Nate Silver Tab Component - Bayesian Probabilist (Market-based)
 function NateSilverTab() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -393,48 +428,48 @@ function NateSilverTab() {
   }
 
   const accounts = data?.accounts || [];
+  const allMarkets = aggregateByMarket(accounts);
+  
   const positions = [];
   let totalAllocated = 0;
-  const maxTotal = BANKROLL * 0.4; // 보수적: 40%만 배치
+  const maxTotal = BANKROLL * 0.4;
 
-  // Silver: 확률 차이가 클 때 베팅, 불확실성 고려
-  const sorted = accounts
-    .filter(acc => acc.maxScore >= 100)
-    .sort((a, b) => b.maxScore - a.maxScore);
+  // Silver: 다수 베터 + 확률 분석
+  const sorted = allMarkets
+    .filter(m => m.maxScore >= 100 && m.bets.length >= 2)
+    .sort((a, b) => b.avgScore - a.avgScore);
 
-  for (const acc of sorted) {
-    if (totalAllocated >= maxTotal) break;
-    if (positions.length >= 15) break;
+  for (const market of sorted) {
+    if (totalAllocated >= maxTotal || positions.length >= 15) break;
     
-    const score = acc.maxScore || 0;
-    const market = acc.markets?.[0];
-    const category = categorizeMarket(market?.question);
+    const score = market.avgScore;
+    const betterCount = market.bets.length;
     
-    // 시장 확률 vs 내 확률 (score 기반 추정)
-    // 내부자 시그널 = 실제 확률이 시장보다 높다는 의미
-    const marketProb = 0.5; // 기본 가정
+    // 베터 수 보너스
+    const countBonus = Math.min(betterCount / 5, 1) * 0.1;
     let myProb;
-    if (score >= 200) myProb = 0.75;
-    else if (score >= 150) myProb = 0.65;
-    else myProb = 0.55;
+    if (score >= 200) myProb = 0.75 + countBonus;
+    else if (score >= 150) myProb = 0.65 + countBonus;
+    else myProb = 0.55 + countBonus;
+    myProb = Math.min(myProb, 0.85);
     
+    const marketProb = 0.5;
     const probDiff = myProb - marketProb;
-    const confidence = Math.min(score / 300, 0.9); // 최대 90% 신뢰도
+    const confidence = Math.min(market.consensus / 100, 0.9);
     
-    // 확률 차이 * 신뢰도로 사이징
-    const betPct = probDiff * confidence * 0.2;
-    const size = Math.round(BANKROLL * Math.min(betPct, 0.03)); // max 3%
+    const betPct = probDiff * confidence * 0.15;
+    const size = Math.round(BANKROLL * Math.min(betPct, 0.03));
     
     if (size < 50) continue;
     
     totalAllocated += size;
     positions.push({ 
-      ...acc, 
+      ...market, 
       size, 
-      category, 
       marketProb,
       myProb,
-      confidence
+      confidence,
+      betterCount
     });
   }
 
@@ -447,39 +482,35 @@ function NateSilverTab() {
         <span>Allocated: <b style={{color:'var(--green)'}}>${totalAllocated.toLocaleString()}</b></span>
         <span>Cash: <b style={{color:'var(--blue)'}}>${cashReserve.toLocaleString()}</b></span>
         <span>Positions: <b>{positions.length}</b></span>
-        <span style={{color:'var(--text-dim)'}}>| Max 40% deployed | Bayesian</span>
+        <span style={{color:'var(--text-dim)'}}>| Max 40% | Bayesian</span>
       </div>
 
       <table className="sus-table">
         <thead><tr>
           <th style={{width:'30px'}}>#</th>
-          <th>Account</th>
+          <th style={{width:'45px'}}>Side</th>
           <th>Market</th>
-          <th style={{width:'40px'}}>Side</th>
-          <th style={{width:'50px'}}>Score</th>
-          <th style={{width:'60px'}}>Mkt→My</th>
+          <th style={{width:'40px'}}>Bets</th>
+          <th style={{width:'60px'}}>Prob</th>
           <th style={{width:'50px'}}>Conf</th>
           <th style={{width:'60px'}}>Size</th>
         </tr></thead>
         <tbody>
-          {positions.map((pos, i) => {
-            const side = pos.markets?.[0]?.side || '-';
-            return (
+          {positions.map((pos, i) => (
             <tr key={i}>
               <td style={{color:'var(--text-dim)',fontSize:'11px'}}>{i+1}</td>
-              <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
-              <td style={{maxWidth:'150px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
               <td><span style={{
                 padding:'1px 6px',borderRadius:'3px',fontSize:'10px',fontWeight:600,
-                background: side === 'YES' ? '#dcfce7' : side === 'NO' ? '#fee2e2' : '#f3f4f6',
-                color: side === 'YES' ? '#166534' : side === 'NO' ? '#991b1b' : '#6b7280'
-              }}>{side}</span></td>
-              <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
-              <td style={{fontFamily:'monospace',fontSize:'11px'}}>{(pos.marketProb*100).toFixed(0)}→<b style={{color:'var(--green)'}}>{(pos.myProb*100).toFixed(0)}%</b></td>
+                background: pos.direction === 'YES' ? '#dcfce7' : '#fee2e2',
+                color: pos.direction === 'YES' ? '#166534' : '#991b1b'
+              }}>{pos.direction}</span></td>
+              <td style={{maxWidth:'180px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.question || '-'}</td>
+              <td style={{fontSize:'11px',color:'var(--text-dim)'}}>{pos.betterCount}</td>
+              <td style={{fontFamily:'monospace',fontSize:'11px'}}>50→<b style={{color:'var(--green)'}}>{(pos.myProb*100).toFixed(0)}%</b></td>
               <td style={{fontFamily:'monospace',fontSize:'11px',color:'var(--text-dim)'}}>{(pos.confidence*100).toFixed(0)}%</td>
               <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
             </tr>
-          );})}
+          ))}
         </tbody>
       </table>
     </div>

@@ -63,12 +63,10 @@ function PTJTab() {
   }, []);
 
   if (loading) {
-    return <div className="loading"><div className="spinner"></div>Loading PTJ Portfolio...</div>;
+    return <div className="loading"><div className="spinner"></div>Loading...</div>;
   }
 
   const accounts = data?.accounts || [];
-  
-  // PTJ Portfolio Construction
   const positions = [];
   let totalAllocated = 0;
   const maxTotal = BANKROLL * 0.5;
@@ -80,7 +78,6 @@ function PTJTab() {
 
   for (const acc of filtered) {
     if (totalAllocated >= maxTotal) break;
-    
     const score = acc.maxScore || 0;
     let tier, maxPct;
     if (score >= 200) { tier = 'S'; maxPct = 0.05; }
@@ -99,92 +96,40 @@ function PTJTab() {
   }
 
   const cashReserve = BANKROLL - totalAllocated;
-  const maxDrawdown = totalAllocated * 0.3;
 
   return (
-    <div className="tab-content">
-      <div style={{ background: '#1e3a5f', border: '1px solid #2563eb', borderRadius: '8px', padding: '16px', marginBottom: '16px' }}>
-        <h3 style={{ color: '#60a5fa', marginBottom: '8px' }}>🛡️ Paul Tudor Jones - "First survive, then make money"</h3>
-        <p style={{ color: '#94a3b8', fontSize: '14px', margin: 0 }}>
-          1/4 Kelly sizing, S/A/B tiers only, -30% stop-loss, crypto excluded, max 50% deployed
-        </p>
+    <div>
+      <div style={{display:'flex',gap:'16px',marginBottom:'12px',fontSize:'12px',flexWrap:'wrap',alignItems:'center'}}>
+        <span style={{fontWeight:600}}>🛡️ PTJ</span>
+        <span>Allocated: <b style={{color:'var(--green)'}}>${totalAllocated.toLocaleString()}</b></span>
+        <span>Cash: <b style={{color:'var(--blue)'}}>${cashReserve.toLocaleString()}</b></span>
+        <span>Positions: <b>{positions.length}</b></span>
+        <span style={{color:'var(--text-dim)'}}>| Stop: <span style={{color:'var(--red)'}}>-30%</span> | TP: <span style={{color:'var(--green)'}}>+50/100/200%</span></span>
       </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '16px' }}>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Allocated</div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#10b981' }}>${totalAllocated.toLocaleString()}</div>
-          <div style={{ color: '#6b7280', fontSize: '12px' }}>{((totalAllocated/BANKROLL)*100).toFixed(0)}% of $10K</div>
-        </div>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Cash Reserve</div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#3b82f6' }}>${cashReserve.toLocaleString()}</div>
-          <div style={{ color: '#6b7280', fontSize: '12px' }}>{((cashReserve/BANKROLL)*100).toFixed(0)}% safe</div>
-        </div>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Max Drawdown</div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#ef4444' }}>-${maxDrawdown.toLocaleString()}</div>
-          <div style={{ color: '#6b7280', fontSize: '12px' }}>If all stops hit</div>
-        </div>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Positions</div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#fff' }}>{positions.length}</div>
-          <div style={{ color: '#6b7280', fontSize: '12px' }}>Active bets</div>
-        </div>
-      </div>
-
-      <div style={{ background: '#1f2937', padding: '12px 16px', borderRadius: '8px', marginBottom: '16px', display: 'flex', gap: '24px', fontSize: '13px' }}>
-        <span><span style={{color:'#9ca3af'}}>Stop-Loss:</span> <span style={{color:'#ef4444'}}>-30%</span></span>
-        <span><span style={{color:'#9ca3af'}}>Take-Profit:</span> <span style={{color:'#10b981'}}>+50/100/200%</span></span>
-        <span><span style={{color:'#9ca3af'}}>Max Single:</span> <span style={{color:'#eab308'}}>5%</span></span>
-        <span><span style={{color:'#9ca3af'}}>Daily Loss:</span> <span style={{color:'#ef4444'}}>-$500</span></span>
-      </div>
-
-      <table className="holders-table">
-        <thead>
-          <tr>
-            <th>Tier</th>
-            <th>Account</th>
-            <th>Market</th>
-            <th>Category</th>
-            <th>Score</th>
-            <th>Size</th>
-            <th>Stop</th>
-          </tr>
-        </thead>
+      <table className="sus-table">
+        <thead><tr>
+          <th style={{width:'40px'}}>Tier</th>
+          <th>Account</th>
+          <th>Market</th>
+          <th style={{width:'60px'}}>Cat</th>
+          <th style={{width:'50px'}}>Score</th>
+          <th style={{width:'60px'}}>Size</th>
+          <th style={{width:'50px'}}>Stop</th>
+        </tr></thead>
         <tbody>
           {positions.map((pos, i) => (
             <tr key={i}>
-              <td>
-                <span style={{
-                  padding: '2px 8px',
-                  borderRadius: '4px',
-                  fontSize: '12px',
-                  fontWeight: 'bold',
-                  background: pos.tier === 'S' ? '#eab308' : pos.tier === 'A' ? '#8b5cf6' : '#3b82f6',
-                  color: pos.tier === 'S' ? '#000' : '#fff'
-                }}>{pos.tier}</span>
-              </td>
-              <td>
-                <a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'#60a5fa'}}>
-                  {pos.name || pos.wallet?.slice(0,10)}
-                </a>
-              </td>
-              <td style={{maxWidth:'250px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'13px',color:'#d1d5db'}}>
-                {pos.markets?.[0]?.question || 'N/A'}
-              </td>
-              <td>
-                <span style={{
-                  fontSize: '11px',
-                  padding: '2px 6px',
-                  borderRadius: '4px',
-                  background: pos.category === 'AI/Tech' ? '#064e3b' : pos.category === 'Government' ? '#1e3a5f' : pos.category === 'Legal' ? '#7f1d1d' : '#374151',
-                  color: pos.category === 'AI/Tech' ? '#6ee7b7' : pos.category === 'Government' ? '#93c5fd' : pos.category === 'Legal' ? '#fca5a5' : '#d1d5db'
-                }}>{pos.category}</span>
-              </td>
-              <td style={{fontFamily:'monospace'}}>{pos.maxScore}</td>
-              <td style={{fontFamily:'monospace',color:'#10b981'}}>${pos.size}</td>
-              <td style={{fontFamily:'monospace',color:'#ef4444'}}>-${Math.round(pos.size * 0.3)}</td>
+              <td><span style={{
+                padding:'1px 6px',borderRadius:'3px',fontSize:'11px',fontWeight:600,
+                background: pos.tier === 'S' ? '#fef3c7' : pos.tier === 'A' ? '#ede9fe' : '#dbeafe',
+                color: pos.tier === 'S' ? '#92400e' : pos.tier === 'A' ? '#6b21a8' : '#1e40af'
+              }}>{pos.tier}</span></td>
+              <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
+              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td style={{fontSize:'11px',color:'var(--text-dim)'}}>{pos.category}</td>
+              <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
+              <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
+              <td style={{fontFamily:'monospace',color:'var(--red)',fontSize:'11px'}}>-${Math.round(pos.size*0.3)}</td>
             </tr>
           ))}
         </tbody>
@@ -207,7 +152,7 @@ function KenGriffinTab() {
   }, []);
 
   if (loading) {
-    return <div className="loading"><div className="spinner"></div>Loading Griffin Portfolio...</div>;
+    return <div className="loading"><div className="spinner"></div>Loading...</div>;
   }
 
   const accounts = data?.accounts || [];
@@ -259,112 +204,46 @@ function KenGriffinTab() {
   }
 
   const cashReserve = BANKROLL - totalAllocated;
-  const diversification = Object.keys(clusterExposure).length;
 
   return (
-    <div className="tab-content">
-      <div style={{ background: '#2e1065', border: '1px solid #7c3aed', borderRadius: '8px', padding: '16px', marginBottom: '16px' }}>
-        <h3 style={{ color: '#a78bfa', marginBottom: '8px' }}>📊 Ken Griffin - "Risk is what you don't see"</h3>
-        <p style={{ color: '#94a3b8', fontSize: '14px', margin: 0 }}>
-          Cluster correlation limits (15%), category limits (25%), max 20 positions, 60% deployed
-        </p>
+    <div>
+      <div style={{display:'flex',gap:'16px',marginBottom:'12px',fontSize:'12px',flexWrap:'wrap',alignItems:'center'}}>
+        <span style={{fontWeight:600}}>📊 Griffin</span>
+        <span>Allocated: <b style={{color:'var(--green)'}}>${totalAllocated.toLocaleString()}</b></span>
+        <span>Cash: <b style={{color:'var(--blue)'}}>${cashReserve.toLocaleString()}</b></span>
+        <span>Positions: <b>{positions.length}/20</b></span>
+        <span style={{color:'var(--text-dim)'}}>| Clusters: {Object.keys(clusterExposure).length}</span>
+      </div>
+      
+      <div style={{display:'flex',gap:'16px',marginBottom:'12px',fontSize:'11px',flexWrap:'wrap'}}>
+        {Object.entries(clusterExposure).map(([cluster, amt]) => {
+          const pct = (amt / BANKROLL) * 100;
+          return (
+            <span key={cluster} style={{background:'#f3f4f6',padding:'2px 8px',borderRadius:'4px'}}>
+              {cluster}: <b style={{color: pct > 12 ? '#b45309' : 'var(--text)'}}>{pct.toFixed(0)}%</b>
+            </span>
+          );
+        })}
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '16px' }}>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Allocated</div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#10b981' }}>${totalAllocated.toLocaleString()}</div>
-          <div style={{ color: '#6b7280', fontSize: '12px' }}>{((totalAllocated/BANKROLL)*100).toFixed(0)}% deployed</div>
-        </div>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Cash Reserve</div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#3b82f6' }}>${cashReserve.toLocaleString()}</div>
-          <div style={{ color: '#6b7280', fontSize: '12px' }}>Dry powder</div>
-        </div>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Clusters</div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#a78bfa' }}>{diversification}</div>
-          <div style={{ color: '#6b7280', fontSize: '12px' }}>Diversified</div>
-        </div>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Positions</div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#fff' }}>{positions.length}</div>
-          <div style={{ color: '#6b7280', fontSize: '12px' }}>Max 20</div>
-        </div>
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <h4 style={{ color: '#a78bfa', marginBottom: '12px', fontSize: '14px' }}>Cluster Exposure (max 15%)</h4>
-          {Object.entries(clusterExposure).map(([cluster, amt]) => {
-            const pct = (amt / BANKROLL) * 100;
-            return (
-              <div key={cluster} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{ color: '#d1d5db', fontSize: '13px' }}>{cluster}</span>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <div style={{ width: '80px', height: '6px', background: '#374151', borderRadius: '3px' }}>
-                    <div style={{ width: `${Math.min(pct/15*100, 100)}%`, height: '100%', background: pct > 12 ? '#eab308' : '#a78bfa', borderRadius: '3px' }} />
-                  </div>
-                  <span style={{ color: pct > 12 ? '#eab308' : '#9ca3af', fontSize: '12px', width: '40px' }}>{pct.toFixed(1)}%</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
-          <h4 style={{ color: '#a78bfa', marginBottom: '12px', fontSize: '14px' }}>Category Exposure (max 25%)</h4>
-          {Object.entries(categoryExposure).map(([cat, amt]) => {
-            const pct = (amt / BANKROLL) * 100;
-            return (
-              <div key={cat} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{
-                  fontSize: '11px',
-                  padding: '2px 6px',
-                  borderRadius: '4px',
-                  background: cat === 'AI/Tech' ? '#064e3b' : cat === 'Government' ? '#1e3a5f' : cat === 'Legal' ? '#7f1d1d' : cat === 'Crypto' ? '#78350f' : '#374151',
-                  color: cat === 'AI/Tech' ? '#6ee7b7' : cat === 'Government' ? '#93c5fd' : cat === 'Legal' ? '#fca5a5' : cat === 'Crypto' ? '#fcd34d' : '#d1d5db'
-                }}>{cat}</span>
-                <span style={{ color: '#9ca3af', fontSize: '12px' }}>${amt.toLocaleString()} ({pct.toFixed(1)}%)</span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <table className="holders-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Account</th>
-            <th>Market</th>
-            <th>Cluster</th>
-            <th>Score</th>
-            <th>Size</th>
-            <th>Adj</th>
-          </tr>
-        </thead>
+      <table className="sus-table">
+        <thead><tr>
+          <th style={{width:'30px'}}>#</th>
+          <th>Account</th>
+          <th>Market</th>
+          <th style={{width:'70px'}}>Cluster</th>
+          <th style={{width:'50px'}}>Score</th>
+          <th style={{width:'60px'}}>Size</th>
+        </tr></thead>
         <tbody>
           {positions.map((pos, i) => (
             <tr key={i}>
-              <td style={{color:'#6b7280'}}>{i+1}</td>
-              <td>
-                <a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'#a78bfa'}}>
-                  {pos.name || pos.wallet?.slice(0,10)}
-                </a>
-              </td>
-              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'13px',color:'#d1d5db'}}>
-                {pos.markets?.[0]?.question || 'N/A'}
-              </td>
-              <td>
-                {pos.cluster ? (
-                  <span style={{fontSize:'11px',padding:'2px 6px',borderRadius:'4px',background:'#2e1065',color:'#c4b5fd'}}>{pos.cluster}</span>
-                ) : '-'}
-              </td>
-              <td style={{fontFamily:'monospace'}}>{pos.maxScore}</td>
-              <td style={{fontFamily:'monospace',color:'#10b981'}}>${pos.size}</td>
-              <td style={{fontFamily:'monospace',color: pos.clusterAdj < 1 ? '#eab308' : '#6b7280'}}>
-                {(pos.clusterAdj * 100).toFixed(0)}%
-              </td>
+              <td style={{color:'var(--text-dim)',fontSize:'11px'}}>{i+1}</td>
+              <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
+              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td style={{fontSize:'10px',color:'var(--text-dim)'}}>{pos.cluster || '-'}</td>
+              <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
+              <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
             </tr>
           ))}
         </tbody>

@@ -33,6 +33,39 @@ async function fetchJSON(url) {
 function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marketEntryDays, extraData = {}) {
   let score = 0;
   
+  // === 마켓 카테고리 가중치 ===
+  const marketQuestion = (extraData.marketQuestion || '').toLowerCase();
+  
+  // 대기업 내부정보 (높은 가치)
+  const MAJOR_CORPS = ['openai', 'google', 'apple', 'microsoft', 'meta', 'amazon', 'tesla', 'nvidia', 
+    'anthropic', 'netflix', 'disney', 'boeing', 'intel', 'amd', 'oracle', 'salesforce', 'adobe',
+    'uber', 'airbnb', 'spotify', 'snap', 'twitter', ' x ', 'tiktok', 'bytedance'];
+  
+  // 정부/규제 (높은 가치)
+  const GOVT_KEYWORDS = ['fed ', 'fomc', 'rate cut', 'rate hike', 'fda', 'sec ', 'ftc', 'doj',
+    'cabinet', 'secretary', 'nominate', 'appointment', 'congress', 'bill', 'sanction'];
+  
+  // 고프로필 법적 (높은 가치)  
+  const LEGAL_KEYWORDS = ['epstein', 'diddy', 'weinstein', 'indicted', 'sentenced', 'trial',
+    'files', 'documents', 'unsealed'];
+  
+  // 크립토/에어드랍 (낮은 가치)
+  const CRYPTO_KEYWORDS = ['airdrop', 'token', 'solana', 'ethereum', 'bitcoin price', 'btc ',
+    'eth ', 'memecoin', 'depeg', 'stablecoin'];
+  
+  // 카테고리 가중치 결정
+  let categoryMultiplier = 1.0;
+  
+  if (MAJOR_CORPS.some(c => marketQuestion.includes(c))) {
+    categoryMultiplier = 1.3;  // 대기업 +30%
+  } else if (GOVT_KEYWORDS.some(k => marketQuestion.includes(k))) {
+    categoryMultiplier = 1.25;  // 정부/규제 +25%
+  } else if (LEGAL_KEYWORDS.some(k => marketQuestion.includes(k))) {
+    categoryMultiplier = 1.2;  // 법적/수사 +20%
+  } else if (CRYPTO_KEYWORDS.some(k => marketQuestion.includes(k))) {
+    categoryMultiplier = 0.7;  // 크립토 -30%
+  }
+  
   // 1. 마켓 진입 시점 (최대 35점)
   if (marketEntryDays <= 3) score += 35;
   else if (marketEntryDays <= 7) score += 25;
@@ -194,11 +227,14 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     score -= 15;
   }
   
+  // === 최종 카테고리 가중치 적용 ===
+  score = Math.round(score * categoryMultiplier);
+  
   return { score, isCamouflage };
 }
 
 // 단일 홀더 분석
-async function analyzeHolder(holder, conditionId) {
+async function analyzeHolder(holder, conditionId, marketQuestion = '') {
   try {
     const [positions, activities, oldestActivity, redeemActivity] = await Promise.all([
       fetchJSON(`${POLYMARKET_API}/positions?user=${holder.wallet}&sizeThreshold=100`),
@@ -292,7 +328,7 @@ async function analyzeHolder(holder, conditionId) {
       categoryRatio = Math.max(slugRatio, keywordRatio);
     }
     
-    const extraData = { avgPrice, winCount, categoryRatio, totalPnl: allTimePnl, totalValue, redeemTotal, shares: holder.shares };
+    const extraData = { avgPrice, winCount, categoryRatio, totalPnl: allTimePnl, totalValue, redeemTotal, shares: holder.shares, marketQuestion };
     
     const { score, isCamouflage } = calculateScore(
       { ...holder, amount: thisMarketValue }, marketRatio, totalMarkets, accountAgeDays, marketEntryDays, extraData
@@ -370,7 +406,7 @@ async function analyzeMarket(market) {
     for (let i = 0; i < allHolders.length; i += BATCH_SIZE) {
       const batch = allHolders.slice(i, i + BATCH_SIZE);
       const results = await Promise.all(
-        batch.map(h => analyzeHolder(h, market.conditionId))
+        batch.map(h => analyzeHolder(h, market.conditionId, market.question))
       );
       analyzed.push(...results.filter(r => r !== null));
       await sleep(DELAY_MS);

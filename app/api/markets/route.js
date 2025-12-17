@@ -31,6 +31,14 @@ export async function GET() {
     'airdrop',
     // 법적 판결/체포 (검찰, 법원, 수사기관)
     'sentenced', 'arrested', 'jail', 'prison', 'indicted', 'convicted',
+    'verdict', 'trial', 'guilty', 'acquitted', 'charged',
+    // 문서/파일 공개 (정부 관계자, 법원)
+    'files', 'documents', 'declassif', 'unseal', 'release',
+    'named in', 'implicated', 'accused', 'linked to',
+    // 특정 고프로필 수사/스캔들
+    'epstein', 'diddy', 'weinstein', 'scandal',
+    // 수사/조사
+    'investigation', 'probe', 'inquiry', 'subpoena', 'testimony',
     'guilty', 'verdict', 'trial',
     // 정부 인사 지명 (인사 담당자)
     'confirmed as', 'appointed', 'nominated', 'ambassador',

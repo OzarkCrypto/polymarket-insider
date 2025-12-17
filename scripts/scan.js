@@ -125,21 +125,31 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     score += 5;
   }
   
-  // 10. REDEEM 총액 (최대 50점) - 실제 수익 실현
+  // 10. REDEEM 총액 (최대 70점) - 실제 수익 실현 = 핵심 지표
   const redeemTotal = extraData.redeemTotal || 0;
   if (redeemTotal >= 100000) {
-    score += 50;  // $100K+ 청산
+    score += 70;  // $100K+ 청산 = 확실한 내부자
   } else if (redeemTotal >= 50000) {
-    score += 35;  // $50K+ 청산
+    score += 50;  // $50K+ 청산
   } else if (redeemTotal >= 20000) {
-    score += 25;  // $20K+ 청산
+    score += 30;  // $20K+ 청산
   } else if (redeemTotal >= 5000) {
-    score += 10;  // $5K+ 청산
+    score += 15;  // $5K+ 청산
   }
   
   // 콤보 가점: 카테고리 집중 + 높은 REDEEM = 전문 내부자
   if (categoryRatio >= 0.5 && redeemTotal >= 50000) {
-    score += 20;  // 집중 + 고수익 콤보
+    score += 25;  // 집중 + 고수익 콤보
+  }
+  
+  // 11. 수익률 기반 가점 (REDEEM / totalValue)
+  const profitRatio = totalValue > 0 ? redeemTotal / totalValue : 0;
+  if (profitRatio >= 5) {
+    score += 30;  // 투자금 대비 5배 이상 수익
+  } else if (profitRatio >= 3) {
+    score += 20;  // 3배 이상
+  } else if (profitRatio >= 2) {
+    score += 10;  // 2배 이상
   }
   
   // 11. 높은 수익률 (최대 30점)

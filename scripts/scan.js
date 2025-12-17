@@ -142,8 +142,13 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     score += 25;  // 집중 + 고수익 콤보
   }
   
-  // 11. 수익률 기반 가점 (REDEEM / totalValue)
+  // 11. 수익률 기반 가점
+  const totalPnl = extraData.totalPnl || 0;
+  const totalValue = extraData.totalValue || 1;
+  const pnlRatio = totalValue > 0 ? totalPnl / totalValue : 0;
   const profitRatio = totalValue > 0 ? redeemTotal / totalValue : 0;
+  
+  // REDEEM / 현재 포지션 비율 (투자금 회수율)
   if (profitRatio >= 5) {
     score += 30;  // 투자금 대비 5배 이상 수익
   } else if (profitRatio >= 3) {
@@ -152,11 +157,7 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     score += 10;  // 2배 이상
   }
   
-  // 11. 높은 수익률 (최대 30점)
-  const totalPnl = extraData.totalPnl || 0;
-  const totalValue = extraData.totalValue || 1;
-  const pnlRatio = totalValue > 0 ? totalPnl / totalValue : 0;
-  
+  // Open PnL 수익률
   if (pnlRatio >= 1.0) {
     score += 30;  // +100% 이상 수익
   } else if (pnlRatio >= 0.5) {

@@ -954,14 +954,12 @@ export default function Home() {
         <button 
           className={`tab ${activeTab === 'ptj' ? 'active' : ''}`}
           onClick={() => setActiveTab('ptj')}
-          style={{ background: activeTab === 'ptj' ? '#2563eb' : undefined }}
         >
           🛡️ PTJ
         </button>
         <button 
           className={`tab ${activeTab === 'kg' ? 'active' : ''}`}
           onClick={() => setActiveTab('kg')}
-          style={{ background: activeTab === 'kg' ? '#7c3aed' : undefined }}
         >
           📊 Griffin
         </button>

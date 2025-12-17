@@ -15,6 +15,364 @@ function formatAmount(num) {
   return Math.round(num).toString();
 }
 
+// ========== PORTFOLIO MANAGEMENT ==========
+const BANKROLL = 10000;
+
+const CATEGORY_KEYWORDS = {
+  'AI/Tech': ['openai', 'gpt', 'claude', 'gemini', 'anthropic', 'google', 'apple', 'microsoft', 'meta', 'nvidia', 'tesla'],
+  'Government': ['fed ', 'fomc', 'rate', 'fda', 'sec', 'cabinet', 'secretary', 'nominate', 'trump', 'biden'],
+  'Legal': ['epstein', 'diddy', 'weinstein', 'trial', 'sentenced', 'indicted', 'files', 'lawsuit'],
+  'Crypto': ['bitcoin', 'btc', 'eth', 'airdrop', 'token', 'solana', 'crypto'],
+};
+
+const CORRELATION_CLUSTERS = {
+  'OpenAI': ['openai', 'gpt', 'sam altman', 'chatgpt'],
+  'Fed/Rates': ['fed ', 'fomc', 'rate cut', 'rate hike'],
+  'Epstein': ['epstein'],
+  'Trump Admin': ['trump', 'cabinet', 'secretary'],
+  'Google': ['google', 'gemini'],
+};
+
+function categorizeMarket(question) {
+  const q = (question || '').toLowerCase();
+  for (const [category, keywords] of Object.entries(CATEGORY_KEYWORDS)) {
+    if (keywords.some(kw => q.includes(kw))) return category;
+  }
+  return 'Other';
+}
+
+function getCluster(question) {
+  const q = (question || '').toLowerCase();
+  for (const [cluster, keywords] of Object.entries(CORRELATION_CLUSTERS)) {
+    if (keywords.some(kw => q.includes(kw))) return cluster;
+  }
+  return null;
+}
+
+// PTJ Tab Component
+function PTJTab() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/data/suspicious.json')
+      .then(res => res.json())
+      .then(d => setData(d))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <div className="loading"><div className="spinner"></div>Loading PTJ Portfolio...</div>;
+  }
+
+  const accounts = data?.accounts || [];
+  
+  // PTJ Portfolio Construction
+  const positions = [];
+  let totalAllocated = 0;
+  const maxTotal = BANKROLL * 0.5;
+
+  const filtered = accounts
+    .filter(acc => acc.maxScore >= 100)
+    .sort((a, b) => b.maxScore - a.maxScore)
+    .slice(0, 15);
+
+  for (const acc of filtered) {
+    if (totalAllocated >= maxTotal) break;
+    
+    const score = acc.maxScore || 0;
+    let tier, maxPct;
+    if (score >= 200) { tier = 'S'; maxPct = 0.05; }
+    else if (score >= 150) { tier = 'A'; maxPct = 0.03; }
+    else { tier = 'B'; maxPct = 0.015; }
+    
+    const market = acc.markets?.[0];
+    const category = categorizeMarket(market?.question);
+    if (category === 'Crypto') continue;
+    
+    const size = Math.min(maxPct * BANKROLL * 0.25, maxTotal - totalAllocated);
+    if (size < 50) continue;
+    
+    totalAllocated += size;
+    positions.push({ ...acc, tier, size: Math.round(size), category });
+  }
+
+  const cashReserve = BANKROLL - totalAllocated;
+  const maxDrawdown = totalAllocated * 0.3;
+
+  return (
+    <div className="tab-content">
+      <div style={{ background: '#1e3a5f', border: '1px solid #2563eb', borderRadius: '8px', padding: '16px', marginBottom: '16px' }}>
+        <h3 style={{ color: '#60a5fa', marginBottom: '8px' }}>🛡️ Paul Tudor Jones - "First survive, then make money"</h3>
+        <p style={{ color: '#94a3b8', fontSize: '14px', margin: 0 }}>
+          1/4 Kelly sizing, S/A/B tiers only, -30% stop-loss, crypto excluded, max 50% deployed
+        </p>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '16px' }}>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Allocated</div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#10b981' }}>${totalAllocated.toLocaleString()}</div>
+          <div style={{ color: '#6b7280', fontSize: '12px' }}>{((totalAllocated/BANKROLL)*100).toFixed(0)}% of $10K</div>
+        </div>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Cash Reserve</div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#3b82f6' }}>${cashReserve.toLocaleString()}</div>
+          <div style={{ color: '#6b7280', fontSize: '12px' }}>{((cashReserve/BANKROLL)*100).toFixed(0)}% safe</div>
+        </div>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Max Drawdown</div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#ef4444' }}>-${maxDrawdown.toLocaleString()}</div>
+          <div style={{ color: '#6b7280', fontSize: '12px' }}>If all stops hit</div>
+        </div>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Positions</div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#fff' }}>{positions.length}</div>
+          <div style={{ color: '#6b7280', fontSize: '12px' }}>Active bets</div>
+        </div>
+      </div>
+
+      <div style={{ background: '#1f2937', padding: '12px 16px', borderRadius: '8px', marginBottom: '16px', display: 'flex', gap: '24px', fontSize: '13px' }}>
+        <span><span style={{color:'#9ca3af'}}>Stop-Loss:</span> <span style={{color:'#ef4444'}}>-30%</span></span>
+        <span><span style={{color:'#9ca3af'}}>Take-Profit:</span> <span style={{color:'#10b981'}}>+50/100/200%</span></span>
+        <span><span style={{color:'#9ca3af'}}>Max Single:</span> <span style={{color:'#eab308'}}>5%</span></span>
+        <span><span style={{color:'#9ca3af'}}>Daily Loss:</span> <span style={{color:'#ef4444'}}>-$500</span></span>
+      </div>
+
+      <table className="holders-table">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Account</th>
+            <th>Market</th>
+            <th>Category</th>
+            <th>Score</th>
+            <th>Size</th>
+            <th>Stop</th>
+          </tr>
+        </thead>
+        <tbody>
+          {positions.map((pos, i) => (
+            <tr key={i}>
+              <td>
+                <span style={{
+                  padding: '2px 8px',
+                  borderRadius: '4px',
+                  fontSize: '12px',
+                  fontWeight: 'bold',
+                  background: pos.tier === 'S' ? '#eab308' : pos.tier === 'A' ? '#8b5cf6' : '#3b82f6',
+                  color: pos.tier === 'S' ? '#000' : '#fff'
+                }}>{pos.tier}</span>
+              </td>
+              <td>
+                <a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'#60a5fa'}}>
+                  {pos.name || pos.wallet?.slice(0,10)}
+                </a>
+              </td>
+              <td style={{maxWidth:'250px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'13px',color:'#d1d5db'}}>
+                {pos.markets?.[0]?.question || 'N/A'}
+              </td>
+              <td>
+                <span style={{
+                  fontSize: '11px',
+                  padding: '2px 6px',
+                  borderRadius: '4px',
+                  background: pos.category === 'AI/Tech' ? '#064e3b' : pos.category === 'Government' ? '#1e3a5f' : pos.category === 'Legal' ? '#7f1d1d' : '#374151',
+                  color: pos.category === 'AI/Tech' ? '#6ee7b7' : pos.category === 'Government' ? '#93c5fd' : pos.category === 'Legal' ? '#fca5a5' : '#d1d5db'
+                }}>{pos.category}</span>
+              </td>
+              <td style={{fontFamily:'monospace'}}>{pos.maxScore}</td>
+              <td style={{fontFamily:'monospace',color:'#10b981'}}>${pos.size}</td>
+              <td style={{fontFamily:'monospace',color:'#ef4444'}}>-${Math.round(pos.size * 0.3)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// Ken Griffin Tab Component
+function KenGriffinTab() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/data/suspicious.json')
+      .then(res => res.json())
+      .then(d => setData(d))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return <div className="loading"><div className="spinner"></div>Loading Griffin Portfolio...</div>;
+  }
+
+  const accounts = data?.accounts || [];
+  
+  // KG Portfolio Construction
+  const positions = [];
+  let totalAllocated = 0;
+  const maxTotal = BANKROLL * 0.6;
+  const clusterExposure = {};
+  const categoryExposure = {};
+
+  const sorted = accounts
+    .filter(acc => acc.maxScore >= 80)
+    .sort((a, b) => b.maxScore - a.maxScore);
+
+  for (const acc of sorted) {
+    if (totalAllocated >= maxTotal || positions.length >= 20) break;
+    
+    const market = acc.markets?.[0];
+    const category = categorizeMarket(market?.question);
+    const cluster = getCluster(market?.question);
+    
+    const categoryLimit = BANKROLL * 0.25;
+    if ((categoryExposure[category] || 0) >= categoryLimit) continue;
+    
+    const score = acc.maxScore || 0;
+    let basePct;
+    if (score >= 200) basePct = 0.04;
+    else if (score >= 150) basePct = 0.025;
+    else if (score >= 100) basePct = 0.015;
+    else basePct = 0.008;
+    
+    let clusterAdj = 1.0;
+    if (cluster && clusterExposure[cluster]) {
+      const maxCluster = BANKROLL * 0.15;
+      const remaining = Math.max(0, maxCluster - clusterExposure[cluster]);
+      clusterAdj = Math.min(1, remaining / (basePct * BANKROLL));
+    }
+    
+    const size = Math.round(basePct * BANKROLL * clusterAdj);
+    if (size < 50) continue;
+    
+    const actualSize = Math.min(size, maxTotal - totalAllocated);
+    totalAllocated += actualSize;
+    if (cluster) clusterExposure[cluster] = (clusterExposure[cluster] || 0) + actualSize;
+    categoryExposure[category] = (categoryExposure[category] || 0) + actualSize;
+    
+    positions.push({ ...acc, size: actualSize, category, cluster, clusterAdj });
+  }
+
+  const cashReserve = BANKROLL - totalAllocated;
+  const diversification = Object.keys(clusterExposure).length;
+
+  return (
+    <div className="tab-content">
+      <div style={{ background: '#2e1065', border: '1px solid #7c3aed', borderRadius: '8px', padding: '16px', marginBottom: '16px' }}>
+        <h3 style={{ color: '#a78bfa', marginBottom: '8px' }}>📊 Ken Griffin - "Risk is what you don't see"</h3>
+        <p style={{ color: '#94a3b8', fontSize: '14px', margin: 0 }}>
+          Cluster correlation limits (15%), category limits (25%), max 20 positions, 60% deployed
+        </p>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '16px' }}>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Allocated</div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#10b981' }}>${totalAllocated.toLocaleString()}</div>
+          <div style={{ color: '#6b7280', fontSize: '12px' }}>{((totalAllocated/BANKROLL)*100).toFixed(0)}% deployed</div>
+        </div>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Cash Reserve</div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#3b82f6' }}>${cashReserve.toLocaleString()}</div>
+          <div style={{ color: '#6b7280', fontSize: '12px' }}>Dry powder</div>
+        </div>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Clusters</div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#a78bfa' }}>{diversification}</div>
+          <div style={{ color: '#6b7280', fontSize: '12px' }}>Diversified</div>
+        </div>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <div style={{ color: '#9ca3af', fontSize: '12px' }}>Positions</div>
+          <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#fff' }}>{positions.length}</div>
+          <div style={{ color: '#6b7280', fontSize: '12px' }}>Max 20</div>
+        </div>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <h4 style={{ color: '#a78bfa', marginBottom: '12px', fontSize: '14px' }}>Cluster Exposure (max 15%)</h4>
+          {Object.entries(clusterExposure).map(([cluster, amt]) => {
+            const pct = (amt / BANKROLL) * 100;
+            return (
+              <div key={cluster} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <span style={{ color: '#d1d5db', fontSize: '13px' }}>{cluster}</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ width: '80px', height: '6px', background: '#374151', borderRadius: '3px' }}>
+                    <div style={{ width: `${Math.min(pct/15*100, 100)}%`, height: '100%', background: pct > 12 ? '#eab308' : '#a78bfa', borderRadius: '3px' }} />
+                  </div>
+                  <span style={{ color: pct > 12 ? '#eab308' : '#9ca3af', fontSize: '12px', width: '40px' }}>{pct.toFixed(1)}%</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <div style={{ background: '#1f2937', padding: '16px', borderRadius: '8px' }}>
+          <h4 style={{ color: '#a78bfa', marginBottom: '12px', fontSize: '14px' }}>Category Exposure (max 25%)</h4>
+          {Object.entries(categoryExposure).map(([cat, amt]) => {
+            const pct = (amt / BANKROLL) * 100;
+            return (
+              <div key={cat} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <span style={{
+                  fontSize: '11px',
+                  padding: '2px 6px',
+                  borderRadius: '4px',
+                  background: cat === 'AI/Tech' ? '#064e3b' : cat === 'Government' ? '#1e3a5f' : cat === 'Legal' ? '#7f1d1d' : cat === 'Crypto' ? '#78350f' : '#374151',
+                  color: cat === 'AI/Tech' ? '#6ee7b7' : cat === 'Government' ? '#93c5fd' : cat === 'Legal' ? '#fca5a5' : cat === 'Crypto' ? '#fcd34d' : '#d1d5db'
+                }}>{cat}</span>
+                <span style={{ color: '#9ca3af', fontSize: '12px' }}>${amt.toLocaleString()} ({pct.toFixed(1)}%)</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <table className="holders-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Account</th>
+            <th>Market</th>
+            <th>Cluster</th>
+            <th>Score</th>
+            <th>Size</th>
+            <th>Adj</th>
+          </tr>
+        </thead>
+        <tbody>
+          {positions.map((pos, i) => (
+            <tr key={i}>
+              <td style={{color:'#6b7280'}}>{i+1}</td>
+              <td>
+                <a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'#a78bfa'}}>
+                  {pos.name || pos.wallet?.slice(0,10)}
+                </a>
+              </td>
+              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'13px',color:'#d1d5db'}}>
+                {pos.markets?.[0]?.question || 'N/A'}
+              </td>
+              <td>
+                {pos.cluster ? (
+                  <span style={{fontSize:'11px',padding:'2px 6px',borderRadius:'4px',background:'#2e1065',color:'#c4b5fd'}}>{pos.cluster}</span>
+                ) : '-'}
+              </td>
+              <td style={{fontFamily:'monospace'}}>{pos.maxScore}</td>
+              <td style={{fontFamily:'monospace',color:'#10b981'}}>${pos.size}</td>
+              <td style={{fontFamily:'monospace',color: pos.clusterAdj < 1 ? '#eab308' : '#6b7280'}}>
+                {(pos.clusterAdj * 100).toFixed(0)}%
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 // Top Suspicious Accounts Tab Component (same structure as HoldersTab)
 function SuspiciousTab({ searchQuery }) {
   const [data, setData] = useState(null);
@@ -692,22 +1050,6 @@ export default function Home() {
             <span className="stat-label">Markets:</span>
             <span className="stat-value blue">{markets.length}</span>
           </div>
-          <a 
-            href="/portfolio" 
-            className="portfolio-link"
-            style={{
-              marginLeft: '16px',
-              padding: '8px 16px',
-              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-              borderRadius: '8px',
-              color: 'white',
-              textDecoration: 'none',
-              fontWeight: '600',
-              fontSize: '14px',
-            }}
-          >
-            💼 Portfolio Manager
-          </a>
         </div>
       </header>
 
@@ -729,6 +1071,20 @@ export default function Home() {
           onClick={() => setActiveTab('holders')}
         >
           Top Holders
+        </button>
+        <button 
+          className={`tab ${activeTab === 'ptj' ? 'active' : ''}`}
+          onClick={() => setActiveTab('ptj')}
+          style={{ background: activeTab === 'ptj' ? '#2563eb' : undefined }}
+        >
+          🛡️ PTJ
+        </button>
+        <button 
+          className={`tab ${activeTab === 'kg' ? 'active' : ''}`}
+          onClick={() => setActiveTab('kg')}
+          style={{ background: activeTab === 'kg' ? '#7c3aed' : undefined }}
+        >
+          📊 Griffin
         </button>
       </div>
 
@@ -753,6 +1109,12 @@ export default function Home() {
       )}
       {activeTab === 'holders' && (
         <HoldersTab markets={markets} searchQuery={searchQuery} />
+      )}
+      {activeTab === 'ptj' && (
+        <PTJTab />
+      )}
+      {activeTab === 'kg' && (
+        <KenGriffinTab />
       )}
     </div>
   );

@@ -692,6 +692,22 @@ export default function Home() {
             <span className="stat-label">Markets:</span>
             <span className="stat-value blue">{markets.length}</span>
           </div>
+          <a 
+            href="/portfolio" 
+            className="portfolio-link"
+            style={{
+              marginLeft: '16px',
+              padding: '8px 16px',
+              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+              borderRadius: '8px',
+              color: 'white',
+              textDecoration: 'none',
+              fontWeight: '600',
+              fontSize: '14px',
+            }}
+          >
+            💼 Portfolio Manager
+          </a>
         </div>
       </header>
 

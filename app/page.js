@@ -111,13 +111,15 @@ function PTJTab() {
           <th style={{width:'40px'}}>Tier</th>
           <th>Account</th>
           <th>Market</th>
-          <th style={{width:'60px'}}>Cat</th>
+          <th style={{width:'40px'}}>Side</th>
           <th style={{width:'50px'}}>Score</th>
           <th style={{width:'60px'}}>Size</th>
           <th style={{width:'50px'}}>Stop</th>
         </tr></thead>
         <tbody>
-          {positions.map((pos, i) => (
+          {positions.map((pos, i) => {
+            const side = pos.markets?.[0]?.side || '-';
+            return (
             <tr key={i}>
               <td><span style={{
                 padding:'1px 6px',borderRadius:'3px',fontSize:'11px',fontWeight:600,
@@ -125,13 +127,17 @@ function PTJTab() {
                 color: pos.tier === 'S' ? '#92400e' : pos.tier === 'A' ? '#6b21a8' : '#1e40af'
               }}>{pos.tier}</span></td>
               <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
-              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
-              <td style={{fontSize:'11px',color:'var(--text-dim)'}}>{pos.category}</td>
+              <td style={{maxWidth:'180px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td><span style={{
+                padding:'1px 6px',borderRadius:'3px',fontSize:'10px',fontWeight:600,
+                background: side === 'YES' ? '#dcfce7' : side === 'NO' ? '#fee2e2' : '#f3f4f6',
+                color: side === 'YES' ? '#166534' : side === 'NO' ? '#991b1b' : '#6b7280'
+              }}>{side}</span></td>
               <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
               <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
               <td style={{fontFamily:'monospace',color:'var(--red)',fontSize:'11px'}}>-${Math.round(pos.size*0.3)}</td>
             </tr>
-          ))}
+          );})}
         </tbody>
       </table>
     </div>
@@ -231,21 +237,29 @@ function KenGriffinTab() {
           <th style={{width:'30px'}}>#</th>
           <th>Account</th>
           <th>Market</th>
-          <th style={{width:'70px'}}>Cluster</th>
+          <th style={{width:'40px'}}>Side</th>
+          <th style={{width:'60px'}}>Cluster</th>
           <th style={{width:'50px'}}>Score</th>
           <th style={{width:'60px'}}>Size</th>
         </tr></thead>
         <tbody>
-          {positions.map((pos, i) => (
+          {positions.map((pos, i) => {
+            const side = pos.markets?.[0]?.side || '-';
+            return (
             <tr key={i}>
               <td style={{color:'var(--text-dim)',fontSize:'11px'}}>{i+1}</td>
               <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
-              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td style={{maxWidth:'160px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td><span style={{
+                padding:'1px 6px',borderRadius:'3px',fontSize:'10px',fontWeight:600,
+                background: side === 'YES' ? '#dcfce7' : side === 'NO' ? '#fee2e2' : '#f3f4f6',
+                color: side === 'YES' ? '#166534' : side === 'NO' ? '#991b1b' : '#6b7280'
+              }}>{side}</span></td>
               <td style={{fontSize:'10px',color:'var(--text-dim)'}}>{pos.cluster || '-'}</td>
               <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
               <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
             </tr>
-          ))}
+          );})}
         </tbody>
       </table>
     </div>
@@ -328,22 +342,32 @@ function EdThorpTab() {
           <th style={{width:'30px'}}>#</th>
           <th>Account</th>
           <th>Market</th>
+          <th style={{width:'40px'}}>Side</th>
           <th style={{width:'50px'}}>Score</th>
           <th style={{width:'50px'}}>Edge</th>
           <th style={{width:'50px'}}>Kelly</th>
           <th style={{width:'60px'}}>Size</th>
         </tr></thead>
         <tbody>
-          {positions.map((pos, i) => (
+          {positions.map((pos, i) => {
+            const side = pos.markets?.[0]?.side || '-';
+            return (
             <tr key={i}>
               <td style={{color:'var(--text-dim)',fontSize:'11px'}}>{i+1}</td>
               <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
-              <td style={{maxWidth:'200px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td style={{maxWidth:'160px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td><span style={{
+                padding:'1px 6px',borderRadius:'3px',fontSize:'10px',fontWeight:600,
+                background: side === 'YES' ? '#dcfce7' : side === 'NO' ? '#fee2e2' : '#f3f4f6',
+                color: side === 'YES' ? '#166534' : side === 'NO' ? '#991b1b' : '#6b7280'
+              }}>{side}</span></td>
               <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
               <td style={{fontFamily:'monospace',fontSize:'12px',color:'var(--green)'}}>{(pos.edge*100).toFixed(0)}%</td>
               <td style={{fontFamily:'monospace',fontSize:'11px',color:'var(--text-dim)'}}>{(pos.kelly*100).toFixed(1)}%</td>
               <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
             </tr>
+          );})}
+        </tbody>
           ))}
         </tbody>
       </table>
@@ -431,23 +455,31 @@ function NateSilverTab() {
           <th style={{width:'30px'}}>#</th>
           <th>Account</th>
           <th>Market</th>
+          <th style={{width:'40px'}}>Side</th>
           <th style={{width:'50px'}}>Score</th>
           <th style={{width:'60px'}}>Mkt→My</th>
           <th style={{width:'50px'}}>Conf</th>
           <th style={{width:'60px'}}>Size</th>
         </tr></thead>
         <tbody>
-          {positions.map((pos, i) => (
+          {positions.map((pos, i) => {
+            const side = pos.markets?.[0]?.side || '-';
+            return (
             <tr key={i}>
               <td style={{color:'var(--text-dim)',fontSize:'11px'}}>{i+1}</td>
               <td><a href={`https://polymarket.com/profile/${pos.wallet}`} target="_blank" style={{color:'var(--blue)',textDecoration:'none',fontSize:'12px'}}>{pos.name || pos.wallet?.slice(0,8)}</a></td>
-              <td style={{maxWidth:'180px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td style={{maxWidth:'150px',overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap',fontSize:'12px'}}>{pos.markets?.[0]?.question || '-'}</td>
+              <td><span style={{
+                padding:'1px 6px',borderRadius:'3px',fontSize:'10px',fontWeight:600,
+                background: side === 'YES' ? '#dcfce7' : side === 'NO' ? '#fee2e2' : '#f3f4f6',
+                color: side === 'YES' ? '#166534' : side === 'NO' ? '#991b1b' : '#6b7280'
+              }}>{side}</span></td>
               <td style={{fontFamily:'monospace',fontSize:'12px'}}>{pos.maxScore}</td>
               <td style={{fontFamily:'monospace',fontSize:'11px'}}>{(pos.marketProb*100).toFixed(0)}→<b style={{color:'var(--green)'}}>{(pos.myProb*100).toFixed(0)}%</b></td>
               <td style={{fontFamily:'monospace',fontSize:'11px',color:'var(--text-dim)'}}>{(pos.confidence*100).toFixed(0)}%</td>
               <td style={{fontFamily:'monospace',color:'var(--green)',fontSize:'12px'}}>${pos.size}</td>
             </tr>
-          ))}
+          );})}
         </tbody>
       </table>
     </div>

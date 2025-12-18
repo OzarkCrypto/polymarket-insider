@@ -1142,19 +1142,25 @@ export default function Home() {
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('markets');
   const [searchQuery, setSearchQuery] = useState('');
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   useEffect(() => {
-    async function fetchMarkets() {
+    async function fetchData() {
       try {
-        const res = await fetch('/api/markets');
-        const data = await res.json();
-        setMarkets(data.markets || []);
+        const [marketsRes, susRes] = await Promise.all([
+          fetch('/api/markets'),
+          fetch('/data/suspicious.json')
+        ]);
+        const marketsData = await marketsRes.json();
+        const susData = await susRes.json();
+        setMarkets(marketsData.markets || []);
+        setLastUpdated(susData.updatedAt || null);
       } catch (err) {
         setError(err.message);
       }
       setLoading(false);
     }
-    fetchMarkets();
+    fetchData();
   }, []);
 
   const totalVolume = markets.reduce((sum, m) => sum + m.volume, 0);
@@ -1184,6 +1190,11 @@ export default function Home() {
         <div className="logo">
           <h1>Polymarket Insider</h1>
           <p>Tech Markets Whale Tracker</p>
+          {lastUpdated && (
+            <p style={{fontSize:'11px',color:'var(--text-dim)',marginTop:'4px'}}>
+              Updated: {new Date(lastUpdated).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul', month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit' })} KST
+            </p>
+          )}
         </div>
         <div className="stats-bar">
           <div className="stat-box">

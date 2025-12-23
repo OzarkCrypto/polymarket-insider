@@ -52,10 +52,13 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
   // 크립토 거버넌스 (높은 가치) - 코어팀, 대형 홀더가 알 수 있음
   const GOVERNANCE_KEYWORDS = ['governance', 'proposal', 'dao', 'vote', 'aave', 'uniswap', 
     'compound', 'makerdao', 'curve', 'lido', 'arbitrum', 'optimism', 'chainlink', 'synthetix',
-    'gmx', 'dydx', 'jupiter', 'jito', 'fee switch', 'tokenomics'];
+    'gmx', 'dydx', 'jupiter', 'jito', 'fee switch', 'tokenomics',
+    // DeFi 프로젝트 에어드랍 (코어팀/VC가 시점 알 수 있음)
+    'lighter', 'hyperliquid', 'eigenlayer', 'layerzero', 'zksync', 'starknet',
+    'monad', 'berachain', 'blast', 'scroll', 'linea', 'base '];
   
-  // 일반 크립토/에어드랍 (낮은 가치)
-  const CRYPTO_KEYWORDS = ['airdrop', 'token', 'solana', 'ethereum', 'bitcoin price', 'btc ',
+  // 일반 크립토/에어드랍 (낮은 가치) - 가격 예측 등
+  const CRYPTO_KEYWORDS = ['solana', 'ethereum', 'bitcoin price', 'btc ',
     'eth ', 'memecoin', 'depeg', 'stablecoin'];
   
   // 카테고리 가중치 결정

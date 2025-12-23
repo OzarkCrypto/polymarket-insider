@@ -22,8 +22,8 @@ const CATEGORY_KEYWORDS = {
   'AI/Tech': ['openai', 'gpt', 'claude', 'gemini', 'anthropic', 'google', 'apple', 'microsoft', 'meta', 'nvidia', 'tesla'],
   'Government': ['fed ', 'fomc', 'rate', 'fda', 'sec ', 'cabinet', 'secretary', 'nominate', 'trump', 'biden'],
   'Legal': ['epstein', 'diddy', 'weinstein', 'trial', 'sentenced', 'indicted', 'files', 'lawsuit'],
-  'Governance': ['governance', 'proposal', 'dao', 'vote', 'aave', 'uniswap', 'compound', 'makerdao', 'curve', 'lido', 'arbitrum', 'optimism', 'chainlink', 'synthetix', 'gmx', 'dydx', 'jupiter', 'jito'],
-  'Crypto': ['bitcoin', 'btc', 'eth ', 'ethereum', 'airdrop', 'token', 'solana', 'crypto'],
+  'Governance': ['governance', 'proposal', 'dao', 'vote', 'aave', 'uniswap', 'compound', 'makerdao', 'curve', 'lido', 'arbitrum', 'optimism', 'chainlink', 'synthetix', 'gmx', 'dydx', 'jupiter', 'jito', 'lighter', 'hyperliquid', 'eigenlayer', 'layerzero', 'zksync', 'starknet', 'monad', 'berachain', 'blast', 'scroll', 'linea'],
+  'Crypto': ['bitcoin', 'btc', 'eth ', 'ethereum', 'solana', 'memecoin', 'depeg'],
 };
 
 const CORRELATION_CLUSTERS = {
@@ -32,7 +32,7 @@ const CORRELATION_CLUSTERS = {
   'Epstein': ['epstein'],
   'Trump Admin': ['trump', 'cabinet', 'secretary'],
   'Google': ['google', 'gemini'],
-  'DeFi': ['aave', 'uniswap', 'compound', 'curve', 'lido', 'makerdao', 'governance', 'proposal'],
+  'DeFi': ['aave', 'uniswap', 'compound', 'curve', 'lido', 'makerdao', 'governance', 'proposal', 'lighter', 'hyperliquid', 'eigenlayer', 'layerzero', 'zksync', 'starknet'],
 };
 
 function categorizeMarket(question) {

@@ -20,9 +20,10 @@ const BANKROLL = 10000;
 
 const CATEGORY_KEYWORDS = {
   'AI/Tech': ['openai', 'gpt', 'claude', 'gemini', 'anthropic', 'google', 'apple', 'microsoft', 'meta', 'nvidia', 'tesla'],
-  'Government': ['fed ', 'fomc', 'rate', 'fda', 'sec', 'cabinet', 'secretary', 'nominate', 'trump', 'biden'],
+  'Government': ['fed ', 'fomc', 'rate', 'fda', 'sec ', 'cabinet', 'secretary', 'nominate', 'trump', 'biden'],
   'Legal': ['epstein', 'diddy', 'weinstein', 'trial', 'sentenced', 'indicted', 'files', 'lawsuit'],
-  'Crypto': ['bitcoin', 'btc', 'eth', 'airdrop', 'token', 'solana', 'crypto'],
+  'Governance': ['governance', 'proposal', 'dao', 'vote', 'aave', 'uniswap', 'compound', 'makerdao', 'curve', 'lido', 'arbitrum', 'optimism', 'chainlink', 'synthetix', 'gmx', 'dydx', 'jupiter', 'jito'],
+  'Crypto': ['bitcoin', 'btc', 'eth ', 'ethereum', 'airdrop', 'token', 'solana', 'crypto'],
 };
 
 const CORRELATION_CLUSTERS = {
@@ -31,6 +32,7 @@ const CORRELATION_CLUSTERS = {
   'Epstein': ['epstein'],
   'Trump Admin': ['trump', 'cabinet', 'secretary'],
   'Google': ['google', 'gemini'],
+  'DeFi': ['aave', 'uniswap', 'compound', 'curve', 'lido', 'makerdao', 'governance', 'proposal'],
 };
 
 function categorizeMarket(question) {

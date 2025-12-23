@@ -113,6 +113,23 @@ export async function GET() {
     // 신용등급 - Moody's, S&P, Fitch
     'downgrade', 'upgrade rating', 'credit rating',
     
+    // ===== 5.5 크립토 거버넌스 (코어팀, 대형 홀더, 재단) =====
+    
+    // 거버넌스 투표 - DAO 코어팀, 대형 토큰 홀더, 재단
+    'governance', 'proposal', 'vote', 'voting', 'dao ',
+    ' dao', 'token holder', 'alignment', 'snapshot',
+    'on-chain vote', 'governance vote', 'pass proposal',
+    
+    // 주요 DeFi 프로토콜 - 코어팀, 멀티시그 홀더
+    'aave', 'uniswap', 'compound', 'makerdao', 'maker ',
+    'curve', 'lido', 'arbitrum', 'optimism', 'polygon',
+    'chainlink', 'synthetix', 'yearn', 'sushi', 'balancer',
+    'frax', 'convex', 'gmx', 'dydx', 'jupiter', 'jito',
+    
+    // 프로토콜 업그레이드 - 코어 개발팀
+    'upgrade proposal', 'protocol upgrade', 'hard fork',
+    'tokenomics', 'fee switch', 'revenue share',
+    
     // ===== 6. 엔터테인먼트/미디어 (스튜디오, 레이블) =====
     
     // 영화/TV - 스튜디오, 네트워크

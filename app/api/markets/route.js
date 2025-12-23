@@ -126,6 +126,11 @@ export async function GET() {
     'chainlink', 'synthetix', 'yearn', 'sushi', 'balancer',
     'frax', 'convex', 'gmx', 'dydx', 'jupiter', 'jito',
     
+    // DeFi 프로젝트 에어드랍 - 코어팀/VC가 시점 알 수 있음
+    'lighter', 'hyperliquid', 'eigenlayer', 'layerzero', 
+    'zksync', 'starknet', 'monad', 'berachain', 'blast',
+    'scroll', 'linea', 'base ',
+    
     // 프로토콜 업그레이드 - 코어 개발팀
     'upgrade proposal', 'protocol upgrade', 'hard fork',
     'tokenomics', 'fee switch', 'revenue share',

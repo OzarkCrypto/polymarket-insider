@@ -49,7 +49,12 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
   const LEGAL_KEYWORDS = ['epstein', 'diddy', 'weinstein', 'indicted', 'sentenced', 'trial',
     'files', 'documents', 'unsealed'];
   
-  // 크립토/에어드랍 (낮은 가치)
+  // 크립토 거버넌스 (높은 가치) - 코어팀, 대형 홀더가 알 수 있음
+  const GOVERNANCE_KEYWORDS = ['governance', 'proposal', 'dao', 'vote', 'aave', 'uniswap', 
+    'compound', 'makerdao', 'curve', 'lido', 'arbitrum', 'optimism', 'chainlink', 'synthetix',
+    'gmx', 'dydx', 'jupiter', 'jito', 'fee switch', 'tokenomics'];
+  
+  // 일반 크립토/에어드랍 (낮은 가치)
   const CRYPTO_KEYWORDS = ['airdrop', 'token', 'solana', 'ethereum', 'bitcoin price', 'btc ',
     'eth ', 'memecoin', 'depeg', 'stablecoin'];
   
@@ -62,8 +67,10 @@ function calculateScore(holder, marketRatio, totalMarkets, accountAgeDays, marke
     categoryMultiplier = 1.25;  // 정부/규제 +25%
   } else if (LEGAL_KEYWORDS.some(k => marketQuestion.includes(k))) {
     categoryMultiplier = 1.2;  // 법적/수사 +20%
+  } else if (GOVERNANCE_KEYWORDS.some(k => marketQuestion.includes(k))) {
+    categoryMultiplier = 1.25;  // 거버넌스 +25% (코어팀/대형홀더 정보)
   } else if (CRYPTO_KEYWORDS.some(k => marketQuestion.includes(k))) {
-    categoryMultiplier = 0.7;  // 크립토 -30%
+    categoryMultiplier = 0.7;  // 일반 크립토 -30%
   }
   
   // 1. 마켓 진입 시점 (최대 35점)

@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-02-01T13:07:56.589Z",
+  "updatedAt": "2026-02-01T16:45:13.708Z",
   "totalMarketsScanned": 298,
   "totalSuspiciousAccounts": 150,
-  "scanDurationSeconds": 597,
+  "scanDurationSeconds": 599,
   "accounts": [
     {
       "wallet": "0xd1c769317bd15de7768a70d0214cf0bbcc531d2b",
@@ -12,7 +12,7 @@
       "isCamouflage": true,
       "maxScore": 351,
       "totalValue": 1515363.3849,
-      "allTimePnl": 3240,
+      "allTimePnl": 3242,
       "monthPnl": 0,
       "markets": [
         {
@@ -28,14 +28,14 @@
       ]
     },
     {
-      "wallet": "0x2785e7022dc20757108204b13c08cea8613b70ae",
-      "name": "poorsob",
-      "totalMarkets": 6,
-      "accountAgeDays": 96,
-      "isCamouflage": false,
-      "maxScore": 342,
-      "totalValue": 5279653.9652,
-      "allTimePnl": 1787,
+      "wallet": "0x17ce7c9a7f768bfa98946caf7d64c9e051f5beec",
+      "name": "fffffz",
+      "totalMarkets": 49,
+      "accountAgeDays": 390,
+      "isCamouflage": true,
+      "maxScore": 348,
+      "totalValue": 64147.477100000004,
+      "allTimePnl": 22635,
       "monthPnl": 0,
       "markets": [
         {
@@ -43,7 +43,50 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 1035991.7696,
+          "amount": 63652.9508,
+          "marketRatio": 81,
+          "marketEntryDays": 2,
+          "score": 348
+        },
+        {
+          "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
+          "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
+          "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
+          "side": "YES",
+          "amount": 192.065,
+          "marketRatio": 0,
+          "marketEntryDays": 2,
+          "score": 291
+        },
+        {
+          "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
+          "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
+          "conditionId": "0xdb1ae961e30733e7857ebb425b5f6449fa8032de13f32c1c6e447a0c3801ca04",
+          "side": "YES",
+          "amount": 302.4613,
+          "marketRatio": 0,
+          "marketEntryDays": 1,
+          "score": 291
+        }
+      ]
+    },
+    {
+      "wallet": "0x2785e7022dc20757108204b13c08cea8613b70ae",
+      "name": "poorsob",
+      "totalMarkets": 6,
+      "accountAgeDays": 96,
+      "isCamouflage": false,
+      "maxScore": 342,
+      "totalValue": 5280706.2677,
+      "allTimePnl": 3904,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
+          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
+          "side": "YES",
+          "amount": 1037044.0721,
           "marketRatio": 15,
           "marketEntryDays": 999,
           "score": 260
@@ -61,14 +104,67 @@
       ]
     },
     {
-      "wallet": "0xdcd669c506a938bae9269a84b8bd2bdb220484cd",
-      "name": "thegreengem",
-      "totalMarkets": 4,
-      "accountAgeDays": 50,
+      "wallet": "0x6d7776a0f954be1a7c975a1e8244de6268f7b72c",
+      "name": "humanbeans",
+      "totalMarkets": 59,
+      "accountAgeDays": 64,
       "isCamouflage": false,
-      "maxScore": 329,
-      "totalValue": 612558.5955,
-      "allTimePnl": 1346,
+      "maxScore": 335,
+      "totalValue": 8368.7604,
+      "allTimePnl": 413419,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
+          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
+          "side": "NO",
+          "amount": 3204.7717,
+          "marketRatio": 1,
+          "marketEntryDays": 1,
+          "score": 335
+        },
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
+          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
+          "side": "YES",
+          "amount": 2872.7692,
+          "marketRatio": 1,
+          "marketEntryDays": 1,
+          "score": 335
+        },
+        {
+          "slug": "will-no-fed-rate-cuts-happen-in-2026",
+          "question": "Will no Fed rate cuts happen in 2026?",
+          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
+          "side": "YES",
+          "amount": 778.0624,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 279
+        },
+        {
+          "slug": "will-1-fed-rate-cut-happen-in-2026",
+          "question": "Will 1 Fed rate cut happen in 2026?",
+          "conditionId": "0x5e082f0b57f47a29044aa35b4c5658393122e659d5feae521c06b57cdd7f905c",
+          "side": "YES",
+          "amount": 1513.1571,
+          "marketRatio": 1,
+          "marketEntryDays": 999,
+          "score": 279
+        }
+      ]
+    },
+    {
+      "wallet": "0x631c2b93ff03c21d29b2b73af4ff965e88ea450f",
+      "name": "dube",
+      "totalMarkets": 2,
+      "accountAgeDays": 72,
+      "isCamouflage": false,
+      "maxScore": 334,
+      "totalValue": 30943.4832,
+      "allTimePnl": 1794,
       "monthPnl": 0,
       "markets": [
         {
@@ -76,8 +172,31 @@
           "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
           "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
           "side": "YES",
-          "amount": 612558.5955,
-          "marketRatio": 91,
+          "amount": 30943.4832,
+          "marketRatio": 69,
+          "marketEntryDays": 2,
+          "score": 334
+        }
+      ]
+    },
+    {
+      "wallet": "0xdcd669c506a938bae9269a84b8bd2bdb220484cd",
+      "name": "thegreengem",
+      "totalMarkets": 4,
+      "accountAgeDays": 50,
+      "isCamouflage": false,
+      "maxScore": 329,
+      "totalValue": 786793.8043,
+      "allTimePnl": 1420,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "tesla-launches-unsupervised-full-self-driving-fsd-by-october-31-717-337",
+          "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
+          "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
+          "side": "YES",
+          "amount": 786793.8043,
+          "marketRatio": 93,
           "marketEntryDays": 2,
           "score": 329
         }
@@ -91,7 +210,7 @@
       "isCamouflage": true,
       "maxScore": 328,
       "totalValue": 21995.8865,
-      "allTimePnl": 7029,
+      "allTimePnl": 7048,
       "monthPnl": 0,
       "markets": [
         {
@@ -136,8 +255,8 @@
       "accountAgeDays": 150,
       "isCamouflage": false,
       "maxScore": 319,
-      "totalValue": 182620.9564,
-      "allTimePnl": 118420,
+      "totalValue": 182806.4525,
+      "allTimePnl": 117822,
       "monthPnl": 0,
       "markets": [
         {
@@ -145,32 +264,9 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 182620.9564,
-          "marketRatio": 85,
-          "marketEntryDays": 6,
-          "score": 319
-        }
-      ]
-    },
-    {
-      "wallet": "0xce5bec63b40392845a9a504915f607c8e03a047a",
-      "name": "Nexuus",
-      "totalMarkets": 15,
-      "accountAgeDays": 216,
-      "isCamouflage": true,
-      "maxScore": 319,
-      "totalValue": 5151.0531,
-      "allTimePnl": 50051,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-march-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
-          "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
-          "side": "YES",
-          "amount": 5151.0531,
-          "marketRatio": 100,
-          "marketEntryDays": 0,
+          "amount": 182806.4525,
+          "marketRatio": 86,
+          "marketEntryDays": 7,
           "score": 319
         }
       ]
@@ -205,8 +301,8 @@
       "accountAgeDays": 86,
       "isCamouflage": false,
       "maxScore": 316,
-      "totalValue": 778450.4310999999,
-      "allTimePnl": 109324,
+      "totalValue": 779550.432,
+      "allTimePnl": 111174,
       "monthPnl": 0,
       "markets": [
         {
@@ -214,7 +310,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 197700.1736,
+          "amount": 198300.1742,
           "marketRatio": 25,
           "marketEntryDays": 2,
           "score": 316
@@ -224,7 +320,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 492250.2515,
+          "amount": 492750.2518,
           "marketRatio": 62,
           "marketEntryDays": 2,
           "score": 316
@@ -236,7 +332,7 @@
           "side": "YES",
           "amount": 88500.006,
           "marketRatio": 11,
-          "marketEntryDays": 0,
+          "marketEntryDays": 1,
           "score": 316
         }
       ]
@@ -245,11 +341,11 @@
       "wallet": "0x3c918a8ef8c379304f744592120cbb4d76149af7",
       "name": "YukoAraki",
       "totalMarkets": 6,
-      "accountAgeDays": 597,
+      "accountAgeDays": 598,
       "isCamouflage": false,
       "maxScore": 316,
       "totalValue": 132979.8868,
-      "allTimePnl": -9649,
+      "allTimePnl": -9397,
       "monthPnl": 0,
       "markets": [
         {
@@ -298,118 +394,25 @@
       ]
     },
     {
-      "wallet": "0x17ce7c9a7f768bfa98946caf7d64c9e051f5beec",
-      "name": "fffffz",
-      "totalMarkets": 63,
-      "accountAgeDays": 390,
+      "wallet": "0xce5bec63b40392845a9a504915f607c8e03a047a",
+      "name": "Nexuus",
+      "totalMarkets": 15,
+      "accountAgeDays": 216,
       "isCamouflage": true,
       "maxScore": 313,
-      "totalValue": 72997.8434,
-      "allTimePnl": 38364,
+      "totalValue": 4270.9001,
+      "allTimePnl": 50329,
       "monthPnl": 0,
       "markets": [
         {
-          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
-          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
+          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-march-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
+          "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "YES",
-          "amount": 63588.3613,
-          "marketRatio": 42,
-          "marketEntryDays": 2,
+          "amount": 4270.9001,
+          "marketRatio": 100,
+          "marketEntryDays": 0,
           "score": 313
-        },
-        {
-          "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
-          "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
-          "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
-          "side": "YES",
-          "amount": 192.065,
-          "marketRatio": 0,
-          "marketEntryDays": 2,
-          "score": 256
-        },
-        {
-          "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
-          "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
-          "conditionId": "0xdb1ae961e30733e7857ebb425b5f6449fa8032de13f32c1c6e447a0c3801ca04",
-          "side": "YES",
-          "amount": 302.4613,
-          "marketRatio": 0,
-          "marketEntryDays": 1,
-          "score": 256
-        },
-        {
-          "slug": "discord-ipo-before-2027",
-          "question": "Discord IPO before 2027?",
-          "conditionId": "0x48fcbf6bb8eceff817ba48b56211e4f8a4cf6896570d847d8d115e63c3abf36a",
-          "side": "NO",
-          "amount": 795.331,
-          "marketRatio": 1,
-          "marketEntryDays": 999,
-          "score": 160
-        },
-        {
-          "slug": "will-discord-not-ipo-by-june-30-2026",
-          "question": "Will Discord not IPO by June 30, 2026?",
-          "conditionId": "0xb57cab2941546609df2c77672a535ba8374c5c2042f921fdcf3c1f072baf57dc",
-          "side": "NO",
-          "amount": 8119.6248,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 165
-        }
-      ]
-    },
-    {
-      "wallet": "0x6d7776a0f954be1a7c975a1e8244de6268f7b72c",
-      "name": "humanbeans",
-      "totalMarkets": 61,
-      "accountAgeDays": 64,
-      "isCamouflage": false,
-      "maxScore": 313,
-      "totalValue": 8375.0351,
-      "allTimePnl": 428062,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
-          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
-          "side": "NO",
-          "amount": 3204.7717,
-          "marketRatio": 1,
-          "marketEntryDays": 1,
-          "score": 313
-        },
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
-          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
-          "side": "YES",
-          "amount": 2872.7692,
-          "marketRatio": 1,
-          "marketEntryDays": 1,
-          "score": 313
-        },
-        {
-          "slug": "will-no-fed-rate-cuts-happen-in-2026",
-          "question": "Will no Fed rate cuts happen in 2026?",
-          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
-          "side": "YES",
-          "amount": 784.3371,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 256
-        },
-        {
-          "slug": "will-1-fed-rate-cut-happen-in-2026",
-          "question": "Will 1 Fed rate cut happen in 2026?",
-          "conditionId": "0x5e082f0b57f47a29044aa35b4c5658393122e659d5feae521c06b57cdd7f905c",
-          "side": "YES",
-          "amount": 1513.1571,
-          "marketRatio": 1,
-          "marketEntryDays": 999,
-          "score": 256
         }
       ]
     },
@@ -420,8 +423,8 @@
       "accountAgeDays": 102,
       "isCamouflage": true,
       "maxScore": 310,
-      "totalValue": 183371.2271,
-      "allTimePnl": 138065,
+      "totalValue": 183557.4853,
+      "allTimePnl": 138006,
       "monthPnl": 0,
       "markets": [
         {
@@ -429,7 +432,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 183371.2271,
+          "amount": 183557.4853,
           "marketRatio": 48,
           "marketEntryDays": 0,
           "score": 310
@@ -443,8 +446,8 @@
       "accountAgeDays": 76,
       "isCamouflage": true,
       "maxScore": 306,
-      "totalValue": 243389.68209999983,
-      "allTimePnl": -97216,
+      "totalValue": 244767.93729999984,
+      "allTimePnl": -101348,
       "monthPnl": 0,
       "markets": [
         {
@@ -452,8 +455,8 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 189424.9479,
-          "marketRatio": 24,
+          "amount": 189999.8339,
+          "marketRatio": 25,
           "marketEntryDays": 1,
           "score": 306
         },
@@ -632,7 +635,7 @@
           "question": "Billionaire one-time wealth tax passes in California election 2026?",
           "conditionId": "0x9345d5142a67f5541264c96515496affee02580f1c572680759eac9fd2a1588a",
           "side": "NO",
-          "amount": 51013.9435,
+          "amount": 51817.3127,
           "marketRatio": 7,
           "marketEntryDays": 999,
           "score": 263
@@ -647,7 +650,7 @@
       "isCamouflage": true,
       "maxScore": 303,
       "totalValue": 23401.7812,
-      "allTimePnl": -27122,
+      "allTimePnl": -27223,
       "monthPnl": 0,
       "markets": [
         {
@@ -669,8 +672,8 @@
       "accountAgeDays": 277,
       "isCamouflage": true,
       "maxScore": 300,
-      "totalValue": 233708.5275,
-      "allTimePnl": 19762,
+      "totalValue": 234410.1351,
+      "allTimePnl": 14873,
       "monthPnl": 0,
       "markets": [
         {
@@ -678,9 +681,9 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 233013.0264,
-          "marketRatio": 49,
-          "marketEntryDays": 1,
+          "amount": 233720.198,
+          "marketRatio": 50,
+          "marketEntryDays": 2,
           "score": 300
         },
         {
@@ -688,7 +691,7 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "YES",
-          "amount": 695.5011,
+          "amount": 689.9371,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 225
@@ -702,8 +705,8 @@
       "accountAgeDays": 620,
       "isCamouflage": false,
       "maxScore": 300,
-      "totalValue": 289011.17480000004,
-      "allTimePnl": 10175,
+      "totalValue": 289290.484,
+      "allTimePnl": 10464,
       "monthPnl": 0,
       "markets": [
         {
@@ -711,7 +714,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 274979.8926,
+          "amount": 275259.2018,
           "marketRatio": 94,
           "marketEntryDays": 1,
           "score": 300
@@ -723,7 +726,7 @@
           "side": "NO",
           "amount": 14031.2822,
           "marketRatio": 5,
-          "marketEntryDays": 1,
+          "marketEntryDays": 2,
           "score": 294
         }
       ]
@@ -735,8 +738,8 @@
       "accountAgeDays": 390,
       "isCamouflage": true,
       "maxScore": 300,
-      "totalValue": 98449.7331,
-      "allTimePnl": 12033,
+      "totalValue": 98549.7328,
+      "allTimePnl": 12134,
       "monthPnl": 0,
       "markets": [
         {
@@ -744,7 +747,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 98449.7331,
+          "amount": 98549.7328,
           "marketRatio": 76,
           "marketEntryDays": 1,
           "score": 300
@@ -758,8 +761,8 @@
       "accountAgeDays": 559,
       "isCamouflage": false,
       "maxScore": 298,
-      "totalValue": 691697.9766,
-      "allTimePnl": 838,
+      "totalValue": 693797.2118,
+      "allTimePnl": 2921,
       "monthPnl": 0,
       "markets": [
         {
@@ -767,7 +770,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 691697.9766,
+          "amount": 693797.2118,
           "marketRatio": 92,
           "marketEntryDays": 1,
           "score": 298
@@ -778,11 +781,11 @@
       "wallet": "0x521a8c20563ccc9e1c8ebfe5cfe6c8f9b2f8d12f",
       "name": "b4k9xj2wh",
       "totalMarkets": 2,
-      "accountAgeDays": 453,
+      "accountAgeDays": 454,
       "isCamouflage": false,
       "maxScore": 298,
-      "totalValue": 374726.03760000004,
-      "allTimePnl": 3590,
+      "totalValue": 375508.2912,
+      "allTimePnl": 4372,
       "monthPnl": 0,
       "markets": [
         {
@@ -790,7 +793,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 198908.6961,
+          "amount": 199512.3643,
           "marketRatio": 53,
           "marketEntryDays": 2,
           "score": 298
@@ -800,33 +803,10 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 175817.3415,
+          "amount": 175995.9269,
           "marketRatio": 47,
           "marketEntryDays": 1,
           "score": 298
-        }
-      ]
-    },
-    {
-      "wallet": "0x631c2b93ff03c21d29b2b73af4ff965e88ea450f",
-      "name": "dube",
-      "totalMarkets": 3,
-      "accountAgeDays": 72,
-      "isCamouflage": false,
-      "maxScore": 295,
-      "totalValue": 38939.4832,
-      "allTimePnl": 819,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "tesla-launches-unsupervised-full-self-driving-fsd-by-october-31-717-337",
-          "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
-          "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
-          "side": "YES",
-          "amount": 38939.4832,
-          "marketRatio": 90,
-          "marketEntryDays": 3,
-          "score": 295
         }
       ]
     },
@@ -837,8 +817,8 @@
       "accountAgeDays": 32,
       "isCamouflage": true,
       "maxScore": 293,
-      "totalValue": 416941.9121,
-      "allTimePnl": 14060,
+      "totalValue": 440726.27930000005,
+      "allTimePnl": 13700,
       "monthPnl": 0,
       "markets": [
         {
@@ -846,8 +826,8 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 154411.0424,
-          "marketRatio": 13,
+          "amount": 178195.4096,
+          "marketRatio": 14,
           "marketEntryDays": 0,
           "score": 281
         },
@@ -869,7 +849,7 @@
           "amount": 37699.1409,
           "marketRatio": 3,
           "marketEntryDays": 999,
-          "score": 177
+          "score": 157
         }
       ]
     },
@@ -881,7 +861,7 @@
       "isCamouflage": true,
       "maxScore": 293,
       "totalValue": 10514.2523,
-      "allTimePnl": 10524,
+      "allTimePnl": 10638,
       "monthPnl": 0,
       "markets": [
         {
@@ -897,37 +877,14 @@
       ]
     },
     {
-      "wallet": "0x7cde9cc2fc1ff9556b5167aaaa6fc5b3ce0ab97d",
-      "name": "allen114",
-      "totalMarkets": 30,
-      "accountAgeDays": 39,
-      "isCamouflage": true,
-      "maxScore": 290,
-      "totalValue": 39557.685,
-      "allTimePnl": -22016,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-no-fed-rate-cuts-happen-in-2026",
-          "question": "Will no Fed rate cuts happen in 2026?",
-          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
-          "side": "NO",
-          "amount": 39557.685,
-          "marketRatio": 23,
-          "marketEntryDays": 2,
-          "score": 290
-        }
-      ]
-    },
-    {
       "wallet": "0xc6587b11a2209e46dfe3928b31c5514a8e33b784",
       "name": "Erasmus.",
       "totalMarkets": 28,
-      "accountAgeDays": 550,
+      "accountAgeDays": 551,
       "isCamouflage": true,
       "maxScore": 288,
-      "totalValue": 443188.5975,
-      "allTimePnl": 135312,
+      "totalValue": 444533.6312,
+      "allTimePnl": 139782,
       "monthPnl": 0,
       "markets": [
         {
@@ -935,7 +892,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 443188.5975,
+          "amount": 444533.6312,
           "marketRatio": 22,
           "marketEntryDays": 2,
           "score": 288
@@ -946,11 +903,11 @@
       "wallet": "0x889e7f0464c72eb8cda1525ebc12b6aaba9d09e0",
       "name": "BowlOfPunch",
       "totalMarkets": 81,
-      "accountAgeDays": 485,
+      "accountAgeDays": 486,
       "isCamouflage": true,
       "maxScore": 288,
-      "totalValue": 448157.6861,
-      "allTimePnl": -256434,
+      "totalValue": 449472.7877,
+      "allTimePnl": -261413,
       "monthPnl": 0,
       "markets": [
         {
@@ -958,7 +915,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 442993.7256,
+          "amount": 444338.1679,
           "marketRatio": 31,
           "marketEntryDays": 1,
           "score": 288
@@ -968,7 +925,7 @@
           "question": "GTA VI released before June 2026?",
           "conditionId": "0xcccb7e7613a087c132b69cbf3a02bece3fdcb824c1da54ae79acc8d4a562d902",
           "side": "NO",
-          "amount": 5163.9605,
+          "amount": 5134.6198,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 155
@@ -978,12 +935,12 @@
     {
       "wallet": "0xdd225a03cd7ed89e3931906c67c75ab31cf89ef1",
       "name": "Euan",
-      "totalMarkets": 28,
+      "totalMarkets": 27,
       "accountAgeDays": 450,
       "isCamouflage": true,
       "maxScore": 288,
-      "totalValue": 140410.9554,
-      "allTimePnl": -2219,
+      "totalValue": 140837.0888,
+      "allTimePnl": -3288,
       "monthPnl": 0,
       "markets": [
         {
@@ -991,8 +948,8 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 140410.9554,
-          "marketRatio": 88,
+          "amount": 140837.0888,
+          "marketRatio": 94,
           "marketEntryDays": 2,
           "score": 288
         }
@@ -1001,12 +958,12 @@
     {
       "wallet": "0xc4086b708cd3a50880b7069add1a1a80000f4675",
       "name": "JJo",
-      "totalMarkets": 15,
+      "totalMarkets": 17,
       "accountAgeDays": 687,
       "isCamouflage": true,
       "maxScore": 288,
-      "totalValue": 127571.6757,
-      "allTimePnl": 8576,
+      "totalValue": 128138.5034,
+      "allTimePnl": 9241,
       "monthPnl": 0,
       "markets": [
         {
@@ -1014,8 +971,8 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 127571.6757,
-          "marketRatio": 83,
+          "amount": 128138.5034,
+          "marketRatio": 84,
           "marketEntryDays": 0,
           "score": 288
         }
@@ -1028,8 +985,8 @@
       "accountAgeDays": 29,
       "isCamouflage": true,
       "maxScore": 288,
-      "totalValue": 311.9721,
-      "allTimePnl": -296051,
+      "totalValue": 291.8448,
+      "allTimePnl": -296072,
       "monthPnl": 0,
       "markets": [
         {
@@ -1037,9 +994,32 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "NO",
-          "amount": 311.9721,
-          "marketRatio": 23,
+          "amount": 291.8448,
+          "marketRatio": 21,
           "marketEntryDays": 2,
+          "score": 288
+        }
+      ]
+    },
+    {
+      "wallet": "0x660622caad009a8cc1f38038c0913be658621338",
+      "name": "manekineko",
+      "totalMarkets": 13,
+      "accountAgeDays": 559,
+      "isCamouflage": true,
+      "maxScore": 288,
+      "totalValue": 102492.1727,
+      "allTimePnl": 1378,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
+          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
+          "side": "YES",
+          "amount": 102492.1727,
+          "marketRatio": 64,
+          "marketEntryDays": 0,
           "score": 288
         }
       ]
@@ -1048,11 +1028,11 @@
       "wallet": "0x71edffd0d70a1da823ff07a3c6fc81457294d338",
       "name": "pako",
       "totalMarkets": 55,
-      "accountAgeDays": 459,
+      "accountAgeDays": 460,
       "isCamouflage": true,
       "maxScore": 288,
-      "totalValue": 534075.701,
-      "allTimePnl": -35139,
+      "totalValue": 534288.204,
+      "allTimePnl": -33662,
       "monthPnl": 0,
       "markets": [
         {
@@ -1061,7 +1041,7 @@
           "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
           "side": "YES",
           "amount": 522738.1414,
-          "marketRatio": 74,
+          "marketRatio": 73,
           "marketEntryDays": 3,
           "score": 288
         },
@@ -1070,7 +1050,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 5358.9559,
+          "amount": 5574.4876,
           "marketRatio": 1,
           "marketEntryDays": 3,
           "score": 238
@@ -1080,7 +1060,7 @@
           "question": "Lisa Cook out as Fed Governor by February 28?",
           "conditionId": "0xbbba7ededa28c134c1e625737b25f780db31029cd8c4085f626552fe4f3b1004",
           "side": "NO",
-          "amount": 5978.6037,
+          "amount": 5975.575,
           "marketRatio": 1,
           "marketEntryDays": 999,
           "score": 194
@@ -1090,12 +1070,12 @@
     {
       "wallet": "0xcdb1f1ef8213c06911e4ba6a884176c5571e276c",
       "name": "Ahpo",
-      "totalMarkets": 20,
+      "totalMarkets": 21,
       "accountAgeDays": 156,
       "isCamouflage": true,
       "maxScore": 286,
       "totalValue": 9448.7732,
-      "allTimePnl": 1454,
+      "allTimePnl": 1546,
       "monthPnl": 0,
       "markets": [
         {
@@ -1118,7 +1098,7 @@
       "isCamouflage": true,
       "maxScore": 282,
       "totalValue": 35721.56,
-      "allTimePnl": 692,
+      "allTimePnl": 693,
       "monthPnl": 0,
       "markets": [
         {
@@ -1134,25 +1114,35 @@
       ]
     },
     {
-      "wallet": "0xca88d64f331060ea470e473b687b26337facefb2",
-      "name": "alexfunfunfun",
-      "totalMarkets": 15,
-      "accountAgeDays": 453,
+      "wallet": "0x7cde9cc2fc1ff9556b5167aaaa6fc5b3ce0ab97d",
+      "name": "allen114",
+      "totalMarkets": 29,
+      "accountAgeDays": 39,
       "isCamouflage": true,
       "maxScore": 281,
-      "totalValue": 13659.7826,
-      "allTimePnl": -4430,
+      "totalValue": 236478.7824,
+      "allTimePnl": -26997,
       "monthPnl": 0,
       "markets": [
         {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
-          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
-          "side": "YES",
-          "amount": 13659.7826,
-          "marketRatio": 46,
-          "marketEntryDays": 1,
+          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-march-2026-meeting",
+          "question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
+          "conditionId": "0x25aa90b3cd98305e849189b4e8b770fc77fe89bccb7cf9656468414e01145d38",
+          "side": "NO",
+          "amount": 196900,
+          "marketRatio": 67,
+          "marketEntryDays": 0,
           "score": 281
+        },
+        {
+          "slug": "will-no-fed-rate-cuts-happen-in-2026",
+          "question": "Will no Fed rate cuts happen in 2026?",
+          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
+          "side": "NO",
+          "amount": 39578.7824,
+          "marketRatio": 13,
+          "marketEntryDays": 2,
+          "score": 265
         }
       ]
     },
@@ -1187,7 +1177,7 @@
       "isCamouflage": true,
       "maxScore": 280,
       "totalValue": 14061.2658,
-      "allTimePnl": 662,
+      "allTimePnl": 790,
       "monthPnl": 0,
       "markets": [
         {
@@ -1206,11 +1196,11 @@
       "wallet": "0x47ab026767cc320ac6e62f6ec747d59cf4d795df",
       "name": "bosshog",
       "totalMarkets": 66,
-      "accountAgeDays": 1376,
+      "accountAgeDays": 1377,
       "isCamouflage": true,
       "maxScore": 279,
-      "totalValue": 171576.00970000002,
-      "allTimePnl": 9070,
+      "totalValue": 172071.0092,
+      "allTimePnl": 9741,
       "monthPnl": 0,
       "markets": [
         {
@@ -1218,7 +1208,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 163102.3422,
+          "amount": 163597.3417,
           "marketRatio": 42,
           "marketEntryDays": 2,
           "score": 279
@@ -1242,8 +1232,8 @@
       "accountAgeDays": 1837,
       "isCamouflage": false,
       "maxScore": 279,
-      "totalValue": 239527.9678,
-      "allTimePnl": -1697,
+      "totalValue": 240086.69809999998,
+      "allTimePnl": -977,
       "monthPnl": 0,
       "markets": [
         {
@@ -1251,8 +1241,8 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 156219.2103,
-          "marketRatio": 32,
+          "amount": 156693.3202,
+          "marketRatio": 33,
           "marketEntryDays": 2,
           "score": 279
         },
@@ -1261,8 +1251,8 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 83308.7575,
-          "marketRatio": 17,
+          "amount": 83393.3779,
+          "marketRatio": 18,
           "marketEntryDays": 2,
           "score": 279
         }
@@ -1276,7 +1266,7 @@
       "isCamouflage": false,
       "maxScore": 277,
       "totalValue": 9995,
-      "allTimePnl": 2272,
+      "allTimePnl": 2277,
       "monthPnl": 0,
       "markets": [
         {
@@ -1285,7 +1275,7 @@
           "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
           "side": "YES",
           "amount": 9995,
-          "marketRatio": 40,
+          "marketRatio": 47,
           "marketEntryDays": 0,
           "score": 277
         }
@@ -1298,8 +1288,8 @@
       "accountAgeDays": 859,
       "isCamouflage": true,
       "maxScore": 276,
-      "totalValue": 473223.1288,
-      "allTimePnl": -1139,
+      "totalValue": 474659.3143,
+      "allTimePnl": 1547,
       "monthPnl": 0,
       "markets": [
         {
@@ -1307,7 +1297,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 473223.1288,
+          "amount": 474659.3143,
           "marketRatio": 96,
           "marketEntryDays": 2,
           "score": 276
@@ -1321,8 +1311,8 @@
       "accountAgeDays": 749,
       "isCamouflage": true,
       "maxScore": 275,
-      "totalValue": 654620.8943,
-      "allTimePnl": -88504,
+      "totalValue": 656438.0464000001,
+      "allTimePnl": -86180,
       "monthPnl": 0,
       "markets": [
         {
@@ -1330,7 +1320,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 570646.3257,
+          "amount": 572378.1811,
           "marketRatio": 55,
           "marketEntryDays": 1,
           "score": 275
@@ -1340,56 +1330,10 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 83974.5686,
+          "amount": 84059.8653,
           "marketRatio": 8,
           "marketEntryDays": 999,
           "score": 194
-        }
-      ]
-    },
-    {
-      "wallet": "0x6ffb4354cbe6e0f9989e3b55564ec5fb8646a834",
-      "name": "AgricultureSecretary",
-      "totalMarkets": 11,
-      "accountAgeDays": 583,
-      "isCamouflage": true,
-      "maxScore": 275,
-      "totalValue": 76571.3292,
-      "allTimePnl": -2819,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
-          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
-          "side": "YES",
-          "amount": 76571.3292,
-          "marketRatio": 49,
-          "marketEntryDays": 1,
-          "score": 275
-        }
-      ]
-    },
-    {
-      "wallet": "0x660622caad009a8cc1f38038c0913be658621338",
-      "name": "manekineko",
-      "totalMarkets": 20,
-      "accountAgeDays": 559,
-      "isCamouflage": true,
-      "maxScore": 275,
-      "totalValue": 63008.1824,
-      "allTimePnl": 4024,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
-          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
-          "side": "YES",
-          "amount": 63008.1824,
-          "marketRatio": 19,
-          "marketEntryDays": 0,
-          "score": 275
         }
       ]
     },
@@ -1400,8 +1344,8 @@
       "accountAgeDays": 665,
       "isCamouflage": true,
       "maxScore": 275,
-      "totalValue": 204791.8853,
-      "allTimePnl": -2909,
+      "totalValue": 204878.86070000002,
+      "allTimePnl": -2966,
       "monthPnl": 0,
       "markets": [
         {
@@ -1419,7 +1363,7 @@
           "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
           "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "NO",
-          "amount": 85453.3501,
+          "amount": 85540.3255,
           "marketRatio": 37,
           "marketEntryDays": 3,
           "score": 250
@@ -1431,7 +1375,7 @@
           "side": "YES",
           "amount": 13012.5352,
           "marketRatio": 6,
-          "marketEntryDays": 4,
+          "marketEntryDays": 5,
           "score": 185
         }
       ]
@@ -1444,7 +1388,7 @@
       "isCamouflage": true,
       "maxScore": 275,
       "totalValue": 9995,
-      "allTimePnl": -2460,
+      "allTimePnl": -3093,
       "monthPnl": 0,
       "markets": [
         {
@@ -1463,11 +1407,11 @@
       "wallet": "0x3b8de6b527425e9c19fb2634f9c3d2e7dfaf2ce6",
       "name": "ZZJ1990",
       "totalMarkets": 2,
-      "accountAgeDays": 25,
+      "accountAgeDays": 26,
       "isCamouflage": false,
       "maxScore": 275,
       "totalValue": 88465.4572,
-      "allTimePnl": -2516,
+      "allTimePnl": -2469,
       "monthPnl": 0,
       "markets": [
         {
@@ -1489,8 +1433,8 @@
       "accountAgeDays": 148,
       "isCamouflage": false,
       "maxScore": 273,
-      "totalValue": 164748.3101,
-      "allTimePnl": -367,
+      "totalValue": 165248.3049,
+      "allTimePnl": 133,
       "monthPnl": 0,
       "markets": [
         {
@@ -1498,7 +1442,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 164748.3101,
+          "amount": 165248.3049,
           "marketRatio": 46,
           "marketEntryDays": 1,
           "score": 273
@@ -1513,7 +1457,7 @@
       "isCamouflage": true,
       "maxScore": 273,
       "totalValue": 9995,
-      "allTimePnl": 336,
+      "allTimePnl": 136,
       "monthPnl": 0,
       "markets": [
         {
@@ -1522,7 +1466,7 @@
           "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
           "side": "YES",
           "amount": 9995,
-          "marketRatio": 20,
+          "marketRatio": 16,
           "marketEntryDays": 1,
           "score": 273
         }
@@ -1531,12 +1475,12 @@
     {
       "wallet": "0xaab9f5e600a5dd88fe3a6f93313b180f6220a08d",
       "name": "DirkDiggler67",
-      "totalMarkets": 69,
+      "totalMarkets": 68,
       "accountAgeDays": 573,
       "isCamouflage": true,
       "maxScore": 273,
       "totalValue": 6662.667,
-      "allTimePnl": 8974,
+      "allTimePnl": 7392,
       "monthPnl": 0,
       "markets": [
         {
@@ -1545,31 +1489,31 @@
           "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
           "side": "YES",
           "amount": 6662.667,
-          "marketRatio": 9,
-          "marketEntryDays": 0,
+          "marketRatio": 10,
+          "marketEntryDays": 1,
           "score": 273
         }
       ]
     },
     {
-      "wallet": "0xaf458bee32b8f1d9ba39ee876f20c7e3ce62ec7d",
-      "name": "fed26",
-      "totalMarkets": 4,
-      "accountAgeDays": 29,
-      "isCamouflage": false,
+      "wallet": "0x002dcd37b0b8fa8db98236e599fe1b90d6272561",
+      "name": "ThePortrait",
+      "totalMarkets": 19,
+      "accountAgeDays": 456,
+      "isCamouflage": true,
       "maxScore": 273,
-      "totalValue": 2925,
-      "allTimePnl": -130,
+      "totalValue": 5351.5328,
+      "allTimePnl": 338,
       "monthPnl": 0,
       "markets": [
         {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
-          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
+          "slug": "tesla-launches-unsupervised-full-self-driving-fsd-by-october-31-717-337",
+          "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
+          "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
           "side": "YES",
-          "amount": 2925,
-          "marketRatio": 64,
-          "marketEntryDays": 3,
+          "amount": 5351.5328,
+          "marketRatio": 20,
+          "marketEntryDays": 2,
           "score": 273
         }
       ]
@@ -1582,7 +1526,7 @@
       "isCamouflage": true,
       "maxScore": 271,
       "totalValue": 45111.1357,
-      "allTimePnl": -2238,
+      "allTimePnl": -2207,
       "monthPnl": 0,
       "markets": [
         {
@@ -1598,37 +1542,14 @@
       ]
     },
     {
-      "wallet": "0x8de674db0dfe57e85594a32c06b94703d2842938",
-      "name": "OLOTH",
-      "totalMarkets": 6,
-      "accountAgeDays": 992,
-      "isCamouflage": false,
-      "maxScore": 270,
-      "totalValue": 9995,
-      "allTimePnl": 343,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
-          "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
-          "conditionId": "0xdb1ae961e30733e7857ebb425b5f6449fa8032de13f32c1c6e447a0c3801ca04",
-          "side": "NO",
-          "amount": 9995,
-          "marketRatio": 26,
-          "marketEntryDays": 2,
-          "score": 270
-        }
-      ]
-    },
-    {
       "wallet": "0x000d257d2dc7616feaef4ae0f14600fdf50a758e",
       "name": "scottilicious",
       "totalMarkets": 73,
       "accountAgeDays": 1909,
       "isCamouflage": true,
       "maxScore": 269,
-      "totalValue": 176581.1403,
-      "allTimePnl": -131663,
+      "totalValue": 177117.0466,
+      "allTimePnl": -127080,
       "monthPnl": 0,
       "markets": [
         {
@@ -1636,7 +1557,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 176581.1403,
+          "amount": 177117.0466,
           "marketRatio": 19,
           "marketEntryDays": 2,
           "score": 269
@@ -1646,12 +1567,12 @@
     {
       "wallet": "0x35bbbad2415fe5e39b12da9a316cdc80b022009b",
       "name": "MisTKy",
-      "totalMarkets": 17,
+      "totalMarkets": 16,
       "accountAgeDays": 21,
       "isCamouflage": true,
       "maxScore": 269,
-      "totalValue": 127113.0754,
-      "allTimePnl": 12093,
+      "totalValue": 147648.2812,
+      "allTimePnl": 10681,
       "monthPnl": 0,
       "markets": [
         {
@@ -1659,8 +1580,8 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 127113.0754,
-          "marketRatio": 75,
+          "amount": 147648.2812,
+          "marketRatio": 76,
           "marketEntryDays": 0,
           "score": 269
         }
@@ -1670,11 +1591,11 @@
       "wallet": "0x12b8e7c160f3ced67a22b7eadf764cd1c2c4479c",
       "name": "bearbees2",
       "totalMarkets": 10,
-      "accountAgeDays": 47,
+      "accountAgeDays": 48,
       "isCamouflage": true,
       "maxScore": 269,
-      "totalValue": 54130.5435,
-      "allTimePnl": 12617,
+      "totalValue": 56156.5225,
+      "allTimePnl": 12736,
       "monthPnl": 0,
       "markets": [
         {
@@ -1682,7 +1603,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 54130.5435,
+          "amount": 56156.5225,
           "marketRatio": 89,
           "marketEntryDays": 2,
           "score": 269
@@ -1690,91 +1611,35 @@
       ]
     },
     {
-      "wallet": "0xaaef789cc9037967f64f780d72f00d52277c472a",
-      "name": "BryanPunishMK22",
-      "totalMarkets": 14,
-      "accountAgeDays": 246,
-      "isCamouflage": false,
-      "maxScore": 269,
-      "totalValue": 20589.291,
-      "allTimePnl": -25085,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
-          "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
-          "conditionId": "0xdb1ae961e30733e7857ebb425b5f6449fa8032de13f32c1c6e447a0c3801ca04",
-          "side": "YES",
-          "amount": 129.631,
-          "marketRatio": 0,
-          "marketEntryDays": 4,
-          "score": 269
-        },
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
-          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
-          "side": "YES",
-          "amount": 20459.66,
-          "marketRatio": 16,
-          "marketEntryDays": 3,
-          "score": 259
-        }
-      ]
-    },
-    {
       "wallet": "0xdd572169e741c72227589c5cb56b9ddd638d694d",
       "name": "Igniss",
-      "totalMarkets": 22,
+      "totalMarkets": 23,
       "accountAgeDays": 183,
       "isCamouflage": true,
       "maxScore": 269,
-      "totalValue": 7602.3788,
-      "allTimePnl": 53580,
+      "totalValue": 8522.536399999999,
+      "allTimePnl": 51261,
       "monthPnl": 0,
       "markets": [
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-march-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
+          "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
+          "side": "YES",
+          "amount": 1548.073,
+          "marketRatio": 18,
+          "marketEntryDays": 0,
+          "score": 250
+        },
         {
           "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
           "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
           "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
           "side": "YES",
-          "amount": 7602.3788,
-          "marketRatio": 99,
+          "amount": 6974.4634,
+          "marketRatio": 84,
           "marketEntryDays": 0,
           "score": 269
-        }
-      ]
-    },
-    {
-      "wallet": "0x2d99e29c4f066ba32098c65e4c7454b277d94ca3",
-      "name": "scout",
-      "totalMarkets": 4,
-      "accountAgeDays": 618,
-      "isCamouflage": false,
-      "maxScore": 267,
-      "totalValue": 597378.7344,
-      "allTimePnl": 2795,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-judy-shelton-as-the-next-fed-chair",
-          "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
-          "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
-          "side": "NO",
-          "amount": 98850.0326,
-          "marketRatio": 8,
-          "marketEntryDays": 999,
-          "score": 213
-        },
-        {
-          "slug": "tesla-launches-unsupervised-full-self-driving-fsd-by-october-31-717-337",
-          "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
-          "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
-          "side": "YES",
-          "amount": 498528.7018,
-          "marketRatio": 41,
-          "marketEntryDays": 0,
-          "score": 267
         }
       ]
     },
@@ -1786,7 +1651,7 @@
       "isCamouflage": false,
       "maxScore": 267,
       "totalValue": 22936.0262,
-      "allTimePnl": -475,
+      "allTimePnl": -507,
       "monthPnl": 0,
       "markets": [
         {
@@ -1798,105 +1663,6 @@
           "marketRatio": 12,
           "marketEntryDays": 0,
           "score": 267
-        }
-      ]
-    },
-    {
-      "wallet": "0xed107a85a4585a381e48c7f7ca4144909e7dd2e5",
-      "name": "bobe2",
-      "totalMarkets": 26,
-      "accountAgeDays": 1008,
-      "isCamouflage": true,
-      "maxScore": 266,
-      "totalValue": 730245.5891999999,
-      "allTimePnl": -6776,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-judy-shelton-as-the-next-fed-chair",
-          "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
-          "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
-          "side": "NO",
-          "amount": 656408.1048,
-          "marketRatio": 15,
-          "marketEntryDays": 0,
-          "score": 266
-        },
-        {
-          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
-          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
-          "side": "YES",
-          "amount": 73837.4844,
-          "marketRatio": 2,
-          "marketEntryDays": 0,
-          "score": 241
-        }
-      ]
-    },
-    {
-      "wallet": "0x9efda3d6354152901fc4706c3b1a9ce50b45ad00",
-      "name": "Istaroth",
-      "totalMarkets": 8,
-      "accountAgeDays": 554,
-      "isCamouflage": true,
-      "maxScore": 266,
-      "totalValue": 394202.73439999996,
-      "allTimePnl": 57597,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
-          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
-          "side": "YES",
-          "amount": 207451.5984,
-          "marketRatio": 50,
-          "marketEntryDays": 0,
-          "score": 254
-        },
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
-          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
-          "side": "YES",
-          "amount": 172695.5554,
-          "marketRatio": 42,
-          "marketEntryDays": 0,
-          "score": 266
-        },
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
-          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
-          "side": "YES",
-          "amount": 14055.5806,
-          "marketRatio": 3,
-          "marketEntryDays": 999,
-          "score": 191
-        }
-      ]
-    },
-    {
-      "wallet": "0x7791392260b390c43d63f1058bfbc4ea8f37af80",
-      "name": "Jiang2018",
-      "totalMarkets": 5,
-      "accountAgeDays": 460,
-      "isCamouflage": false,
-      "maxScore": 266,
-      "totalValue": 619.9987,
-      "allTimePnl": 3423,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
-          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
-          "side": "NO",
-          "amount": 619.9987,
-          "marketRatio": 1,
-          "marketEntryDays": 2,
-          "score": 266
         }
       ]
     },
@@ -1930,8 +1696,8 @@
       "accountAgeDays": 641,
       "isCamouflage": false,
       "maxScore": 263,
-      "totalValue": 180576.4107,
-      "allTimePnl": -25127,
+      "totalValue": 180759.8301,
+      "allTimePnl": -24943,
       "monthPnl": 0,
       "markets": [
         {
@@ -1939,7 +1705,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 180576.4107,
+          "amount": 180759.8301,
           "marketRatio": 100,
           "marketEntryDays": 2,
           "score": 263
@@ -1947,58 +1713,25 @@
       ]
     },
     {
-      "wallet": "0x030a01fff8762c0747b6dbc589b28ee6cea8acfc",
-      "name": "Aaaaa12346",
+      "wallet": "0x6ffb4354cbe6e0f9989e3b55564ec5fb8646a834",
+      "name": "AgricultureSecretary",
       "totalMarkets": 8,
-      "accountAgeDays": 556,
-      "isCamouflage": false,
-      "maxScore": 260,
-      "totalValue": 451.7491,
-      "allTimePnl": -1536,
+      "accountAgeDays": 583,
+      "isCamouflage": true,
+      "maxScore": 263,
+      "totalValue": 76649.1061,
+      "allTimePnl": -2930,
       "monthPnl": 0,
       "markets": [
         {
           "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
-          "side": "NO",
-          "amount": 451.7491,
-          "marketRatio": 36,
-          "marketEntryDays": 1,
-          "score": 260
-        }
-      ]
-    },
-    {
-      "wallet": "0x8debd189ffd74160f25e367bafaed61a9fea7062",
-      "name": "taut-dogwood",
-      "totalMarkets": 11,
-      "accountAgeDays": 1008,
-      "isCamouflage": true,
-      "maxScore": 260,
-      "totalValue": 44575.6453,
-      "allTimePnl": 297,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-march-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
-          "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
-          "side": "NO",
-          "amount": 14802.0158,
-          "marketRatio": 28,
-          "marketEntryDays": 0,
-          "score": 260
-        },
-        {
-          "slug": "will-the-ecb-announce-no-change-at-the-february-2026-meeting",
-          "question": "Will the ECB announce no change at the February 2026 meeting?",
-          "conditionId": "0x378d1c879e2531607fe0534003c2a2ec02719276c44ca6a660a3e2a9f4e6a0d0",
           "side": "YES",
-          "amount": 29773.6295,
-          "marketRatio": 56,
-          "marketEntryDays": 0,
-          "score": 220
+          "amount": 76649.1061,
+          "marketRatio": 50,
+          "marketEntryDays": 1,
+          "score": 263
         }
       ]
     },
@@ -2009,8 +1742,8 @@
       "accountAgeDays": 46,
       "isCamouflage": true,
       "maxScore": 256,
-      "totalValue": 207284.9846,
-      "allTimePnl": -1247,
+      "totalValue": 207814.9846,
+      "allTimePnl": -594,
       "monthPnl": 0,
       "markets": [
         {
@@ -2018,8 +1751,8 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 158159.9846,
-          "marketRatio": 44,
+          "amount": 158639.9846,
+          "marketRatio": 45,
           "marketEntryDays": 1,
           "score": 256
         },
@@ -2028,7 +1761,7 @@
           "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
           "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "NO",
-          "amount": 49125,
+          "amount": 49175,
           "marketRatio": 14,
           "marketEntryDays": 1,
           "score": 215
@@ -2038,12 +1771,12 @@
     {
       "wallet": "0x5ee1c416fbe1c3e6a8bc51b74dd816c43276e116",
       "name": "WuTangClan",
-      "totalMarkets": 20,
+      "totalMarkets": 19,
       "accountAgeDays": 180,
       "isCamouflage": true,
       "maxScore": 256,
-      "totalValue": 98450.2073,
-      "allTimePnl": -7763974,
+      "totalValue": 98550.2075,
+      "allTimePnl": -7763970,
       "monthPnl": 0,
       "markets": [
         {
@@ -2051,10 +1784,73 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 98450.2073,
+          "amount": 98550.2075,
           "marketRatio": 24,
           "marketEntryDays": 999,
           "score": 256
+        }
+      ]
+    },
+    {
+      "wallet": "0x011f2d377e56119fb09196dffb0948ae55711122",
+      "name": "11122",
+      "totalMarkets": 100,
+      "accountAgeDays": 447,
+      "isCamouflage": false,
+      "maxScore": 256,
+      "totalValue": 1561.0683,
+      "allTimePnl": 214995,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-kevin-hassett-as-the-next-fed-chair",
+          "question": "Will Trump nominate Kevin Hassett as the next Fed chair?",
+          "conditionId": "0xdcc87b9ca36015e396bd0eebca29e854a136ed2b0b701049d1ee9da6bee3eb35",
+          "side": "YES",
+          "amount": 203.6659,
+          "marketRatio": 0,
+          "marketEntryDays": 0,
+          "score": 256
+        },
+        {
+          "slug": "will-trump-nominate-jerome-powell-as-the-next-fed-chair",
+          "question": "Will Trump nominate Jerome Powell as the next Fed chair?",
+          "conditionId": "0x60acc46cda1f0619259acf3ef8c77bf734ff08cbed256ca3d1e9444138e21266",
+          "side": "YES",
+          "amount": 270.6072,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 213
+        },
+        {
+          "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
+          "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
+          "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
+          "side": "YES",
+          "amount": 778.9756,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 213
+        },
+        {
+          "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
+          "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
+          "conditionId": "0xdb1ae961e30733e7857ebb425b5f6449fa8032de13f32c1c6e447a0c3801ca04",
+          "side": "YES",
+          "amount": 133.801,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 213
+        },
+        {
+          "slug": "will-trump-nominate-christopher-waller-as-the-next-fed-chair",
+          "question": "Will Trump nominate Christopher Waller as the next Fed chair?",
+          "conditionId": "0x705371444684d676041d1010a94cae3a657340fa4809b4307de3c173a35e0957",
+          "side": "YES",
+          "amount": 174.0186,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 213
         }
       ]
     },
@@ -2082,6 +1878,82 @@
       ]
     },
     {
+      "wallet": "0xed107a85a4585a381e48c7f7ca4144909e7dd2e5",
+      "name": "bobe2",
+      "totalMarkets": 26,
+      "accountAgeDays": 1009,
+      "isCamouflage": true,
+      "maxScore": 254,
+      "totalValue": 732312.7229,
+      "allTimePnl": -2794,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-judy-shelton-as-the-next-fed-chair",
+          "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
+          "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
+          "side": "NO",
+          "amount": 658400.2386,
+          "marketRatio": 14,
+          "marketEntryDays": 0,
+          "score": 254
+        },
+        {
+          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
+          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
+          "side": "YES",
+          "amount": 73912.4843,
+          "marketRatio": 2,
+          "marketEntryDays": 0,
+          "score": 229
+        }
+      ]
+    },
+    {
+      "wallet": "0x9efda3d6354152901fc4706c3b1a9ce50b45ad00",
+      "name": "Istaroth",
+      "totalMarkets": 8,
+      "accountAgeDays": 555,
+      "isCamouflage": true,
+      "maxScore": 254,
+      "totalValue": 456997.40119999996,
+      "allTimePnl": 57978,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
+          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
+          "side": "YES",
+          "amount": 239391.6252,
+          "marketRatio": 50,
+          "marketEntryDays": 0,
+          "score": 254
+        },
+        {
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
+          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
+          "side": "YES",
+          "amount": 203550.1954,
+          "marketRatio": 43,
+          "marketEntryDays": 0,
+          "score": 254
+        },
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
+          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
+          "side": "YES",
+          "amount": 14055.5806,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 191
+        }
+      ]
+    },
+    {
       "wallet": "0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b",
       "name": "Car",
       "totalMarkets": 100,
@@ -2089,7 +1961,7 @@
       "isCamouflage": true,
       "maxScore": 254,
       "totalValue": 66632.8405,
-      "allTimePnl": -11882,
+      "allTimePnl": -13809,
       "monthPnl": 0,
       "markets": [
         {
@@ -2098,7 +1970,7 @@
           "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
           "side": "YES",
           "amount": 66632.8405,
-          "marketRatio": 20,
+          "marketRatio": 16,
           "marketEntryDays": 999,
           "score": 254
         }
@@ -2108,11 +1980,11 @@
       "wallet": "0xf910cc50ec0ceecb18a24dee5b9606b5ffa87467",
       "name": "december",
       "totalMarkets": 7,
-      "accountAgeDays": 336,
+      "accountAgeDays": 337,
       "isCamouflage": false,
       "maxScore": 254,
       "totalValue": 15141.7579,
-      "allTimePnl": -8682,
+      "allTimePnl": -8812,
       "monthPnl": 0,
       "markets": [
         {
@@ -2135,7 +2007,7 @@
       "isCamouflage": true,
       "maxScore": 254,
       "totalValue": 14026.297,
-      "allTimePnl": -1749408,
+      "allTimePnl": -1749020,
       "monthPnl": 0,
       "markets": [
         {
@@ -2144,8 +2016,8 @@
           "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
           "side": "YES",
           "amount": 14026.297,
-          "marketRatio": 77,
-          "marketEntryDays": 1,
+          "marketRatio": 64,
+          "marketEntryDays": 2,
           "score": 254
         }
       ]
@@ -2154,11 +2026,11 @@
       "wallet": "0x57ae6ad85aa10e5f66a2997983fa7b91b634e386",
       "name": "FedMoneyPrinter",
       "totalMarkets": 4,
-      "accountAgeDays": 16,
+      "accountAgeDays": 17,
       "isCamouflage": false,
       "maxScore": 251,
-      "totalValue": 262382.4513,
-      "allTimePnl": 4590,
+      "totalValue": 262622.7548,
+      "allTimePnl": 5071,
       "monthPnl": 0,
       "markets": [
         {
@@ -2166,7 +2038,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 236578.7596,
+          "amount": 236819.0631,
           "marketRatio": 90,
           "marketEntryDays": 2,
           "score": 251
@@ -2190,8 +2062,8 @@
       "accountAgeDays": 607,
       "isCamouflage": true,
       "maxScore": 250,
-      "totalValue": 501464.6943,
-      "allTimePnl": 71314,
+      "totalValue": 506968.2099,
+      "allTimePnl": 72154,
       "monthPnl": 0,
       "markets": [
         {
@@ -2199,19 +2071,19 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 257520.7111,
-          "marketRatio": 37,
-          "marketEntryDays": 1,
-          "score": 250
+          "amount": 258302.261,
+          "marketRatio": 38,
+          "marketEntryDays": 999,
+          "score": 206
         },
         {
           "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 121216.6865,
+          "amount": 121339.8116,
           "marketRatio": 18,
-          "marketEntryDays": 1,
+          "marketEntryDays": 0,
           "score": 250
         },
         {
@@ -2239,9 +2111,9 @@
           "question": "Trump out as President before 2027?",
           "conditionId": "0x48b0b0bca515f68fccf95af4793dbd0edbfec1f8ec6e8df2c0f69ba74f8c4722",
           "side": "NO",
-          "amount": 23662.5616,
-          "marketRatio": 3,
-          "marketEntryDays": 1,
+          "amount": 26197.5616,
+          "marketRatio": 4,
+          "marketEntryDays": 0,
           "score": 187
         },
         {
@@ -2249,9 +2121,9 @@
           "question": "Trump out as President by March 31?",
           "conditionId": "0xfc9ee9c25abd5b966088767214c22dcf3ad1c72548e9a1dbef9d4328c170e5b5",
           "side": "NO",
-          "amount": 98799.6014,
+          "amount": 100863.442,
           "marketRatio": 15,
-          "marketEntryDays": 1,
+          "marketEntryDays": 0,
           "score": 200
         }
       ]
@@ -2263,8 +2135,8 @@
       "accountAgeDays": 379,
       "isCamouflage": false,
       "maxScore": 250,
-      "totalValue": 144207.026,
-      "allTimePnl": 69796,
+      "totalValue": 144644.6801,
+      "allTimePnl": 70234,
       "monthPnl": 0,
       "markets": [
         {
@@ -2272,7 +2144,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 144207.026,
+          "amount": 144644.6801,
           "marketRatio": 16,
           "marketEntryDays": 3,
           "score": 250
@@ -2287,7 +2159,7 @@
       "isCamouflage": true,
       "maxScore": 250,
       "totalValue": 179819.8196,
-      "allTimePnl": -265117,
+      "allTimePnl": -265121,
       "monthPnl": 0,
       "markets": [
         {
@@ -2306,11 +2178,11 @@
       "wallet": "0x5d189e816b4149be00977c1a3c8840374aec4972",
       "name": "gloriafoster",
       "totalMarkets": 100,
-      "accountAgeDays": 246,
+      "accountAgeDays": 247,
       "isCamouflage": true,
       "maxScore": 250,
-      "totalValue": 19509.504200000003,
-      "allTimePnl": -118622,
+      "totalValue": 17585.6278,
+      "allTimePnl": -115704,
       "monthPnl": 0,
       "markets": [
         {
@@ -2318,8 +2190,8 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
           "conditionId": "0x25aa90b3cd98305e849189b4e8b770fc77fe89bccb7cf9656468414e01145d38",
           "side": "YES",
-          "amount": 13180.4649,
-          "marketRatio": 5,
+          "amount": 11252.5965,
+          "marketRatio": 4,
           "marketEntryDays": 0,
           "score": 250
         },
@@ -2338,22 +2210,22 @@
           "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
           "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
           "side": "YES",
-          "amount": 5179.0393,
+          "amount": 5183.0313,
           "marketRatio": 2,
-          "marketEntryDays": 0,
-          "score": 219
+          "marketEntryDays": 999,
+          "score": 175
         }
       ]
     },
     {
       "wallet": "0x328ae9a0564d71f721efc87356d583ea73a030c9",
       "name": "Lively-Award",
-      "totalMarkets": 77,
+      "totalMarkets": 79,
       "accountAgeDays": 495,
       "isCamouflage": false,
       "maxScore": 250,
-      "totalValue": 4323.2667,
-      "allTimePnl": -1113,
+      "totalValue": 4359.322,
+      "allTimePnl": -1049,
       "monthPnl": 0,
       "markets": [
         {
@@ -2362,7 +2234,7 @@
           "conditionId": "0x25aa90b3cd98305e849189b4e8b770fc77fe89bccb7cf9656468414e01145d38",
           "side": "YES",
           "amount": 1085,
-          "marketRatio": 3,
+          "marketRatio": 2,
           "marketEntryDays": 3,
           "score": 250
         },
@@ -2373,7 +2245,7 @@
           "side": "YES",
           "amount": 536.3878,
           "marketRatio": 1,
-          "marketEntryDays": 5,
+          "marketEntryDays": 6,
           "score": 225
         },
         {
@@ -2381,7 +2253,7 @@
           "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
           "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
           "side": "YES",
-          "amount": 2080.8305,
+          "amount": 2138.6314,
           "marketRatio": 5,
           "marketEntryDays": 6,
           "score": 238
@@ -2391,7 +2263,7 @@
           "question": "Will 8 Fed rate cuts happen in 2026?",
           "conditionId": "0xfe28cb84a714b1a964290d7fd2587e71d57e905678c8ab64488449b24be78e52",
           "side": "YES",
-          "amount": 380.5484,
+          "amount": 358.8028,
           "marketRatio": 1,
           "marketEntryDays": 9,
           "score": 225
@@ -2409,14 +2281,47 @@
       ]
     },
     {
+      "wallet": "0xaaef789cc9037967f64f780d72f00d52277c472a",
+      "name": "BryanPunishMK22",
+      "totalMarkets": 14,
+      "accountAgeDays": 247,
+      "isCamouflage": false,
+      "maxScore": 250,
+      "totalValue": 20589.291,
+      "allTimePnl": -26681,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
+          "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
+          "conditionId": "0xdb1ae961e30733e7857ebb425b5f6449fa8032de13f32c1c6e447a0c3801ca04",
+          "side": "YES",
+          "amount": 129.631,
+          "marketRatio": 0,
+          "marketEntryDays": 4,
+          "score": 250
+        },
+        {
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
+          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
+          "side": "YES",
+          "amount": 20459.66,
+          "marketRatio": 16,
+          "marketEntryDays": 3,
+          "score": 240
+        }
+      ]
+    },
+    {
       "wallet": "0xebc6257296364265b17cb6e2d605c66d14fdd45f",
       "name": "NIRVANA87",
-      "totalMarkets": 8,
+      "totalMarkets": 6,
       "accountAgeDays": 31,
       "isCamouflage": false,
       "maxScore": 250,
       "totalValue": 24987.5,
-      "allTimePnl": 669,
+      "allTimePnl": 754,
       "monthPnl": 0,
       "markets": [
         {
@@ -2425,7 +2330,7 @@
           "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
           "side": "YES",
           "amount": 24987.5,
-          "marketRatio": 22,
+          "marketRatio": 23,
           "marketEntryDays": 0,
           "score": 250
         }
@@ -2435,7 +2340,7 @@
       "wallet": "0x1986a3e555dd2a334c33c34b0168170cff54ef06",
       "name": "luciousleft",
       "totalMarkets": 1,
-      "accountAgeDays": 526,
+      "accountAgeDays": 527,
       "isCamouflage": false,
       "maxScore": 250,
       "totalValue": 194700,
@@ -2461,8 +2366,8 @@
       "accountAgeDays": 475,
       "isCamouflage": true,
       "maxScore": 250,
-      "totalValue": 75483.2333,
-      "allTimePnl": 34905,
+      "totalValue": 82563.2333,
+      "allTimePnl": 34242,
       "monthPnl": 0,
       "markets": [
         {
@@ -2470,8 +2375,8 @@
           "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
           "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
           "side": "YES",
-          "amount": 75483.2333,
-          "marketRatio": 20,
+          "amount": 82563.2333,
+          "marketRatio": 21,
           "marketEntryDays": 0,
           "score": 250
         }
@@ -2484,8 +2389,8 @@
       "accountAgeDays": 319,
       "isCamouflage": true,
       "maxScore": 250,
-      "totalValue": 64458.0736,
-      "allTimePnl": -1543308,
+      "totalValue": 65473.1614,
+      "allTimePnl": -1539224,
       "monthPnl": 0,
       "markets": [
         {
@@ -2493,7 +2398,7 @@
           "question": "Billionaire one-time wealth tax passes in California election 2026?",
           "conditionId": "0x9345d5142a67f5541264c96515496affee02580f1c572680759eac9fd2a1588a",
           "side": "NO",
-          "amount": 64458.0736,
+          "amount": 65473.1614,
           "marketRatio": 6,
           "marketEntryDays": 2,
           "score": 250
@@ -2507,8 +2412,8 @@
       "accountAgeDays": 186,
       "isCamouflage": false,
       "maxScore": 248,
-      "totalValue": 455145.9349,
-      "allTimePnl": -1091,
+      "totalValue": 456527.258,
+      "allTimePnl": 290,
       "monthPnl": 0,
       "markets": [
         {
@@ -2516,7 +2421,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 455145.9349,
+          "amount": 456527.258,
           "marketRatio": 100,
           "marketEntryDays": 1,
           "score": 248
@@ -2527,7 +2432,7 @@
       "wallet": "0x7072dd52161bae614bec6905846a53c9a3a53413",
       "name": "ForesightOracle",
       "totalMarkets": 3,
-      "accountAgeDays": 404,
+      "accountAgeDays": 405,
       "isCamouflage": false,
       "maxScore": 247,
       "totalValue": 699650,
@@ -2549,12 +2454,12 @@
     {
       "wallet": "0xdda3f0438afbd1af4336d5d3e460e92d7c2a6bfd",
       "name": "laichzeit53",
-      "totalMarkets": 7,
+      "totalMarkets": 6,
       "accountAgeDays": 163,
       "isCamouflage": true,
       "maxScore": 247,
       "totalValue": 5234.5987,
-      "allTimePnl": -3754,
+      "allTimePnl": -3786,
       "monthPnl": 0,
       "markets": [
         {
@@ -2563,9 +2468,32 @@
           "conditionId": "0x61af02c9250c3917602e21c301e2f0cd032ea4e25bdef3751846b4d5f1c22799",
           "side": "NO",
           "amount": 5234.5987,
-          "marketRatio": 93,
+          "marketRatio": 100,
           "marketEntryDays": 0,
           "score": 247
+        }
+      ]
+    },
+    {
+      "wallet": "0x59d7a43d0919cc9d800dbdbc545deefbfbd8ba8e",
+      "name": "Abdoulay",
+      "totalMarkets": 4,
+      "accountAgeDays": 155,
+      "isCamouflage": false,
+      "maxScore": 245,
+      "totalValue": 9010.4839,
+      "allTimePnl": 195,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-ecb-announce-a-50-bps-decrease-at-the-february-2026-meeting",
+          "question": "Will the ECB announce a 50+ bps decrease at the February 2026 meeting?",
+          "conditionId": "0x547efe535c45e582fd8fdcbfbad481e2bc70094e60b8518159585c549405a53a",
+          "side": "NO",
+          "amount": 9010.4839,
+          "marketRatio": 47,
+          "marketEntryDays": 0,
+          "score": 245
         }
       ]
     },
@@ -2576,8 +2504,8 @@
       "accountAgeDays": 551,
       "isCamouflage": true,
       "maxScore": 245,
-      "totalValue": 3225.0085,
-      "allTimePnl": 201202,
+      "totalValue": 3078.4172,
+      "allTimePnl": 204661,
       "monthPnl": 0,
       "markets": [
         {
@@ -2585,10 +2513,93 @@
           "question": "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
           "conditionId": "0xdab002228af15d1cb3a161b3a584165eac9010d4419582c3c7d5d07d847c4256",
           "side": "NO",
-          "amount": 3225.0085,
-          "marketRatio": 3,
+          "amount": 3078.4172,
+          "marketRatio": 4,
           "marketEntryDays": 0,
           "score": 245
+        }
+      ]
+    },
+    {
+      "wallet": "0xbacd00c9080a82ded56f504ee8810af732b0ab35",
+      "name": "ScottyNooo",
+      "totalMarkets": 100,
+      "accountAgeDays": 271,
+      "isCamouflage": true,
+      "maxScore": 244,
+      "totalValue": 642668.6185,
+      "allTimePnl": -131640,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-judy-shelton-as-the-next-fed-chair",
+          "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
+          "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
+          "side": "NO",
+          "amount": 268482.6463,
+          "marketRatio": 19,
+          "marketEntryDays": 999,
+          "score": 219
+        },
+        {
+          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
+          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
+          "side": "YES",
+          "amount": 301237.9373,
+          "marketRatio": 21,
+          "marketEntryDays": 999,
+          "score": 219
+        },
+        {
+          "slug": "will-trump-nominate-kevin-hassett-as-the-next-fed-chair",
+          "question": "Will Trump nominate Kevin Hassett as the next Fed chair?",
+          "conditionId": "0xdcc87b9ca36015e396bd0eebca29e854a136ed2b0b701049d1ee9da6bee3eb35",
+          "side": "YES",
+          "amount": 129.2801,
+          "marketRatio": 0,
+          "marketEntryDays": 0,
+          "score": 244
+        },
+        {
+          "slug": "will-trump-nominate-christopher-waller-as-the-next-fed-chair",
+          "question": "Will Trump nominate Christopher Waller as the next Fed chair?",
+          "conditionId": "0x705371444684d676041d1010a94cae3a657340fa4809b4307de3c173a35e0957",
+          "side": "NO",
+          "amount": 40822.6465,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 178
+        },
+        {
+          "slug": "will-the-supreme-court-rule-in-favor-of-trumps-tariffs",
+          "question": "Supreme Court rules in favor of Trump's tariffs?",
+          "conditionId": "0xb1d2cd56624ec8bb3d8115d50d503d0e8578bf32d754ad5fe3c0e08a73186c57",
+          "side": "NO",
+          "amount": 24382.2526,
+          "marketRatio": 2,
+          "marketEntryDays": 999,
+          "score": 142
+        },
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 50+ bps after the April 2026 meeting?",
+          "conditionId": "0xd72622d154dfe65b9c019d6afcfe75a55717e5c502db611f555b101aafbf6ec5",
+          "side": "NO",
+          "amount": 6686.8047,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 169
+        },
+        {
+          "slug": "tim-cook-out-as-apple-ceo-by-march-31",
+          "question": "Tim Cook out as Apple CEO by March 31?",
+          "conditionId": "0xb86abc5abe1c66d8c77b03e4d22ac94ae15c6e64a7ae8f4fce8d9507bb878ea6",
+          "side": "YES",
+          "amount": 927.051,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 182
         }
       ]
     },
@@ -2599,8 +2610,8 @@
       "accountAgeDays": 19,
       "isCamouflage": false,
       "maxScore": 244,
-      "totalValue": 266924.32769999997,
-      "allTimePnl": -10530,
+      "totalValue": 267733.73459999997,
+      "allTimePnl": -9721,
       "monthPnl": 0,
       "markets": [
         {
@@ -2608,7 +2619,7 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 266699.5867,
+          "amount": 267508.9936,
           "marketRatio": 100,
           "marketEntryDays": 2,
           "score": 225
@@ -2632,8 +2643,8 @@
       "accountAgeDays": 1037,
       "isCamouflage": true,
       "maxScore": 244,
-      "totalValue": 108291.5466,
-      "allTimePnl": -27566,
+      "totalValue": 108618.8118,
+      "allTimePnl": -24619,
       "monthPnl": 0,
       "markets": [
         {
@@ -2641,8 +2652,8 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 88964.9784,
-          "marketRatio": 15,
+          "amount": 89234.9784,
+          "marketRatio": 14,
           "marketEntryDays": 0,
           "score": 244
         },
@@ -2661,7 +2672,7 @@
           "question": "Will OpenAI IPO by June 30 2026?",
           "conditionId": "0x753e6031044632c083fede2715235b69bb2596e37d34f6f19d2b6635d2d4dd58",
           "side": "NO",
-          "amount": 10765.8618,
+          "amount": 10823.127,
           "marketRatio": 2,
           "marketEntryDays": 999,
           "score": 163
@@ -2669,35 +2680,35 @@
       ]
     },
     {
-      "wallet": "0xce66940dfe6dc18bc151d66d52a66eb2121bcc64",
-      "name": "cynical-reason",
-      "totalMarkets": 96,
-      "accountAgeDays": 188,
-      "isCamouflage": false,
+      "wallet": "0x5cd5c8d7a17c78d7389d8b87b611aed83322ac33",
+      "name": "Yannlagaf",
+      "totalMarkets": 100,
+      "accountAgeDays": 549,
+      "isCamouflage": true,
       "maxScore": 244,
-      "totalValue": 11965.9468,
-      "allTimePnl": 21531,
+      "totalValue": 23454.539099999998,
+      "allTimePnl": -4732,
       "monthPnl": 0,
       "markets": [
         {
           "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
           "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
           "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
-          "side": "NO",
-          "amount": 8950.0383,
-          "marketRatio": 2,
-          "marketEntryDays": 999,
+          "side": "YES",
+          "amount": 17433.1736,
+          "marketRatio": 8,
+          "marketEntryDays": 0,
           "score": 244
         },
         {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
-          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
+          "slug": "no-change-in-bank-of-englands-interest-rates-after-february-2026-meeting",
+          "question": "No change in Bank of England's interest rates after February 2026 meeting?",
+          "conditionId": "0x36d7c2d61f17e094808398465c342571b9525c227c8b47048308a4b91ac5a8ee",
           "side": "YES",
-          "amount": 3015.9085,
-          "marketRatio": 1,
-          "marketEntryDays": 999,
-          "score": 238
+          "amount": 6021.3655,
+          "marketRatio": 3,
+          "marketEntryDays": 0,
+          "score": 160
         }
       ]
     },
@@ -2709,7 +2720,7 @@
       "isCamouflage": false,
       "maxScore": 244,
       "totalValue": 5015.9753,
-      "allTimePnl": -3882,
+      "allTimePnl": -3956,
       "monthPnl": 0,
       "markets": [
         {
@@ -2725,6 +2736,29 @@
       ]
     },
     {
+      "wallet": "0x814de45404c20dd9956737a83f7c8b0b039eb842",
+      "name": "resfeber",
+      "totalMarkets": 66,
+      "accountAgeDays": 83,
+      "isCamouflage": true,
+      "maxScore": 244,
+      "totalValue": 2625,
+      "allTimePnl": -6774,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
+          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
+          "side": "YES",
+          "amount": 2625,
+          "marketRatio": 9,
+          "marketEntryDays": 0,
+          "score": 244
+        }
+      ]
+    },
+    {
       "wallet": "0x614ef98a8be021de3a974942b2fb98794ff34f1b",
       "name": "cookiejar",
       "totalMarkets": 6,
@@ -2732,7 +2766,7 @@
       "isCamouflage": false,
       "maxScore": 243,
       "totalValue": 28052.6266,
-      "allTimePnl": 4731,
+      "allTimePnl": 5148,
       "monthPnl": 0,
       "markets": [
         {
@@ -2741,7 +2775,7 @@
           "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
           "side": "YES",
           "amount": 28052.6266,
-          "marketRatio": 44,
+          "marketRatio": 43,
           "marketEntryDays": 9,
           "score": 243
         }
@@ -2755,7 +2789,7 @@
       "isCamouflage": false,
       "maxScore": 241,
       "totalValue": 86154.8296,
-      "allTimePnl": 4856,
+      "allTimePnl": 3962,
       "monthPnl": 0,
       "markets": [
         {
@@ -2765,7 +2799,30 @@
           "side": "YES",
           "amount": 86154.8296,
           "marketRatio": 27,
-          "marketEntryDays": 1,
+          "marketEntryDays": 2,
+          "score": 241
+        }
+      ]
+    },
+    {
+      "wallet": "0xaf458bee32b8f1d9ba39ee876f20c7e3ce62ec7d",
+      "name": "fed26",
+      "totalMarkets": 5,
+      "accountAgeDays": 30,
+      "isCamouflage": false,
+      "maxScore": 241,
+      "totalValue": 2925,
+      "allTimePnl": -168,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
+          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
+          "side": "YES",
+          "amount": 2925,
+          "marketRatio": 23,
+          "marketEntryDays": 3,
           "score": 241
         }
       ]
@@ -2777,8 +2834,8 @@
       "accountAgeDays": 556,
       "isCamouflage": true,
       "maxScore": 240,
-      "totalValue": 18604.622000000003,
-      "allTimePnl": -376,
+      "totalValue": 19090.4416,
+      "allTimePnl": -121,
       "monthPnl": 0,
       "markets": [
         {
@@ -2788,7 +2845,7 @@
           "side": "NO",
           "amount": 10345.6879,
           "marketRatio": 13,
-          "marketEntryDays": 22,
+          "marketEntryDays": 23,
           "score": 190
         },
         {
@@ -2796,8 +2853,8 @@
           "question": "Epstein client list released by June 30?",
           "conditionId": "0xa08bf5e2acca8cf3f85209795cf278128a30869c5a8bfb97851e19fd21d0d21e",
           "side": "NO",
-          "amount": 8258.9341,
-          "marketRatio": 10,
+          "amount": 8744.7537,
+          "marketRatio": 11,
           "marketEntryDays": 12,
           "score": 240
         }
@@ -2810,8 +2867,8 @@
       "accountAgeDays": 587,
       "isCamouflage": false,
       "maxScore": 238,
-      "totalValue": 148527.2094,
-      "allTimePnl": -550692,
+      "totalValue": 148496.7808,
+      "allTimePnl": -551185,
       "monthPnl": 0,
       "markets": [
         {
@@ -2819,7 +2876,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "NO",
-          "amount": 471.6419,
+          "amount": 441.2133,
           "marketRatio": 0,
           "marketEntryDays": 2,
           "score": 206
@@ -2864,7 +2921,7 @@
       "isCamouflage": true,
       "maxScore": 237,
       "totalValue": 57344.7545,
-      "allTimePnl": -27194,
+      "allTimePnl": -27157,
       "monthPnl": 0,
       "markets": [
         {
@@ -2884,171 +2941,8 @@
           "side": "NO",
           "amount": 10902.1866,
           "marketRatio": 8,
-          "marketEntryDays": 16,
+          "marketEntryDays": 17,
           "score": 150
-        }
-      ]
-    },
-    {
-      "wallet": "0x67bc6af6806df61ba5144b125174ecf5f821d54e",
-      "name": "waterfall0",
-      "totalMarkets": 76,
-      "accountAgeDays": 85,
-      "isCamouflage": true,
-      "maxScore": 235,
-      "totalValue": 2226.6072,
-      "allTimePnl": 10403,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-bill-pulte-as-the-next-fed-chair",
-          "question": "Will Trump nominate Bill Pulte as the next Fed chair?",
-          "conditionId": "0xc82669901de7cb0be25c1d8de39fbbe8e2ddc0aacba0a30a663ed13c3b9eb06d",
-          "side": "YES",
-          "amount": 160.3208,
-          "marketRatio": 6,
-          "marketEntryDays": 0,
-          "score": 235
-        },
-        {
-          "slug": "will-trump-nominate-himself-as-the-next-fed-chair",
-          "question": "Will Trump nominate himself as the next Fed chair?",
-          "conditionId": "0x3d83f444f62b2afe0cb28485073cbf3617400d58813cd351cd4d242560ac47f2",
-          "side": "YES",
-          "amount": 142.5291,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-individual-j-as-the-next-fed-chair",
-          "question": "Will Trump nominate Janet Yellen as the next Fed chair?",
-          "conditionId": "0xc71855fc12bcc7fed8448d4eb863a3aab497e8bbd135ee54d5a8ddb03c4ea1f9",
-          "side": "YES",
-          "amount": 143.8121,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-arthur-laffer-as-the-next-fed-chair",
-          "question": "Will Trump nominate Arthur Laffer as the next Fed chair?",
-          "conditionId": "0xe844e12246d8504b8ec30c1d461718dbc9645fb73487ca50e5e716eefbb2bc63",
-          "side": "YES",
-          "amount": 145.2916,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-barron-trump-as-the-next-fed-chair",
-          "question": "Will Trump nominate Barron Trump as the next Fed chair?",
-          "conditionId": "0x1d0f90b6e67d5e574780c98d42b0d339d4b17e945215fcc555ffd8a31092d76a",
-          "side": "YES",
-          "amount": 143.2333,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-david-zervos-as-the-next-fed-chair",
-          "question": "Will Trump nominate David Zervos as the next Fed chair?",
-          "conditionId": "0x92291ad59a105b0fb205f8aa2d3d2dbba7ee249ad6532672c854eaaf79fc135c",
-          "side": "YES",
-          "amount": 124.4611,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-ron-paul-as-the-next-fed-chair",
-          "question": "Will Trump nominate Ron Paul as the next Fed chair?",
-          "conditionId": "0xfee4b6988b9513dab72118c97abeb4369f0d9a7c2290337ca5d5c2f116a148c2",
-          "side": "YES",
-          "amount": 167.2317,
-          "marketRatio": 6,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-philip-jefferson-as-the-next-fed-chair",
-          "question": "Will Trump nominate Philip Jefferson as the next Fed chair?",
-          "conditionId": "0xfbb2046e013da7b66ecedf3a9de63ce446fd57c23ccc77cd019991f485522236",
-          "side": "YES",
-          "amount": 143.1054,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-larry-kudlow-as-the-next-fed-chair",
-          "question": "Will Trump nominate Larry Kudlow as the next Fed chair?",
-          "conditionId": "0x22d3d4722ce79dae5b2594df2ce89b1c283e3227b78718353bcca2e854d115a4",
-          "side": "YES",
-          "amount": 171.917,
-          "marketRatio": 6,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-david-malpass-as-the-next-fed-chair",
-          "question": "Will Trump nominate David Malpass as the next Fed chair?",
-          "conditionId": "0x998acf9ed1bbda06d59df70786441468872c72b2de59cacbea93625b14a5efcb",
-          "side": "YES",
-          "amount": 140.5041,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-larry-lindsey-as-the-next-fed-chair",
-          "question": "Will Trump nominate Larry Lindsey as the next Fed chair?",
-          "conditionId": "0x95657cd92502a3b132163cb9c77f5f16771dda1faa33a3977364f11a945d68f0",
-          "side": "YES",
-          "amount": 167.2317,
-          "marketRatio": 6,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-marc-sumerlin-as-the-next-fed-chair",
-          "question": "Will Trump nominate Marc Sumerlin as the next Fed chair?",
-          "conditionId": "0xecb8543d8b5072ab44f216f0d18830d0276bfcbb6b51bfd14c62540560cc7a88",
-          "side": "YES",
-          "amount": 142.5291,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-lorie-k-logan-as-the-next-fed-chair",
-          "question": "Will Trump nominate Lorie K. Logan as the next Fed chair?",
-          "conditionId": "0xdc609df6c167499ecd2beffda05a1ddaeca7ed3269a805f7b9a4afd5e96cf2e5",
-          "side": "YES",
-          "amount": 140.5041,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-james-b-bullard-as-the-next-fed-chair",
-          "question": "Will Trump nominate James B. Bullard as the next Fed chair?",
-          "conditionId": "0x582c62c350aac2720711abeb30b16c41c5cdc9b342bfa30da380b6ea6bdeb1ac",
-          "side": "YES",
-          "amount": 143.1054,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 191
-        },
-        {
-          "slug": "will-trump-nominate-howard-lutnick-as-the-next-fed-chair",
-          "question": "Will Trump nominate Howard Lutnick as the next Fed chair?",
-          "conditionId": "0xcba397f49b319dccb5f1b92c3710518d1c4f8f1dee86577b4bb243f3ca77e389",
-          "side": "YES",
-          "amount": 150.8307,
-          "marketRatio": 6,
-          "marketEntryDays": 999,
-          "score": 191
         }
       ]
     },
@@ -3076,14 +2970,47 @@
       ]
     },
     {
-      "wallet": "0xdf705353876ceb2549f0c03ffcb4cba33d785e92",
-      "name": "AngryRhino",
-      "totalMarkets": 83,
-      "accountAgeDays": 58,
-      "isCamouflage": true,
-      "maxScore": 231,
-      "totalValue": 121847.1328,
-      "allTimePnl": -60216,
+      "wallet": "0x8debd189ffd74160f25e367bafaed61a9fea7062",
+      "name": "taut-dogwood",
+      "totalMarkets": 11,
+      "accountAgeDays": 1008,
+      "isCamouflage": false,
+      "maxScore": 235,
+      "totalValue": 44098.960999999996,
+      "allTimePnl": 359,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-march-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
+          "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
+          "side": "NO",
+          "amount": 14325.3315,
+          "marketRatio": 27,
+          "marketEntryDays": 0,
+          "score": 235
+        },
+        {
+          "slug": "will-the-ecb-announce-no-change-at-the-february-2026-meeting",
+          "question": "Will the ECB announce no change at the February 2026 meeting?",
+          "conditionId": "0x378d1c879e2531607fe0534003c2a2ec02719276c44ca6a660a3e2a9f4e6a0d0",
+          "side": "YES",
+          "amount": 29773.6295,
+          "marketRatio": 57,
+          "marketEntryDays": 0,
+          "score": 220
+        }
+      ]
+    },
+    {
+      "wallet": "0x2d99e29c4f066ba32098c65e4c7454b277d94ca3",
+      "name": "scout",
+      "totalMarkets": 3,
+      "accountAgeDays": 618,
+      "isCamouflage": false,
+      "maxScore": 234,
+      "totalValue": 597678.7345,
+      "allTimePnl": 3073,
       "monthPnl": 0,
       "markets": [
         {
@@ -3091,7 +3018,93 @@
           "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
           "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
           "side": "NO",
-          "amount": 101290.3276,
+          "amount": 99150.0327,
+          "marketRatio": 8,
+          "marketEntryDays": 999,
+          "score": 225
+        },
+        {
+          "slug": "tesla-launches-unsupervised-full-self-driving-fsd-by-october-31-717-337",
+          "question": "Tesla launches unsupervised full self driving (FSD) by June 30?",
+          "conditionId": "0x35155be9ad199e97505970a5dfb2b4bca7a9d1bb7b731389a590091997998a78",
+          "side": "YES",
+          "amount": 498528.7018,
+          "marketRatio": 41,
+          "marketEntryDays": 999,
+          "score": 234
+        }
+      ]
+    },
+    {
+      "wallet": "0xe598435df0cdf5d22bdd5082d557f75f9180a0a8",
+      "name": "bamesjond",
+      "totalMarkets": 100,
+      "accountAgeDays": 96,
+      "isCamouflage": false,
+      "maxScore": 234,
+      "totalValue": 24856.8575,
+      "allTimePnl": -1598635,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-no-one-before-2027",
+          "question": "Will Trump nominate no one before 2027?",
+          "conditionId": "0xc830d19ead001f5378792cc0df36004ddb1b312bb26fbd5c4226aa698c41f808",
+          "side": "YES",
+          "amount": 137.9449,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 188
+        },
+        {
+          "slug": "will-gta-6-cost-100",
+          "question": "Will GTA 6 cost $100+?",
+          "conditionId": "0xae5584fbb57f23c1c608d544b656f23d8bf12340cef70811cf31bb0cb4fc2115",
+          "side": "NO",
+          "amount": 6462.6182,
+          "marketRatio": 5,
+          "marketEntryDays": 999,
+          "score": 155
+        },
+        {
+          "slug": "will-tariffs-generate-250b-in-2025",
+          "question": "Will tariffs generate >$250b in 2025?",
+          "conditionId": "0x53700c2b2fa65e0a3775c757d0c705be4bee8c265c49d283ef50a0dfb3bf8894",
+          "side": "NO",
+          "amount": 7561.8563,
+          "marketRatio": 6,
+          "marketEntryDays": 999,
+          "score": 155
+        },
+        {
+          "slug": "epstein-client-list-released-by-june-30",
+          "question": "Epstein client list released by June 30?",
+          "conditionId": "0xa08bf5e2acca8cf3f85209795cf278128a30869c5a8bfb97851e19fd21d0d21e",
+          "side": "NO",
+          "amount": 10694.4381,
+          "marketRatio": 9,
+          "marketEntryDays": 0,
+          "score": 234
+        }
+      ]
+    },
+    {
+      "wallet": "0xdf705353876ceb2549f0c03ffcb4cba33d785e92",
+      "name": "AngryRhino",
+      "totalMarkets": 83,
+      "accountAgeDays": 58,
+      "isCamouflage": true,
+      "maxScore": 231,
+      "totalValue": 122154.539,
+      "allTimePnl": -59603,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-judy-shelton-as-the-next-fed-chair",
+          "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
+          "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
+          "side": "NO",
+          "amount": 101597.7338,
           "marketRatio": 30,
           "marketEntryDays": 2,
           "score": 231
@@ -3103,7 +3116,7 @@
           "side": "NO",
           "amount": 8449.9813,
           "marketRatio": 3,
-          "marketEntryDays": 17,
+          "marketEntryDays": 18,
           "score": 110
         },
         {
@@ -3135,8 +3148,8 @@
       "accountAgeDays": 53,
       "isCamouflage": false,
       "maxScore": 231,
-      "totalValue": 9095.2575,
-      "allTimePnl": 33,
+      "totalValue": 9104.5148,
+      "allTimePnl": 26,
       "monthPnl": 0,
       "markets": [
         {
@@ -3144,10 +3157,43 @@
           "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
           "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "NO",
-          "amount": 9095.2575,
-          "marketRatio": 99,
+          "amount": 9104.5148,
+          "marketRatio": 100,
           "marketEntryDays": 29,
           "score": 231
+        }
+      ]
+    },
+    {
+      "wallet": "0xce66940dfe6dc18bc151d66d52a66eb2121bcc64",
+      "name": "cynical-reason",
+      "totalMarkets": 93,
+      "accountAgeDays": 188,
+      "isCamouflage": false,
+      "maxScore": 231,
+      "totalValue": 11965.9468,
+      "allTimePnl": -10144,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
+          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
+          "side": "NO",
+          "amount": 8950.0383,
+          "marketRatio": 2,
+          "marketEntryDays": 999,
+          "score": 231
+        },
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
+          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
+          "side": "YES",
+          "amount": 3015.9085,
+          "marketRatio": 1,
+          "marketEntryDays": 999,
+          "score": 225
         }
       ]
     },
@@ -3158,8 +3204,8 @@
       "accountAgeDays": 54,
       "isCamouflage": false,
       "maxScore": 229,
-      "totalValue": 709759.2614,
-      "allTimePnl": 26154,
+      "totalValue": 710480.1952,
+      "allTimePnl": 26875,
       "monthPnl": 0,
       "markets": [
         {
@@ -3167,7 +3213,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 709759.2614,
+          "amount": 710480.1952,
           "marketRatio": 69,
           "marketEntryDays": 1,
           "score": 229
@@ -3182,7 +3228,7 @@
       "isCamouflage": true,
       "maxScore": 229,
       "totalValue": 13479.9488,
-      "allTimePnl": 31512,
+      "allTimePnl": 29177,
       "monthPnl": 0,
       "markets": [
         {
@@ -3191,8 +3237,31 @@
           "conditionId": "0xdcc87b9ca36015e396bd0eebca29e854a136ed2b0b701049d1ee9da6bee3eb35",
           "side": "NO",
           "amount": 13479.9488,
-          "marketRatio": 15,
+          "marketRatio": 16,
           "marketEntryDays": 999,
+          "score": 229
+        }
+      ]
+    },
+    {
+      "wallet": "0x8de674db0dfe57e85594a32c06b94703d2842938",
+      "name": "OLOTH",
+      "totalMarkets": 8,
+      "accountAgeDays": 992,
+      "isCamouflage": false,
+      "maxScore": 229,
+      "totalValue": 9995,
+      "allTimePnl": 352,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
+          "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
+          "conditionId": "0xdb1ae961e30733e7857ebb425b5f6449fa8032de13f32c1c6e447a0c3801ca04",
+          "side": "NO",
+          "amount": 9995,
+          "marketRatio": 22,
+          "marketEntryDays": 2,
           "score": 229
         }
       ]
@@ -3204,29 +3273,19 @@
       "accountAgeDays": 372,
       "isCamouflage": false,
       "maxScore": 228,
-      "totalValue": 234444.88789999997,
-      "allTimePnl": 98382,
+      "totalValue": 234605.79220000003,
+      "allTimePnl": 131463,
       "monthPnl": 0,
       "markets": [
-        {
-          "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
-          "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
-          "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
-          "side": "NO",
-          "amount": 9980,
-          "marketRatio": 1,
-          "marketEntryDays": 999,
-          "score": 169
-        },
         {
           "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-march-2026-meeting",
           "question": "Will the Fed increase interest rates by 25+ bps after the March 2026 meeting?",
           "conditionId": "0x25aa90b3cd98305e849189b4e8b770fc77fe89bccb7cf9656468414e01145d38",
           "side": "NO",
-          "amount": 9845,
-          "marketRatio": 1,
+          "amount": 19690,
+          "marketRatio": 2,
           "marketEntryDays": 999,
-          "score": 169
+          "score": 175
         },
         {
           "slug": "tesla-launches-unsupervised-full-self-driving-fsd-by-october-31-717-337",
@@ -3243,7 +3302,7 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "NO",
-          "amount": 5625.0088,
+          "amount": 5628.0088,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 169
@@ -3253,7 +3312,7 @@
           "question": "Will 2 Fed rate cuts happen in 2026?",
           "conditionId": "0xe0d9f508a249e0070db06eb7d1e1fb17eb23c963f6fb722c4c3f81e23240c1cd",
           "side": "YES",
-          "amount": 5161.197,
+          "amount": 5275.8903,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 206
@@ -3263,7 +3322,7 @@
           "question": "Will 8 Fed rate cuts happen in 2026?",
           "conditionId": "0xfe28cb84a714b1a964290d7fd2587e71d57e905678c8ab64488449b24be78e52",
           "side": "YES",
-          "amount": 200.7289,
+          "amount": 189.2587,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 188
@@ -3273,7 +3332,7 @@
           "question": "Will 6 Fed rate cuts happen in 2026?",
           "conditionId": "0x4914bfdd892a48c341b5e0f41ec10475a815f2277273110b16f95e21084bfe75",
           "side": "YES",
-          "amount": 895.3852,
+          "amount": 906.7192,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 200
@@ -3283,20 +3342,10 @@
           "question": "Will 3 Fed rate cuts happen in 2026?",
           "conditionId": "0x8d4966e84ae80f24b2e14643fdd45364e354229e11e2c17903b4b1763cfbe67c",
           "side": "YES",
-          "amount": 6290.8019,
-          "marketRatio": 1,
-          "marketEntryDays": 999,
-          "score": 206
-        },
-        {
-          "slug": "will-7-fed-rate-cuts-happen-in-2026",
-          "question": "Will 7 Fed rate cuts happen in 2026?",
-          "conditionId": "0x2368d2604c9c2b95bc98c51bd50c66e5351caebf05b9fe79d3398c387fe29a89",
-          "side": "YES",
-          "amount": 493.5285,
+          "amount": 6176.4237,
           "marketRatio": 0,
           "marketEntryDays": 999,
-          "score": 188
+          "score": 206
         },
         {
           "slug": "will-5-fed-rate-cuts-happen-in-2026",
@@ -3307,6 +3356,16 @@
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 200
+        },
+        {
+          "slug": "will-7-fed-rate-cuts-happen-in-2026",
+          "question": "Will 7 Fed rate cuts happen in 2026?",
+          "conditionId": "0x2368d2604c9c2b95bc98c51bd50c66e5351caebf05b9fe79d3398c387fe29a89",
+          "side": "YES",
+          "amount": 475.9025,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 188
         },
         {
           "slug": "will-4-fed-rate-cuts-happen-in-2026",
@@ -3333,7 +3392,7 @@
           "question": "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
           "conditionId": "0xdab002228af15d1cb3a161b3a584165eac9010d4419582c3c7d5d07d847c4256",
           "side": "YES",
-          "amount": 24207.4115,
+          "amount": 24517.7629,
           "marketRatio": 2,
           "marketEntryDays": 999,
           "score": 142
@@ -3358,7 +3417,7 @@
       "isCamouflage": true,
       "maxScore": 228,
       "totalValue": 14515.8839,
-      "allTimePnl": 8362,
+      "allTimePnl": 8049,
       "monthPnl": 0,
       "markets": [
         {
@@ -3390,8 +3449,8 @@
       "accountAgeDays": 262,
       "isCamouflage": true,
       "maxScore": 225,
-      "totalValue": 1893.48,
-      "allTimePnl": -61766,
+      "totalValue": 1771.32,
+      "allTimePnl": -62338,
       "monthPnl": 0,
       "markets": [
         {
@@ -3399,7 +3458,7 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "NO",
-          "amount": 1893.48,
+          "amount": 1771.32,
           "marketRatio": 11,
           "marketEntryDays": 999,
           "score": 225
@@ -3414,7 +3473,7 @@
       "isCamouflage": false,
       "maxScore": 225,
       "totalValue": 114.7135,
-      "allTimePnl": 12307,
+      "allTimePnl": 7968,
       "monthPnl": 0,
       "markets": [
         {
@@ -3436,8 +3495,8 @@
       "accountAgeDays": 536,
       "isCamouflage": false,
       "maxScore": 225,
-      "totalValue": 212.2396,
-      "allTimePnl": -29317,
+      "totalValue": 200.1116,
+      "allTimePnl": -29088,
       "monthPnl": 0,
       "markets": [
         {
@@ -3445,7 +3504,7 @@
           "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
           "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "YES",
-          "amount": 212.2396,
+          "amount": 200.1116,
           "marketRatio": 0,
           "marketEntryDays": 4,
           "score": 225
@@ -3459,8 +3518,8 @@
       "accountAgeDays": 30,
       "isCamouflage": false,
       "maxScore": 225,
-      "totalValue": 50165.1462,
-      "allTimePnl": 165,
+      "totalValue": 50216.2049,
+      "allTimePnl": 216,
       "monthPnl": 0,
       "markets": [
         {
@@ -3468,7 +3527,7 @@
           "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
           "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "NO",
-          "amount": 50165.1462,
+          "amount": 50216.2049,
           "marketRatio": 100,
           "marketEntryDays": 0,
           "score": 225
@@ -3479,11 +3538,11 @@
       "wallet": "0x1318b890f452fea4127dcd64204036543fef96c9",
       "name": "bengorgor",
       "totalMarkets": 6,
-      "accountAgeDays": 404,
+      "accountAgeDays": 405,
       "isCamouflage": true,
       "maxScore": 225,
-      "totalValue": 15188.6563,
-      "allTimePnl": -2955,
+      "totalValue": 15204.1155,
+      "allTimePnl": -2939,
       "monthPnl": 0,
       "markets": [
         {
@@ -3491,7 +3550,7 @@
           "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
           "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "NO",
-          "amount": 15188.6563,
+          "amount": 15204.1155,
           "marketRatio": 75,
           "marketEntryDays": 0,
           "score": 225
@@ -3499,37 +3558,14 @@
       ]
     },
     {
-      "wallet": "0x814de45404c20dd9956737a83f7c8b0b039eb842",
-      "name": "resfeber",
-      "totalMarkets": 65,
-      "accountAgeDays": 83,
-      "isCamouflage": true,
-      "maxScore": 225,
-      "totalValue": 2625,
-      "allTimePnl": 171,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-march-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the March 2026 meeting?",
-          "conditionId": "0xd6c49a94948e365aa74c09eef54d907b7ca534b243c387c375305d5cdd1afef3",
-          "side": "YES",
-          "amount": 2625,
-          "marketRatio": 7,
-          "marketEntryDays": 1,
-          "score": 225
-        }
-      ]
-    },
-    {
       "wallet": "0xb401123e33dbbe1d575c4ee4f30c714a2819df2a",
       "name": "rando12345",
-      "totalMarkets": 15,
+      "totalMarkets": 13,
       "accountAgeDays": 176,
       "isCamouflage": true,
       "maxScore": 225,
-      "totalValue": 12695.1192,
-      "allTimePnl": -889,
+      "totalValue": 12678.2911,
+      "allTimePnl": -1318,
       "monthPnl": 0,
       "markets": [
         {
@@ -3537,8 +3573,8 @@
           "question": "Will the U.S. collect less than $100b in revenue in 2025?",
           "conditionId": "0x6acea3596be0a8126e8658d39ecc1ac44bee1246c162e51a8062b380bcf147c2",
           "side": "YES",
-          "amount": 12695.1192,
-          "marketRatio": 48,
+          "amount": 12678.2911,
+          "marketRatio": 55,
           "marketEntryDays": 1,
           "score": 225
         }
@@ -3548,11 +3584,11 @@
       "wallet": "0x7c873c11e40ceaaba6385322d49f565b66659bd4",
       "name": "jaja5050",
       "totalMarkets": 75,
-      "accountAgeDays": 251,
+      "accountAgeDays": 252,
       "isCamouflage": true,
       "maxScore": 225,
-      "totalValue": 10164.7688,
-      "allTimePnl": -103694,
+      "totalValue": 10324.8439,
+      "allTimePnl": -102844,
       "monthPnl": 0,
       "markets": [
         {
@@ -3560,7 +3596,7 @@
           "question": "Billionaire one-time wealth tax passes in California election 2026?",
           "conditionId": "0x9345d5142a67f5541264c96515496affee02580f1c572680759eac9fd2a1588a",
           "side": "NO",
-          "amount": 10164.7688,
+          "amount": 10324.8439,
           "marketRatio": 5,
           "marketEntryDays": 0,
           "score": 225
@@ -3585,91 +3621,8 @@
           "side": "YES",
           "amount": 23319.8518,
           "marketRatio": 20,
-          "marketEntryDays": 10,
+          "marketEntryDays": 11,
           "score": 222
-        }
-      ]
-    },
-    {
-      "wallet": "0xbacd00c9080a82ded56f504ee8810af732b0ab35",
-      "name": "ScottyNooo",
-      "totalMarkets": 100,
-      "accountAgeDays": 271,
-      "isCamouflage": true,
-      "maxScore": 221,
-      "totalValue": 641496.0630999999,
-      "allTimePnl": -140835,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-judy-shelton-as-the-next-fed-chair",
-          "question": "Will Trump nominate Judy Shelton as the next Fed chair?",
-          "conditionId": "0x46d40e851b24d9b0af4bc1942ccd86439cae82a9011767da14950df0ad997adf",
-          "side": "NO",
-          "amount": 267670.2934,
-          "marketRatio": 19,
-          "marketEntryDays": 999,
-          "score": 219
-        },
-        {
-          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
-          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
-          "side": "YES",
-          "amount": 300932.2672,
-          "marketRatio": 21,
-          "marketEntryDays": 999,
-          "score": 219
-        },
-        {
-          "slug": "will-trump-nominate-kevin-hassett-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Hassett as the next Fed chair?",
-          "conditionId": "0xdcc87b9ca36015e396bd0eebca29e854a136ed2b0b701049d1ee9da6bee3eb35",
-          "side": "YES",
-          "amount": 129.2801,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 200
-        },
-        {
-          "slug": "will-trump-nominate-christopher-waller-as-the-next-fed-chair",
-          "question": "Will Trump nominate Christopher Waller as the next Fed chair?",
-          "conditionId": "0x705371444684d676041d1010a94cae3a657340fa4809b4307de3c173a35e0957",
-          "side": "NO",
-          "amount": 40822.6465,
-          "marketRatio": 3,
-          "marketEntryDays": 0,
-          "score": 221
-        },
-        {
-          "slug": "will-the-supreme-court-rule-in-favor-of-trumps-tariffs",
-          "question": "Supreme Court rules in favor of Trump's tariffs?",
-          "conditionId": "0xb1d2cd56624ec8bb3d8115d50d503d0e8578bf32d754ad5fe3c0e08a73186c57",
-          "side": "NO",
-          "amount": 24382.2526,
-          "marketRatio": 2,
-          "marketEntryDays": 999,
-          "score": 142
-        },
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 50+ bps after the April 2026 meeting?",
-          "conditionId": "0xd72622d154dfe65b9c019d6afcfe75a55717e5c502db611f555b101aafbf6ec5",
-          "side": "NO",
-          "amount": 6686.8047,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 169
-        },
-        {
-          "slug": "tim-cook-out-as-apple-ceo-by-march-31",
-          "question": "Tim Cook out as Apple CEO by March 31?",
-          "conditionId": "0xb86abc5abe1c66d8c77b03e4d22ac94ae15c6e64a7ae8f4fce8d9507bb878ea6",
-          "side": "YES",
-          "amount": 872.5186,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 182
         }
       ]
     },
@@ -3681,7 +3634,7 @@
       "isCamouflage": false,
       "maxScore": 220,
       "totalValue": 27699.041,
-      "allTimePnl": 803,
+      "allTimePnl": 539,
       "monthPnl": 0,
       "markets": [
         {
@@ -3704,7 +3657,7 @@
       "isCamouflage": true,
       "maxScore": 220,
       "totalValue": 23630.3714,
-      "allTimePnl": 701,
+      "allTimePnl": 646,
       "monthPnl": 0,
       "markets": [
         {
@@ -3720,6 +3673,29 @@
       ]
     },
     {
+      "wallet": "0x4ba4466ba485e8c18948a0a80ce4c9db05718a89",
+      "name": "Skaliz",
+      "totalMarkets": 100,
+      "accountAgeDays": 550,
+      "isCamouflage": true,
+      "maxScore": 219,
+      "totalValue": 13012.5325,
+      "allTimePnl": -101723,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
+          "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
+          "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
+          "side": "NO",
+          "amount": 13012.5325,
+          "marketRatio": 59,
+          "marketEntryDays": 4,
+          "score": 219
+        }
+      ]
+    },
+    {
       "wallet": "0x90ed5bffbffbfc344aa1195572d89719a398b5bc",
       "name": "failstober",
       "totalMarkets": 100,
@@ -3727,7 +3703,7 @@
       "isCamouflage": false,
       "maxScore": 219,
       "totalValue": 366.61209999999994,
-      "allTimePnl": 84087,
+      "allTimePnl": 82961,
       "monthPnl": 0,
       "markets": [
         {
@@ -3753,52 +3729,6 @@
       ]
     },
     {
-      "wallet": "0x4ba4466ba485e8c18948a0a80ce4c9db05718a89",
-      "name": "Skaliz",
-      "totalMarkets": 100,
-      "accountAgeDays": 549,
-      "isCamouflage": true,
-      "maxScore": 219,
-      "totalValue": 13012.5325,
-      "allTimePnl": -101915,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
-          "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
-          "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
-          "side": "NO",
-          "amount": 13012.5325,
-          "marketRatio": 59,
-          "marketEntryDays": 4,
-          "score": 219
-        }
-      ]
-    },
-    {
-      "wallet": "0x8a815b830d6ecfb203abd27334ef8d621e2558b0",
-      "name": "Yelowyolo",
-      "totalMarkets": 49,
-      "accountAgeDays": 156,
-      "isCamouflage": true,
-      "maxScore": 219,
-      "totalValue": 113.8732,
-      "allTimePnl": 2369,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-christopher-waller-as-the-next-fed-chair",
-          "question": "Will Trump nominate Christopher Waller as the next Fed chair?",
-          "conditionId": "0x705371444684d676041d1010a94cae3a657340fa4809b4307de3c173a35e0957",
-          "side": "YES",
-          "amount": 113.8732,
-          "marketRatio": 9,
-          "marketEntryDays": 0,
-          "score": 219
-        }
-      ]
-    },
-    {
       "wallet": "0x5e0220909135c88382a2128e1e8ef1278567817e",
       "name": "gotigers",
       "totalMarkets": 26,
@@ -3806,7 +3736,7 @@
       "isCamouflage": false,
       "maxScore": 219,
       "totalValue": 3750,
-      "allTimePnl": -271864,
+      "allTimePnl": -271125,
       "monthPnl": 0,
       "markets": [
         {
@@ -3822,14 +3752,37 @@
       ]
     },
     {
+      "wallet": "0xec981ed70ae69c5cbcac08c1ba063e734f6bafcd",
+      "name": "0xheavy888",
+      "totalMarkets": 55,
+      "accountAgeDays": 538,
+      "isCamouflage": true,
+      "maxScore": 219,
+      "totalValue": 6449.9834,
+      "allTimePnl": 6791,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "billionaire-one-time-wealth-tax-passes-in-california-election-2026",
+          "question": "Billionaire one-time wealth tax passes in California election 2026?",
+          "conditionId": "0x9345d5142a67f5541264c96515496affee02580f1c572680759eac9fd2a1588a",
+          "side": "NO",
+          "amount": 6449.9834,
+          "marketRatio": 6,
+          "marketEntryDays": 999,
+          "score": 219
+        }
+      ]
+    },
+    {
       "wallet": "0xcaab19659b995951a44cc992447cb2ad5be324dd",
       "name": "QMG-CORE",
-      "totalMarkets": 89,
-      "accountAgeDays": 674,
+      "totalMarkets": 87,
+      "accountAgeDays": 675,
       "isCamouflage": true,
       "maxScore": 217,
-      "totalValue": 72260.8187,
-      "allTimePnl": 3725,
+      "totalValue": 77411.56779999999,
+      "allTimePnl": 3400,
       "monthPnl": 0,
       "markets": [
         {
@@ -3858,7 +3811,7 @@
           "conditionId": "0x378d1c879e2531607fe0534003c2a2ec02719276c44ca6a660a3e2a9f4e6a0d0",
           "side": "YES",
           "amount": 28616.2034,
-          "marketRatio": 13,
+          "marketRatio": 15,
           "marketEntryDays": 1,
           "score": 217
         },
@@ -3867,22 +3820,32 @@
           "question": "Will the ECB announce an increase at the February 2026 meeting?",
           "conditionId": "0x35ef49754fb8f57901d75296f6a9f34b24f18046fce3b4bdfce8838452d44324",
           "side": "NO",
-          "amount": 27665.5222,
-          "marketRatio": 13,
-          "marketEntryDays": 1,
+          "amount": 27802.4987,
+          "marketRatio": 14,
+          "marketEntryDays": 0,
           "score": 217
+        },
+        {
+          "slug": "will-anthropic-not-ipo-by-june-30-2026",
+          "question": "Will Anthropic not IPO by June 30, 2026?",
+          "conditionId": "0xaf4c3ba4d1b1568d4309bba0874cb7eec1e5b40a648f4a26b12efa2e9b5ee8a4",
+          "side": "YES",
+          "amount": 5013.7726,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 189
         }
       ]
     },
     {
       "wallet": "0xd4f904ecac0ff22ac6601de6b972d4f8b6b4f619",
       "name": "avenger",
-      "totalMarkets": 23,
+      "totalMarkets": 24,
       "accountAgeDays": 781,
       "isCamouflage": false,
       "maxScore": 216,
       "totalValue": 6950.7339,
-      "allTimePnl": 5087,
+      "allTimePnl": 6055,
       "monthPnl": 0,
       "markets": [
         {
@@ -3891,7 +3854,7 @@
           "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
           "side": "NO",
           "amount": 6950.7339,
-          "marketRatio": 8,
+          "marketRatio": 7,
           "marketEntryDays": 2,
           "score": 216
         }
@@ -3905,7 +3868,7 @@
       "isCamouflage": true,
       "maxScore": 216,
       "totalValue": 54750.1025,
-      "allTimePnl": 11695,
+      "allTimePnl": 12521,
       "monthPnl": 0,
       "markets": [
         {
@@ -3928,7 +3891,7 @@
       "isCamouflage": false,
       "maxScore": 216,
       "totalValue": 373.2443,
-      "allTimePnl": 814,
+      "allTimePnl": 1036,
       "monthPnl": 0,
       "markets": [
         {
@@ -3938,7 +3901,7 @@
           "side": "YES",
           "amount": 373.2443,
           "marketRatio": 2,
-          "marketEntryDays": 1,
+          "marketEntryDays": 2,
           "score": 216
         }
       ]
@@ -3950,8 +3913,8 @@
       "accountAgeDays": 69,
       "isCamouflage": false,
       "maxScore": 215,
-      "totalValue": 23026.3541,
-      "allTimePnl": -24898,
+      "totalValue": 31365.729900000002,
+      "allTimePnl": -24709,
       "monthPnl": 0,
       "markets": [
         {
@@ -3959,8 +3922,8 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "NO",
-          "amount": 727.8474,
-          "marketRatio": 2,
+          "amount": 680.8895,
+          "marketRatio": 1,
           "marketEntryDays": 999,
           "score": 81
         },
@@ -3970,7 +3933,7 @@
           "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
           "side": "YES",
           "amount": 213.5837,
-          "marketRatio": 1,
+          "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 119
         },
@@ -3979,8 +3942,8 @@
           "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
           "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
           "side": "NO",
-          "amount": 22084.923,
-          "marketRatio": 56,
+          "amount": 30471.2567,
+          "marketRatio": 64,
           "marketEntryDays": 0,
           "score": 215
         }
@@ -3990,11 +3953,11 @@
       "wallet": "0x8e9eedf20dfa70956d49f608a205e402d9df38e4",
       "name": "Karajan",
       "totalMarkets": 100,
-      "accountAgeDays": 421,
+      "accountAgeDays": 422,
       "isCamouflage": true,
       "maxScore": 213,
-      "totalValue": 4070.8541000000005,
-      "allTimePnl": -1844729,
+      "totalValue": 4128.940799999999,
+      "allTimePnl": -1846297,
       "monthPnl": 0,
       "markets": [
         {
@@ -4002,7 +3965,7 @@
           "question": "Will Trump nominate Bill Pulte as the next Fed chair?",
           "conditionId": "0xc82669901de7cb0be25c1d8de39fbbe8e2ddc0aacba0a30a663ed13c3b9eb06d",
           "side": "YES",
-          "amount": 311.3086,
+          "amount": 315.181,
           "marketRatio": 7,
           "marketEntryDays": 999,
           "score": 213
@@ -4012,7 +3975,7 @@
           "question": "Will Trump nominate himself as the next Fed chair?",
           "conditionId": "0x3d83f444f62b2afe0cb28485073cbf3617400d58813cd351cd4d242560ac47f2",
           "side": "YES",
-          "amount": 231.389,
+          "amount": 235.2614,
           "marketRatio": 6,
           "marketEntryDays": 999,
           "score": 213
@@ -4022,7 +3985,7 @@
           "question": "Will Trump nominate Janet Yellen as the next Fed chair?",
           "conditionId": "0xc71855fc12bcc7fed8448d4eb863a3aab497e8bbd135ee54d5a8ddb03c4ea1f9",
           "side": "YES",
-          "amount": 287.9711,
+          "amount": 291.8435,
           "marketRatio": 7,
           "marketEntryDays": 999,
           "score": 213
@@ -4032,7 +3995,7 @@
           "question": "Will Trump nominate Arthur Laffer as the next Fed chair?",
           "conditionId": "0xe844e12246d8504b8ec30c1d461718dbc9645fb73487ca50e5e716eefbb2bc63",
           "side": "YES",
-          "amount": 258.9048,
+          "amount": 262.7772,
           "marketRatio": 6,
           "marketEntryDays": 999,
           "score": 213
@@ -4042,7 +4005,7 @@
           "question": "Will Trump nominate Barron Trump as the next Fed chair?",
           "conditionId": "0x1d0f90b6e67d5e574780c98d42b0d339d4b17e945215fcc555ffd8a31092d76a",
           "side": "YES",
-          "amount": 243.6669,
+          "amount": 247.5394,
           "marketRatio": 6,
           "marketEntryDays": 999,
           "score": 213
@@ -4052,7 +4015,7 @@
           "question": "Will Trump nominate David Zervos as the next Fed chair?",
           "conditionId": "0x92291ad59a105b0fb205f8aa2d3d2dbba7ee249ad6532672c854eaaf79fc135c",
           "side": "YES",
-          "amount": 148.7037,
+          "amount": 152.5761,
           "marketRatio": 4,
           "marketEntryDays": 999,
           "score": 200
@@ -4062,7 +4025,7 @@
           "question": "Will Trump nominate Ron Paul as the next Fed chair?",
           "conditionId": "0xfee4b6988b9513dab72118c97abeb4369f0d9a7c2290337ca5d5c2f116a148c2",
           "side": "YES",
-          "amount": 321.112,
+          "amount": 324.9845,
           "marketRatio": 8,
           "marketEntryDays": 999,
           "score": 213
@@ -4072,7 +4035,7 @@
           "question": "Will Trump nominate Philip Jefferson as the next Fed chair?",
           "conditionId": "0xfbb2046e013da7b66ecedf3a9de63ce446fd57c23ccc77cd019991f485522236",
           "side": "YES",
-          "amount": 246.2733,
+          "amount": 250.1458,
           "marketRatio": 6,
           "marketEntryDays": 999,
           "score": 213
@@ -4082,7 +4045,7 @@
           "question": "Will Trump nominate Larry Kudlow as the next Fed chair?",
           "conditionId": "0x22d3d4722ce79dae5b2594df2ce89b1c283e3227b78718353bcca2e854d115a4",
           "side": "YES",
-          "amount": 331.1095,
+          "amount": 334.982,
           "marketRatio": 8,
           "marketEntryDays": 999,
           "score": 213
@@ -4092,7 +4055,7 @@
           "question": "Will Trump nominate David Malpass as the next Fed chair?",
           "conditionId": "0x998acf9ed1bbda06d59df70786441468872c72b2de59cacbea93625b14a5efcb",
           "side": "YES",
-          "amount": 230.8616,
+          "amount": 234.734,
           "marketRatio": 6,
           "marketEntryDays": 999,
           "score": 213
@@ -4102,7 +4065,7 @@
           "question": "Will Trump nominate Larry Lindsey as the next Fed chair?",
           "conditionId": "0x95657cd92502a3b132163cb9c77f5f16771dda1faa33a3977364f11a945d68f0",
           "side": "YES",
-          "amount": 287.9461,
+          "amount": 291.8185,
           "marketRatio": 7,
           "marketEntryDays": 999,
           "score": 213
@@ -4112,7 +4075,7 @@
           "question": "Will Trump nominate Marc Sumerlin as the next Fed chair?",
           "conditionId": "0xecb8543d8b5072ab44f216f0d18830d0276bfcbb6b51bfd14c62540560cc7a88",
           "side": "YES",
-          "amount": 238.6756,
+          "amount": 242.548,
           "marketRatio": 6,
           "marketEntryDays": 999,
           "score": 213
@@ -4122,7 +4085,7 @@
           "question": "Will Trump nominate Lorie K. Logan as the next Fed chair?",
           "conditionId": "0xdc609df6c167499ecd2beffda05a1ddaeca7ed3269a805f7b9a4afd5e96cf2e5",
           "side": "YES",
-          "amount": 331.2689,
+          "amount": 335.1414,
           "marketRatio": 8,
           "marketEntryDays": 999,
           "score": 213
@@ -4132,7 +4095,7 @@
           "question": "Will Trump nominate James B. Bullard as the next Fed chair?",
           "conditionId": "0x582c62c350aac2720711abeb30b16c41c5cdc9b342bfa30da380b6ea6bdeb1ac",
           "side": "YES",
-          "amount": 314.2158,
+          "amount": 318.0883,
           "marketRatio": 8,
           "marketEntryDays": 999,
           "score": 213
@@ -4142,9 +4105,32 @@
           "question": "Will Trump nominate Howard Lutnick as the next Fed chair?",
           "conditionId": "0xcba397f49b319dccb5f1b92c3710518d1c4f8f1dee86577b4bb243f3ca77e389",
           "side": "YES",
-          "amount": 287.4472,
+          "amount": 291.3197,
           "marketRatio": 7,
           "marketEntryDays": 999,
+          "score": 213
+        }
+      ]
+    },
+    {
+      "wallet": "0x216509be5332c6037105b4f871966eb97240f598",
+      "name": "HotChili",
+      "totalMarkets": 100,
+      "accountAgeDays": 535,
+      "isCamouflage": true,
+      "maxScore": 213,
+      "totalValue": 523.5171,
+      "allTimePnl": 4376,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
+          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
+          "side": "NO",
+          "amount": 523.5171,
+          "marketRatio": 5,
+          "marketEntryDays": 0,
           "score": 213
         }
       ]
@@ -4157,7 +4143,7 @@
       "isCamouflage": true,
       "maxScore": 213,
       "totalValue": 58564.6739,
-      "allTimePnl": -1214188,
+      "allTimePnl": -1214044,
       "monthPnl": 0,
       "markets": [
         {
@@ -4190,7 +4176,7 @@
       "isCamouflage": true,
       "maxScore": 213,
       "totalValue": 18794.8659,
-      "allTimePnl": 134970,
+      "allTimePnl": 112208,
       "monthPnl": 0,
       "markets": [
         {
@@ -4199,7 +4185,7 @@
           "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
           "side": "YES",
           "amount": 18794.8659,
-          "marketRatio": 10,
+          "marketRatio": 11,
           "marketEntryDays": 999,
           "score": 213
         }
@@ -4229,14 +4215,200 @@
       ]
     },
     {
+      "wallet": "0x67bc6af6806df61ba5144b125174ecf5f821d54e",
+      "name": "waterfall0",
+      "totalMarkets": 81,
+      "accountAgeDays": 85,
+      "isCamouflage": false,
+      "maxScore": 210,
+      "totalValue": 2389.8387,
+      "allTimePnl": 11832,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-bill-pulte-as-the-next-fed-chair",
+          "question": "Will Trump nominate Bill Pulte as the next Fed chair?",
+          "conditionId": "0xc82669901de7cb0be25c1d8de39fbbe8e2ddc0aacba0a30a663ed13c3b9eb06d",
+          "side": "YES",
+          "amount": 171.2029,
+          "marketRatio": 3,
+          "marketEntryDays": 0,
+          "score": 210
+        },
+        {
+          "slug": "will-trump-nominate-himself-as-the-next-fed-chair",
+          "question": "Will Trump nominate himself as the next Fed chair?",
+          "conditionId": "0x3d83f444f62b2afe0cb28485073cbf3617400d58813cd351cd4d242560ac47f2",
+          "side": "YES",
+          "amount": 153.4112,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-individual-j-as-the-next-fed-chair",
+          "question": "Will Trump nominate Janet Yellen as the next Fed chair?",
+          "conditionId": "0xc71855fc12bcc7fed8448d4eb863a3aab497e8bbd135ee54d5a8ddb03c4ea1f9",
+          "side": "YES",
+          "amount": 154.6942,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-arthur-laffer-as-the-next-fed-chair",
+          "question": "Will Trump nominate Arthur Laffer as the next Fed chair?",
+          "conditionId": "0xe844e12246d8504b8ec30c1d461718dbc9645fb73487ca50e5e716eefbb2bc63",
+          "side": "YES",
+          "amount": 156.1737,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-barron-trump-as-the-next-fed-chair",
+          "question": "Will Trump nominate Barron Trump as the next Fed chair?",
+          "conditionId": "0x1d0f90b6e67d5e574780c98d42b0d339d4b17e945215fcc555ffd8a31092d76a",
+          "side": "YES",
+          "amount": 154.1154,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-david-zervos-as-the-next-fed-chair",
+          "question": "Will Trump nominate David Zervos as the next Fed chair?",
+          "conditionId": "0x92291ad59a105b0fb205f8aa2d3d2dbba7ee249ad6532672c854eaaf79fc135c",
+          "side": "YES",
+          "amount": 135.3432,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-ron-paul-as-the-next-fed-chair",
+          "question": "Will Trump nominate Ron Paul as the next Fed chair?",
+          "conditionId": "0xfee4b6988b9513dab72118c97abeb4369f0d9a7c2290337ca5d5c2f116a148c2",
+          "side": "YES",
+          "amount": 178.1138,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-philip-jefferson-as-the-next-fed-chair",
+          "question": "Will Trump nominate Philip Jefferson as the next Fed chair?",
+          "conditionId": "0xfbb2046e013da7b66ecedf3a9de63ce446fd57c23ccc77cd019991f485522236",
+          "side": "YES",
+          "amount": 153.9875,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-larry-kudlow-as-the-next-fed-chair",
+          "question": "Will Trump nominate Larry Kudlow as the next Fed chair?",
+          "conditionId": "0x22d3d4722ce79dae5b2594df2ce89b1c283e3227b78718353bcca2e854d115a4",
+          "side": "YES",
+          "amount": 182.7991,
+          "marketRatio": 4,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-david-malpass-as-the-next-fed-chair",
+          "question": "Will Trump nominate David Malpass as the next Fed chair?",
+          "conditionId": "0x998acf9ed1bbda06d59df70786441468872c72b2de59cacbea93625b14a5efcb",
+          "side": "YES",
+          "amount": 151.3862,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-larry-lindsey-as-the-next-fed-chair",
+          "question": "Will Trump nominate Larry Lindsey as the next Fed chair?",
+          "conditionId": "0x95657cd92502a3b132163cb9c77f5f16771dda1faa33a3977364f11a945d68f0",
+          "side": "YES",
+          "amount": 178.1138,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-marc-sumerlin-as-the-next-fed-chair",
+          "question": "Will Trump nominate Marc Sumerlin as the next Fed chair?",
+          "conditionId": "0xecb8543d8b5072ab44f216f0d18830d0276bfcbb6b51bfd14c62540560cc7a88",
+          "side": "YES",
+          "amount": 153.4112,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-lorie-k-logan-as-the-next-fed-chair",
+          "question": "Will Trump nominate Lorie K. Logan as the next Fed chair?",
+          "conditionId": "0xdc609df6c167499ecd2beffda05a1ddaeca7ed3269a805f7b9a4afd5e96cf2e5",
+          "side": "YES",
+          "amount": 151.3862,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-james-b-bullard-as-the-next-fed-chair",
+          "question": "Will Trump nominate James B. Bullard as the next Fed chair?",
+          "conditionId": "0x582c62c350aac2720711abeb30b16c41c5cdc9b342bfa30da380b6ea6bdeb1ac",
+          "side": "YES",
+          "amount": 153.9875,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        },
+        {
+          "slug": "will-trump-nominate-howard-lutnick-as-the-next-fed-chair",
+          "question": "Will Trump nominate Howard Lutnick as the next Fed chair?",
+          "conditionId": "0xcba397f49b319dccb5f1b92c3710518d1c4f8f1dee86577b4bb243f3ca77e389",
+          "side": "YES",
+          "amount": 161.7128,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 166
+        }
+      ]
+    },
+    {
+      "wallet": "0x7791392260b390c43d63f1058bfbc4ea8f37af80",
+      "name": "Jiang2018",
+      "totalMarkets": 6,
+      "accountAgeDays": 460,
+      "isCamouflage": false,
+      "maxScore": 210,
+      "totalValue": 579.9988,
+      "allTimePnl": -4717,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-kevin-warsh-as-the-next-fed-chair",
+          "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
+          "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
+          "side": "NO",
+          "amount": 579.9988,
+          "marketRatio": 23,
+          "marketEntryDays": 2,
+          "score": 210
+        }
+      ]
+    },
+    {
       "wallet": "0x9d84ce0306f8551e02efef1680475fc0f1dc1344",
       "name": "ImJustKen",
       "totalMarkets": 100,
       "accountAgeDays": 999,
       "isCamouflage": true,
       "maxScore": 210,
-      "totalValue": 423970.9257999999,
-      "allTimePnl": 400824,
+      "totalValue": 424369.8081999999,
+      "allTimePnl": 377261,
       "monthPnl": 0,
       "markets": [
         {
@@ -4244,8 +4416,8 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 389103.6036,
-          "marketRatio": 45,
+          "amount": 389498.8333,
+          "marketRatio": 48,
           "marketEntryDays": 999,
           "score": 210
         },
@@ -4324,7 +4496,7 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "YES",
-          "amount": 3346.7455,
+          "amount": 3319.9716,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 191
@@ -4344,7 +4516,7 @@
           "question": "Will 12 or more Fed rate cuts happen in 2026?",
           "conditionId": "0xffa0accb74987c0dc33a70eb3780c1da160206bcfb3ef5d16c1667bc5c459c78",
           "side": "YES",
-          "amount": 287.5358,
+          "amount": 258.1954,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 179
@@ -4354,7 +4526,7 @@
           "question": "Will OpenAI IPO by December 31 2026?",
           "conditionId": "0x66f5b8203ee1c36b993af623fd7f9ef7271dd87b3aebf6df508048ad4b563432",
           "side": "NO",
-          "amount": 6932.9775,
+          "amount": 6992.7445,
           "marketRatio": 1,
           "marketEntryDays": 999,
           "score": 166
@@ -4372,14 +4544,37 @@
       ]
     },
     {
+      "wallet": "0x24c8cf69a0e0a17eee21f69d29752bfa32e823e1",
+      "name": "debased",
+      "totalMarkets": 100,
+      "accountAgeDays": 1034,
+      "isCamouflage": false,
+      "maxScore": 210,
+      "totalValue": 189.9056,
+      "allTimePnl": -518324,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
+          "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
+          "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
+          "side": "YES",
+          "amount": 189.9056,
+          "marketRatio": 0,
+          "marketEntryDays": 0,
+          "score": 210
+        }
+      ]
+    },
+    {
       "wallet": "0xa81eefec9c08fa157d855f1ac5caf8feab1903dc",
       "name": "Snow-White",
       "totalMarkets": 100,
       "accountAgeDays": 98,
       "isCamouflage": true,
       "maxScore": 210,
-      "totalValue": 53564.4038,
-      "allTimePnl": 13338,
+      "totalValue": 53627.88769999999,
+      "allTimePnl": 13968,
       "monthPnl": 0,
       "markets": [
         {
@@ -4387,7 +4582,7 @@
           "question": "Will the U.S. collect less than $100b in revenue in 2025?",
           "conditionId": "0x6acea3596be0a8126e8658d39ecc1ac44bee1246c162e51a8062b380bcf147c2",
           "side": "YES",
-          "amount": 44699.342,
+          "amount": 44640.0905,
           "marketRatio": 24,
           "marketEntryDays": 0,
           "score": 207
@@ -4397,9 +4592,9 @@
           "question": "Will the U.S. collect between $100b and $200b in revenue in 2025?",
           "conditionId": "0xfd94efe3bbd624fb6577ad51cf5639dcbbcd0eb5a6f03543d98a8e4fe58af27a",
           "side": "YES",
-          "amount": 518.216,
+          "amount": 640.9514,
           "marketRatio": 0,
-          "marketEntryDays": 0,
+          "marketEntryDays": 1,
           "score": 185
         },
         {
@@ -4409,7 +4604,7 @@
           "side": "YES",
           "amount": 8346.8458,
           "marketRatio": 4,
-          "marketEntryDays": 0,
+          "marketEntryDays": 1,
           "score": 210
         }
       ]
@@ -4421,8 +4616,8 @@
       "accountAgeDays": 320,
       "isCamouflage": true,
       "maxScore": 210,
-      "totalValue": 6816.7303,
-      "allTimePnl": -7749,
+      "totalValue": 7114.0795,
+      "allTimePnl": -7483,
       "monthPnl": 0,
       "markets": [
         {
@@ -4430,9 +4625,9 @@
           "question": "GPT ads by March 31?",
           "conditionId": "0x331ef908bdfd259bb5e6b018c9beb9323224b54c1a53aeeea6d2363de19426f6",
           "side": "YES",
-          "amount": 6816.7303,
+          "amount": 7114.0795,
           "marketRatio": 7,
-          "marketEntryDays": 1,
+          "marketEntryDays": 2,
           "score": 210
         }
       ]
@@ -4467,8 +4662,8 @@
       "accountAgeDays": 154,
       "isCamouflage": false,
       "maxScore": 210,
-      "totalValue": 14122.469,
-      "allTimePnl": -22687,
+      "totalValue": 14144.969,
+      "allTimePnl": -17274,
       "monthPnl": 0,
       "markets": [
         {
@@ -4476,8 +4671,8 @@
           "question": "Discord IPO before 2027?",
           "conditionId": "0x48fcbf6bb8eceff817ba48b56211e4f8a4cf6896570d847d8d115e63c3abf36a",
           "side": "YES",
-          "amount": 14122.469,
-          "marketRatio": 19,
+          "amount": 14144.969,
+          "marketRatio": 17,
           "marketEntryDays": 999,
           "score": 210
         }
@@ -4490,8 +4685,8 @@
       "accountAgeDays": 553,
       "isCamouflage": false,
       "maxScore": 209,
-      "totalValue": 1231.1695,
-      "allTimePnl": -6243,
+      "totalValue": 1292.728,
+      "allTimePnl": -6319,
       "monthPnl": 0,
       "markets": [
         {
@@ -4499,7 +4694,7 @@
           "question": "Will Anthropic not IPO by June 30, 2026?",
           "conditionId": "0xaf4c3ba4d1b1568d4309bba0874cb7eec1e5b40a648f4a26b12efa2e9b5ee8a4",
           "side": "NO",
-          "amount": 1231.1695,
+          "amount": 1292.728,
           "marketRatio": 6,
           "marketEntryDays": 38,
           "score": 209
@@ -4530,14 +4725,14 @@
       ]
     },
     {
-      "wallet": "0xbdd474c1268840cf2256ae8a2276c8423c59f3b6",
-      "name": "Genuineking",
-      "totalMarkets": 1,
-      "accountAgeDays": 423,
+      "wallet": "0xce71bed9dd1418abc34d244730879d795e8683bc",
+      "name": "tutrucks",
+      "totalMarkets": 7,
+      "accountAgeDays": 144,
       "isCamouflage": false,
       "maxScore": 206,
-      "totalValue": 53750.0529,
-      "allTimePnl": 23012,
+      "totalValue": 84999.7212,
+      "allTimePnl": -3016,
       "monthPnl": 0,
       "markets": [
         {
@@ -4545,10 +4740,20 @@
           "question": "Will Trump nominate Kevin Warsh as the next Fed chair?",
           "conditionId": "0x61b66d02793b4a68ab0cc25be60d65f517fe18c7d654041281bb130341244fcc",
           "side": "YES",
-          "amount": 53750.0529,
-          "marketRatio": 100,
-          "marketEntryDays": 15,
+          "amount": 65203.4492,
+          "marketRatio": 34,
+          "marketEntryDays": 0,
           "score": 206
+        },
+        {
+          "slug": "poilievre-out-as-leader-of-conservatives-before-2027",
+          "question": "Poilievre out as leader of Conservatives before 2027?",
+          "conditionId": "0x189fc3a42652bc98e40592bbdee43cb8160315310ce535a4fa37fd838da64e72",
+          "side": "NO",
+          "amount": 19796.272,
+          "marketRatio": 10,
+          "marketEntryDays": 11,
+          "score": 140
         }
       ]
     },
@@ -4560,7 +4765,7 @@
       "isCamouflage": true,
       "maxScore": 206,
       "totalValue": 28310.5708,
-      "allTimePnl": -34555,
+      "allTimePnl": -34688,
       "monthPnl": 0,
       "markets": [
         {
@@ -4593,7 +4798,7 @@
       "isCamouflage": false,
       "maxScore": 206,
       "totalValue": 17699.823,
-      "allTimePnl": 1066,
+      "allTimePnl": 1161,
       "monthPnl": 0,
       "markets": [
         {
@@ -4615,8 +4820,8 @@
       "accountAgeDays": 89,
       "isCamouflage": true,
       "maxScore": 206,
-      "totalValue": 16874.0762,
-      "allTimePnl": -1503,
+      "totalValue": 16883.0757,
+      "allTimePnl": -1230,
       "monthPnl": 0,
       "markets": [
         {
@@ -4624,9 +4829,9 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "NO",
-          "amount": 16874.0762,
+          "amount": 16883.0757,
           "marketRatio": 28,
-          "marketEntryDays": 19,
+          "marketEntryDays": 20,
           "score": 206
         }
       ]
@@ -4684,8 +4889,8 @@
       "accountAgeDays": 28,
       "isCamouflage": true,
       "maxScore": 205,
-      "totalValue": 52341.2431,
-      "allTimePnl": 29581,
+      "totalValue": 57600.2625,
+      "allTimePnl": 28951,
       "monthPnl": 0,
       "markets": [
         {
@@ -4693,9 +4898,9 @@
           "question": "GPT ads by March 31?",
           "conditionId": "0x331ef908bdfd259bb5e6b018c9beb9323224b54c1a53aeeea6d2363de19426f6",
           "side": "YES",
-          "amount": 52341.2431,
-          "marketRatio": 22,
-          "marketEntryDays": 0,
+          "amount": 57600.2625,
+          "marketRatio": 24,
+          "marketEntryDays": 1,
           "score": 205
         }
       ]
@@ -4707,8 +4912,8 @@
       "accountAgeDays": 45,
       "isCamouflage": false,
       "maxScore": 204,
-      "totalValue": 57151.3064,
-      "allTimePnl": -158,
+      "totalValue": 57209.4757,
+      "allTimePnl": -99,
       "monthPnl": 0,
       "markets": [
         {
@@ -4716,7 +4921,7 @@
           "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
           "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "NO",
-          "amount": 57151.3064,
+          "amount": 57209.4757,
           "marketRatio": 100,
           "marketEntryDays": 1,
           "score": 204
@@ -4730,8 +4935,8 @@
       "accountAgeDays": 45,
       "isCamouflage": false,
       "maxScore": 204,
-      "totalValue": 51781.0142,
-      "allTimePnl": -123,
+      "totalValue": 51833.7176,
+      "allTimePnl": -70,
       "monthPnl": 0,
       "markets": [
         {
@@ -4739,7 +4944,7 @@
           "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
           "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "NO",
-          "amount": 51781.0142,
+          "amount": 51833.7176,
           "marketRatio": 100,
           "marketEntryDays": 1,
           "score": 204
@@ -4750,11 +4955,11 @@
       "wallet": "0x11dfd92b6e01f265f46b328ec8878b001332731f",
       "name": "crazymad00885",
       "totalMarkets": 6,
-      "accountAgeDays": 229,
+      "accountAgeDays": 230,
       "isCamouflage": true,
       "maxScore": 204,
-      "totalValue": 5698.4906,
-      "allTimePnl": -149,
+      "totalValue": 5704.2906,
+      "allTimePnl": -147,
       "monthPnl": 0,
       "markets": [
         {
@@ -4762,215 +4967,10 @@
           "question": "Will the Fed decrease interest rates by 50+ bps after the March 2026 meeting?",
           "conditionId": "0xdeb615a52cd114e5aa27d8344ae506a72bea81f6ed13f5915f050b615a193c20",
           "side": "NO",
-          "amount": 5698.4906,
+          "amount": 5704.2906,
           "marketRatio": 79,
           "marketEntryDays": 5,
           "score": 204
-        }
-      ]
-    },
-    {
-      "wallet": "0x3c01b99c8aed5d5dc7477f3dc3bb048290b1d612",
-      "name": "FoldingKeene",
-      "totalMarkets": 4,
-      "accountAgeDays": 334,
-      "isCamouflage": false,
-      "maxScore": 204,
-      "totalValue": 18276.4052,
-      "allTimePnl": 880,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
-          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
-          "side": "YES",
-          "amount": 18276.4052,
-          "marketRatio": 61,
-          "marketEntryDays": 9,
-          "score": 204
-        }
-      ]
-    },
-    {
-      "wallet": "0xfa8fc6a3e706bc4aa7556d060564c154322ad61b",
-      "name": "singaporesling",
-      "totalMarkets": 100,
-      "accountAgeDays": 454,
-      "isCamouflage": true,
-      "maxScore": 203,
-      "totalValue": 68908.3469,
-      "allTimePnl": 3581,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-kevin-hassett-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Hassett as the next Fed chair?",
-          "conditionId": "0xdcc87b9ca36015e396bd0eebca29e854a136ed2b0b701049d1ee9da6bee3eb35",
-          "side": "NO",
-          "amount": 9295.35,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 181
-        },
-        {
-          "slug": "will-2-fed-rate-cuts-happen-in-2026",
-          "question": "Will 2 Fed rate cuts happen in 2026?",
-          "conditionId": "0xe0d9f508a249e0070db06eb7d1e1fb17eb23c963f6fb722c4c3f81e23240c1cd",
-          "side": "NO",
-          "amount": 26867.0122,
-          "marketRatio": 14,
-          "marketEntryDays": 999,
-          "score": 203
-        },
-        {
-          "slug": "will-1-fed-rate-cut-happen-in-2026",
-          "question": "Will 1 Fed rate cut happen in 2026?",
-          "conditionId": "0x5e082f0b57f47a29044aa35b4c5658393122e659d5feae521c06b57cdd7f905c",
-          "side": "NO",
-          "amount": 9047.2137,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 181
-        },
-        {
-          "slug": "will-the-feds-lower-bound-reach-2pt75-or-lower-before-2027-448-727-854",
-          "question": "Will the Fed’s lower bound reach 2.75% or lower before 2027?",
-          "conditionId": "0x2bb4294142c311763ca6be27ceffcef132f5ac8281f98a62abe02f6e6a8c0107",
-          "side": "YES",
-          "amount": 9662.4426,
-          "marketRatio": 5,
-          "marketEntryDays": 999,
-          "score": 145
-        },
-        {
-          "slug": "will-the-feds-lower-bound-reach-3pt0-or-lower-before-2027-676-111",
-          "question": "Will the Fed’s lower bound reach 3.0% or lower before 2027?",
-          "conditionId": "0xdab002228af15d1cb3a161b3a584165eac9010d4419582c3c7d5d07d847c4256",
-          "side": "YES",
-          "amount": 7664.4282,
-          "marketRatio": 4,
-          "marketEntryDays": 1,
-          "score": 180
-        },
-        {
-          "slug": "will-waymo-launch-in-miami-by-june-30-2026",
-          "question": "Will Waymo launch in Miami by June 30 2026?",
-          "conditionId": "0x6d74d9ea77b720f648d0376c04c661c6039f26bcd5658d5b8588452f6df1922b",
-          "side": "YES",
-          "amount": 6371.9002,
-          "marketRatio": 3,
-          "marketEntryDays": 6,
-          "score": 170
-        }
-      ]
-    },
-    {
-      "wallet": "0x2c980dbb742719d57b9f43f1f2860a6e830729fc",
-      "name": "ningchaoxian2",
-      "totalMarkets": 4,
-      "accountAgeDays": 76,
-      "isCamouflage": false,
-      "maxScore": 203,
-      "totalValue": 35603.9584,
-      "allTimePnl": -4621,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
-          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
-          "side": "YES",
-          "amount": 35603.9584,
-          "marketRatio": 100,
-          "marketEntryDays": 1,
-          "score": 203
-        }
-      ]
-    },
-    {
-      "wallet": "0x15691449477aa15e72cdff51c7b6687b58bc4e0c",
-      "name": "wallet-m",
-      "totalMarkets": 65,
-      "accountAgeDays": 334,
-      "isCamouflage": true,
-      "maxScore": 203,
-      "totalValue": 26094.168,
-      "allTimePnl": -807619,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-march-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the March 2026 meeting?",
-          "conditionId": "0x257b18205f908aef01ef2d1d50e6fea7d29cf5486fe04031d8b101394476faed",
-          "side": "YES",
-          "amount": 26094.168,
-          "marketRatio": 100,
-          "marketEntryDays": 52,
-          "score": 203
-        }
-      ]
-    },
-    {
-      "wallet": "0x011f2d377e56119fb09196dffb0948ae55711122",
-      "name": "11122",
-      "totalMarkets": 100,
-      "accountAgeDays": 447,
-      "isCamouflage": false,
-      "maxScore": 200,
-      "totalValue": 1571.0683,
-      "allTimePnl": 157660,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-trump-nominate-kevin-hassett-as-the-next-fed-chair",
-          "question": "Will Trump nominate Kevin Hassett as the next Fed chair?",
-          "conditionId": "0xdcc87b9ca36015e396bd0eebca29e854a136ed2b0b701049d1ee9da6bee3eb35",
-          "side": "YES",
-          "amount": 213.6659,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 200
-        },
-        {
-          "slug": "will-trump-nominate-jerome-powell-as-the-next-fed-chair",
-          "question": "Will Trump nominate Jerome Powell as the next Fed chair?",
-          "conditionId": "0x60acc46cda1f0619259acf3ef8c77bf734ff08cbed256ca3d1e9444138e21266",
-          "side": "YES",
-          "amount": 270.6072,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 200
-        },
-        {
-          "slug": "will-trump-nominate-rick-rieder-as-the-next-fed-chair",
-          "question": "Will Trump nominate Rick Rieder as the next Fed chair?",
-          "conditionId": "0xbd603617895e199d4042781ee55a7a9614af3130ca8e90d257424ca246f66197",
-          "side": "YES",
-          "amount": 778.9756,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 200
-        },
-        {
-          "slug": "will-trump-nominate-scott-bessent-as-the-next-fed-chair",
-          "question": "Will Trump nominate Scott Bessent as the next Fed chair?",
-          "conditionId": "0xdb1ae961e30733e7857ebb425b5f6449fa8032de13f32c1c6e447a0c3801ca04",
-          "side": "YES",
-          "amount": 133.801,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 200
-        },
-        {
-          "slug": "will-trump-nominate-christopher-waller-as-the-next-fed-chair",
-          "question": "Will Trump nominate Christopher Waller as the next Fed chair?",
-          "conditionId": "0x705371444684d676041d1010a94cae3a657340fa4809b4307de3c173a35e0957",
-          "side": "YES",
-          "amount": 174.0186,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 200
         }
       ]
     }

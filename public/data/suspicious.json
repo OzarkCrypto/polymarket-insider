@@ -1,18 +1,41 @@
 {
-  "updatedAt": "2026-04-10T13:25:26.411Z",
-  "totalMarketsScanned": 364,
+  "updatedAt": "2026-04-10T17:01:38.071Z",
+  "totalMarketsScanned": 366,
   "totalSuspiciousAccounts": 150,
-  "scanDurationSeconds": 376,
+  "scanDurationSeconds": 403,
   "accounts": [
+    {
+      "wallet": "0x09fc877d0f2065b37c5cb5aafc0e66602c7d4cd4",
+      "name": "vikkS",
+      "totalMarkets": 4,
+      "accountAgeDays": 183,
+      "isCamouflage": false,
+      "maxScore": 316,
+      "totalValue": 541.3409,
+      "allTimePnl": 1182,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
+          "side": "YES",
+          "amount": 541.3409,
+          "marketRatio": 10,
+          "marketEntryDays": 0,
+          "score": 316
+        }
+      ]
+    },
     {
       "wallet": "0x0e5bd76779e74304d08e759072abf126d87da593",
       "name": "JAHODA",
-      "totalMarkets": 6,
+      "totalMarkets": 5,
       "accountAgeDays": 154,
       "isCamouflage": false,
-      "maxScore": 310,
-      "totalValue": 515754.8323,
-      "allTimePnl": 205260,
+      "maxScore": 285,
+      "totalValue": 513168.6386,
+      "allTimePnl": 221697,
       "monthPnl": 0,
       "markets": [
         {
@@ -20,10 +43,10 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 393399.9319,
+          "amount": 391399.9322,
           "marketRatio": 30,
           "marketEntryDays": 999,
-          "score": 260
+          "score": 235
         },
         {
           "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-june-2026-meeting",
@@ -33,27 +56,17 @@
           "amount": 121246.1547,
           "marketRatio": 9,
           "marketEntryDays": 999,
-          "score": 260
+          "score": 235
         },
         {
           "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-june-2026-meeting",
           "question": "Will the Fed increase interest rates by 25 bps after the June 2026 meeting?",
           "conditionId": "0xa7cb4135c6d9c36da0e343874dd5b455de739c6d1b9f9f5583dd9320aacf5db2",
           "side": "YES",
-          "amount": 798.4272,
+          "amount": 522.5517,
           "marketRatio": 0,
           "marketEntryDays": 1,
-          "score": 310
-        },
-        {
-          "slug": "will-the-fed-increase-interest-rates-by-50-bps-after-the-june-2026-meeting",
-          "question": "Will the Fed increase interest rates by 50+ bps after the June 2026 meeting?",
-          "conditionId": "0xb01e70a56199a6d5467f47a2b94e75e7c7218c128c8d0b8beb6dafed2f0d15c2",
-          "side": "YES",
-          "amount": 310.3185,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 266
+          "score": 285
         }
       ]
     },
@@ -65,7 +78,7 @@
       "isCamouflage": false,
       "maxScore": 277,
       "totalValue": 1100.8055,
-      "allTimePnl": -645,
+      "allTimePnl": -658,
       "monthPnl": 0,
       "markets": [
         {
@@ -84,11 +97,11 @@
       "wallet": "0x71edffd0d70a1da823ff07a3c6fc81457294d338",
       "name": "pako",
       "totalMarkets": 74,
-      "accountAgeDays": 527,
+      "accountAgeDays": 528,
       "isCamouflage": true,
       "maxScore": 275,
-      "totalValue": 560314.3341,
-      "allTimePnl": 19255,
+      "totalValue": 558175.7943,
+      "allTimePnl": 17238,
       "monthPnl": 0,
       "markets": [
         {
@@ -96,7 +109,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 420650.7813,
+          "amount": 418512.2415,
           "marketRatio": 63,
           "marketEntryDays": 4,
           "score": 275
@@ -108,7 +121,30 @@
           "side": "YES",
           "amount": 139663.5528,
           "marketRatio": 21,
-          "marketEntryDays": 5,
+          "marketEntryDays": 6,
+          "score": 275
+        }
+      ]
+    },
+    {
+      "wallet": "0xbe89905ca9a689f5129621b62fcf715b5a45b88c",
+      "name": "simpleman",
+      "totalMarkets": 31,
+      "accountAgeDays": 452,
+      "isCamouflage": true,
+      "maxScore": 275,
+      "totalValue": 68485.6163,
+      "allTimePnl": 1710,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
+          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
+          "side": "YES",
+          "amount": 68485.6163,
+          "marketRatio": 74,
+          "marketEntryDays": 0,
           "score": 275
         }
       ]
@@ -117,11 +153,11 @@
       "wallet": "0xf5198df69e13937a40d1c76d6f72d9aa067d906b",
       "name": "sbimbg",
       "totalMarkets": 52,
-      "accountAgeDays": 510,
+      "accountAgeDays": 511,
       "isCamouflage": true,
       "maxScore": 275,
-      "totalValue": 13314.0682,
-      "allTimePnl": 14536,
+      "totalValue": 13471.6312,
+      "allTimePnl": 14145,
       "monthPnl": 0,
       "markets": [
         {
@@ -129,7 +165,7 @@
           "question": "Fed rate hike in 2026?",
           "conditionId": "0x80b3af88cb991980e8da1ce86b9794a0957f96ec98c29319dd7ba65e9744d82b",
           "side": "NO",
-          "amount": 13314.0682,
+          "amount": 13471.6312,
           "marketRatio": 9,
           "marketEntryDays": 999,
           "score": 275
@@ -137,60 +173,14 @@
       ]
     },
     {
-      "wallet": "0x9b0b60aa0a1df93202f996860342fd5607815e43",
-      "name": "Irboz-sama",
-      "totalMarkets": 22,
-      "accountAgeDays": 1134,
-      "isCamouflage": false,
-      "maxScore": 273,
-      "totalValue": 771.0708,
-      "allTimePnl": 1740,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 50+ bps after the April 2026 meeting?",
-          "conditionId": "0xd72622d154dfe65b9c019d6afcfe75a55717e5c502db611f555b101aafbf6ec5",
-          "side": "YES",
-          "amount": 771.0708,
-          "marketRatio": 13,
-          "marketEntryDays": 0,
-          "score": 273
-        }
-      ]
-    },
-    {
-      "wallet": "0x09fc877d0f2065b37c5cb5aafc0e66602c7d4cd4",
-      "name": "vikkS",
-      "totalMarkets": 5,
-      "accountAgeDays": 182,
-      "isCamouflage": false,
-      "maxScore": 273,
-      "totalValue": 666.0114,
-      "allTimePnl": 741,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
-          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
-          "side": "YES",
-          "amount": 666.0114,
-          "marketRatio": 11,
-          "marketEntryDays": 0,
-          "score": 273
-        }
-      ]
-    },
-    {
       "wallet": "0x5f8ec8b9c07547d93ac7206ef75c1b625e6021b7",
       "name": "1234ab",
       "totalMarkets": 37,
-      "accountAgeDays": 55,
+      "accountAgeDays": 56,
       "isCamouflage": false,
       "maxScore": 269,
-      "totalValue": 169814.521,
-      "allTimePnl": -18812,
+      "totalValue": 169884.1417,
+      "allTimePnl": -18664,
       "monthPnl": 0,
       "markets": [
         {
@@ -208,8 +198,8 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "YES",
-          "amount": 1144.5966,
-          "marketRatio": 0,
+          "amount": 1320.6884,
+          "marketRatio": 1,
           "marketEntryDays": 1,
           "score": 250
         },
@@ -218,7 +208,7 @@
           "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
           "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
           "side": "YES",
-          "amount": 1840.1518,
+          "amount": 2576.2125,
           "marketRatio": 1,
           "marketEntryDays": 2,
           "score": 250
@@ -228,7 +218,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 165725.9965,
+          "amount": 164883.4647,
           "marketRatio": 64,
           "marketEntryDays": 2,
           "score": 269
@@ -242,8 +232,8 @@
       "accountAgeDays": 619,
       "isCamouflage": true,
       "maxScore": 269,
-      "totalValue": 50786.7968,
-      "allTimePnl": 74715,
+      "totalValue": 50712.2757,
+      "allTimePnl": 74847,
       "monthPnl": 0,
       "markets": [
         {
@@ -251,9 +241,9 @@
           "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
           "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
           "side": "NO",
-          "amount": 11143.7347,
+          "amount": 11110.0508,
           "marketRatio": 4,
-          "marketEntryDays": 0,
+          "marketEntryDays": 1,
           "score": 269
         },
         {
@@ -271,7 +261,7 @@
           "question": "Will Paramount close Warner Bros acquisition?",
           "conditionId": "0xa71785ae27eeaf2a9f7adf8f4f0d7db11e773fa2602b28c55399d31e91c3f2f0",
           "side": "YES",
-          "amount": 5921.4013,
+          "amount": 5880.5641,
           "marketRatio": 2,
           "marketEntryDays": 999,
           "score": 155
@@ -305,8 +295,8 @@
       "accountAgeDays": 70,
       "isCamouflage": true,
       "maxScore": 269,
-      "totalValue": 104842.1748,
-      "allTimePnl": 3784,
+      "totalValue": 104833.1905,
+      "allTimePnl": 3399,
       "monthPnl": 0,
       "markets": [
         {
@@ -314,7 +304,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 59322.4039,
+          "amount": 59020.8157,
           "marketRatio": 11,
           "marketEntryDays": 0,
           "score": 269
@@ -324,7 +314,7 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "NO",
-          "amount": 6375.391,
+          "amount": 6204.7478,
           "marketRatio": 1,
           "marketEntryDays": 1,
           "score": 219
@@ -334,7 +324,7 @@
           "question": "Fed rate hike in 2026?",
           "conditionId": "0x80b3af88cb991980e8da1ce86b9794a0957f96ec98c29319dd7ba65e9744d82b",
           "side": "NO",
-          "amount": 39144.3799,
+          "amount": 39607.627,
           "marketRatio": 7,
           "marketEntryDays": 0,
           "score": 265
@@ -349,7 +339,7 @@
       "isCamouflage": false,
       "maxScore": 267,
       "totalValue": 70869.8522,
-      "allTimePnl": -2688,
+      "allTimePnl": -2693,
       "monthPnl": 0,
       "markets": [
         {
@@ -369,7 +359,7 @@
           "side": "NO",
           "amount": 61788.8077,
           "marketRatio": 57,
-          "marketEntryDays": 94,
+          "marketEntryDays": 95,
           "score": 267
         }
       ]
@@ -382,7 +372,7 @@
       "isCamouflage": false,
       "maxScore": 266,
       "totalValue": 50299.7029,
-      "allTimePnl": -17160,
+      "allTimePnl": -16787,
       "monthPnl": 0,
       "markets": [
         {
@@ -391,7 +381,7 @@
           "conditionId": "0x9345d5142a67f5541264c96515496affee02580f1c572680759eac9fd2a1588a",
           "side": "NO",
           "amount": 50299.7029,
-          "marketRatio": 90,
+          "marketRatio": 89,
           "marketEntryDays": 9,
           "score": 266
         }
@@ -404,8 +394,8 @@
       "accountAgeDays": 511,
       "isCamouflage": true,
       "maxScore": 265,
-      "totalValue": 43464.5053,
-      "allTimePnl": 22916,
+      "totalValue": 43824.986699999994,
+      "allTimePnl": 23141,
       "monthPnl": 0,
       "markets": [
         {
@@ -413,8 +403,8 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "YES",
-          "amount": 22265.4333,
-          "marketRatio": 40,
+          "amount": 23292.6039,
+          "marketRatio": 42,
           "marketEntryDays": 1,
           "score": 265
         },
@@ -423,7 +413,7 @@
           "question": "Will 1 Fed rate cut happen in 2026?",
           "conditionId": "0x5e082f0b57f47a29044aa35b4c5658393122e659d5feae521c06b57cdd7f905c",
           "side": "YES",
-          "amount": 11953.6044,
+          "amount": 11484.8355,
           "marketRatio": 21,
           "marketEntryDays": 1,
           "score": 250
@@ -443,22 +433,22 @@
           "question": "Will 3 Fed rate cuts happen in 2026?",
           "conditionId": "0x8d4966e84ae80f24b2e14643fdd45364e354229e11e2c17903b4b1763cfbe67c",
           "side": "YES",
-          "amount": 2078.1631,
-          "marketRatio": 4,
+          "amount": 1880.2428,
+          "marketRatio": 3,
           "marketEntryDays": 1,
           "score": 188
         }
       ]
     },
     {
-      "wallet": "0xcaab19659b995951a44cc992447cb2ad5be324dd",
-      "name": "QMG-CORE",
-      "totalMarkets": 85,
-      "accountAgeDays": 742,
+      "wallet": "0x832bbb891caf3a24c7d1915d9f6369c4949b5c91",
+      "name": "yoyobb2018",
+      "totalMarkets": 60,
+      "accountAgeDays": 251,
       "isCamouflage": true,
       "maxScore": 263,
-      "totalValue": 83243.0465,
-      "allTimePnl": 9480,
+      "totalValue": 9741.2447,
+      "allTimePnl": -6095,
       "monthPnl": 0,
       "markets": [
         {
@@ -466,19 +456,9 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "NO",
-          "amount": 29136.8231,
-          "marketRatio": 9,
+          "amount": 9741.2447,
+          "marketRatio": 17,
           "marketEntryDays": 0,
-          "score": 259
-        },
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
-          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
-          "side": "YES",
-          "amount": 54106.2234,
-          "marketRatio": 16,
-          "marketEntryDays": 1,
           "score": 263
         }
       ]
@@ -490,8 +470,8 @@
       "accountAgeDays": 506,
       "isCamouflage": false,
       "maxScore": 263,
-      "totalValue": 416402.0141,
-      "allTimePnl": 11721,
+      "totalValue": 414285.0745,
+      "allTimePnl": 9604,
       "monthPnl": 0,
       "markets": [
         {
@@ -499,7 +479,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 416402.0141,
+          "amount": 414285.0745,
           "marketRatio": 100,
           "marketEntryDays": 5,
           "score": 263
@@ -513,8 +493,8 @@
       "accountAgeDays": 546,
       "isCamouflage": true,
       "maxScore": 263,
-      "totalValue": 158679.3161,
-      "allTimePnl": 1310,
+      "totalValue": 157872.6089,
+      "allTimePnl": 509,
       "monthPnl": 0,
       "markets": [
         {
@@ -522,7 +502,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 158679.3161,
+          "amount": 157872.6089,
           "marketRatio": 44,
           "marketEntryDays": 5,
           "score": 263
@@ -530,57 +510,14 @@
       ]
     },
     {
-      "wallet": "0x7cde9cc2fc1ff9556b5167aaaa6fc5b3ce0ab97d",
-      "name": "allen114",
-      "totalMarkets": 78,
-      "accountAgeDays": 107,
-      "isCamouflage": true,
-      "maxScore": 263,
-      "totalValue": 156913.821,
-      "allTimePnl": -219033,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
-          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
-          "side": "YES",
-          "amount": 116223.1823,
-          "marketRatio": 48,
-          "marketEntryDays": 3,
-          "score": 263
-        },
-        {
-          "slug": "will-no-fed-rate-cuts-happen-in-2026",
-          "question": "Will no Fed rate cuts happen in 2026?",
-          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
-          "side": "NO",
-          "amount": 33359.7162,
-          "marketRatio": 14,
-          "marketEntryDays": 999,
-          "score": 215
-        },
-        {
-          "slug": "will-spacexs-market-cap-be-greater-than-1t-at-market-close-on-ipo-day",
-          "question": "Will SpaceX's market cap be greater than $1T at market close on IPO day?",
-          "conditionId": "0xdafaa73301e394d19a14c3f1b220d3e27eee7cc042fe4e694c102ba9292ec49e",
-          "side": "YES",
-          "amount": 7330.9225,
-          "marketRatio": 3,
-          "marketEntryDays": 999,
-          "score": 135
-        }
-      ]
-    },
-    {
       "wallet": "0xa52b785a5510117ac3ae03d75d029f89a36c9480",
       "name": "Hashbrown",
-      "totalMarkets": 13,
+      "totalMarkets": 11,
       "accountAgeDays": 467,
       "isCamouflage": true,
       "maxScore": 263,
-      "totalValue": 113541.5075,
-      "allTimePnl": 6520,
+      "totalValue": 113238.0083,
+      "allTimePnl": 6350,
       "monthPnl": 0,
       "markets": [
         {
@@ -588,8 +525,8 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 59698.2936,
-          "marketRatio": 34,
+          "amount": 59394.7944,
+          "marketRatio": 38,
           "marketEntryDays": 999,
           "score": 231
         },
@@ -599,7 +536,7 @@
           "conditionId": "0xde04b189b3f19eaccda02529a3ea67abfc46bff5c0c8fc42d8a2d0ed7b8f0d41",
           "side": "YES",
           "amount": 53843.2139,
-          "marketRatio": 30,
+          "marketRatio": 34,
           "marketEntryDays": 7,
           "score": 263
         }
@@ -612,8 +549,8 @@
       "accountAgeDays": 623,
       "isCamouflage": false,
       "maxScore": 260,
-      "totalValue": 364.346,
-      "allTimePnl": 76235,
+      "totalValue": 510.0845,
+      "allTimePnl": 79022,
       "monthPnl": 0,
       "markets": [
         {
@@ -621,8 +558,8 @@
           "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
           "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
           "side": "YES",
-          "amount": 364.346,
-          "marketRatio": 0,
+          "amount": 510.0845,
+          "marketRatio": 1,
           "marketEntryDays": 999,
           "score": 260
         }
@@ -635,8 +572,8 @@
       "accountAgeDays": 282,
       "isCamouflage": false,
       "maxScore": 260,
-      "totalValue": 100129.3295,
-      "allTimePnl": 131,
+      "totalValue": 99620.2836,
+      "allTimePnl": -378,
       "monthPnl": 0,
       "markets": [
         {
@@ -644,7 +581,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 100129.3295,
+          "amount": 99620.2836,
           "marketRatio": 100,
           "marketEntryDays": 3,
           "score": 260
@@ -659,7 +596,7 @@
       "isCamouflage": true,
       "maxScore": 260,
       "totalValue": 28640.271,
-      "allTimePnl": 3646,
+      "allTimePnl": 4000,
       "monthPnl": 0,
       "markets": [
         {
@@ -679,8 +616,31 @@
           "side": "YES",
           "amount": 6745.876,
           "marketRatio": 7,
-          "marketEntryDays": 10,
+          "marketEntryDays": 11,
           "score": 234
+        }
+      ]
+    },
+    {
+      "wallet": "0xcaab19659b995951a44cc992447cb2ad5be324dd",
+      "name": "QMG-CORE",
+      "totalMarkets": 85,
+      "accountAgeDays": 743,
+      "isCamouflage": true,
+      "maxScore": 259,
+      "totalValue": 34069.9956,
+      "allTimePnl": 9368,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
+          "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
+          "side": "NO",
+          "amount": 34069.9956,
+          "marketRatio": 10,
+          "marketEntryDays": 0,
+          "score": 259
         }
       ]
     },
@@ -691,8 +651,8 @@
       "accountAgeDays": 107,
       "isCamouflage": true,
       "maxScore": 256,
-      "totalValue": 19299.7177,
-      "allTimePnl": -54444,
+      "totalValue": 19280.2917,
+      "allTimePnl": -54810,
       "monthPnl": 0,
       "markets": [
         {
@@ -700,7 +660,7 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "NO",
-          "amount": 19299.7177,
+          "amount": 19280.2917,
           "marketRatio": 33,
           "marketEntryDays": 0,
           "score": 256
@@ -711,11 +671,11 @@
       "wallet": "0x3b8de6b527425e9c19fb2634f9c3d2e7dfaf2ce6",
       "name": "ZZJ1990",
       "totalMarkets": 1,
-      "accountAgeDays": 93,
+      "accountAgeDays": 94,
       "isCamouflage": false,
       "maxScore": 256,
-      "totalValue": 154177.814,
-      "allTimePnl": -157,
+      "totalValue": 153393.9919,
+      "allTimePnl": -941,
       "monthPnl": 0,
       "markets": [
         {
@@ -723,7 +683,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 154177.814,
+          "amount": 153393.9919,
           "marketRatio": 100,
           "marketEntryDays": 6,
           "score": 256
@@ -737,8 +697,8 @@
       "accountAgeDays": 345,
       "isCamouflage": false,
       "maxScore": 256,
-      "totalValue": 6912.715,
-      "allTimePnl": 16251,
+      "totalValue": 7231.6191,
+      "allTimePnl": 15268,
       "monthPnl": 0,
       "markets": [
         {
@@ -746,7 +706,7 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "YES",
-          "amount": 6912.715,
+          "amount": 7231.6191,
           "marketRatio": 10,
           "marketEntryDays": 999,
           "score": 256
@@ -761,7 +721,7 @@
       "isCamouflage": false,
       "maxScore": 256,
       "totalValue": 7771.7396,
-      "allTimePnl": -3238,
+      "allTimePnl": -3187,
       "monthPnl": 0,
       "markets": [
         {
@@ -777,48 +737,68 @@
       ]
     },
     {
-      "wallet": "0xdeac8d42a5400b2037d85317afde2765bb8b0216",
-      "name": "0xdeac8D42A5400b2037d85317Afde2765bB8b0216-1767901914988",
-      "totalMarkets": 9,
-      "accountAgeDays": 91,
-      "isCamouflage": false,
+      "wallet": "0x5d748cf9e4f90dcbf26c25c7ed1a9c741e41ee45",
+      "name": "OkaneKasegu",
+      "totalMarkets": 100,
+      "accountAgeDays": 473,
+      "isCamouflage": true,
       "maxScore": 250,
-      "totalValue": 702.5854,
-      "allTimePnl": 2710,
+      "totalValue": 7443.75,
+      "allTimePnl": -9688,
       "monthPnl": 0,
       "markets": [
         {
           "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
-          "side": "YES",
-          "amount": 702.5854,
-          "marketRatio": 6,
-          "marketEntryDays": 3,
+          "side": "NO",
+          "amount": 7443.75,
+          "marketRatio": 9,
+          "marketEntryDays": 4,
           "score": 250
         }
       ]
     },
     {
-      "wallet": "0x581d24e58039e1f569dacde9c288e028b51f2b06",
-      "name": "Duratio",
-      "totalMarkets": 20,
-      "accountAgeDays": 278,
+      "wallet": "0x7cde9cc2fc1ff9556b5167aaaa6fc5b3ce0ab97d",
+      "name": "allen114",
+      "totalMarkets": 78,
+      "accountAgeDays": 107,
       "isCamouflage": true,
       "maxScore": 250,
-      "totalValue": 1050,
-      "allTimePnl": 201,
+      "totalValue": 155430.0524,
+      "allTimePnl": -219426,
       "monthPnl": 0,
       "markets": [
         {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
-          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
+          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 1050,
-          "marketRatio": 33,
-          "marketEntryDays": 1,
+          "amount": 115632.3171,
+          "marketRatio": 48,
+          "marketEntryDays": 4,
           "score": 250
+        },
+        {
+          "slug": "will-no-fed-rate-cuts-happen-in-2026",
+          "question": "Will no Fed rate cuts happen in 2026?",
+          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
+          "side": "NO",
+          "amount": 32466.8128,
+          "marketRatio": 13,
+          "marketEntryDays": 999,
+          "score": 215
+        },
+        {
+          "slug": "will-spacexs-market-cap-be-greater-than-1t-at-market-close-on-ipo-day",
+          "question": "Will SpaceX's market cap be greater than $1T at market close on IPO day?",
+          "conditionId": "0xdafaa73301e394d19a14c3f1b220d3e27eee7cc042fe4e694c102ba9292ec49e",
+          "side": "YES",
+          "amount": 7330.9225,
+          "marketRatio": 3,
+          "marketEntryDays": 999,
+          "score": 135
         }
       ]
     },
@@ -829,8 +809,8 @@
       "accountAgeDays": 94,
       "isCamouflage": false,
       "maxScore": 248,
-      "totalValue": 67527.5023,
-      "allTimePnl": 69,
+      "totalValue": 67184.2004,
+      "allTimePnl": -274,
       "monthPnl": 0,
       "markets": [
         {
@@ -838,7 +818,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 67527.5023,
+          "amount": 67184.2004,
           "marketRatio": 100,
           "marketEntryDays": 2,
           "score": 248
@@ -849,7 +829,7 @@
       "wallet": "0x4825c873a8c890bdaff00d253a23e8e09eb95ec5",
       "name": "slamjampeter",
       "totalMarkets": 1,
-      "accountAgeDays": 323,
+      "accountAgeDays": 324,
       "isCamouflage": false,
       "maxScore": 246,
       "totalValue": 23497.1163,
@@ -871,31 +851,51 @@
     {
       "wallet": "0x7b02b2bac2a30ed5e40b7094e734f4c3dc2a4991",
       "name": "foodenjoyer",
-      "totalMarkets": 14,
-      "accountAgeDays": 70,
+      "totalMarkets": 15,
+      "accountAgeDays": 71,
       "isCamouflage": false,
       "maxScore": 244,
-      "totalValue": 184883.2942,
-      "allTimePnl": 6451,
+      "totalValue": 286600.9174,
+      "allTimePnl": 6433,
       "monthPnl": 0,
       "markets": [
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 50+ bps after the April 2026 meeting?",
+          "conditionId": "0xd72622d154dfe65b9c019d6afcfe75a55717e5c502db611f555b101aafbf6ec5",
+          "side": "NO",
+          "amount": 29865,
+          "marketRatio": 4,
+          "marketEntryDays": 0,
+          "score": 240
+        },
         {
           "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "NO",
-          "amount": 70900.8095,
-          "marketRatio": 12,
+          "amount": 124313.2848,
+          "marketRatio": 17,
           "marketEntryDays": 2,
           "score": 244
+        },
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
+          "side": "NO",
+          "amount": 18800.5,
+          "marketRatio": 3,
+          "marketEntryDays": 0,
+          "score": 238
         },
         {
           "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 99009.5351,
-          "marketRatio": 16,
+          "amount": 98506.1821,
+          "marketRatio": 14,
           "marketEntryDays": 2,
           "score": 244
         },
@@ -904,7 +904,7 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "YES",
-          "amount": 8555.2065,
+          "amount": 8949.8836,
           "marketRatio": 1,
           "marketEntryDays": 999,
           "score": 225
@@ -914,7 +914,7 @@
           "question": "Will 1 Fed rate cut happen in 2026?",
           "conditionId": "0x5e082f0b57f47a29044aa35b4c5658393122e659d5feae521c06b57cdd7f905c",
           "side": "YES",
-          "amount": 6417.7431,
+          "amount": 6166.0669,
           "marketRatio": 1,
           "marketEntryDays": 999,
           "score": 213
@@ -928,8 +928,8 @@
       "accountAgeDays": 297,
       "isCamouflage": false,
       "maxScore": 244,
-      "totalValue": 24245.0172,
-      "allTimePnl": -19394,
+      "totalValue": 24380.9247,
+      "allTimePnl": -20100,
       "monthPnl": 0,
       "markets": [
         {
@@ -937,7 +937,7 @@
           "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
           "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
           "side": "YES",
-          "amount": 339.7686,
+          "amount": 475.6761,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 210
@@ -948,7 +948,7 @@
           "conditionId": "0xdde06286a7b9464d344f410ab0b3d2ebc6469904e72c27fd982f65fdbf78768d",
           "side": "YES",
           "amount": 23905.2486,
-          "marketRatio": 14,
+          "marketRatio": 15,
           "marketEntryDays": 10,
           "score": 244
         }
@@ -961,8 +961,8 @@
       "accountAgeDays": 134,
       "isCamouflage": true,
       "maxScore": 244,
-      "totalValue": 27151.077299999997,
-      "allTimePnl": 13827,
+      "totalValue": 27146.3364,
+      "allTimePnl": 13276,
       "monthPnl": 0,
       "markets": [
         {
@@ -970,7 +970,7 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "NO",
-          "amount": 9186.2786,
+          "amount": 8940.3994,
           "marketRatio": 8,
           "marketEntryDays": 999,
           "score": 181
@@ -980,8 +980,8 @@
           "question": "Will 1 Fed rate cut happen in 2026?",
           "conditionId": "0x5e082f0b57f47a29044aa35b4c5658393122e659d5feae521c06b57cdd7f905c",
           "side": "NO",
-          "amount": 17964.7987,
-          "marketRatio": 15,
+          "amount": 18205.937,
+          "marketRatio": 16,
           "marketEntryDays": 0,
           "score": 244
         }
@@ -995,7 +995,7 @@
       "isCamouflage": true,
       "maxScore": 244,
       "totalValue": 14601.7446,
-      "allTimePnl": -5548,
+      "allTimePnl": -4924,
       "monthPnl": 0,
       "markets": [
         {
@@ -1017,8 +1017,8 @@
       "accountAgeDays": 296,
       "isCamouflage": true,
       "maxScore": 244,
-      "totalValue": 13645.1335,
-      "allTimePnl": -26766,
+      "totalValue": 13744.8835,
+      "allTimePnl": -28380,
       "monthPnl": 0,
       "markets": [
         {
@@ -1036,8 +1036,8 @@
           "question": "Lee Jae-myung arrested before 2027?",
           "conditionId": "0x005de69d6f0d32f8284310d0b0d292f6eb42119fe0ecde7dbd34f7aedce0851c",
           "side": "NO",
-          "amount": 8388.5,
-          "marketRatio": 6,
+          "amount": 8488.25,
+          "marketRatio": 7,
           "marketEntryDays": 999,
           "score": 170
         }
@@ -1047,11 +1047,11 @@
       "wallet": "0x3c918a8ef8c379304f744592120cbb4d76149af7",
       "name": "Vilgefortz",
       "totalMarkets": 7,
-      "accountAgeDays": 665,
+      "accountAgeDays": 666,
       "isCamouflage": true,
       "maxScore": 241,
-      "totalValue": 161097.75,
-      "allTimePnl": 3849,
+      "totalValue": 160353.75,
+      "allTimePnl": 2917,
       "monthPnl": 0,
       "markets": [
         {
@@ -1059,7 +1059,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 146344.8,
+          "amount": 145600.8,
           "marketRatio": 59,
           "marketEntryDays": 9,
           "score": 241
@@ -1071,41 +1071,8 @@
           "side": "YES",
           "amount": 14752.95,
           "marketRatio": 6,
-          "marketEntryDays": 3,
-          "score": 235
-        }
-      ]
-    },
-    {
-      "wallet": "0x25257a6a89dba93dd0c536b6279365632a4eb919",
-      "name": "Trading4Fridge",
-      "totalMarkets": 40,
-      "accountAgeDays": 1106,
-      "isCamouflage": true,
-      "maxScore": 241,
-      "totalValue": 5154.0799,
-      "allTimePnl": 811,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-3-fed-rate-cuts-happen-in-2026",
-          "question": "Will 3 Fed rate cuts happen in 2026?",
-          "conditionId": "0x8d4966e84ae80f24b2e14643fdd45364e354229e11e2c17903b4b1763cfbe67c",
-          "side": "YES",
-          "amount": 4971.0338,
-          "marketRatio": 13,
-          "marketEntryDays": 999,
-          "score": 241
-        },
-        {
-          "slug": "will-4-fed-rate-cuts-happen-in-2026",
-          "question": "Will 4 Fed rate cuts happen in 2026?",
-          "conditionId": "0xaece8d6062d3e3eb9845b32441a4ab06eb2ef332c0228bc6a36add450647c7c4",
-          "side": "YES",
-          "amount": 183.0461,
-          "marketRatio": 0,
-          "marketEntryDays": 999,
-          "score": 191
+          "marketEntryDays": 4,
+          "score": 223
         }
       ]
     },
@@ -1117,7 +1084,7 @@
       "isCamouflage": true,
       "maxScore": 241,
       "totalValue": 34261.576100000006,
-      "allTimePnl": -37953,
+      "allTimePnl": -37926,
       "monthPnl": 0,
       "markets": [
         {
@@ -1146,11 +1113,11 @@
       "wallet": "0xe598435df0cdf5d22bdd5082d557f75f9180a0a8",
       "name": "bamesjond",
       "totalMarkets": 100,
-      "accountAgeDays": 163,
+      "accountAgeDays": 164,
       "isCamouflage": true,
       "maxScore": 236,
       "totalValue": 33443.5843,
-      "allTimePnl": -1740701,
+      "allTimePnl": -1740679,
       "monthPnl": 0,
       "markets": [
         {
@@ -1173,7 +1140,7 @@
       "isCamouflage": false,
       "maxScore": 235,
       "totalValue": 5460.3397,
-      "allTimePnl": -3536,
+      "allTimePnl": -3705,
       "monthPnl": 0,
       "markets": [
         {
@@ -1195,8 +1162,8 @@
       "accountAgeDays": 569,
       "isCamouflage": false,
       "maxScore": 231,
-      "totalValue": 322215.4819,
-      "allTimePnl": 6247,
+      "totalValue": 320577.3758,
+      "allTimePnl": 4677,
       "monthPnl": 0,
       "markets": [
         {
@@ -1204,7 +1171,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 322215.4819,
+          "amount": 320577.3758,
           "marketRatio": 79,
           "marketEntryDays": 22,
           "score": 231
@@ -1218,7 +1185,7 @@
       "accountAgeDays": 59,
       "isCamouflage": false,
       "maxScore": 231,
-      "totalValue": 61233.59819999999,
+      "totalValue": 61419.6719,
       "allTimePnl": -27082,
       "monthPnl": 0,
       "markets": [
@@ -1227,7 +1194,7 @@
           "question": "Fed rate hike in 2026?",
           "conditionId": "0x80b3af88cb991980e8da1ce86b9794a0957f96ec98c29319dd7ba65e9744d82b",
           "side": "NO",
-          "amount": 13925.1486,
+          "amount": 14089.9433,
           "marketRatio": 5,
           "marketEntryDays": 999,
           "score": 206
@@ -1239,7 +1206,7 @@
           "side": "YES",
           "amount": 31089.7251,
           "marketRatio": 10,
-          "marketEntryDays": 9,
+          "marketEntryDays": 10,
           "score": 212
         },
         {
@@ -1247,7 +1214,7 @@
           "question": "SpaceX (Space Exploration Technologies Corp.) IPO before 2027?",
           "conditionId": "0xc8a898fa8ce2121e3bba1ee52120ed8ab4f8ea7ed5a6dcd9b138fe7b9e454c0b",
           "side": "YES",
-          "amount": 9520,
+          "amount": 9580,
           "marketRatio": 3,
           "marketEntryDays": 999,
           "score": 160
@@ -1257,7 +1224,7 @@
           "question": "Fed emergency rate cut before 2027?",
           "conditionId": "0x93a3b80b1fb485057add882b55d12011ea011fedd9abededad86ac6cb53a2802",
           "side": "NO",
-          "amount": 6698.7245,
+          "amount": 6660.0035,
           "marketRatio": 2,
           "marketEntryDays": 7,
           "score": 231
@@ -1265,14 +1232,37 @@
       ]
     },
     {
+      "wallet": "0x9b0b60aa0a1df93202f996860342fd5607815e43",
+      "name": "Irboz-sama",
+      "totalMarkets": 22,
+      "accountAgeDays": 1134,
+      "isCamouflage": false,
+      "maxScore": 229,
+      "totalValue": 771.0708,
+      "allTimePnl": 1762,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 50+ bps after the April 2026 meeting?",
+          "conditionId": "0xd72622d154dfe65b9c019d6afcfe75a55717e5c502db611f555b101aafbf6ec5",
+          "side": "YES",
+          "amount": 771.0708,
+          "marketRatio": 12,
+          "marketEntryDays": 999,
+          "score": 229
+        }
+      ]
+    },
+    {
       "wallet": "0xa102b434ce441a3119e146f75ed6276ee1a836d9",
       "name": "tf2",
       "totalMarkets": 4,
-      "accountAgeDays": 925,
+      "accountAgeDays": 926,
       "isCamouflage": false,
       "maxScore": 229,
-      "totalValue": 54638.8888,
-      "allTimePnl": 54731,
+      "totalValue": 54361.111,
+      "allTimePnl": 54525,
       "monthPnl": 0,
       "markets": [
         {
@@ -1280,8 +1270,8 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 54638.8888,
-          "marketRatio": 96,
+          "amount": 54361.111,
+          "marketRatio": 95,
           "marketEntryDays": 999,
           "score": 229
         }
@@ -1294,8 +1284,8 @@
       "accountAgeDays": 437,
       "isCamouflage": true,
       "maxScore": 229,
-      "totalValue": 14739.998,
-      "allTimePnl": -2,
+      "totalValue": 15419.9979,
+      "allTimePnl": 566,
       "monthPnl": 0,
       "markets": [
         {
@@ -1303,22 +1293,55 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "YES",
-          "amount": 14739.998,
-          "marketRatio": 76,
+          "amount": 15419.9979,
+          "marketRatio": 78,
           "marketEntryDays": 22,
           "score": 229
         }
       ]
     },
     {
-      "wallet": "0x04b954ec5d65e0a855d31b5e695083f3c4ad79e0",
-      "name": "235-afsdkfjlsfsjfsl",
-      "totalMarkets": 100,
-      "accountAgeDays": 62,
+      "wallet": "0x25257a6a89dba93dd0c536b6279365632a4eb919",
+      "name": "Trading4Fridge",
+      "totalMarkets": 40,
+      "accountAgeDays": 1106,
+      "isCamouflage": true,
+      "maxScore": 229,
+      "totalValue": 4762.002,
+      "allTimePnl": 408,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-3-fed-rate-cuts-happen-in-2026",
+          "question": "Will 3 Fed rate cuts happen in 2026?",
+          "conditionId": "0x8d4966e84ae80f24b2e14643fdd45364e354229e11e2c17903b4b1763cfbe67c",
+          "side": "YES",
+          "amount": 4497.6021,
+          "marketRatio": 12,
+          "marketEntryDays": 999,
+          "score": 229
+        },
+        {
+          "slug": "will-4-fed-rate-cuts-happen-in-2026",
+          "question": "Will 4 Fed rate cuts happen in 2026?",
+          "conditionId": "0xaece8d6062d3e3eb9845b32441a4ab06eb2ef332c0228bc6a36add450647c7c4",
+          "side": "YES",
+          "amount": 264.3999,
+          "marketRatio": 1,
+          "marketEntryDays": 999,
+          "score": 191
+        }
+      ]
+    },
+    {
+      "wallet": "0xdeac8d42a5400b2037d85317afde2765bb8b0216",
+      "name": "0xdeac8D42A5400b2037d85317Afde2765bB8b0216-1767901914988",
+      "totalMarkets": 9,
+      "accountAgeDays": 91,
       "isCamouflage": false,
       "maxScore": 225,
-      "totalValue": 8096.9959,
-      "allTimePnl": -49666,
+      "totalValue": 810.6755,
+      "allTimePnl": 2792,
       "monthPnl": 0,
       "markets": [
         {
@@ -1326,19 +1349,9 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "YES",
-          "amount": 536.9097,
-          "marketRatio": 1,
-          "marketEntryDays": 999,
-          "score": 194
-        },
-        {
-          "slug": "will-no-fed-rate-cuts-happen-in-2026",
-          "question": "Will no Fed rate cuts happen in 2026?",
-          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
-          "side": "YES",
-          "amount": 7560.0862,
-          "marketRatio": 10,
-          "marketEntryDays": 999,
+          "amount": 810.6755,
+          "marketRatio": 7,
+          "marketEntryDays": 4,
           "score": 225
         }
       ]
@@ -1350,8 +1363,8 @@
       "accountAgeDays": 655,
       "isCamouflage": true,
       "maxScore": 225,
-      "totalValue": 279638.6423,
-      "allTimePnl": -579883,
+      "totalValue": 278216.9919,
+      "allTimePnl": -580047,
       "monthPnl": 0,
       "markets": [
         {
@@ -1359,7 +1372,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 279638.6423,
+          "amount": 278216.9919,
           "marketRatio": 70,
           "marketEntryDays": 6,
           "score": 225
@@ -1373,8 +1386,8 @@
       "accountAgeDays": 543,
       "isCamouflage": true,
       "maxScore": 225,
-      "totalValue": 133677.0078,
-      "allTimePnl": 23694,
+      "totalValue": 132997.4094,
+      "allTimePnl": 23014,
       "monthPnl": 0,
       "markets": [
         {
@@ -1382,7 +1395,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 133677.0078,
+          "amount": 132997.4094,
           "marketRatio": 25,
           "marketEntryDays": 9,
           "score": 225
@@ -1392,12 +1405,12 @@
     {
       "wallet": "0xec981ed70ae69c5cbcac08c1ba063e734f6bafcd",
       "name": "0xheavy888",
-      "totalMarkets": 32,
-      "accountAgeDays": 605,
+      "totalMarkets": 36,
+      "accountAgeDays": 606,
       "isCamouflage": true,
       "maxScore": 225,
       "totalValue": 10794.9836,
-      "allTimePnl": 1223,
+      "allTimePnl": 549,
       "monthPnl": 0,
       "markets": [
         {
@@ -1416,11 +1429,11 @@
       "wallet": "0xd0a042d1da4cab5293f6a758a0082234b05d2760",
       "name": "drdeev",
       "totalMarkets": 100,
-      "accountAgeDays": 92,
+      "accountAgeDays": 93,
       "isCamouflage": true,
       "maxScore": 225,
       "totalValue": 3080.9856,
-      "allTimePnl": -56307,
+      "allTimePnl": -57218,
       "monthPnl": 0,
       "markets": [
         {
@@ -1429,31 +1442,8 @@
           "conditionId": "0xdde06286a7b9464d344f410ab0b3d2ebc6469904e72c27fd982f65fdbf78768d",
           "side": "YES",
           "amount": 3080.9856,
-          "marketRatio": 76,
+          "marketRatio": 57,
           "marketEntryDays": 999,
-          "score": 225
-        }
-      ]
-    },
-    {
-      "wallet": "0x7e31a5e9c31638483614e9fd9f945bb34692454d",
-      "name": "Odysseus7",
-      "totalMarkets": 18,
-      "accountAgeDays": 346,
-      "isCamouflage": true,
-      "maxScore": 225,
-      "totalValue": 14287.7358,
-      "allTimePnl": -1610,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-a-province-schedule-a-referendum-to-leave-canada-before-2027",
-          "question": "Will a province schedule a referendum to leave Canada before 2027?",
-          "conditionId": "0x006e3bc30b325c9cd4e4a35e33738e7f49634dc353f8495303d511b875d8ad5b",
-          "side": "YES",
-          "amount": 14287.7358,
-          "marketRatio": 36,
-          "marketEntryDays": 7,
           "score": 225
         }
       ]
@@ -1466,7 +1456,7 @@
       "isCamouflage": true,
       "maxScore": 225,
       "totalValue": 7034.2207,
-      "allTimePnl": 1173,
+      "allTimePnl": 1139,
       "monthPnl": 0,
       "markets": [
         {
@@ -1482,37 +1472,60 @@
       ]
     },
     {
-      "wallet": "0x832bbb891caf3a24c7d1915d9f6369c4949b5c91",
-      "name": "yoyobb2018",
-      "totalMarkets": 60,
-      "accountAgeDays": 251,
+      "wallet": "0x9aeb534c42b58b21673d5e03e9da14fbd15b2729",
+      "name": "The-Joker",
+      "totalMarkets": 24,
+      "accountAgeDays": 177,
       "isCamouflage": true,
-      "maxScore": 219,
-      "totalValue": 9751.0596,
-      "allTimePnl": -6012,
+      "maxScore": 220,
+      "totalValue": 6930.4395,
+      "allTimePnl": 3935,
       "monthPnl": 0,
       "markets": [
         {
-          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
-          "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
+          "slug": "will-claude-5-be-released-by-april-30-2026",
+          "question": "Will Claude 5 be released by April 30, 2026?",
+          "conditionId": "0x3acb42d4a4da859a82ec3c78e6be641489985672ea7f28ae73da7c253af32fa8",
           "side": "NO",
-          "amount": 9751.0596,
-          "marketRatio": 17,
-          "marketEntryDays": 999,
-          "score": 219
+          "amount": 6930.4395,
+          "marketRatio": 13,
+          "marketEntryDays": 2,
+          "score": 220
         }
       ]
     },
     {
-      "wallet": "0x5d189e816b4149be00977c1a3c8840374aec4972",
-      "name": "gloriafoster",
+      "wallet": "0x7e31a5e9c31638483614e9fd9f945bb34692454d",
+      "name": "Odysseus7",
+      "totalMarkets": 18,
+      "accountAgeDays": 346,
+      "isCamouflage": true,
+      "maxScore": 215,
+      "totalValue": 14287.7358,
+      "allTimePnl": -2356,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-a-province-schedule-a-referendum-to-leave-canada-before-2027",
+          "question": "Will a province schedule a referendum to leave Canada before 2027?",
+          "conditionId": "0x006e3bc30b325c9cd4e4a35e33738e7f49634dc353f8495303d511b875d8ad5b",
+          "side": "YES",
+          "amount": 14287.7358,
+          "marketRatio": 37,
+          "marketEntryDays": 8,
+          "score": 215
+        }
+      ]
+    },
+    {
+      "wallet": "0x04b954ec5d65e0a855d31b5e695083f3c4ad79e0",
+      "name": "235-afsdkfjlsfsjfsl",
       "totalMarkets": 100,
-      "accountAgeDays": 314,
+      "accountAgeDays": 62,
       "isCamouflage": false,
       "maxScore": 213,
-      "totalValue": 355.6049,
-      "allTimePnl": -157472,
+      "totalValue": 8528.3667,
+      "allTimePnl": -49819,
       "monthPnl": 0,
       "markets": [
         {
@@ -1520,31 +1533,18 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "YES",
-          "amount": 355.6049,
-          "marketRatio": 0,
-          "marketEntryDays": 0,
-          "score": 213
-        }
-      ]
-    },
-    {
-      "wallet": "0xc1b399b26020a4f689108e9640fd3dc8ffc8501c",
-      "name": "CoffeeLover",
-      "totalMarkets": 100,
-      "accountAgeDays": 407,
-      "isCamouflage": false,
-      "maxScore": 213,
-      "totalValue": 206.25,
-      "allTimePnl": 62865,
-      "monthPnl": 0,
-      "markets": [
+          "amount": 619.5112,
+          "marketRatio": 1,
+          "marketEntryDays": 999,
+          "score": 181
+        },
         {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
-          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
-          "side": "NO",
-          "amount": 206.25,
-          "marketRatio": 0,
+          "slug": "will-no-fed-rate-cuts-happen-in-2026",
+          "question": "Will no Fed rate cuts happen in 2026?",
+          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
+          "side": "YES",
+          "amount": 7908.8555,
+          "marketRatio": 10,
           "marketEntryDays": 999,
           "score": 213
         }
@@ -1557,8 +1557,8 @@
       "accountAgeDays": 119,
       "isCamouflage": false,
       "maxScore": 213,
-      "totalValue": 98590.489,
-      "allTimePnl": 14979,
+      "totalValue": 98089.2663,
+      "allTimePnl": 13919,
       "monthPnl": 0,
       "markets": [
         {
@@ -1566,7 +1566,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 98590.489,
+          "amount": 98089.2663,
           "marketRatio": 22,
           "marketEntryDays": 0,
           "score": 213
@@ -1580,8 +1580,8 @@
       "accountAgeDays": 519,
       "isCamouflage": false,
       "maxScore": 213,
-      "totalValue": 75269.9876,
-      "allTimePnl": -407,
+      "totalValue": 79883.7698,
+      "allTimePnl": -792,
       "monthPnl": 0,
       "markets": [
         {
@@ -1589,9 +1589,32 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 75269.9876,
+          "amount": 79883.7698,
           "marketRatio": 100,
           "marketEntryDays": 4,
+          "score": 213
+        }
+      ]
+    },
+    {
+      "wallet": "0xc1b399b26020a4f689108e9640fd3dc8ffc8501c",
+      "name": "CoffeeLover",
+      "totalMarkets": 100,
+      "accountAgeDays": 407,
+      "isCamouflage": false,
+      "maxScore": 213,
+      "totalValue": 267.5,
+      "allTimePnl": 64518,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
+          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
+          "side": "NO",
+          "amount": 267.5,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
           "score": 213
         }
       ]
@@ -1603,8 +1626,8 @@
       "accountAgeDays": 637,
       "isCamouflage": true,
       "maxScore": 210,
-      "totalValue": 11347.5612,
-      "allTimePnl": 1552,
+      "totalValue": 11007.0122,
+      "allTimePnl": 1172,
       "monthPnl": 0,
       "markets": [
         {
@@ -1613,7 +1636,7 @@
           "conditionId": "0x9345d5142a67f5541264c96515496affee02580f1c572680759eac9fd2a1588a",
           "side": "NO",
           "amount": 8566.4108,
-          "marketRatio": 62,
+          "marketRatio": 64,
           "marketEntryDays": 60,
           "score": 210
         },
@@ -1622,8 +1645,8 @@
           "question": "Billionaire one-time wealth tax on California ballot?",
           "conditionId": "0x04f1a10e79a106d18dc45e6087f0757456197ec5c6ffec2506cd066e8215fc62",
           "side": "NO",
-          "amount": 2781.1504,
-          "marketRatio": 20,
+          "amount": 2440.6014,
+          "marketRatio": 18,
           "marketEntryDays": 58,
           "score": 179
         }
@@ -1636,8 +1659,8 @@
       "accountAgeDays": 90,
       "isCamouflage": false,
       "maxScore": 210,
-      "totalValue": 373.8983,
-      "allTimePnl": -14093,
+      "totalValue": 540.0754,
+      "allTimePnl": -14021,
       "monthPnl": 0,
       "markets": [
         {
@@ -1645,8 +1668,8 @@
           "question": "Will 4 Fed rate cuts happen in 2026?",
           "conditionId": "0xaece8d6062d3e3eb9845b32441a4ab06eb2ef332c0228bc6a36add450647c7c4",
           "side": "YES",
-          "amount": 373.8983,
-          "marketRatio": 10,
+          "amount": 540.0754,
+          "marketRatio": 15,
           "marketEntryDays": 21,
           "score": 210
         }
@@ -1659,8 +1682,8 @@
       "accountAgeDays": 68,
       "isCamouflage": false,
       "maxScore": 210,
-      "totalValue": 5434.9277,
-      "allTimePnl": 60781,
+      "totalValue": 5195.0699,
+      "allTimePnl": 60918,
       "monthPnl": 0,
       "markets": [
         {
@@ -1668,7 +1691,7 @@
           "question": "Will Claude 5 be released by April 30, 2026?",
           "conditionId": "0x3acb42d4a4da859a82ec3c78e6be641489985672ea7f28ae73da7c253af32fa8",
           "side": "YES",
-          "amount": 2446.068,
+          "amount": 2277.3736,
           "marketRatio": 2,
           "marketEntryDays": 2,
           "score": 210
@@ -1678,10 +1701,43 @@
           "question": "Will Discord not IPO by June 30, 2026?",
           "conditionId": "0xb57cab2941546609df2c77672a535ba8374c5c2042f921fdcf3c1f072baf57dc",
           "side": "NO",
-          "amount": 2988.8597,
+          "amount": 2917.6963,
           "marketRatio": 2,
           "marketEntryDays": 999,
           "score": 165
+        }
+      ]
+    },
+    {
+      "wallet": "0xaf458bee32b8f1d9ba39ee876f20c7e3ce62ec7d",
+      "name": "fed26",
+      "totalMarkets": 9,
+      "accountAgeDays": 98,
+      "isCamouflage": false,
+      "maxScore": 206,
+      "totalValue": 51964.8554,
+      "allTimePnl": -6734,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
+          "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
+          "side": "YES",
+          "amount": 949.8974,
+          "marketRatio": 1,
+          "marketEntryDays": 4,
+          "score": 200
+        },
+        {
+          "slug": "will-no-fed-rate-cuts-happen-in-2026",
+          "question": "Will no Fed rate cuts happen in 2026?",
+          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
+          "side": "YES",
+          "amount": 51014.958,
+          "marketRatio": 65,
+          "marketEntryDays": 7,
+          "score": 206
         }
       ]
     },
@@ -1692,8 +1748,8 @@
       "accountAgeDays": 339,
       "isCamouflage": false,
       "maxScore": 206,
-      "totalValue": 76947.4217,
-      "allTimePnl": 20617,
+      "totalValue": 76628.5065,
+      "allTimePnl": 29411,
       "monthPnl": 0,
       "markets": [
         {
@@ -1701,7 +1757,7 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "NO",
-          "amount": 17726.4169,
+          "amount": 17708.5745,
           "marketRatio": 1,
           "marketEntryDays": 999,
           "score": 175
@@ -1711,7 +1767,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 59221.0048,
+          "amount": 58919.932,
           "marketRatio": 4,
           "marketEntryDays": 999,
           "score": 206
@@ -1725,8 +1781,8 @@
       "accountAgeDays": 73,
       "isCamouflage": false,
       "maxScore": 206,
-      "totalValue": 42360.5603,
-      "allTimePnl": 909,
+      "totalValue": 42242.6791,
+      "allTimePnl": 792,
       "monthPnl": 0,
       "markets": [
         {
@@ -1734,7 +1790,7 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "NO",
-          "amount": 5039.7582,
+          "amount": 5034.6855,
           "marketRatio": 12,
           "marketEntryDays": 34,
           "score": 198
@@ -1744,9 +1800,32 @@
           "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
           "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
           "side": "NO",
-          "amount": 37320.8021,
+          "amount": 37207.9936,
           "marketRatio": 88,
           "marketEntryDays": 22,
+          "score": 206
+        }
+      ]
+    },
+    {
+      "wallet": "0x462128e09a5e2becc0e867dba764d429c0c2efcc",
+      "name": "olxbossx",
+      "totalMarkets": 3,
+      "accountAgeDays": 445,
+      "isCamouflage": false,
+      "maxScore": 206,
+      "totalValue": 665.7593,
+      "allTimePnl": 181,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
+          "side": "YES",
+          "amount": 665.7593,
+          "marketRatio": 64,
+          "marketEntryDays": 0,
           "score": 206
         }
       ]
@@ -1758,8 +1837,8 @@
       "accountAgeDays": 440,
       "isCamouflage": true,
       "maxScore": 206,
-      "totalValue": 109565.3288,
-      "allTimePnl": 79456,
+      "totalValue": 128632.6861,
+      "allTimePnl": 83544,
       "monthPnl": 0,
       "markets": [
         {
@@ -1767,8 +1846,8 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 89949.7469,
-          "marketRatio": 6,
+          "amount": 109062.4528,
+          "marketRatio": 7,
           "marketEntryDays": 999,
           "score": 206
         },
@@ -1797,7 +1876,7 @@
           "question": "Will 3 Fed rate cuts happen in 2026?",
           "conditionId": "0x8d4966e84ae80f24b2e14643fdd45364e354229e11e2c17903b4b1763cfbe67c",
           "side": "YES",
-          "amount": 2401.9425,
+          "amount": 2173.1861,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 188
@@ -1807,7 +1886,7 @@
           "question": "Will 4 Fed rate cuts happen in 2026?",
           "conditionId": "0xaece8d6062d3e3eb9845b32441a4ab06eb2ef332c0228bc6a36add450647c7c4",
           "side": "YES",
-          "amount": 412.6676,
+          "amount": 596.0754,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 188
@@ -1831,8 +1910,8 @@
       "accountAgeDays": 999,
       "isCamouflage": true,
       "maxScore": 206,
-      "totalValue": 26093.887,
-      "allTimePnl": -860608,
+      "totalValue": 27297.6756,
+      "allTimePnl": -858663,
       "monthPnl": 0,
       "markets": [
         {
@@ -1840,8 +1919,8 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "YES",
-          "amount": 26093.887,
-          "marketRatio": 7,
+          "amount": 27297.6756,
+          "marketRatio": 8,
           "marketEntryDays": 999,
           "score": 206
         }
@@ -1855,7 +1934,7 @@
       "isCamouflage": true,
       "maxScore": 206,
       "totalValue": 153717.1354,
-      "allTimePnl": -803150,
+      "allTimePnl": -803203,
       "monthPnl": 0,
       "markets": [
         {
@@ -1877,8 +1956,8 @@
       "accountAgeDays": 520,
       "isCamouflage": true,
       "maxScore": 206,
-      "totalValue": 23094.624499999998,
-      "allTimePnl": 4758,
+      "totalValue": 23413.3822,
+      "allTimePnl": 5062,
       "monthPnl": 0,
       "markets": [
         {
@@ -1896,8 +1975,8 @@
           "question": "Billionaire one-time wealth tax on California ballot?",
           "conditionId": "0x04f1a10e79a106d18dc45e6087f0757456197ec5c6ffec2506cd066e8215fc62",
           "side": "YES",
-          "amount": 8022.0677,
-          "marketRatio": 18,
+          "amount": 8340.8254,
+          "marketRatio": 19,
           "marketEntryDays": 19,
           "score": 188
         }
@@ -1911,7 +1990,7 @@
       "isCamouflage": false,
       "maxScore": 206,
       "totalValue": 10710.0997,
-      "allTimePnl": 2989,
+      "allTimePnl": 2570,
       "monthPnl": 0,
       "markets": [
         {
@@ -1933,8 +2012,8 @@
       "accountAgeDays": 73,
       "isCamouflage": true,
       "maxScore": 205,
-      "totalValue": 12864.2456,
-      "allTimePnl": -4077,
+      "totalValue": 12877.3524,
+      "allTimePnl": -4039,
       "monthPnl": 0,
       "markets": [
         {
@@ -1942,7 +2021,7 @@
           "question": "GTA VI released before June 2026?",
           "conditionId": "0xcccb7e7613a087c132b69cbf3a02bece3fdcb824c1da54ae79acc8d4a562d902",
           "side": "NO",
-          "amount": 12864.2456,
+          "amount": 12877.3524,
           "marketRatio": 40,
           "marketEntryDays": 999,
           "score": 205
@@ -1950,60 +2029,14 @@
       ]
     },
     {
-      "wallet": "0x24c8cf69a0e0a17eee21f69d29752bfa32e823e1",
-      "name": "debased",
-      "totalMarkets": 100,
-      "accountAgeDays": 1102,
-      "isCamouflage": false,
-      "maxScore": 204,
-      "totalValue": 11038.7596,
-      "allTimePnl": -363438,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
-          "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
-          "side": "NO",
-          "amount": 11038.7596,
-          "marketRatio": 1,
-          "marketEntryDays": 0,
-          "score": 204
-        }
-      ]
-    },
-    {
-      "wallet": "0x462128e09a5e2becc0e867dba764d429c0c2efcc",
-      "name": "olxbossx",
-      "totalMarkets": 4,
-      "accountAgeDays": 444,
-      "isCamouflage": false,
-      "maxScore": 204,
-      "totalValue": 483.1044,
-      "allTimePnl": -82,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
-          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
-          "side": "YES",
-          "amount": 483.1044,
-          "marketRatio": 60,
-          "marketEntryDays": 0,
-          "score": 204
-        }
-      ]
-    },
-    {
       "wallet": "0x7c873c11e40ceaaba6385322d49f565b66659bd4",
       "name": "jaja5050",
       "totalMarkets": 74,
-      "accountAgeDays": 319,
+      "accountAgeDays": 320,
       "isCamouflage": true,
       "maxScore": 203,
       "totalValue": 27351.3675,
-      "allTimePnl": -142424,
+      "allTimePnl": -142441,
       "monthPnl": 0,
       "markets": [
         {
@@ -2022,11 +2055,11 @@
       "wallet": "0x8365a0c9908dca494abaf0b90584162b474ce9a6",
       "name": "Retired-Davis",
       "totalMarkets": 34,
-      "accountAgeDays": 531,
+      "accountAgeDays": 532,
       "isCamouflage": true,
       "maxScore": 203,
       "totalValue": 6223.36,
-      "allTimePnl": -13224,
+      "allTimePnl": -13206,
       "monthPnl": 0,
       "markets": [
         {
@@ -2042,14 +2075,14 @@
       ]
     },
     {
-      "wallet": "0xaf458bee32b8f1d9ba39ee876f20c7e3ce62ec7d",
-      "name": "fed26",
-      "totalMarkets": 9,
-      "accountAgeDays": 97,
+      "wallet": "0xd6c0a0f2cbfa15c2de02ade45cafad40f6f322c1",
+      "name": "0xd6C0A0f2Cbfa15C2dE02AdE45caFAD40F6f322C1-1769737289364",
+      "totalMarkets": 2,
+      "accountAgeDays": 11,
       "isCamouflage": false,
       "maxScore": 200,
-      "totalValue": 47694.5575,
-      "allTimePnl": -9156,
+      "totalValue": 527.0836,
+      "allTimePnl": -73,
       "monthPnl": 0,
       "markets": [
         {
@@ -2057,20 +2090,20 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "YES",
-          "amount": 823.2444,
-          "marketRatio": 1,
-          "marketEntryDays": 4,
+          "amount": 243.5064,
+          "marketRatio": 46,
+          "marketEntryDays": 2,
           "score": 200
         },
         {
-          "slug": "will-no-fed-rate-cuts-happen-in-2026",
-          "question": "Will no Fed rate cuts happen in 2026?",
-          "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
-          "side": "YES",
-          "amount": 46871.3131,
-          "marketRatio": 63,
-          "marketEntryDays": 10,
-          "score": 190
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
+          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
+          "side": "NO",
+          "amount": 283.5772,
+          "marketRatio": 54,
+          "marketEntryDays": 1,
+          "score": 188
         }
       ]
     },
@@ -2082,7 +2115,7 @@
       "isCamouflage": true,
       "maxScore": 200,
       "totalValue": 69096.9647,
-      "allTimePnl": 87831,
+      "allTimePnl": 90024,
       "monthPnl": 0,
       "markets": [
         {
@@ -2105,7 +2138,7 @@
       "isCamouflage": false,
       "maxScore": 200,
       "totalValue": 130,
-      "allTimePnl": -4491,
+      "allTimePnl": -4632,
       "monthPnl": 0,
       "markets": [
         {
@@ -2121,37 +2154,14 @@
       ]
     },
     {
-      "wallet": "0x9aeb534c42b58b21673d5e03e9da14fbd15b2729",
-      "name": "The-Joker",
-      "totalMarkets": 25,
-      "accountAgeDays": 177,
-      "isCamouflage": false,
-      "maxScore": 200,
-      "totalValue": 6850.3188,
-      "allTimePnl": 4142,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-claude-5-be-released-by-april-30-2026",
-          "question": "Will Claude 5 be released by April 30, 2026?",
-          "conditionId": "0x3acb42d4a4da859a82ec3c78e6be641489985672ea7f28ae73da7c253af32fa8",
-          "side": "NO",
-          "amount": 6850.3188,
-          "marketRatio": 12,
-          "marketEntryDays": 2,
-          "score": 200
-        }
-      ]
-    },
-    {
       "wallet": "0x2b76c1d12cd928b1d95a6d2c7f1e6f6e7f14edef",
       "name": "idfinsider0228",
       "totalMarkets": 15,
       "accountAgeDays": 346,
       "isCamouflage": false,
       "maxScore": 200,
-      "totalValue": 34140.6851,
-      "allTimePnl": -8752,
+      "totalValue": 35310.8359,
+      "allTimePnl": -11038,
       "monthPnl": 0,
       "markets": [
         {
@@ -2169,9 +2179,9 @@
           "question": "Poilievre out as leader of Conservatives by December 31, 2026?",
           "conditionId": "0x189fc3a42652bc98e40592bbdee43cb8160315310ce535a4fa37fd838da64e72",
           "side": "NO",
-          "amount": 20916.4453,
-          "marketRatio": 25,
-          "marketEntryDays": 1,
+          "amount": 22086.5961,
+          "marketRatio": 28,
+          "marketEntryDays": 2,
           "score": 200
         }
       ]
@@ -2183,8 +2193,8 @@
       "accountAgeDays": 101,
       "isCamouflage": false,
       "maxScore": 198,
-      "totalValue": 2488.7693,
-      "allTimePnl": -1323,
+      "totalValue": 2474.6844,
+      "allTimePnl": -1337,
       "monthPnl": 0,
       "markets": [
         {
@@ -2202,8 +2212,8 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "YES",
-          "amount": 252.9077,
-          "marketRatio": 7,
+          "amount": 291.8166,
+          "marketRatio": 8,
           "marketEntryDays": 999,
           "score": 179
         },
@@ -2222,8 +2232,8 @@
           "question": "Will the Fed increase interest rates by 25 bps after the June 2026 meeting?",
           "conditionId": "0xa7cb4135c6d9c36da0e343874dd5b455de739c6d1b9f9f5583dd9320aacf5db2",
           "side": "YES",
-          "amount": 397.4533,
-          "marketRatio": 11,
+          "amount": 344.4595,
+          "marketRatio": 9,
           "marketEntryDays": 5,
           "score": 198
         },
@@ -2240,6 +2250,29 @@
       ]
     },
     {
+      "wallet": "0x24c8cf69a0e0a17eee21f69d29752bfa32e823e1",
+      "name": "debased",
+      "totalMarkets": 100,
+      "accountAgeDays": 1102,
+      "isCamouflage": false,
+      "maxScore": 198,
+      "totalValue": 8270.4935,
+      "allTimePnl": -359558,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
+          "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
+          "side": "NO",
+          "amount": 8270.4935,
+          "marketRatio": 1,
+          "marketEntryDays": 1,
+          "score": 198
+        }
+      ]
+    },
+    {
       "wallet": "0x41eacf5aaa4c7fc883a098635b981050715d7a3d",
       "name": "Chungvicular",
       "totalMarkets": 27,
@@ -2247,7 +2280,7 @@
       "isCamouflage": false,
       "maxScore": 196,
       "totalValue": 2028.6554,
-      "allTimePnl": 5538,
+      "allTimePnl": 6428,
       "monthPnl": 0,
       "markets": [
         {
@@ -2256,7 +2289,7 @@
           "conditionId": "0x448f73e89890ae9d0e42ad0b592f63b53c0ae05d1ca3fa8d80b30027781f1be7",
           "side": "YES",
           "amount": 2028.6554,
-          "marketRatio": 8,
+          "marketRatio": 7,
           "marketEntryDays": 999,
           "score": 196
         }
@@ -2266,11 +2299,11 @@
       "wallet": "0x413f29bc7f5ce2a2d8d28fb3a8b5d75199d247f3",
       "name": "luckyfly",
       "totalMarkets": 24,
-      "accountAgeDays": 175,
+      "accountAgeDays": 176,
       "isCamouflage": false,
       "maxScore": 195,
-      "totalValue": 1475.4636,
-      "allTimePnl": -6641,
+      "totalValue": 1373.7075,
+      "allTimePnl": -6621,
       "monthPnl": 0,
       "markets": [
         {
@@ -2278,7 +2311,7 @@
           "question": "Will Claude 5 be released by April 30, 2026?",
           "conditionId": "0x3acb42d4a4da859a82ec3c78e6be641489985672ea7f28ae73da7c253af32fa8",
           "side": "YES",
-          "amount": 1475.4636,
+          "amount": 1373.7075,
           "marketRatio": 3,
           "marketEntryDays": 4,
           "score": 195
@@ -2293,7 +2326,7 @@
       "isCamouflage": false,
       "maxScore": 194,
       "totalValue": 6350,
-      "allTimePnl": 9106,
+      "allTimePnl": 9104,
       "monthPnl": 0,
       "markets": [
         {
@@ -2304,39 +2337,6 @@
           "amount": 6350,
           "marketRatio": 9,
           "marketEntryDays": 999,
-          "score": 194
-        }
-      ]
-    },
-    {
-      "wallet": "0xc1a58674dbcc1d3208f7e61a0a8b252162caf290",
-      "name": "amis",
-      "totalMarkets": 43,
-      "accountAgeDays": 633,
-      "isCamouflage": false,
-      "maxScore": 194,
-      "totalValue": 19220.2558,
-      "allTimePnl": 3062,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-hyperliquid-dip-to-8-by-december-31-2026",
-          "question": "Will Hyperliquid dip to $8 by December 31, 2026?",
-          "conditionId": "0x587313a1b7d4eae36578004e3333e3d8bc9159177ecd255ff61b947a4e636b02",
-          "side": "NO",
-          "amount": 5265.8037,
-          "marketRatio": 2,
-          "marketEntryDays": 16,
-          "score": 169
-        },
-        {
-          "slug": "will-hyperliquid-dip-to-12-by-december-31-2026",
-          "question": "Will Hyperliquid dip to $12 by December 31, 2026?",
-          "conditionId": "0x8f9956410b9b8ef4c112ea03800920bc445deff855d57fb156c9ab9b56aecc8a",
-          "side": "NO",
-          "amount": 13954.4521,
-          "marketRatio": 4,
-          "marketEntryDays": 14,
           "score": 194
         }
       ]
@@ -2368,11 +2368,11 @@
       "wallet": "0xa66790e2b0075e73c3781ddaf1d0b875a3aaceb3",
       "name": "Elias.Thornwell",
       "totalMarkets": 100,
-      "accountAgeDays": 291,
+      "accountAgeDays": 292,
       "isCamouflage": true,
       "maxScore": 191,
-      "totalValue": 5787.6273,
-      "allTimePnl": -2069,
+      "totalValue": 5781.8018,
+      "allTimePnl": -1872,
       "monthPnl": 0,
       "markets": [
         {
@@ -2380,7 +2380,7 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "NO",
-          "amount": 5787.6273,
+          "amount": 5781.8018,
           "marketRatio": 5,
           "marketEntryDays": 999,
           "score": 191
@@ -2394,8 +2394,8 @@
       "accountAgeDays": 551,
       "isCamouflage": false,
       "maxScore": 191,
-      "totalValue": 12197.3783,
-      "allTimePnl": 6294,
+      "totalValue": 12160.5097,
+      "allTimePnl": 6361,
       "monthPnl": 0,
       "markets": [
         {
@@ -2403,8 +2403,8 @@
           "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
           "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
           "side": "NO",
-          "amount": 12197.3783,
-          "marketRatio": 11,
+          "amount": 12160.5097,
+          "marketRatio": 10,
           "marketEntryDays": 39,
           "score": 191
         }
@@ -2417,8 +2417,8 @@
       "accountAgeDays": 540,
       "isCamouflage": true,
       "maxScore": 190,
-      "totalValue": 37883.9901,
-      "allTimePnl": -210978,
+      "totalValue": 36869.9903,
+      "allTimePnl": -211514,
       "monthPnl": 0,
       "markets": [
         {
@@ -2426,8 +2426,8 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "NO",
-          "amount": 37883.9901,
-          "marketRatio": 48,
+          "amount": 36869.9903,
+          "marketRatio": 47,
           "marketEntryDays": 999,
           "score": 190
         }
@@ -2440,8 +2440,8 @@
       "accountAgeDays": 290,
       "isCamouflage": false,
       "maxScore": 190,
-      "totalValue": 8686.5586,
-      "allTimePnl": 2814,
+      "totalValue": 8789.8529,
+      "allTimePnl": 3072,
       "monthPnl": 0,
       "markets": [
         {
@@ -2449,9 +2449,9 @@
           "question": "Lee Jae-myung arrested before 2027?",
           "conditionId": "0x005de69d6f0d32f8284310d0b0d292f6eb42119fe0ecde7dbd34f7aedce0851c",
           "side": "NO",
-          "amount": 8686.5586,
+          "amount": 8789.8529,
           "marketRatio": 16,
-          "marketEntryDays": 1,
+          "marketEntryDays": 2,
           "score": 190
         }
       ]
@@ -2463,8 +2463,8 @@
       "accountAgeDays": 1105,
       "isCamouflage": false,
       "maxScore": 189,
-      "totalValue": 27855.7549,
-      "allTimePnl": -54968,
+      "totalValue": 27872.9345,
+      "allTimePnl": -54697,
       "monthPnl": 0,
       "markets": [
         {
@@ -2482,7 +2482,7 @@
           "question": "Will OpenAI IPO by June 30 2026?",
           "conditionId": "0x753e6031044632c083fede2715235b69bb2596e37d34f6f19d2b6635d2d4dd58",
           "side": "NO",
-          "amount": 11046.4614,
+          "amount": 11063.641,
           "marketRatio": 3,
           "marketEntryDays": 999,
           "score": 189
@@ -2490,24 +2490,57 @@
       ]
     },
     {
-      "wallet": "0x2a21da2e20fa5b69381d7d44bd73f879c1aefb6c",
-      "name": "mastershifu",
-      "totalMarkets": 9,
-      "accountAgeDays": 577,
+      "wallet": "0x39aaed185b92e99a78249610cc14a589b764583c",
+      "name": "0x39AaEd185b92e99a78249610cc14A589B764583C-1759470981616",
+      "totalMarkets": 100,
+      "accountAgeDays": 177,
       "isCamouflage": true,
       "maxScore": 188,
-      "totalValue": 1467.8076,
-      "allTimePnl": -34033,
+      "totalValue": 22676.2028,
+      "allTimePnl": 2483,
       "monthPnl": 0,
       "markets": [
         {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
-          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
+          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 50+ bps after the April 2026 meeting?",
+          "conditionId": "0xd72622d154dfe65b9c019d6afcfe75a55717e5c502db611f555b101aafbf6ec5",
           "side": "NO",
-          "amount": 1467.8076,
-          "marketRatio": 100,
-          "marketEntryDays": 1,
+          "amount": 11439.6289,
+          "marketRatio": 15,
+          "marketEntryDays": 0,
+          "score": 188
+        },
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
+          "side": "NO",
+          "amount": 11236.5739,
+          "marketRatio": 15,
+          "marketEntryDays": 0,
+          "score": 188
+        }
+      ]
+    },
+    {
+      "wallet": "0xf81c11c712ac751d2fa21fcb3c617e2b1ba94540",
+      "name": "pa21",
+      "totalMarkets": 12,
+      "accountAgeDays": 352,
+      "isCamouflage": false,
+      "maxScore": 188,
+      "totalValue": 214.2857,
+      "allTimePnl": -383,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
+          "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
+          "side": "YES",
+          "amount": 214.2857,
+          "marketRatio": 10,
+          "marketEntryDays": 2,
           "score": 188
         }
       ]
@@ -2519,8 +2552,8 @@
       "accountAgeDays": 87,
       "isCamouflage": false,
       "maxScore": 188,
-      "totalValue": 287145.8239,
-      "allTimePnl": 240,
+      "totalValue": 286679.3239,
+      "allTimePnl": -227,
       "monthPnl": 0,
       "markets": [
         {
@@ -2528,7 +2561,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 91760.55,
+          "amount": 91294.05,
           "marketRatio": 32,
           "marketEntryDays": 19,
           "score": 188
@@ -2546,14 +2579,37 @@
       ]
     },
     {
+      "wallet": "0x2a21da2e20fa5b69381d7d44bd73f879c1aefb6c",
+      "name": "mastershifu",
+      "totalMarkets": 9,
+      "accountAgeDays": 577,
+      "isCamouflage": true,
+      "maxScore": 188,
+      "totalValue": 1903.702,
+      "allTimePnl": -33597,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
+          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
+          "side": "NO",
+          "amount": 1903.702,
+          "marketRatio": 100,
+          "marketEntryDays": 1,
+          "score": 188
+        }
+      ]
+    },
+    {
       "wallet": "0x95074f700f93bdf6e62fc965e0832064c0877b04",
       "name": "CAR-LGBTFriendlyVersion",
       "totalMarkets": 100,
       "accountAgeDays": 100,
       "isCamouflage": false,
       "maxScore": 188,
-      "totalValue": 18848.1136,
-      "allTimePnl": 16619,
+      "totalValue": 18854.2545,
+      "allTimePnl": 16672,
       "monthPnl": 0,
       "markets": [
         {
@@ -2561,7 +2617,7 @@
           "question": "GTA VI released before June 2026?",
           "conditionId": "0xcccb7e7613a087c132b69cbf3a02bece3fdcb824c1da54ae79acc8d4a562d902",
           "side": "NO",
-          "amount": 6027.2632,
+          "amount": 6033.4041,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 145
@@ -2585,8 +2641,8 @@
       "accountAgeDays": 157,
       "isCamouflage": false,
       "maxScore": 188,
-      "totalValue": 12628.0092,
-      "allTimePnl": -7579,
+      "totalValue": 12290.009,
+      "allTimePnl": -7631,
       "monthPnl": 0,
       "markets": [
         {
@@ -2594,8 +2650,8 @@
           "question": "Will no Fed rate cuts happen in 2026?",
           "conditionId": "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527",
           "side": "NO",
-          "amount": 12628.0092,
-          "marketRatio": 19,
+          "amount": 12290.009,
+          "marketRatio": 18,
           "marketEntryDays": 999,
           "score": 188
         }
@@ -2609,7 +2665,7 @@
       "isCamouflage": true,
       "maxScore": 188,
       "totalValue": 15337.1526,
-      "allTimePnl": -92952,
+      "allTimePnl": -93896,
       "monthPnl": 0,
       "markets": [
         {
@@ -2631,8 +2687,8 @@
       "accountAgeDays": 95,
       "isCamouflage": false,
       "maxScore": 188,
-      "totalValue": 3023.8177,
-      "allTimePnl": 20757,
+      "totalValue": 2828.7327,
+      "allTimePnl": 19998,
       "monthPnl": 0,
       "markets": [
         {
@@ -2640,7 +2696,7 @@
           "question": "Fed rate hike in 2026?",
           "conditionId": "0x80b3af88cb991980e8da1ce86b9794a0957f96ec98c29319dd7ba65e9744d82b",
           "side": "YES",
-          "amount": 3023.8177,
+          "amount": 2828.7327,
           "marketRatio": 1,
           "marketEntryDays": 999,
           "score": 188
@@ -2654,8 +2710,8 @@
       "accountAgeDays": 332,
       "isCamouflage": false,
       "maxScore": 188,
-      "totalValue": 16592.1293,
-      "allTimePnl": 31455,
+      "totalValue": 17216.882999999998,
+      "allTimePnl": 31966,
       "monthPnl": 0,
       "markets": [
         {
@@ -2663,18 +2719,18 @@
           "question": "Will Claude 5 be released by May 31, 2026?",
           "conditionId": "0x6d4e3af4996807a673cb2678a7b5960bfd6dfa5c43b8556e23cdf094fb55d2b6",
           "side": "YES",
-          "amount": 4498.1921,
-          "marketRatio": 5,
+          "amount": 5346.9076,
+          "marketRatio": 6,
           "marketEntryDays": 999,
-          "score": 178
+          "score": 183
         },
         {
           "slug": "will-claude-5-be-released-by-june-30-2026",
           "question": "Will Claude 5 be released by June 30, 2026?",
           "conditionId": "0x562d8e6be61af9176d3ed95c775b56202e5e668d7dd703be7c875926f56efdbd",
           "side": "YES",
-          "amount": 12093.9372,
-          "marketRatio": 12,
+          "amount": 11869.9754,
+          "marketRatio": 14,
           "marketEntryDays": 999,
           "score": 188
         }
@@ -2688,7 +2744,7 @@
       "isCamouflage": false,
       "maxScore": 186,
       "totalValue": 7878.9814,
-      "allTimePnl": -49261,
+      "allTimePnl": -49752,
       "monthPnl": 0,
       "markets": [
         {
@@ -2711,7 +2767,7 @@
       "isCamouflage": true,
       "maxScore": 185,
       "totalValue": 23491.0828,
-      "allTimePnl": -6617,
+      "allTimePnl": -6385,
       "monthPnl": 0,
       "markets": [
         {
@@ -2721,7 +2777,7 @@
           "side": "NO",
           "amount": 23491.0828,
           "marketRatio": 31,
-          "marketEntryDays": 34,
+          "marketEntryDays": 35,
           "score": 185
         }
       ]
@@ -2733,8 +2789,8 @@
       "accountAgeDays": 101,
       "isCamouflage": true,
       "maxScore": 185,
-      "totalValue": 299053.85709999996,
-      "allTimePnl": -229615,
+      "totalValue": 296694.8177,
+      "allTimePnl": -217742,
       "monthPnl": 0,
       "markets": [
         {
@@ -2742,7 +2798,7 @@
           "question": "Will Claude 5 be released by April 30, 2026?",
           "conditionId": "0x3acb42d4a4da859a82ec3c78e6be641489985672ea7f28ae73da7c253af32fa8",
           "side": "NO",
-          "amount": 194452.2353,
+          "amount": 196726.5305,
           "marketRatio": 4,
           "marketEntryDays": 999,
           "score": 185
@@ -2752,7 +2808,7 @@
           "question": "Will Claude 5 be released by May 31, 2026?",
           "conditionId": "0x6d4e3af4996807a673cb2678a7b5960bfd6dfa5c43b8556e23cdf094fb55d2b6",
           "side": "NO",
-          "amount": 76947.3584,
+          "amount": 71712.8442,
           "marketRatio": 2,
           "marketEntryDays": 999,
           "score": 165
@@ -2762,7 +2818,7 @@
           "question": "Will Claude 5 be released by June 30, 2026?",
           "conditionId": "0x562d8e6be61af9176d3ed95c775b56202e5e668d7dd703be7c875926f56efdbd",
           "side": "NO",
-          "amount": 27654.2634,
+          "amount": 28255.443,
           "marketRatio": 1,
           "marketEntryDays": 999,
           "score": 162
@@ -2770,91 +2826,25 @@
       ]
     },
     {
-      "wallet": "0xf83eb91d77cb7141e41e1ca7592e49fa2fc0fe3a",
-      "name": "DigitalOpportunityFund",
-      "totalMarkets": 2,
-      "accountAgeDays": 253,
+      "wallet": "0x0e65acd3fccbdf60e7ac42afaad32bf1c940e33f",
+      "name": "lEGLeGDaNDAnYah.",
+      "totalMarkets": 5,
+      "accountAgeDays": 485,
       "isCamouflage": false,
-      "maxScore": 182,
-      "totalValue": 23390.8383,
-      "allTimePnl": -8340,
+      "maxScore": 183,
+      "totalValue": 1810.5388,
+      "allTimePnl": -3547,
       "monthPnl": 0,
       "markets": [
         {
-          "slug": "trump-out-as-president-before-2027",
-          "question": "Trump out as President before 2027?",
-          "conditionId": "0x48b0b0bca515f68fccf95af4793dbd0edbfec1f8ec6e8df2c0f69ba74f8c4722",
-          "side": "NO",
-          "amount": 23390.8383,
-          "marketRatio": 100,
-          "marketEntryDays": 3,
-          "score": 182
-        }
-      ]
-    },
-    {
-      "wallet": "0x39aaed185b92e99a78249610cc14a589b764583c",
-      "name": "0x39AaEd185b92e99a78249610cc14A589B764583C-1759470981616",
-      "totalMarkets": 100,
-      "accountAgeDays": 177,
-      "isCamouflage": true,
-      "maxScore": 181,
-      "totalValue": 19136.9993,
-      "allTimePnl": 1234,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-50-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 50+ bps after the April 2026 meeting?",
-          "conditionId": "0xd72622d154dfe65b9c019d6afcfe75a55717e5c502db611f555b101aafbf6ec5",
-          "side": "NO",
-          "amount": 9650.2973,
-          "marketRatio": 15,
-          "marketEntryDays": 0,
-          "score": 181
-        },
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
-          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
-          "side": "NO",
-          "amount": 9486.702,
-          "marketRatio": 14,
-          "marketEntryDays": 0,
-          "score": 181
-        }
-      ]
-    },
-    {
-      "wallet": "0xd6c0a0f2cbfa15c2de02ade45cafad40f6f322c1",
-      "name": "0xd6C0A0f2Cbfa15C2dE02AdE45caFAD40F6f322C1-1769737289364",
-      "totalMarkets": 2,
-      "accountAgeDays": 11,
-      "isCamouflage": false,
-      "maxScore": 181,
-      "totalValue": 429.6848,
-      "allTimePnl": -170,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
-          "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
+          "slug": "will-claude-5-be-released-by-april-30-2026",
+          "question": "Will Claude 5 be released by April 30, 2026?",
+          "conditionId": "0x3acb42d4a4da859a82ec3c78e6be641489985672ea7f28ae73da7c253af32fa8",
           "side": "YES",
-          "amount": 211.0389,
-          "marketRatio": 49,
-          "marketEntryDays": 1,
-          "score": 181
-        },
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
-          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
-          "side": "NO",
-          "amount": 218.6459,
+          "amount": 1810.5388,
           "marketRatio": 51,
-          "marketEntryDays": 1,
-          "score": 169
+          "marketEntryDays": 8,
+          "score": 183
         }
       ]
     },
@@ -2862,11 +2852,11 @@
       "wallet": "0x28ca4e9a04531f2eac0c2770f95db4e1c6a65d19",
       "name": "DuneMentat",
       "totalMarkets": 91,
-      "accountAgeDays": 254,
+      "accountAgeDays": 255,
       "isCamouflage": true,
       "maxScore": 181,
-      "totalValue": 9562.5585,
-      "allTimePnl": 2087,
+      "totalValue": 9552.9334,
+      "allTimePnl": 2044,
       "monthPnl": 0,
       "markets": [
         {
@@ -2874,7 +2864,7 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "NO",
-          "amount": 9562.5585,
+          "amount": 9552.9334,
           "marketRatio": 23,
           "marketEntryDays": 999,
           "score": 181
@@ -2885,11 +2875,11 @@
       "wallet": "0xfa8fc6a3e706bc4aa7556d060564c154322ad61b",
       "name": "singaporesling",
       "totalMarkets": 100,
-      "accountAgeDays": 522,
+      "accountAgeDays": 523,
       "isCamouflage": true,
       "maxScore": 181,
-      "totalValue": 12276.989,
-      "allTimePnl": -22986,
+      "totalValue": 12244.8923,
+      "allTimePnl": -23424,
       "monthPnl": 0,
       "markets": [
         {
@@ -2897,8 +2887,8 @@
           "question": "Will 1 Fed rate cut happen in 2026?",
           "conditionId": "0x5e082f0b57f47a29044aa35b4c5658393122e659d5feae521c06b57cdd7f905c",
           "side": "NO",
-          "amount": 9253.4113,
-          "marketRatio": 3,
+          "amount": 9377.6181,
+          "marketRatio": 4,
           "marketEntryDays": 999,
           "score": 181
         },
@@ -2907,7 +2897,7 @@
           "question": "Will the Fed’s lower bound reach 2.75% or lower before 2027?",
           "conditionId": "0x2bb4294142c311763ca6be27ceffcef132f5ac8281f98a62abe02f6e6a8c0107",
           "side": "YES",
-          "amount": 3023.5777,
+          "amount": 2867.2742,
           "marketRatio": 1,
           "marketEntryDays": 1,
           "score": 155
@@ -2922,7 +2912,7 @@
       "isCamouflage": true,
       "maxScore": 180,
       "totalValue": 83499.9911,
-      "allTimePnl": 12828,
+      "allTimePnl": 12484,
       "monthPnl": 0,
       "markets": [
         {
@@ -2944,8 +2934,8 @@
       "accountAgeDays": 101,
       "isCamouflage": false,
       "maxScore": 180,
-      "totalValue": 1679.6876,
-      "allTimePnl": -6576,
+      "totalValue": 1563.8471,
+      "allTimePnl": -6297,
       "monthPnl": 0,
       "markets": [
         {
@@ -2953,8 +2943,8 @@
           "question": "Will Claude 5 be released by April 30, 2026?",
           "conditionId": "0x3acb42d4a4da859a82ec3c78e6be641489985672ea7f28ae73da7c253af32fa8",
           "side": "YES",
-          "amount": 1679.6876,
-          "marketRatio": 24,
+          "amount": 1563.8471,
+          "marketRatio": 22,
           "marketEntryDays": 3,
           "score": 180
         }
@@ -2967,8 +2957,8 @@
       "accountAgeDays": 270,
       "isCamouflage": false,
       "maxScore": 180,
-      "totalValue": 6582.0174,
-      "allTimePnl": 2433,
+      "totalValue": 6659,
+      "allTimePnl": 3507,
       "monthPnl": 0,
       "markets": [
         {
@@ -2976,7 +2966,7 @@
           "question": "Will Claude 5 be released by April 30, 2026?",
           "conditionId": "0x3acb42d4a4da859a82ec3c78e6be641489985672ea7f28ae73da7c253af32fa8",
           "side": "NO",
-          "amount": 6582.0174,
+          "amount": 6659,
           "marketRatio": 8,
           "marketEntryDays": 6,
           "score": 180
@@ -2991,7 +2981,7 @@
       "isCamouflage": false,
       "maxScore": 180,
       "totalValue": 8500,
-      "allTimePnl": 133738,
+      "allTimePnl": 133704,
       "monthPnl": 0,
       "markets": [
         {
@@ -3013,8 +3003,8 @@
       "accountAgeDays": 522,
       "isCamouflage": true,
       "maxScore": 180,
-      "totalValue": 5460.2117,
-      "allTimePnl": -29421,
+      "totalValue": 5293.4877,
+      "allTimePnl": -29656,
       "monthPnl": 0,
       "markets": [
         {
@@ -3022,8 +3012,8 @@
           "question": "GTA 6 launch postponed again?",
           "conditionId": "0x652293940a98a7ec9b1d2b23fb9e8399728d1a461dce61523fa2fcce8d844e21",
           "side": "NO",
-          "amount": 5460.2117,
-          "marketRatio": 35,
+          "amount": 5293.4877,
+          "marketRatio": 34,
           "marketEntryDays": 1,
           "score": 180
         }
@@ -3033,11 +3023,11 @@
       "wallet": "0xcce2b7c71f21e358b8e5e797e586cbc03160d58b",
       "name": "xcnstrategy",
       "totalMarkets": 18,
-      "accountAgeDays": 596,
+      "accountAgeDays": 597,
       "isCamouflage": false,
       "maxScore": 179,
-      "totalValue": 28959.029300000002,
-      "allTimePnl": 849,
+      "totalValue": 29104.1069,
+      "allTimePnl": 1013,
       "monthPnl": 0,
       "markets": [
         {
@@ -3047,7 +3037,7 @@
           "side": "NO",
           "amount": 16699.9689,
           "marketRatio": 13,
-          "marketEntryDays": 59,
+          "marketEntryDays": 60,
           "score": 143
         },
         {
@@ -3055,9 +3045,9 @@
           "question": "Fed rate hike in 2026?",
           "conditionId": "0x80b3af88cb991980e8da1ce86b9794a0957f96ec98c29319dd7ba65e9744d82b",
           "side": "NO",
-          "amount": 12259.0604,
+          "amount": 12404.138,
           "marketRatio": 10,
-          "marketEntryDays": 46,
+          "marketEntryDays": 47,
           "score": 179
         }
       ]
@@ -3089,11 +3079,11 @@
       "wallet": "0x0ead7a48afa30eba6413b8d5717569e514019572",
       "name": "minisobaby",
       "totalMarkets": 7,
-      "accountAgeDays": 255,
+      "accountAgeDays": 256,
       "isCamouflage": true,
       "maxScore": 176,
       "totalValue": 49001.6592,
-      "allTimePnl": -6933,
+      "allTimePnl": -6835,
       "monthPnl": 0,
       "markets": [
         {
@@ -3109,14 +3099,37 @@
       ]
     },
     {
+      "wallet": "0xf624ccde79a2db326ca3b7e66512ad6d4bdea1b5",
+      "name": "0xf624Ccde79A2dB326Ca3b7E66512aD6D4bdeA1B5-1768762682755",
+      "totalMarkets": 3,
+      "accountAgeDays": 6,
+      "isCamouflage": false,
+      "maxScore": 175,
+      "totalValue": 461.2949,
+      "allTimePnl": 155,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
+          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
+          "side": "YES",
+          "amount": 461.2949,
+          "marketRatio": 88,
+          "marketEntryDays": 6,
+          "score": 175
+        }
+      ]
+    },
+    {
       "wallet": "0xd71f26a8f3c429045e6d14319101b249c16631bd",
       "name": "MacMain",
       "totalMarkets": 11,
       "accountAgeDays": 554,
       "isCamouflage": true,
       "maxScore": 175,
-      "totalValue": 379.5,
-      "allTimePnl": -9002,
+      "totalValue": 492.2,
+      "allTimePnl": -8889,
       "monthPnl": 0,
       "markets": [
         {
@@ -3124,9 +3137,42 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "NO",
-          "amount": 379.5,
+          "amount": 492.2,
           "marketRatio": 100,
           "marketEntryDays": 2,
+          "score": 175
+        }
+      ]
+    },
+    {
+      "wallet": "0xc1a58674dbcc1d3208f7e61a0a8b252162caf290",
+      "name": "amis",
+      "totalMarkets": 43,
+      "accountAgeDays": 633,
+      "isCamouflage": false,
+      "maxScore": 175,
+      "totalValue": 19220.2558,
+      "allTimePnl": 3081,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-hyperliquid-dip-to-8-by-december-31-2026",
+          "question": "Will Hyperliquid dip to $8 by December 31, 2026?",
+          "conditionId": "0x587313a1b7d4eae36578004e3333e3d8bc9159177ecd255ff61b947a4e636b02",
+          "side": "NO",
+          "amount": 5265.8037,
+          "marketRatio": 2,
+          "marketEntryDays": 17,
+          "score": 169
+        },
+        {
+          "slug": "will-hyperliquid-dip-to-12-by-december-31-2026",
+          "question": "Will Hyperliquid dip to $12 by December 31, 2026?",
+          "conditionId": "0x8f9956410b9b8ef4c112ea03800920bc445deff855d57fb156c9ab9b56aecc8a",
+          "side": "NO",
+          "amount": 13954.4521,
+          "marketRatio": 4,
+          "marketEntryDays": 15,
           "score": 175
         }
       ]
@@ -3138,8 +3184,8 @@
       "accountAgeDays": 39,
       "isCamouflage": false,
       "maxScore": 173,
-      "totalValue": 159058.5263,
-      "allTimePnl": 4258,
+      "totalValue": 158634.7204,
+      "allTimePnl": 3757,
       "monthPnl": 0,
       "markets": [
         {
@@ -3147,7 +3193,7 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "NO",
-          "amount": 94382.3861,
+          "amount": 94287.3862,
           "marketRatio": 10,
           "marketEntryDays": 1,
           "score": 173
@@ -3157,7 +3203,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 64676.1402,
+          "amount": 64347.3342,
           "marketRatio": 7,
           "marketEntryDays": 2,
           "score": 173
@@ -3171,8 +3217,8 @@
       "accountAgeDays": 735,
       "isCamouflage": false,
       "maxScore": 173,
-      "totalValue": 6153.4846,
-      "allTimePnl": 3151,
+      "totalValue": 6134.8846,
+      "allTimePnl": 2915,
       "monthPnl": 0,
       "markets": [
         {
@@ -3180,7 +3226,7 @@
           "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
           "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
           "side": "NO",
-          "amount": 6153.4846,
+          "amount": 6134.8846,
           "marketRatio": 23,
           "marketEntryDays": 999,
           "score": 173
@@ -3188,25 +3234,25 @@
       ]
     },
     {
-      "wallet": "0x0e65acd3fccbdf60e7ac42afaad32bf1c940e33f",
-      "name": "lEGLeGDaNDAnYah.",
-      "totalMarkets": 5,
-      "accountAgeDays": 485,
+      "wallet": "0xf83eb91d77cb7141e41e1ca7592e49fa2fc0fe3a",
+      "name": "DigitalOpportunityFund",
+      "totalMarkets": 2,
+      "accountAgeDays": 253,
       "isCamouflage": false,
-      "maxScore": 173,
-      "totalValue": 1944.6528,
-      "allTimePnl": -3659,
+      "maxScore": 172,
+      "totalValue": 23390.8383,
+      "allTimePnl": -8340,
       "monthPnl": 0,
       "markets": [
         {
-          "slug": "will-claude-5-be-released-by-april-30-2026",
-          "question": "Will Claude 5 be released by April 30, 2026?",
-          "conditionId": "0x3acb42d4a4da859a82ec3c78e6be641489985672ea7f28ae73da7c253af32fa8",
-          "side": "YES",
-          "amount": 1944.6528,
-          "marketRatio": 56,
-          "marketEntryDays": 8,
-          "score": 173
+          "slug": "trump-out-as-president-before-2027",
+          "question": "Trump out as President before 2027?",
+          "conditionId": "0x48b0b0bca515f68fccf95af4793dbd0edbfec1f8ec6e8df2c0f69ba74f8c4722",
+          "side": "NO",
+          "amount": 23390.8383,
+          "marketRatio": 100,
+          "marketEntryDays": 4,
+          "score": 172
         }
       ]
     },
@@ -3214,11 +3260,11 @@
       "wallet": "0xdf17f4a8dd01a4cfa6fc3da323a2baee5f8697d1",
       "name": "Nutritious-Ornament",
       "totalMarkets": 89,
-      "accountAgeDays": 486,
+      "accountAgeDays": 487,
       "isCamouflage": true,
       "maxScore": 172,
       "totalValue": 25915.7553,
-      "allTimePnl": 45113,
+      "allTimePnl": 37640,
       "monthPnl": 0,
       "markets": [
         {
@@ -3237,11 +3283,11 @@
       "wallet": "0x0e12c4cb7b3b767f4ddf4dcdcb678bdf45037ed6",
       "name": "Asddd22",
       "totalMarkets": 28,
-      "accountAgeDays": 111,
+      "accountAgeDays": 112,
       "isCamouflage": true,
       "maxScore": 170,
-      "totalValue": 16319.9206,
-      "allTimePnl": -1176,
+      "totalValue": 16336.5482,
+      "allTimePnl": -1159,
       "monthPnl": 0,
       "markets": [
         {
@@ -3249,7 +3295,7 @@
           "question": "GTA VI released before June 2026?",
           "conditionId": "0xcccb7e7613a087c132b69cbf3a02bece3fdcb824c1da54ae79acc8d4a562d902",
           "side": "NO",
-          "amount": 16319.9206,
+          "amount": 16336.5482,
           "marketRatio": 42,
           "marketEntryDays": 33,
           "score": 170
@@ -3263,8 +3309,8 @@
       "accountAgeDays": 667,
       "isCamouflage": true,
       "maxScore": 170,
-      "totalValue": 11179.052,
-      "allTimePnl": 5523,
+      "totalValue": 11190.4417,
+      "allTimePnl": 5573,
       "monthPnl": 0,
       "markets": [
         {
@@ -3272,9 +3318,9 @@
           "question": "GTA VI released before June 2026?",
           "conditionId": "0xcccb7e7613a087c132b69cbf3a02bece3fdcb824c1da54ae79acc8d4a562d902",
           "side": "NO",
-          "amount": 11179.052,
+          "amount": 11190.4417,
           "marketRatio": 13,
-          "marketEntryDays": 23,
+          "marketEntryDays": 24,
           "score": 170
         }
       ]
@@ -3309,8 +3355,8 @@
       "accountAgeDays": 539,
       "isCamouflage": false,
       "maxScore": 170,
-      "totalValue": 8964.4984,
-      "allTimePnl": -5104,
+      "totalValue": 9020.9974,
+      "allTimePnl": -4809,
       "monthPnl": 0,
       "markets": [
         {
@@ -3318,7 +3364,7 @@
           "question": "SpaceX (Space Exploration Technologies Corp.) IPO before 2027?",
           "conditionId": "0xc8a898fa8ce2121e3bba1ee52120ed8ab4f8ea7ed5a6dcd9b138fe7b9e454c0b",
           "side": "YES",
-          "amount": 8964.4984,
+          "amount": 9020.9974,
           "marketRatio": 29,
           "marketEntryDays": 9,
           "score": 170
@@ -3333,7 +3379,7 @@
       "isCamouflage": false,
       "maxScore": 170,
       "totalValue": 9350.0548,
-      "allTimePnl": 9565,
+      "allTimePnl": 9596,
       "monthPnl": 0,
       "markets": [
         {
@@ -3349,24 +3395,24 @@
       ]
     },
     {
-      "wallet": "0x07d4245464dc4fa05d0b3f084d82482462dc8991",
-      "name": "Wojtek",
-      "totalMarkets": 95,
-      "accountAgeDays": 739,
-      "isCamouflage": true,
+      "wallet": "0x5d189e816b4149be00977c1a3c8840374aec4972",
+      "name": "gloriafoster",
+      "totalMarkets": 100,
+      "accountAgeDays": 315,
+      "isCamouflage": false,
       "maxScore": 169,
-      "totalValue": 402.9187,
-      "allTimePnl": 1607,
+      "totalValue": 1182.015,
+      "allTimePnl": -153792,
       "monthPnl": 0,
       "markets": [
         {
-          "slug": "will-12-or-more-fed-rate-cuts-happen-in-2026",
-          "question": "Will 12 or more Fed rate cuts happen in 2026?",
-          "conditionId": "0xffa0accb74987c0dc33a70eb3780c1da160206bcfb3ef5d16c1667bc5c459c78",
+          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2026-meeting",
+          "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
+          "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "YES",
-          "amount": 402.9187,
-          "marketRatio": 3,
-          "marketEntryDays": 0,
+          "amount": 1182.015,
+          "marketRatio": 0,
+          "marketEntryDays": 999,
           "score": 169
         }
       ]
@@ -3378,8 +3424,8 @@
       "accountAgeDays": 139,
       "isCamouflage": false,
       "maxScore": 169,
-      "totalValue": 438.90299999999996,
-      "allTimePnl": -78756,
+      "totalValue": 488.6072,
+      "allTimePnl": -75075,
       "monthPnl": 0,
       "markets": [
         {
@@ -3387,7 +3433,7 @@
           "question": "Will 11 Fed rate cuts happen in 2026?",
           "conditionId": "0x1adf074e048fa613f4ddbc0766088748a48d120a3a713b0183e219032a411ae3",
           "side": "YES",
-          "amount": 179.709,
+          "amount": 195.8912,
           "marketRatio": 0,
           "marketEntryDays": 0,
           "score": 169
@@ -3397,7 +3443,7 @@
           "question": "Will 10 Fed rate cuts happen in 2026?",
           "conditionId": "0x757c144993b3cb831e04c42bfcff8c18864c7da4f4688a5939d2f62e031cbc87",
           "side": "YES",
-          "amount": 157.5823,
+          "amount": 183.5255,
           "marketRatio": 0,
           "marketEntryDays": 0,
           "score": 169
@@ -3407,9 +3453,55 @@
           "question": "Will 9 Fed rate cuts happen in 2026?",
           "conditionId": "0x4ec6fcb43fe1a32163c7da09d54a99ab9bf6abdc6fd49939d7ad67d696a3248b",
           "side": "YES",
-          "amount": 101.6117,
+          "amount": 109.1905,
           "marketRatio": 0,
+          "marketEntryDays": 999,
+          "score": 125
+        }
+      ]
+    },
+    {
+      "wallet": "0xe821d597d53bb282e03bcc63fde018c8f6b9b27e",
+      "name": "tiger11",
+      "totalMarkets": 67,
+      "accountAgeDays": 121,
+      "isCamouflage": true,
+      "maxScore": 169,
+      "totalValue": 245.2401,
+      "allTimePnl": 318,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-the-fed-increase-interest-rates-by-25-bps-after-the-june-2026-meeting",
+          "question": "Will the Fed increase interest rates by 25 bps after the June 2026 meeting?",
+          "conditionId": "0xa7cb4135c6d9c36da0e343874dd5b455de739c6d1b9f9f5583dd9320aacf5db2",
+          "side": "YES",
+          "amount": 245.2401,
+          "marketRatio": 5,
           "marketEntryDays": 0,
+          "score": 169
+        }
+      ]
+    },
+    {
+      "wallet": "0x80a4552cdcde3b861b8adc146ab1fbd4711022cc",
+      "name": "puravida",
+      "totalMarkets": 100,
+      "accountAgeDays": 636,
+      "isCamouflage": true,
+      "maxScore": 169,
+      "totalValue": 4988.3406,
+      "allTimePnl": -26684,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "fed-emergency-rate-cut-before-2027",
+          "question": "Fed emergency rate cut before 2027?",
+          "conditionId": "0x93a3b80b1fb485057add882b55d12011ea011fedd9abededad86ac6cb53a2802",
+          "side": "NO",
+          "amount": 4988.3406,
+          "marketRatio": 20,
+          "marketEntryDays": 7,
           "score": 169
         }
       ]
@@ -3421,8 +3513,8 @@
       "accountAgeDays": 248,
       "isCamouflage": false,
       "maxScore": 167,
-      "totalValue": 48086.2911,
-      "allTimePnl": 1130,
+      "totalValue": 48135.2838,
+      "allTimePnl": 1176,
       "monthPnl": 0,
       "markets": [
         {
@@ -3430,7 +3522,7 @@
           "question": "GTA VI released before June 2026?",
           "conditionId": "0xcccb7e7613a087c132b69cbf3a02bece3fdcb824c1da54ae79acc8d4a562d902",
           "side": "NO",
-          "amount": 48086.2911,
+          "amount": 48135.2838,
           "marketRatio": 55,
           "marketEntryDays": 999,
           "score": 167
@@ -3445,7 +3537,7 @@
       "isCamouflage": false,
       "maxScore": 166,
       "totalValue": 12583.5933,
-      "allTimePnl": 1645,
+      "allTimePnl": 1762,
       "monthPnl": 0,
       "markets": [
         {
@@ -3468,7 +3560,7 @@
       "isCamouflage": true,
       "maxScore": 165,
       "totalValue": 120787.0117,
-      "allTimePnl": -11552,
+      "allTimePnl": -11620,
       "monthPnl": 0,
       "markets": [
         {
@@ -3486,12 +3578,12 @@
     {
       "wallet": "0x095dcfb123a4bc035ee6b0d624bab0cc964352cf",
       "name": "Extra-Large-Begonia",
-      "totalMarkets": 80,
+      "totalMarkets": 81,
       "accountAgeDays": 1915,
       "isCamouflage": false,
       "maxScore": 165,
       "totalValue": 47198.24999999999,
-      "allTimePnl": -310079,
+      "allTimePnl": -307134,
       "monthPnl": 0,
       "markets": [
         {
@@ -3530,11 +3622,11 @@
       "wallet": "0x8e88e1ec83fa450ac03efef8347ab1bad6ac0670",
       "name": "rulki",
       "totalMarkets": 19,
-      "accountAgeDays": 410,
+      "accountAgeDays": 411,
       "isCamouflage": true,
       "maxScore": 165,
       "totalValue": 23578.1755,
-      "allTimePnl": 633,
+      "allTimePnl": 652,
       "monthPnl": 0,
       "markets": [
         {
@@ -3550,37 +3642,14 @@
       ]
     },
     {
-      "wallet": "0xb10047d6a254b2ebb306d7a7d13bf59171ab6461",
-      "name": "Parz1vaI",
-      "totalMarkets": 57,
-      "accountAgeDays": 614,
-      "isCamouflage": false,
-      "maxScore": 165,
-      "totalValue": 4069.8335,
-      "allTimePnl": 15872,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-claude-5-be-released-by-may-31-2026",
-          "question": "Will Claude 5 be released by May 31, 2026?",
-          "conditionId": "0x6d4e3af4996807a673cb2678a7b5960bfd6dfa5c43b8556e23cdf094fb55d2b6",
-          "side": "YES",
-          "amount": 4069.8335,
-          "marketRatio": 2,
-          "marketEntryDays": 1,
-          "score": 165
-        }
-      ]
-    },
-    {
       "wallet": "0xf769c6390f6d564fe4859effbddb682c62660114",
       "name": "MrMarket",
       "totalMarkets": 100,
       "accountAgeDays": 403,
       "isCamouflage": true,
       "maxScore": 165,
-      "totalValue": 6845.579,
-      "allTimePnl": -21721,
+      "totalValue": 7028.564,
+      "allTimePnl": -20372,
       "monthPnl": 0,
       "markets": [
         {
@@ -3588,7 +3657,7 @@
           "question": "Will Trump's approval rating hit 35% in 2026?",
           "conditionId": "0xd2e96e78b5a59e12b4d60d6b8426aa93dc6edf2ed7d711509481050c347856b3",
           "side": "NO",
-          "amount": 6845.579,
+          "amount": 7028.564,
           "marketRatio": 10,
           "marketEntryDays": 5,
           "score": 165
@@ -3599,11 +3668,11 @@
       "wallet": "0xa5fda0340959e67ef9de8bc5caf1c502c6f736d1",
       "name": "88blitzcrank",
       "totalMarkets": 16,
-      "accountAgeDays": 174,
+      "accountAgeDays": 175,
       "isCamouflage": true,
       "maxScore": 163,
-      "totalValue": 7796.4881000000005,
-      "allTimePnl": -8155,
+      "totalValue": 7653.539000000001,
+      "allTimePnl": -8372,
       "monthPnl": 0,
       "markets": [
         {
@@ -3611,8 +3680,8 @@
           "question": "Will the Fed increase interest rates by 25+ bps after the April 2026 meeting?",
           "conditionId": "0xd4d00e5bf8b960cc37c74c1ec19e41e00b0706add203ddcfbb65ad006c5c223a",
           "side": "YES",
-          "amount": 2115.1049,
-          "marketRatio": 23,
+          "amount": 2440.5056,
+          "marketRatio": 27,
           "marketEntryDays": 7,
           "score": 163
         },
@@ -3621,8 +3690,8 @@
           "question": "Will the Fed increase interest rates by 25 bps after the June 2026 meeting?",
           "conditionId": "0xa7cb4135c6d9c36da0e343874dd5b455de739c6d1b9f9f5583dd9320aacf5db2",
           "side": "YES",
-          "amount": 2012.611,
-          "marketRatio": 22,
+          "amount": 1744.2628,
+          "marketRatio": 19,
           "marketEntryDays": 6,
           "score": 163
         },
@@ -3641,56 +3710,10 @@
           "question": "Fed rate hike in 2026?",
           "conditionId": "0x80b3af88cb991980e8da1ce86b9794a0957f96ec98c29319dd7ba65e9744d82b",
           "side": "YES",
-          "amount": 3100.0244,
-          "marketRatio": 34,
+          "amount": 2900.0228,
+          "marketRatio": 32,
           "marketEntryDays": 999,
           "score": 131
-        }
-      ]
-    },
-    {
-      "wallet": "0xf624ccde79a2db326ca3b7e66512ad6d4bdea1b5",
-      "name": "0xf624Ccde79A2dB326Ca3b7E66512aD6D4bdeA1B5-1768762682755",
-      "totalMarkets": 3,
-      "accountAgeDays": 5,
-      "isCamouflage": false,
-      "maxScore": 163,
-      "totalValue": 329.4964,
-      "allTimePnl": 24,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-decrease-interest-rates-by-25-bps-after-the-april-2026-meeting",
-          "question": "Will the Fed decrease interest rates by 25 bps after the April 2026 meeting?",
-          "conditionId": "0x0d14f5dc9fb3250ec888b1ac8d9fe9a0ce06f9d3ea60fdf138e8690622fea84c",
-          "side": "YES",
-          "amount": 329.4964,
-          "marketRatio": 84,
-          "marketEntryDays": 5,
-          "score": 163
-        }
-      ]
-    },
-    {
-      "wallet": "0xf797d4d1c038d1eb0593edae0e66bf8e4b2e0bf2",
-      "name": "DerDon",
-      "totalMarkets": 79,
-      "accountAgeDays": 414,
-      "isCamouflage": false,
-      "maxScore": 163,
-      "totalValue": 942.9617,
-      "allTimePnl": 7023,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
-          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
-          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
-          "side": "NO",
-          "amount": 942.9617,
-          "marketRatio": 2,
-          "marketEntryDays": 999,
-          "score": 163
         }
       ]
     },
@@ -3701,8 +3724,8 @@
       "accountAgeDays": 164,
       "isCamouflage": false,
       "maxScore": 163,
-      "totalValue": 58634.7839,
-      "allTimePnl": 173,
+      "totalValue": 58336.6915,
+      "allTimePnl": -125,
       "monthPnl": 0,
       "markets": [
         {
@@ -3710,9 +3733,32 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 58634.7839,
+          "amount": 58336.6915,
           "marketRatio": 100,
           "marketEntryDays": 1,
+          "score": 163
+        }
+      ]
+    },
+    {
+      "wallet": "0xf797d4d1c038d1eb0593edae0e66bf8e4b2e0bf2",
+      "name": "DerDon",
+      "totalMarkets": 81,
+      "accountAgeDays": 414,
+      "isCamouflage": false,
+      "maxScore": 163,
+      "totalValue": 1222.9928,
+      "allTimePnl": 7434,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
+          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
+          "side": "NO",
+          "amount": 1222.9928,
+          "marketRatio": 2,
+          "marketEntryDays": 999,
           "score": 163
         }
       ]
@@ -3725,7 +3771,7 @@
       "isCamouflage": false,
       "maxScore": 163,
       "totalValue": 19204.9484,
-      "allTimePnl": 20730,
+      "allTimePnl": 20866,
       "monthPnl": 0,
       "markets": [
         {
@@ -3764,29 +3810,6 @@
       ]
     },
     {
-      "wallet": "0xd48a81db62f742c4e42d86dfc23a7ee345366e90",
-      "name": "NiFengFanPan",
-      "totalMarkets": 100,
-      "accountAgeDays": 199,
-      "isCamouflage": false,
-      "maxScore": 163,
-      "totalValue": 5087.255,
-      "allTimePnl": -104829,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "billionaire-one-time-wealth-tax-passes-in-california-election-2026",
-          "question": "Billionaire one-time wealth tax passes in California election 2026?",
-          "conditionId": "0x9345d5142a67f5541264c96515496affee02580f1c572680759eac9fd2a1588a",
-          "side": "NO",
-          "amount": 5087.255,
-          "marketRatio": 1,
-          "marketEntryDays": 999,
-          "score": 163
-        }
-      ]
-    },
-    {
       "wallet": "0x5c14eb6a6d5083c003daa8241ed559d2dc82cc49",
       "name": "forinnerpsandr1x11222",
       "totalMarkets": 15,
@@ -3794,7 +3817,7 @@
       "isCamouflage": false,
       "maxScore": 162,
       "totalValue": 32530.742,
-      "allTimePnl": 45226,
+      "allTimePnl": 45503,
       "monthPnl": 0,
       "markets": [
         {
@@ -3816,8 +3839,8 @@
       "accountAgeDays": 191,
       "isCamouflage": false,
       "maxScore": 160,
-      "totalValue": 171350.9778,
-      "allTimePnl": 10916,
+      "totalValue": 170598.57379999998,
+      "allTimePnl": 10164,
       "monthPnl": 0,
       "markets": [
         {
@@ -3825,7 +3848,7 @@
           "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
           "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
           "side": "YES",
-          "amount": 147997.8665,
+          "amount": 147245.4625,
           "marketRatio": 44,
           "marketEntryDays": 19,
           "score": 160
@@ -3843,29 +3866,6 @@
       ]
     },
     {
-      "wallet": "0x4bac379da2f29d87c01ff737843e396a2cec02b1",
-      "name": "LuckyNFT444",
-      "totalMarkets": 20,
-      "accountAgeDays": 520,
-      "isCamouflage": false,
-      "maxScore": 160,
-      "totalValue": 303.6227,
-      "allTimePnl": 15373,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "will-the-fed-increase-interest-rates-by-50-bps-after-the-june-2026-meeting",
-          "question": "Will the Fed increase interest rates by 50+ bps after the June 2026 meeting?",
-          "conditionId": "0xb01e70a56199a6d5467f47a2b94e75e7c7218c128c8d0b8beb6dafed2f0d15c2",
-          "side": "YES",
-          "amount": 303.6227,
-          "marketRatio": 2,
-          "marketEntryDays": 0,
-          "score": 160
-        }
-      ]
-    },
-    {
       "wallet": "0x333e8f4fb0353ef31cf1a7d00789e1319381369b",
       "name": "",
       "totalMarkets": 16,
@@ -3873,7 +3873,7 @@
       "isCamouflage": false,
       "maxScore": 160,
       "totalValue": 19007.5963,
-      "allTimePnl": 3080,
+      "allTimePnl": 2947,
       "monthPnl": 0,
       "markets": [
         {
@@ -3912,29 +3912,6 @@
       ]
     },
     {
-      "wallet": "0xed107a85a4585a381e48c7f7ca4144909e7dd2e5",
-      "name": "bobe2",
-      "totalMarkets": 32,
-      "accountAgeDays": 1076,
-      "isCamouflage": false,
-      "maxScore": 158,
-      "totalValue": 68278.0235,
-      "allTimePnl": 42682,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "trump-out-as-president-before-2027",
-          "question": "Trump out as President before 2027?",
-          "conditionId": "0x48b0b0bca515f68fccf95af4793dbd0edbfec1f8ec6e8df2c0f69ba74f8c4722",
-          "side": "NO",
-          "amount": 68278.0235,
-          "marketRatio": 1,
-          "marketEntryDays": 999,
-          "score": 158
-        }
-      ]
-    },
-    {
       "wallet": "0x1d379e322ef813587a3e13ad79857c45edc7f4a4",
       "name": "OverlookHotel",
       "totalMarkets": 14,
@@ -3942,7 +3919,7 @@
       "isCamouflage": true,
       "maxScore": 158,
       "totalValue": 24585.0655,
-      "allTimePnl": -7335,
+      "allTimePnl": -7112,
       "monthPnl": 0,
       "markets": [
         {
@@ -3958,10 +3935,33 @@
       ]
     },
     {
+      "wallet": "0xed107a85a4585a381e48c7f7ca4144909e7dd2e5",
+      "name": "bobe2",
+      "totalMarkets": 35,
+      "accountAgeDays": 1077,
+      "isCamouflage": false,
+      "maxScore": 158,
+      "totalValue": 68278.0235,
+      "allTimePnl": 41510,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "trump-out-as-president-before-2027",
+          "question": "Trump out as President before 2027?",
+          "conditionId": "0x48b0b0bca515f68fccf95af4793dbd0edbfec1f8ec6e8df2c0f69ba74f8c4722",
+          "side": "NO",
+          "amount": 68278.0235,
+          "marketRatio": 1,
+          "marketEntryDays": 999,
+          "score": 158
+        }
+      ]
+    },
+    {
       "wallet": "0x1318b890f452fea4127dcd64204036543fef96c9",
       "name": "bengorgor",
       "totalMarkets": 6,
-      "accountAgeDays": 472,
+      "accountAgeDays": 473,
       "isCamouflage": true,
       "maxScore": 156,
       "totalValue": 5507.4531,
@@ -3981,6 +3981,29 @@
       ]
     },
     {
+      "wallet": "0x5b0b2d8904d0fd30f79ed64bab90b17ad4873d6f",
+      "name": "dawajhajs",
+      "totalMarkets": 1,
+      "accountAgeDays": 2,
+      "isCamouflage": false,
+      "maxScore": 156,
+      "totalValue": 522.9625,
+      "allTimePnl": 132,
+      "monthPnl": 0,
+      "markets": [
+        {
+          "slug": "will-there-be-no-change-in-fed-interest-rates-after-the-april-2026-meeting",
+          "question": "Will there be no change in Fed interest rates after the April 2026 meeting?",
+          "conditionId": "0x36e8ca24d2a13435f519f15580d42b45cdbe3bc425fb39a7c2733260357af0fa",
+          "side": "NO",
+          "amount": 522.9625,
+          "marketRatio": 100,
+          "marketEntryDays": 2,
+          "score": 156
+        }
+      ]
+    },
+    {
       "wallet": "0xde7be6d489bce070a959e0cb813128ae659b5f4b",
       "name": "wan123",
       "totalMarkets": 100,
@@ -3988,7 +4011,7 @@
       "isCamouflage": false,
       "maxScore": 156,
       "totalValue": 7321.7214,
-      "allTimePnl": -339565,
+      "allTimePnl": -246454,
       "monthPnl": 0,
       "markets": [
         {
@@ -4010,8 +4033,8 @@
       "accountAgeDays": 538,
       "isCamouflage": true,
       "maxScore": 156,
-      "totalValue": 6127.6173,
-      "allTimePnl": -90862,
+      "totalValue": 6209.8672,
+      "allTimePnl": -90729,
       "monthPnl": 0,
       "markets": [
         {
@@ -4019,9 +4042,9 @@
           "question": "Will 1 Fed rate cut happen in 2026?",
           "conditionId": "0x5e082f0b57f47a29044aa35b4c5658393122e659d5feae521c06b57cdd7f905c",
           "side": "NO",
-          "amount": 6127.6173,
+          "amount": 6209.8672,
           "marketRatio": 8,
-          "marketEntryDays": 18,
+          "marketEntryDays": 19,
           "score": 156
         }
       ]
@@ -4034,7 +4057,7 @@
       "isCamouflage": false,
       "maxScore": 156,
       "totalValue": 860.5847,
-      "allTimePnl": 5936,
+      "allTimePnl": 6051,
       "monthPnl": 0,
       "markets": [
         {
@@ -4043,7 +4066,7 @@
           "conditionId": "0xdde06286a7b9464d344f410ab0b3d2ebc6469904e72c27fd982f65fdbf78768d",
           "side": "YES",
           "amount": 860.5847,
-          "marketRatio": 14,
+          "marketRatio": 13,
           "marketEntryDays": 9,
           "score": 156
         }
@@ -4052,12 +4075,12 @@
     {
       "wallet": "0x2c4ca29d332c67d3ad7bf22b3cfe9486e3b1cb39",
       "name": "ololololololololo",
-      "totalMarkets": 73,
+      "totalMarkets": 75,
       "accountAgeDays": 960,
       "isCamouflage": false,
       "maxScore": 156,
-      "totalValue": 136.8996,
-      "allTimePnl": -220069,
+      "totalValue": 112.0087,
+      "allTimePnl": -218096,
       "monthPnl": 0,
       "markets": [
         {
@@ -4065,7 +4088,7 @@
           "question": "Will 7 Fed rate cuts happen in 2026?",
           "conditionId": "0x2368d2604c9c2b95bc98c51bd50c66e5351caebf05b9fe79d3398c387fe29a89",
           "side": "YES",
-          "amount": 136.8996,
+          "amount": 112.0087,
           "marketRatio": 0,
           "marketEntryDays": 999,
           "score": 156
@@ -4076,11 +4099,11 @@
       "wallet": "0x477a7d28ed844984088129207c0afcb2459e2d8e",
       "name": "Bot9735",
       "totalMarkets": 100,
-      "accountAgeDays": 633,
+      "accountAgeDays": 634,
       "isCamouflage": true,
       "maxScore": 156,
       "totalValue": 2057.2247,
-      "allTimePnl": -85168,
+      "allTimePnl": -85159,
       "monthPnl": 0,
       "markets": [
         {
@@ -4102,8 +4125,8 @@
       "accountAgeDays": 197,
       "isCamouflage": false,
       "maxScore": 155,
-      "totalValue": 5116.9815,
-      "allTimePnl": -742,
+      "totalValue": 5122.1949,
+      "allTimePnl": -769,
       "monthPnl": 0,
       "markets": [
         {
@@ -4111,7 +4134,7 @@
           "question": "GTA VI released before June 2026?",
           "conditionId": "0xcccb7e7613a087c132b69cbf3a02bece3fdcb824c1da54ae79acc8d4a562d902",
           "side": "NO",
-          "amount": 5116.9815,
+          "amount": 5122.1949,
           "marketRatio": 10,
           "marketEntryDays": 65,
           "score": 155
@@ -4122,11 +4145,11 @@
       "wallet": "0x8b71010f8d18ccce16a37434778117ee2d6b8044",
       "name": "0x8b71010f8D18CccE16a37434778117EE2d6b8044-1735105889785",
       "totalMarkets": 100,
-      "accountAgeDays": 158,
+      "accountAgeDays": 159,
       "isCamouflage": true,
       "maxScore": 155,
       "totalValue": 60465.9852,
-      "allTimePnl": -396605,
+      "allTimePnl": -396429,
       "monthPnl": 0,
       "markets": [
         {
@@ -4148,29 +4171,6 @@
           "marketRatio": 3,
           "marketEntryDays": 999,
           "score": 135
-        }
-      ]
-    },
-    {
-      "wallet": "0x020b3e1b425742b74b67723c5e0feb912665d13c",
-      "name": "BlackPeopleDontRecycle",
-      "totalMarkets": 15,
-      "accountAgeDays": 632,
-      "isCamouflage": false,
-      "maxScore": 155,
-      "totalValue": 28047.2241,
-      "allTimePnl": -21417,
-      "monthPnl": 0,
-      "markets": [
-        {
-          "slug": "trump-out-as-president-before-2027",
-          "question": "Trump out as President before 2027?",
-          "conditionId": "0x48b0b0bca515f68fccf95af4793dbd0edbfec1f8ec6e8df2c0f69ba74f8c4722",
-          "side": "NO",
-          "amount": 28047.2241,
-          "marketRatio": 15,
-          "marketEntryDays": 999,
-          "score": 155
         }
       ]
     }
